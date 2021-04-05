@@ -20,8 +20,15 @@
                         <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
-      
-                                    <select class="form-control col-md-3" v-model="criterio">
+                                    <select v-model="buscarA" @click="listarArticulo(1,buscarA,criterioA)" class="form-control col-md-3" placeholder="Seleccione Area">
+                                      <option value="">Todos</option>
+                                      <option value="1">Teclados</option>
+                                      <option value="2">Monitores</option>
+                                      <option value="3">Motherboards</option>
+                                      <option value="4">Laptops</option>
+                                      <option value="5">Fundas</option>
+                                    </select>
+                                    <select class="form-control col-md-3">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                     </select>
@@ -47,7 +54,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="articulo in arrayArticulo" :key="articulo.id">
+                                <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
                                     
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.codigo"></td>
@@ -224,7 +231,10 @@
                 arrayUnidad :[],
                 offset : 3,
                 criterio : 'nombre',
-                buscar : ''
+                buscar : '',
+                criterioA: 'idcategoria',
+                buscarA:'',
+               
             }
            
         },

@@ -9,7 +9,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Usuarios
-                        <button type="button" @click="abrirModal('persona','registrar')" class="btn btn-secondary">
+                        <button type="button" @click="abrirModal('persona','registrar')" class="btn btn-primary float-right">
                             <i class="icon-plus"></i>&nbsp;Nuevo
                         </button>
                     </div>

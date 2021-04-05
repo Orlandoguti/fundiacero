@@ -106,7 +106,7 @@ class ArticuloController extends Controller
         if (!$request->ajax()) return redirect('/');
 
         $filtro = $request->filtro;
-        $articulos = Articulo::where('codigo','=', $filtro)
+        $articulos = Articulo::where('nombre','=', $filtro)
         ->select('id', 'nombre')->orderBy('nombre', 'asc')->take(1)->get();
 
         return ['articulos' => $articulos];

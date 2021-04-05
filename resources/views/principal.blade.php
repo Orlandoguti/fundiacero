@@ -8,7 +8,7 @@
     <meta name="description" content="Sistema Ventas Laravel Vue Js- Compartiendocodigos">
     <meta name="author" content="compartiendocodigos.net">
     <meta name="keyword" content="Sistema ventas Laravel Vue Js, Sistema compras Laravel Vue Js">
-    <link rel="shortcut icon" href="img/favicon.png">
+    <link rel="shortcut icon" href="img/fundi.png">
     <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}">
     <title> MEDISIS - Sistema de Farmacia</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">

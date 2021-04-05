@@ -55487,6 +55487,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -55521,7 +55528,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             arrayUnidad: [],
             offset: 3,
             criterio: 'nombre',
-            buscar: ''
+            buscar: '',
+            criterioA: 'idcategoria',
+            buscarA: ''
+
         };
     },
 
@@ -58621,12 +58631,16 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.criterio,
-                        expression: "criterio"
+                        value: _vm.buscarA,
+                        expression: "buscarA"
                       }
                     ],
                     staticClass: "form-control col-md-3",
+                    attrs: { placeholder: "Seleccione Area" },
                     on: {
+                      click: function($event) {
+                        _vm.listarArticulo(1, _vm.buscarA, _vm.criterioA)
+                      },
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
                           .call($event.target.options, function(o) {
@@ -58636,22 +58650,36 @@ var render = function() {
                             var val = "_value" in o ? o._value : o.value
                             return val
                           })
-                        _vm.criterio = $event.target.multiple
+                        _vm.buscarA = $event.target.multiple
                           ? $$selectedVal
                           : $$selectedVal[0]
                       }
                     }
                   },
                   [
-                    _c("option", { attrs: { value: "nombre" } }, [
-                      _vm._v("Nombre")
+                    _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "1" } }, [
+                      _vm._v("Teclados")
                     ]),
                     _vm._v(" "),
-                    _c("option", { attrs: { value: "descripcion" } }, [
-                      _vm._v("Descripción")
-                    ])
+                    _c("option", { attrs: { value: "2" } }, [
+                      _vm._v("Monitores")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "3" } }, [
+                      _vm._v("Motherboards")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "4" } }, [
+                      _vm._v("Laptops")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", { attrs: { value: "5" } }, [_vm._v("Fundas")])
                   ]
                 ),
+                _vm._v(" "),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -58705,7 +58733,7 @@ var render = function() {
             "table",
             { staticClass: "table table-bordered table-striped table-sm" },
             [
-              _vm._m(1),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "tbody",
@@ -59243,7 +59271,7 @@ var render = function() {
                       ])
                     ]),
                     _vm._v(" "),
-                    _vm._m(2),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group row" }, [
                       _c(
@@ -59376,6 +59404,16 @@ var staticRenderFns = [
       _c("li", { staticClass: "breadcrumb-item" }, [
         _c("a", { attrs: { href: "/" } }, [_vm._v("Dashboard")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("select", { staticClass: "form-control col-md-3" }, [
+      _c("option", { attrs: { value: "nombre" } }, [_vm._v("Nombre")]),
+      _vm._v(" "),
+      _c("option", { attrs: { value: "descripcion" } }, [_vm._v("Descripción")])
     ])
   },
   function() {
@@ -66250,7 +66288,7 @@ var render = function() {
           _c(
             "button",
             {
-              staticClass: "btn btn-secondary",
+              staticClass: "btn btn-primary float-right",
               attrs: { type: "button" },
               on: {
                 click: function($event) {
