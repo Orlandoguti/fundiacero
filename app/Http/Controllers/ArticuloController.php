@@ -19,14 +19,14 @@ class ArticuloController extends Controller
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('unidads','articulos.idunidad','=','unidads.id')
             ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion')
-            ->orderBy('articulos.id', 'asc')->paginate(5);
+            ->orderBy('categorias.id', 'asc')->paginate(7);
         }
         else{
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('unidads','articulos.idunidad','=','unidads.id')
             ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
-            ->orderBy('articulos.id', 'asc')->paginate(5);
+            ->orderBy('categorias.id', 'asc')->paginate(7);
         }
         
 

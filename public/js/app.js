@@ -55491,9 +55491,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -55801,6 +55798,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
+        this.selectCategoria();
         this.listarArticulo(1, this.buscar, this.criterio);
     }
 });
@@ -58635,11 +58633,10 @@ var render = function() {
                         expression: "buscarA"
                       }
                     ],
-                    staticClass: "form-control col-md-3",
-                    attrs: { placeholder: "Seleccione Area" },
+                    staticClass: "form-control col-md-4",
                     on: {
                       click: function($event) {
-                        _vm.listarArticulo(1, _vm.buscarA, _vm.criterioA)
+                        _vm.listarArticulo(0, _vm.buscarA, _vm.criterioA)
                       },
                       change: function($event) {
                         var $$selectedVal = Array.prototype.filter
@@ -58657,26 +58654,23 @@ var render = function() {
                     }
                   },
                   [
+                    _c("option", { attrs: { value: "", disabled: "" } }, [
+                      _vm._v("Seleccione la Area")
+                    ]),
+                    _vm._v(" "),
                     _c("option", { attrs: { value: "" } }, [_vm._v("Todos")]),
                     _vm._v(" "),
-                    _c("option", { attrs: { value: "1" } }, [
-                      _vm._v("Teclados")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "2" } }, [
-                      _vm._v("Monitores")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "3" } }, [
-                      _vm._v("Motherboards")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "4" } }, [
-                      _vm._v("Laptops")
-                    ]),
-                    _vm._v(" "),
-                    _c("option", { attrs: { value: "5" } }, [_vm._v("Fundas")])
-                  ]
+                    _vm._l(_vm.arrayCategoria, function(categoria) {
+                      return _c("option", {
+                        key: categoria.id,
+                        domProps: {
+                          value: categoria.id,
+                          textContent: _vm._s(categoria.nombre)
+                        }
+                      })
+                    })
+                  ],
+                  2
                 ),
                 _vm._v(" "),
                 _vm._m(1),
