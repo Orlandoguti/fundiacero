@@ -10,7 +10,7 @@
     <meta name="keyword" content="Sistema ventas Laravel Vue Js, Sistema compras Laravel Vue Js">
     <link rel="shortcut icon" href="img/fundi.png">
     <meta name="userId" content="{{ Auth::check() ? Auth::user()->id : ''}}">
-    <title> MEDISIS - Sistema de Farmacia</title>
+    <title> FUNDIACERO S.A.</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js">
     <!-- Icons -->
@@ -65,7 +65,7 @@
     </div>   
     </div>
     <footer class="app-footer">
-        <span><a href="https://www.google.com.bo/maps/@-19.0366367,-65.2599134,16.98z/data=!4m2!7m1!2e1?hl=es" target="_blank">Hospital Municipal Modelo Boliviano Japones</a> &copy; 2020-2021</span>
+        <span><a href="https://www.fundiacero.com/" target="_blank">Fundiciones Fundiacero S.A.</a> &copy; 2021</span>
         
     </footer>
     

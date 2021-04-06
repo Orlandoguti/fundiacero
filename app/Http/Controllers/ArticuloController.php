@@ -150,11 +150,6 @@ class ArticuloController extends Controller
         $articulo->stock = $request->stock;
         $articulo->descripcion = $request->descripcion;
         $articulo->condicion = '1';
-        if(Input::hasFile('imagen')){
-    		$file=Input::file('imagen');
-    		$file->move(public_path().'/imagenes/articulos/',$file->getClientOriginalName());
-    		$articulo->imagen=$file->getClientOriginalName();
-    	}
         $articulo->save();
     }
 
