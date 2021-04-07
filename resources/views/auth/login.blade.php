@@ -9,8 +9,7 @@
           <form class="form-horizontal was-validated" method="POST" action="{{ route('login')}}">
           {{ csrf_field() }}
               <div class="card-body text-center">
-              <div><img src="imagenes/fn.jpg"></div>
-              <span class="divlinea"><i></i>_____________________________________________________________________________</span>
+              <div><img src="imagenes/fun.png" width="400" height="100"></div>
               <div class="form-group mb-4{{$errors->has('usuario' ? 'is-invalid' : '')}}">
               <span class="input-group-addon"><i class="icon-user"></i>&nbsp; Usuario:</span>
                 <input type="text" value="{{old('usuario')}}" name="usuario" id="usuario" class="form-control-2" placeholder="Ingrese su Usuario....." >

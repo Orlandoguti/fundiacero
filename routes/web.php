@@ -91,6 +91,20 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/unidad/activar', 'UnidadController@activar');
         Route::get('/unidad/selectUnidad', 'UnidadController@selectUnidad');
 
+        Route::get('/tiempo', 'TiempoController@index');
+        Route::post('/tiempo/registrar', 'TiempoController@store');
+        Route::put('/tiempo/actualizar', 'TiempoController@update');
+        Route::put('/tiempo/desactivar', 'TiempoController@desactivar');
+        Route::put('/tiempo/activar', 'TiempoController@activar');
+        Route::get('/tiempo/selectTiempo', 'TiempoController@selectTiempo');
+
+        Route::get('/estado', 'EstadoController@index');
+        Route::post('/estado/registrar', 'EstadoController@store');
+        Route::put('/estado/actualizar', 'EstadoController@update');
+        Route::put('/estado/desactivar', 'EstadoController@desactivar');
+        Route::put('/estado/activar', 'EstadoController@activar');
+        Route::get('/estado/selectEstado', 'EstadoController@selectEstado');
+
         Route::get('/articulo', 'ArticuloController@index');
         Route::post('/articulo/registrar', 'ArticuloController@store');
         Route::put('/articulo/actualizar', 'ArticuloController@update');

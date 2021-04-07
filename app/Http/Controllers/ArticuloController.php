@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Crypt;
 use App\Articulo;
 
 class ArticuloController extends Controller
@@ -18,13 +20,17 @@ class ArticuloController extends Controller
         if ($buscar==''){
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('unidads','articulos.idunidad','=','unidads.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion')
+            ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+            ->join('estados','articulos.idestado','=','estados.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
             ->orderBy('categorias.id', 'asc')->paginate(7);
         }
         else{
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('unidads','articulos.idunidad','=','unidads.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.condicion')
+            ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+            ->join('estados','articulos.idestado','=','estados.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('categorias.id', 'asc')->paginate(7);
         }
@@ -52,13 +58,17 @@ class ArticuloController extends Controller
         if ($buscar==''){
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('unidads','articulos.idunidad','=','unidads.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.imagen','articulos.condicion')
+            ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+            ->join('estados','articulos.idestado','=','estados.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
         else{
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('unidads','articulos.idunidad','=','unidads.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.imagen','articulos.condicion')
+            ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+            ->join('estados','articulos.idestado','=','estados.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
@@ -76,13 +86,17 @@ class ArticuloController extends Controller
         if ($buscar==''){
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('unidads','articulos.idunidad','=','unidads.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.imagen','articulos.condicion')
+            ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+            ->join('estados','articulos.idestado','=','estados.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
         else{
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
             ->join('unidads','articulos.idunidad','=','unidads.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.imagen','articulos.condicion')
+            ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+            ->join('estados','articulos.idestado','=','estados.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->where('articulos.stock','>','0')
             ->orderBy('articulos.id', 'desc')->paginate(10);
@@ -94,7 +108,9 @@ class ArticuloController extends Controller
     public function listarPdf(){
         $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
         ->join('unidads','articulos.idunidad','=','unidads.id')
-        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','articulos.precio_venta','articulos.stock','articulos.descripcion','articulos.imagen','articulos.condicion')
+        ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+        ->join('estados','articulos.idestado','=','estados.id')
+        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
         ->orderBy('articulos.nombre', 'desc')->get();
 
         $cont=Articulo::count();
@@ -116,7 +132,7 @@ class ArticuloController extends Controller
 
         $filtro = $request->filtro;
         $articulos = Articulo::where('codigo','=', $filtro)
-        ->select('id', 'nombre','stock','precio_venta')
+        ->select('id', 'nombre','stock')
         ->where('stock','>','0')
         ->orderBy('nombre', 'asc')->take(1)->get();
 
@@ -128,12 +144,19 @@ class ArticuloController extends Controller
         $articulo = new Articulo();
         $articulo->idcategoria = $request->idcategoria;
         $articulo->idunidad = $request->idunidad;
+        $articulo->idtiempo = $request->idtiempo;
+        $articulo->idestado = $request->idestado;
         $articulo->codigo = $request->codigo;
         $articulo->nombre = $request->nombre;
-        $articulo->precio_venta = $request->precio_venta;
         $articulo->stock = $request->stock;
+        $articulo->tiempo = $request->tiempo;
         $articulo->descripcion = $request->descripcion;
-        $articulo->imagen = $request->imagen;
+        $articulo->marca = $request->marca;
+        if(Input::hasFile('imagen')){
+    		$file=Input::file('imagen');
+    		$file->move(public_path().'imagenes/articulos/',$file->getClientOriginalName());
+    		$articulo->imagen=$file->getClientOriginalName();
+    	}
         $articulo->condicion = '1';
         $articulo->save();
         
@@ -144,11 +167,22 @@ class ArticuloController extends Controller
         $articulo = Articulo::findOrFail($request->id);
         $articulo->idcategoria = $request->idcategoria;
         $articulo->idunidad = $request->idunidad;
+        $articulo->idtiempo = $request->idtiempo;
+        $articulo->idestado = $request->idestado;
         $articulo->codigo = $request->codigo;
         $articulo->nombre = $request->nombre;
-        $articulo->precio_venta = $request->precio_venta;
         $articulo->stock = $request->stock;
+        $articulo->tiempo = $request->tiempo;
         $articulo->descripcion = $request->descripcion;
+        $articulo->marca = $request->marca;
+        if(Input::hasFile('imagen')) {
+            $file=Input::file('imagen');
+            Image::make($request->file('imagen'))
+                ->resize(144, 145)
+                ->save(public_path().'/imagenes/articulos/' . $file->getClientOriginalName());
+            $articulo->imagen=$file->getClientOriginalName();
+            // var_dump($empresa->eq_foto=$file->getClientOriginalName()); die;
+        }
         $articulo->condicion = '1';
         $articulo->save();
     }

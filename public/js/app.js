@@ -55491,6 +55491,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -55501,11 +55522,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             nombre_categoria: '',
             idunidad: 0,
             nombre_unidad: '',
+            idtiempo: 0,
+            nombre_tiempo: '',
+            idestado: 0,
+            nombre_estado: '',
             codigo: '',
             nombre: '',
-            precio_venta: 0,
             stock: 0,
+            tiempo: 0,
             descripcion: '',
+            marca: '',
             imagen: '',
             arrayArticulo: [],
             modal: 0,
@@ -55523,6 +55549,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             arrayCategoria: [],
             arrayUnidad: [],
+            arrayTiempo: [],
+            arrayEstado: [],
             offset: 3,
             criterio: 'nombre',
             buscar: '',
@@ -55536,6 +55564,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'barcode': __WEBPACK_IMPORTED_MODULE_0_vue_barcode___default.a
     },
     computed: {
+        imagen: function imagen() {
+            return this.imagenmin;
+        },
+
 
         isActived: function isActived() {
             return this.pagination.current_page;
@@ -55602,6 +55634,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
+        selectTiempo: function selectTiempo() {
+            var me = this;
+            var url = '/tiempo/selectTiempo';
+            axios.get(url).then(function (response) {
+                //console.log(response);
+                var respuesta = response.data;
+                me.arrayTiempo = respuesta.tiempos;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
+        selectEstado: function selectEstado() {
+            var me = this;
+            var url = '/estado/selectEstado';
+            axios.get(url).then(function (response) {
+                //console.log(response);
+                var respuesta = response.data;
+                me.arrayEstado = respuesta.estados;
+            }).catch(function (error) {
+                console.log(error);
+            });
+        },
         cambiarPagina: function cambiarPagina(page, buscar, criterio) {
             var me = this;
             //Actualiza la página actual
@@ -55619,11 +55673,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.post('/articulo/registrar', {
                 'idcategoria': this.idcategoria,
                 'idunidad': this.idunidad,
+                'idtiempo': this.idtiempo,
+                'idestado': this.idestado,
                 'codigo': this.codigo,
                 'nombre': this.nombre,
                 'stock': this.stock,
-                'precio_venta': this.precio_venta,
+                'tiempo': this.tiempo,
                 'descripcion': this.descripcion,
+                'marca': this.marca,
                 'imagen': this.imagen
             }).then(function (response) {
                 me.cerrarModal();
@@ -55642,11 +55699,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.put('/articulo/actualizar', {
                 'idcategoria': this.idcategoria,
                 'idunidad': this.idunidad,
+                'idtiempo': this.idtiempo,
+                'idestado': this.idestado,
                 'codigo': this.codigo,
                 'nombre': this.nombre,
                 'stock': this.stock,
-                'precio_venta': this.precio_venta,
+                'tiempo': this.tiempo,
                 'descripcion': this.descripcion,
+                'marca': this.marca,
                 'imagen': this.imagen,
                 'id': this.articulo_id
             }).then(function (response) {
@@ -55726,9 +55786,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             if (this.idcategoria == 0) this.errorMostrarMsjArticulo.push("Seleccione una categoría.");
             if (this.idunidad == 0) this.errorMostrarMsjArticulo.push("Seleccione una unidad.");
+            if (this.idtiempo == 0) this.errorMostrarMsjArticulo.push("Seleccione un tiempo .");
+            if (this.idestado == 0) this.errorMostrarMsjArticulo.push("Seleccione un estado.");
             if (!this.nombre) this.errorMostrarMsjArticulo.push("El nombre del artículo no puede estar vacío.");
             if (!this.stock) this.errorMostrarMsjArticulo.push("El stock del artículo debe ser un número y no puede estar vacío.");
-            if (!this.precio_venta) this.errorMostrarMsjArticulo.push("El precio venta del artículo debe ser un número y no puede estar vacío.");
 
             if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
 
@@ -55741,11 +55802,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.nombre_categoria = '';
             this.idunidad = 0;
             this.nombre_unidad = '';
+            this.idtiempo = 0;
+            this.nombre_tiempo = '';
+            this.idestado = 0;
+            this.nombre_estado = '';
             this.codigo = '';
             this.nombre = '';
-            this.precio_venta = 0;
             this.stock = 0;
+            this.tiempo = 0;
             this.descripcion = '';
+            this.marca = '';
             this.imagen = '';
             this.errorArticulo = 0;
         },
@@ -55764,11 +55830,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.nombre_categoria = '';
                                     this.idunidad = 0;
                                     this.nombre_unidad = '';
+                                    this.idtiempo = 0;
+                                    this.nombre_tiempo = '';
+                                    this.idestado = 0;
+                                    this.nombre_estado = '';
                                     this.codigo = '';
                                     this.nombre = '';
-                                    this.precio_venta = 0;
                                     this.stock = 0;
+                                    this.tiempo = 0;
                                     this.descripcion = '';
+                                    this.marca = '';
                                     this.imagen = '';
                                     this.tipoAccion = 1;
                                     break;
@@ -55782,11 +55853,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                     this.articulo_id = data['id'];
                                     this.idcategoria = data['idcategoria'];
                                     this.idunidad = data['idunidad'];
+                                    this.idtiempo = data['idtiempo'];
+                                    this.idestado = data['idestado'];
                                     this.codigo = data['codigo'];
                                     this.nombre = data['nombre'];
                                     this.stock = data['stock'];
-                                    this.precio_venta = data['precio_venta'];
+                                    this.tiempo = data['tiempo'];
                                     this.descripcion = data['descripcion'];
+                                    this.marca = data['marca'];
                                     this.imagen = data['imagen'];
                                     break;
                                 }
@@ -55795,6 +55869,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
             this.selectCategoria();
             this.selectUnidad();
+            this.selectTiempo();
+            this.selectEstado();
         }
     },
     mounted: function mounted() {
@@ -58756,11 +58832,19 @@ var render = function() {
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(articulo.precio_venta) }
+                      domProps: { textContent: _vm._s(articulo.descripcion) }
                     }),
                     _vm._v(" "),
                     _c("td", {
-                      domProps: { textContent: _vm._s(articulo.descripcion) }
+                      domProps: { textContent: _vm._s(articulo.tiempo) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      domProps: { textContent: _vm._s(articulo.nombre_tiempo) }
+                    }),
+                    _vm._v(" "),
+                    _c("td", {
+                      domProps: { textContent: _vm._s(articulo.nombre_estado) }
                     }),
                     _vm._v(" "),
                     _c("td", [
@@ -59108,7 +59192,7 @@ var render = function() {
                         [_vm._v("Nombre")]
                       ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "col-md-9" }, [
+                      _c("div", { staticClass: "col-md-5" }, [
                         _c("input", {
                           directives: [
                             {
@@ -59133,6 +59217,56 @@ var render = function() {
                             }
                           }
                         })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idestado,
+                                expression: "idestado"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.idestado = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Estado del Producto")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayEstado, function(estado) {
+                              return _c("option", {
+                                key: estado.id,
+                                domProps: {
+                                  value: estado.id,
+                                  textContent: _vm._s(estado.nombre)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
                       ])
                     ]),
                     _vm._v(" "),
@@ -59141,9 +59275,9 @@ var render = function() {
                         "label",
                         {
                           staticClass: "col-md-3 form-control-label",
-                          attrs: { for: "text-input" }
+                          attrs: { for: "email-input" }
                         },
-                        [_vm._v("Precio Venta")]
+                        [_vm._v("Marca")]
                       ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-9" }, [
@@ -59152,19 +59286,22 @@ var render = function() {
                             {
                               name: "model",
                               rawName: "v-model",
-                              value: _vm.precio_venta,
-                              expression: "precio_venta"
+                              value: _vm.marca,
+                              expression: "marca"
                             }
                           ],
                           staticClass: "form-control",
-                          attrs: { type: "number", placeholder: "" },
-                          domProps: { value: _vm.precio_venta },
+                          attrs: {
+                            type: "email",
+                            placeholder: "Ingrese Marca del Producto"
+                          },
+                          domProps: { value: _vm.marca },
                           on: {
                             input: function($event) {
                               if ($event.target.composing) {
                                 return
                               }
-                              _vm.precio_venta = $event.target.value
+                              _vm.marca = $event.target.value
                             }
                           }
                         })
@@ -59204,15 +59341,6 @@ var render = function() {
                           }
                         })
                       ]),
-                      _vm._v(" "),
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-1 form-control-label",
-                          attrs: { for: "text-input" }
-                        },
-                        [_vm._v("Unidad")]
-                      ),
                       _vm._v(" "),
                       _c("div", { staticClass: "col-md-4" }, [
                         _c(
@@ -59256,6 +59384,91 @@ var render = function() {
                                 domProps: {
                                   value: unidad.id,
                                   textContent: _vm._s(unidad.nombre)
+                                }
+                              })
+                            })
+                          ],
+                          2
+                        )
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Tiempo de Garantia")]
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-5" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tiempo,
+                              expression: "tiempo"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: { type: "number", placeholder: "" },
+                          domProps: { value: _vm.tiempo },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.tiempo = $event.target.value
+                            }
+                          }
+                        })
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.idtiempo,
+                                expression: "idtiempo"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.idtiempo = $event.target.multiple
+                                  ? $$selectedVal
+                                  : $$selectedVal[0]
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { value: "0", disabled: "" } },
+                              [_vm._v("Seleccione Tiempo")]
+                            ),
+                            _vm._v(" "),
+                            _vm._l(_vm.arrayTiempo, function(tiempo) {
+                              return _c("option", {
+                                key: tiempo.id,
+                                domProps: {
+                                  value: tiempo.id,
+                                  textContent: _vm._s(tiempo.nombre)
                                 }
                               })
                             })
@@ -59424,13 +59637,17 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", [_vm._v("Cantidad")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Unidad de Medidad")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Precio Venta")]),
+        _c("th", [_vm._v("Medida")]),
         _vm._v(" "),
         _c("th", [_vm._v("Descripción")]),
         _vm._v(" "),
-        _c("th", [_vm._v("Estado")]),
+        _c("th", [_vm._v("Garantia")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Tiempo")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Estado Producto")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Condicion")]),
         _vm._v(" "),
         _c("th", [_vm._v("Opciones")])
       ])
@@ -59453,7 +59670,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-md-9" }, [
         _c("input", {
           staticClass: "form-control-file",
-          attrs: { type: "file", name: "imagen" }
+          attrs: { type: "file" }
         })
       ])
     ])
