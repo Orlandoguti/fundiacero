@@ -154,7 +154,7 @@ class ArticuloController extends Controller
         $articulo->marca = $request->marca;
         if(Input::hasFile('imagen')){
     		$file=Input::file('imagen');
-    		$file->move(public_path().'imagenes/articulos/',$file->getClientOriginalName());
+    		$file->move(public_path().'/imagenes/articulos/',$file->getClientOriginalName());
     		$articulo->imagen=$file->getClientOriginalName();
     	}
         $articulo->condicion = '1';

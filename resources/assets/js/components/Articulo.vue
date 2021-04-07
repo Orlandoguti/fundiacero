@@ -36,7 +36,7 @@
                         </div>
                    
                        
-                        <table class="table table-bordered table-striped table-sm">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>Area</th>
@@ -267,11 +267,7 @@
         'barcode': VueBarcode
     },
         computed:{
-
-            imagen(){
-                return this.imagenmin;
-            },
-
+            
             isActived: function(){
                 return this.pagination.current_page;
             },
