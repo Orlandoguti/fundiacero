@@ -6,9 +6,11 @@
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
-                <div class="card">
+                <template v-if="listado==1">
+                    <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Artículos
+                        
                         <button type="button" @click="abrirModal('articulo','registrar')" class="btn btn-primary float-right">
                             <i class="icon-plus"></i>&nbsp; Registrar Articulo
                         </button>
@@ -20,7 +22,7 @@
                         <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
-                                        <select v-model="buscarA" @click="listarArticulo(0,buscarA,criterioA)" class="form-control col-md-4">
+                                        <select v-model="buscarA" @click="listarArticulo(1,buscarA,criterioA)" class="form-control col-md-4">
                                             <option value="" disabled>Seleccione la Area</option>
                                             <option value="">Todos</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
@@ -34,9 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                   
-                       
-                        <table class="table">
+                        <table class="table table-bordered table-striped table-sm">
                             <thead>
                                 <tr>
                                     <th>Area</th>
@@ -56,7 +56,11 @@
                                 <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
                                     
                                     <td v-text="articulo.nombre_categoria"></td>
-                                    <td v-text="articulo.codigo"></td>
+                                       <td>
+                                        <a class='black-color'>
+                                            <i class="fa fa-barcode fa-2x" aria-hidden="true"></i>
+                                        </a>
+                                        </td>
                                     <td v-text="articulo.nombre"></td>
                                     <td v-text="articulo.stock"></td>
                                     <td v-text="articulo.nombre_unidad"></td>
@@ -73,6 +77,9 @@
                                         </div>   
                                     </td>
                                     <td>
+                                        <button type="button" @click="verArticulo(articulo.id)" class="btn btn-success btn-sm">
+                                            <i class="icon-eye"></i>
+                                            </button>
                                         <button type="button" @click="abrirModal('articulo','actualizar',articulo)" class="btn btn-warning btn-sm">
                                           <i class="icon-pencil"></i>
                                         </button> &nbsp;
@@ -104,7 +111,9 @@
                             </ul>
                         </nav>
                     </div>
-                </div>
+                    </div>
+                </template>
+                
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
             <!--Inicio del modal agregar/actualizar-->
@@ -179,11 +188,12 @@
                                         </select>
                                     </div>
                                 </div>
+                                
                                 <div class="form-group row">
-                                            <label class="col-md-3 form-control-label" for="text-input">Imagen</label>
-                                             <div class="col-md-9">
-                                            <input type="file" class="form-control-file">
-                                    </div>
+                                    <label class="col-md-3 form-control-label">Seleccione la Imagen</label>
+                                    <div class="col-md-4">
+                                    <input type="file" class="form-control" @change="obtimage">
+                                </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Descripción</label>
@@ -212,6 +222,72 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
+            <template v-if="listado==2">
+                 <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Artículos
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row border">
+                            <div class="col-md-9">
+                                <div class="form-group">
+                                    <label for="">Area</label>
+                                    <p v-text="nombre_categoria"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="">Nombre</label>
+                                <p v-text="nombre"></p>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Cantidad</label>
+                                    <p v-text="stock"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group row border">
+                            <div class="table-responsive col-md-12">
+                                <table class="table table-bordered table-striped table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>Area</th>
+                                            <th>Código de Producto</th>
+                                            <th>Nombre Producto</th>
+                                            <th>Cantidad</th>
+                                            <th>Medida</th>
+                                            <th>Descripción</th>
+                                            <th>Garantia</th>
+                                            <th>Tiempo</th>
+                                            <th>Estado Producto</th>
+                                            <th>Imagen</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody v-if="arrayArticulo.length">
+                                         <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
+                                             <td v-text="articulo.nombre_categoria"></td>
+                                            <td v-text="articulo.codigo"></td>
+                                            <td v-text="articulo.nombre"></td>
+                                            <td v-text="articulo.stock"></td>
+                                            <td v-text="articulo.nombre_unidad"></td>
+                                            <td v-text="articulo.descripcion"></td>
+                                            <td v-text="articulo.tiempo"></td>                                   
+                                            <td v-text="articulo.nombre_tiempo"></td>
+                                            <td v-text="articulo.nombre_estado"></td>
+                                            <td>
+                                               <img :src="'/imagenes/articulos/' + articulo.imagen" width="200">
+                                            </td>
+                                        </tr>
+                                    </tbody>                                
+                                </table>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <button type="button" @click="ocultarDetalle()" class="btn btn-secondary">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
         </main>
 </template>
 
@@ -237,6 +313,7 @@
                 marca : '',
                 imagen : '',
                 arrayArticulo : [],
+                listado: 1,
                 modal : 0,
                 tituloModal : '',
                 tipoAccion : 0,
@@ -298,6 +375,33 @@
         },
 
         methods : {
+            
+             ocultarDetalle(){
+                this.listado=1;
+            },
+
+               verArticulo(id){
+                let me=this;
+                me.listado=2;
+
+                //obtener datos de los detalles
+                 var url= '/articulo/obtenerDetalles?id=' + id;
+
+                axios.get(url).then(function (response) {
+                    console.log(response);
+                    var respuesta= response.data;
+                    me.arrayArticulo = respuesta.articulos;
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+
+            obtimage(e){
+                let file = e.target.files[0];
+                this.imagen = file;
+            },
 
             listarArticulo (page,buscar,criterio){
                 let me=this;
@@ -375,48 +479,47 @@
                 }
                 
                 let me = this;
+                let formData = new FormData();
+                formData.append('idcategoria', this.idcategoria);
+                formData.append('idunidad', this.idunidad);
+                formData.append('idtiempo', this.idtiempo);
+                formData.append('idestado', this.idestado);
+                formData.append('codigo', this.codigo);
+                formData.append('nombre', this.nombre);
+                formData.append('stock', this.stock);
+                formData.append('tiempo', this.tiempo);
+                formData.append('descripcion', this.descripcion);
+                formData.append('marca', this.marca);
+                formData.append('imagen', this.imagen);
 
-                axios.post('/articulo/registrar',{
-                    'idcategoria': this.idcategoria,
-                    'idunidad': this.idunidad,
-                    'idtiempo': this.idtiempo,
-                    'idestado': this.idestado,
-                    'codigo': this.codigo,
-                    'nombre': this.nombre,
-                    'stock': this.stock,
-                    'tiempo': this.tiempo,
-                    'descripcion': this.descripcion,
-                    'marca': this.marca,
-                    'imagen': this.imagen
-                }).then(function (response) {
+                axios.post('/articulo/registrar',formData).then(function (response) {
                     me.cerrarModal();
                     me.listarArticulo(1,'','nombre');
                 }).catch(function (error) {
                     console.log(error);
                 });
             },
-        
+
             actualizarArticulo(){
                if (this.validarArticulo()){
                     return;
                 }
-                
                 let me = this;
+                let formData = new FormData();
+                formData.append('id', this.articulo_id);
+                formData.append('idcategoria', this.idcategoria);
+                formData.append('idunidad', this.idunidad);
+                formData.append('idtiempo', this.idtiempo);
+                formData.append('idestado', this.idestado);
+                formData.append('codigo', this.codigo);
+                formData.append('nombre', this.nombre);
+                formData.append('stock', this.stock);
+                formData.append('tiempo', this.tiempo);
+                formData.append('descripcion', this.descripcion);
+                formData.append('marca', this.marca);
+                formData.append('imagen', this.imagen);
 
-                axios.put('/articulo/actualizar',{
-                    'idcategoria': this.idcategoria,
-                    'idunidad': this.idunidad,
-                    'idtiempo': this.idtiempo,
-                    'idestado': this.idestado,
-                    'codigo': this.codigo,
-                    'nombre': this.nombre,
-                    'stock': this.stock,
-                    'tiempo': this.tiempo,
-                    'descripcion': this.descripcion,
-                    'marca': this.marca,
-                    'imagen': this.imagen,
-                    'id': this.articulo_id
-                }).then(function (response) {
+                axios.post('/articulo/actualizar',formData).then(function (response) {
                     me.cerrarModal();
                     me.listarArticulo(1,'','nombre');
                 }).catch(function (error) {
@@ -516,6 +619,7 @@
 
                 return this.errorArticulo;
             },
+
             cerrarModal(){
                 this.modal=0;
                 this.tituloModal='';
@@ -580,7 +684,7 @@
                                 this.tiempo=data['tiempo'];
                                 this.descripcion= data['descripcion'];
                                 this.marca= data['marca'];
-                                this.imagen= data['imagen'];
+                                this.imagen= data[''];
                                 break;
                             }
                         }

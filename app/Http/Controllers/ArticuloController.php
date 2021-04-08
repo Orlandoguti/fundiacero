@@ -48,6 +48,7 @@ class ArticuloController extends Controller
             'articulos' => $articulos
         ];
     }
+
     public function listarArticulo(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
@@ -75,6 +76,46 @@ class ArticuloController extends Controller
         
 
         return ['articulos' => $articulos];
+    }
+    public function obtenerCabecera(Request $request){
+        if (!$request->ajax()) return redirect('/');
+ 
+        $id = $request->id;
+         
+
+        $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
+        ->join('unidads','articulos.idunidad','=','unidads.id')
+        ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+        ->join('estados','articulos.idestado','=','estados.id')
+        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+        ->where('articulos.id','=',$id)
+        ->orderBy('articulos.id', 'desc')->take(1)->get();
+
+         
+        return [
+           
+            'articulos' => $articulos
+        ];
+    }
+
+    public function obtenerDetalles(Request $request){
+        if (!$request->ajax()) return redirect('/');
+ 
+        $id = $request->id;
+         
+        $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
+        ->join('unidads','articulos.idunidad','=','unidads.id')
+        ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+        ->join('estados','articulos.idestado','=','estados.id')
+        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+        ->where('articulos.id','=',$id)
+        ->orderBy('articulos.id', 'desc')->get();
+
+         
+        return [
+           
+            'articulos' => $articulos
+        ];
     }
     public function listarArticuloVenta(Request $request)
     {
@@ -152,14 +193,14 @@ class ArticuloController extends Controller
         $articulo->tiempo = $request->tiempo;
         $articulo->descripcion = $request->descripcion;
         $articulo->marca = $request->marca;
-        if(Input::hasFile('imagen')){
-    		$file=Input::file('imagen');
-    		$file->move(public_path().'/imagenes/articulos/',$file->getClientOriginalName());
-    		$articulo->imagen=$file->getClientOriginalName();
-    	}
+        $fileData = $request->file('imagen');
+        if(Input::hasfile('imagen')) {
+            $fileName = time()."_".$fileData->getClientOriginalName();
+            $fileData->move(public_path().'/imagenes/articulos/', $fileName);
+            $articulo->imagen = $fileName;
+        }
         $articulo->condicion = '1';
-        $articulo->save();
-        
+        $articulo->save();  
     }
     public function update(Request $request)
     {
@@ -175,13 +216,11 @@ class ArticuloController extends Controller
         $articulo->tiempo = $request->tiempo;
         $articulo->descripcion = $request->descripcion;
         $articulo->marca = $request->marca;
-        if(Input::hasFile('imagen')) {
-            $file=Input::file('imagen');
-            Image::make($request->file('imagen'))
-                ->resize(144, 145)
-                ->save(public_path().'/imagenes/articulos/' . $file->getClientOriginalName());
-            $articulo->imagen=$file->getClientOriginalName();
-            // var_dump($empresa->eq_foto=$file->getClientOriginalName()); die;
+        $fileData = $request->file('imagen');
+        if(Input::hasfile('imagen')) {
+            $fileName = time()."_".$fileData->getClientOriginalName();
+            $fileData->move(public_path().'/imagenes/articulos/', $fileName);
+            $articulo->imagen = $fileName;
         }
         $articulo->condicion = '1';
         $articulo->save();
