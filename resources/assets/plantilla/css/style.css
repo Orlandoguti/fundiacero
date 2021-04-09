@@ -2800,7 +2800,10 @@ margin-top: 10px;}
 .card-body, .card-block {
   -ms-flex: 1 1 auto;
       flex: 1 1 auto;
-  padding: 1.25rem; }
+      padding-top: 1.25rem;
+    padding-right: 1.25rem;
+    padding-bottom: 1.25rem; 
+    padding-left: 1.25rem; }
 
 .card-title {
   margin-bottom: 0.75rem; }
@@ -7502,6 +7505,7 @@ base-chart.chart {
     padding-left: 7.5px; }
 
 .main .container-fluid {
+  background-color: white;
   padding: 0 30px; }
 
 .input-group-addon,

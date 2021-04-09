@@ -30,6 +30,7 @@
                                     <select class="form-control col-md-3">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
+                                      <option value="codigo">Codigo</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarArticulo(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarArticulo(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
@@ -40,7 +41,6 @@
                             <thead>
                                 <tr>
                                     <th>Area</th>
-                                    <th>Código de Producto</th>
                                     <th>Nombre Producto</th>
                                     <th>Cantidad</th>
                                     <th>Medida</th>
@@ -48,7 +48,8 @@
                                     <th>Garantia</th>
                                     <th>Tiempo</th>
                                     <th>Estado Producto</th>
-                                    <th>Condicion</th>
+                                    <th>Condicion</th>                                    
+                                    <th>Código de Producto</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
@@ -56,11 +57,6 @@
                                 <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
                                     
                                     <td v-text="articulo.nombre_categoria"></td>
-                                       <td>
-                                        <a class='black-color'>
-                                            <i class="fa fa-barcode fa-2x" aria-hidden="true"></i>
-                                        </a>
-                                        </td>
                                     <td v-text="articulo.nombre"></td>
                                     <td v-text="articulo.stock"></td>
                                     <td v-text="articulo.nombre_unidad"></td>
@@ -75,6 +71,11 @@
                                         <div v-else>
                                             <span class="badge badge-danger">Desactivado</span>
                                         </div>   
+                                    </td>                                                                        
+                                    <td>
+                                         <a href="#" class='black-color' @click.prevent="generateAndDownloadBarCode(articulo.codigo,articulo.nombre_categoria)">
+                                            <i class="fa fa-barcode fa-2xd" aria-hidden="true"></i>
+                                        </a>
                                     </td>
                                     <td>
                                         <button type="button" @click="verArticulo(articulo.id)" class="btn btn-success btn-sm">
@@ -115,7 +116,94 @@
                 </template>
                 
                 <!-- Fin ejemplo de tabla Listado -->
+
+                 <!-- Ejemplo de tabla Listado 2 detalles-->
+                 <template v-else-if="listado==2">
+                 <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Artículos
+                    </div>
+         <div class="card-body">
+                <div class="form-group row border">
+                            <div class="table-responsive col-md-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre del Producto</th>
+                                            <th>Area</th>
+                                            <th>Estado del Producto</th>
+                                            <th>Descripcion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody v-if="arrayArticulo.length">
+                                         <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
+                                            <td v-text="articulo.nombre"></td>
+                                            <td v-text="articulo.nombre_categoria"></td>
+                                            <td v-text="articulo.nombre_estado"></td>                                   
+                                            <td v-text="articulo.descripcion"></td>                                            
+                                        </tr>
+                                    </tbody>                                
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row border">
+                            <div class="table-responsive col-md-12">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Cantidad</th>
+                                            <th>Medida</th>
+                                            <th>Garantia</th>
+                                            <th>Tiempo</th>
+                                             <th>Marca</th>
+                                            <th>Fecha de Registro</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody v-if="arrayArticulo.length">
+                                         <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
+                                            <td v-text="articulo.stock"></td>
+                                            <td v-text="articulo.nombre_unidad"></td>
+                                            <td v-text="articulo.tiempo"></td>                                   
+                                            <td v-text="articulo.nombre_tiempo"></td>
+                                            <td v-text="articulo.marca"></td>
+                                            <td v-text="articulo.created_at"></td>                                             
+                                        </tr>
+                                    </tbody>                                
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="card-body">
+                            <div class="form-group row border">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                     </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <div v-for="articulo in arrayArticulo" :key="articulo.id">
+                                             <img class = "img-square" :src="'/imagenes/articulos/' + articulo.imagen" width="200" height="200">
+                                        </div>
+                                     </div>
+                                </div>
+                               <div class="col-md-5">
+                                    <label v-if="codigo" placeholder="Código de barras">
+                                    <barcode :value="codigo" :options="{ format: 'EAN-13' }">
+                                            Generando código de barras.    
+                                    </barcode>                                       
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-12">
+                                <button type="button" @click="ocultarDetalle()"  class="btn btn-secondary float-right">Cerrar</button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
             </div>
+            
             <!--Inicio del modal agregar/actualizar-->
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
@@ -140,7 +228,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Código</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="codigo" class="form-control" placeholder="Código de barras"> 
+                                        <input type="text" v-model="codigo" class="form-control" placeholder="Ingrese Codigo de Producto: AL-T0001 "> 
                                         <barcode :value="codigo" :options="{ format: 'EAN-13' }">
                                             Generando código de barras.    
                                         </barcode>                                       
@@ -188,19 +276,22 @@
                                         </select>
                                     </div>
                                 </div>
-                                
-                                <div class="form-group row">
-                                    <label class="col-md-3 form-control-label">Seleccione la Imagen</label>
-                                    <div class="col-md-4">
-                                    <input type="file" class="form-control" @change="obtimage">
-                                </div>
-                                </div>
-                                <div class="form-group row">
+                                  <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Descripción</label>
                                     <div class="col-md-9">
                                         <input type="email" v-model="descripcion" class="form-control" placeholder="Ingrese descripción">
                                     </div>
                                 </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 form-control-label">Seleccione la Imagen</label>
+                                    <div class="col-md-4">
+                                    <input type="file" class="form-control" @change="obtimage">
+                                </div>
+                                <figure>
+                                    <img width="200" height="200" :src="imagenm" alt="Foto del Producto">
+                                </figure>
+                                </div>
+                              
                                 <div v-show="errorArticulo" class="form-group row div-error">
                                     <div class="text-center text-error">
                                         <div v-for="error in errorMostrarMsjArticulo" :key="error" v-text="error">
@@ -222,76 +313,12 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
-            <template v-if="listado==2">
-                 <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Artículos
-                    </div>
-                    <div class="card-body">
-                        <div class="form-group row border">
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label for="">Area</label>
-                                    <p v-text="nombre_categoria"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="">Nombre</label>
-                                <p v-text="nombre"></p>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Cantidad</label>
-                                    <p v-text="stock"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row border">
-                            <div class="table-responsive col-md-12">
-                                <table class="table table-bordered table-striped table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>Area</th>
-                                            <th>Código de Producto</th>
-                                            <th>Nombre Producto</th>
-                                            <th>Cantidad</th>
-                                            <th>Medida</th>
-                                            <th>Descripción</th>
-                                            <th>Garantia</th>
-                                            <th>Tiempo</th>
-                                            <th>Estado Producto</th>
-                                            <th>Imagen</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody v-if="arrayArticulo.length">
-                                         <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
-                                             <td v-text="articulo.nombre_categoria"></td>
-                                            <td v-text="articulo.codigo"></td>
-                                            <td v-text="articulo.nombre"></td>
-                                            <td v-text="articulo.stock"></td>
-                                            <td v-text="articulo.nombre_unidad"></td>
-                                            <td v-text="articulo.descripcion"></td>
-                                            <td v-text="articulo.tiempo"></td>                                   
-                                            <td v-text="articulo.nombre_tiempo"></td>
-                                            <td v-text="articulo.nombre_estado"></td>
-                                            <td>
-                                               <img :src="'/imagenes/articulos/' + articulo.imagen" width="200">
-                                            </td>
-                                        </tr>
-                                    </tbody>                                
-                                </table>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <button type="button" @click="ocultarDetalle()" class="btn btn-secondary">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                </template>
         </main>
 </template>
 
 <script>
+
+    import {generateAndDownloadBarcodeInPDF} from './generateBarcode'; 
     import VueBarcode from 'vue-barcode';
     export default {
         data (){
@@ -311,7 +338,8 @@
                 tiempo : 0,
                 descripcion : '',
                 marca : '',
-                imagen : '',
+                imagenmin:'',
+                imagen:'',
                 arrayArticulo : [],
                 listado: 1,
                 modal : 0,
@@ -332,7 +360,7 @@
                 arrayTiempo :[],
                 arrayEstado :[],
                 offset : 3,
-                criterio : 'nombre',
+                criterio : 'codigo',
                 buscar : '',
                 criterioA: 'idcategoria',
                 buscarA:'',
@@ -344,7 +372,9 @@
         'barcode': VueBarcode
     },
         computed:{
-            
+            imagenm(){
+                return this.imagenmin;
+            },
             isActived: function(){
                 return this.pagination.current_page;
             },
@@ -375,8 +405,12 @@
         },
 
         methods : {
-            
-             ocultarDetalle(){
+
+    generateAndDownloadBarCode(codigo,nombre_categoria) {
+      generateAndDownloadBarcodeInPDF(codigo,nombre_categoria);
+    },
+     ocultarDetalle(){
+         
                 this.listado=1;
             },
 
@@ -384,6 +418,23 @@
                 let me=this;
                 me.listado=2;
 
+               var arrayArticulo=[];
+                var url= '/articulo/obtenerCabecera?id=' + id;
+
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    arrayArticulo = respuesta.articulos;
+                    
+                    me.nombre = arrayArticulo[0]['nombre'];
+                    me.codigo = arrayArticulo[0]['codigo'];
+                    me.nombre_categoria = arrayArticulo[0]['nombre_categoria'];
+                    me.nombre_estado = arrayArticulo[0]['nombre_estado'];
+                    me.descripcion = arrayArticulo[0]['descripcion'];
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
                 //obtener datos de los detalles
                  var url= '/articulo/obtenerDetalles?id=' + id;
 
@@ -401,10 +452,19 @@
             obtimage(e){
                 let file = e.target.files[0];
                 this.imagen = file;
+                this.cargarImagen(file);
             },
 
+            cargarImagen(file){
+                let reader = new FileReader();
+                reader.onload = (e) =>{
+                    this.imagenmin = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            },
             listarArticulo (page,buscar,criterio){
                 let me=this;
+                this.buscaA = '';
                 var url= '/articulo?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
@@ -664,6 +724,7 @@
                                 this.descripcion = '';
                                 this.marca = '';
                                 this.imagen = '';
+                                this.imagenmin = '';
                                 this.tipoAccion = 1;
                                 break;
                             }
@@ -685,6 +746,7 @@
                                 this.descripcion= data['descripcion'];
                                 this.marca= data['marca'];
                                 this.imagen= data[''];
+                                this.imagenmin= data['imagenm'];
                                 break;
                             }
                         }
@@ -721,4 +783,17 @@
         color: rgb(13, 123, 240) !important;
         font-weight: bold;
     }
+    .orders-component-title {
+    margin: 40px 0px;
+    font-weight: bold;
+    line-height: 24px;
+    text-decoration: underline;
+    }
+
+    .black-color {
+    color: black;
+    }
+    .fa-2xd {
+    font-size: 31px;
+}
 </style>

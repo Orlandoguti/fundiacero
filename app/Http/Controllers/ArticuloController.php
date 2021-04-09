@@ -22,7 +22,7 @@ class ArticuloController extends Controller
             ->join('unidads','articulos.idunidad','=','unidads.id')
             ->join('tiempos','articulos.idtiempo','=','tiempos.id')
             ->join('estados','articulos.idestado','=','estados.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
             ->orderBy('categorias.id', 'asc')->paginate(7);
         }
         else{
@@ -30,7 +30,7 @@ class ArticuloController extends Controller
             ->join('unidads','articulos.idunidad','=','unidads.id')
             ->join('tiempos','articulos.idtiempo','=','tiempos.id')
             ->join('estados','articulos.idestado','=','estados.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('categorias.id', 'asc')->paginate(7);
         }
@@ -61,7 +61,7 @@ class ArticuloController extends Controller
             ->join('unidads','articulos.idunidad','=','unidads.id')
             ->join('tiempos','articulos.idtiempo','=','tiempos.id')
             ->join('estados','articulos.idestado','=','estados.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
         else{
@@ -69,7 +69,7 @@ class ArticuloController extends Controller
             ->join('unidads','articulos.idunidad','=','unidads.id')
             ->join('tiempos','articulos.idtiempo','=','tiempos.id')
             ->join('estados','articulos.idestado','=','estados.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
@@ -87,7 +87,7 @@ class ArticuloController extends Controller
         ->join('unidads','articulos.idunidad','=','unidads.id')
         ->join('tiempos','articulos.idtiempo','=','tiempos.id')
         ->join('estados','articulos.idestado','=','estados.id')
-        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
         ->where('articulos.id','=',$id)
         ->orderBy('articulos.id', 'desc')->take(1)->get();
 
@@ -107,7 +107,7 @@ class ArticuloController extends Controller
         ->join('unidads','articulos.idunidad','=','unidads.id')
         ->join('tiempos','articulos.idtiempo','=','tiempos.id')
         ->join('estados','articulos.idestado','=','estados.id')
-        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion','articulos.created_at')
         ->where('articulos.id','=',$id)
         ->orderBy('articulos.id', 'desc')->get();
 
@@ -129,7 +129,7 @@ class ArticuloController extends Controller
             ->join('unidads','articulos.idunidad','=','unidads.id')
             ->join('tiempos','articulos.idtiempo','=','tiempos.id')
             ->join('estados','articulos.idestado','=','estados.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
             ->orderBy('articulos.id', 'desc')->paginate(10);
         }
         else{
@@ -137,7 +137,7 @@ class ArticuloController extends Controller
             ->join('unidads','articulos.idunidad','=','unidads.id')
             ->join('tiempos','articulos.idtiempo','=','tiempos.id')
             ->join('estados','articulos.idestado','=','estados.id')
-            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
             ->where('articulos.stock','>','0')
             ->orderBy('articulos.id', 'desc')->paginate(10);
@@ -151,7 +151,7 @@ class ArticuloController extends Controller
         ->join('unidads','articulos.idunidad','=','unidads.id')
         ->join('tiempos','articulos.idtiempo','=','tiempos.id')
         ->join('estados','articulos.idestado','=','estados.id')
-        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.condicion')
+        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
         ->orderBy('articulos.nombre', 'desc')->get();
 
         $cont=Articulo::count();
@@ -164,7 +164,7 @@ class ArticuloController extends Controller
 
         $filtro = $request->filtro;
         $articulos = Articulo::where('nombre','=', $filtro)
-        ->select('id', 'nombre')->orderBy('nombre', 'asc')->take(1)->get();
+        ->select('id', 'nombre','codigo')->orderBy('nombre', 'asc')->take(1)->get();
 
         return ['articulos' => $articulos];
     }
