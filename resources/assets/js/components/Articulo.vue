@@ -27,7 +27,7 @@
                                             <option value="">Todos</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
-                                    <select class="form-control col-md-3">
+                                    <select class="form-control col-md-3" v-model="criterio">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                       <option value="codigo">Codigo</option>
@@ -48,8 +48,8 @@
                                     <th>Garantia</th>
                                     <th>Tiempo</th>
                                     <th>Estado Producto</th>
-                                    <th>Condicion</th>                                    
                                     <th>Código de Producto</th>
+                                    <th>Condicion</th>                                    
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
@@ -64,7 +64,12 @@
                                     <td v-text="articulo.tiempo"></td>                                   
                                     <td v-text="articulo.nombre_tiempo"></td>
                                     <td v-text="articulo.nombre_estado"></td>
-                                    <td>
+                                   <td>
+                                         <a href="#" class='black-color' @click.prevent="generateAndDownloadBarCode(articulo.codigo,articulo.nombre_categoria)">
+                                            <i class="fa fa-barcode fa-2xd" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                     <td>
                                         <div v-if="articulo.condicion">
                                             <span class="badge badge-success">Activo</span>
                                         </div>
@@ -72,11 +77,7 @@
                                             <span class="badge badge-danger">Desactivado</span>
                                         </div>   
                                     </td>                                                                        
-                                    <td>
-                                         <a href="#" class='black-color' @click.prevent="generateAndDownloadBarCode(articulo.codigo,articulo.nombre_categoria)">
-                                            <i class="fa fa-barcode fa-2xd" aria-hidden="true"></i>
-                                        </a>
-                                    </td>
+                                    
                                     <td>
                                         <button type="button" @click="verArticulo(articulo.id)" class="btn btn-success btn-sm">
                                             <i class="icon-eye"></i>
@@ -229,7 +230,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                                     <div class="col-md-5">
-                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Producto">                                        
+                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Producto" >                                        
                                     </div>
                                     <div class="col-md-4">
                                     <select class="form-control" v-model="idestado">
@@ -265,11 +266,18 @@
                                     </div>
                                 </div>
                                  <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Tiempo de Garantia</label>
-                                    <div class="col-md-5">
+                                    <label class="col-md-3 form-control-label" for="text-input">Garantia</label>
+                                      <div class="col-md-4">
+                                      <label class="radio-inline">
+                                        <input type="radio" v-model="exp" value="1"> SI
+                                        <label >--</label>
+                                        <input type="radio" v-model="exp" value="0"> NO
+                                        </label>                                               
+                                    </div>
+                                    <div v-if="exp == 1" class="col-md-2">
                                         <input type="number" v-model="tiempo" class="form-control" placeholder="">                                                     
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4" v-if="exp == 1">
                                      <select class="form-control" v-model="idtiempo">
                                             <option value="0" disabled>Seleccione Tiempo</option>
                                             <option v-for="tiempo in arrayTiempo" :key="tiempo.id" :value="tiempo.id" v-text="tiempo.nombre"></option>
@@ -321,6 +329,7 @@
     import {generateAndDownloadBarcodeInPDF} from './generateBarcode'; 
     import VueBarcode from 'vue-barcode';
     export default {
+   
         data (){
             return {
                 articulo_id: 0,
@@ -336,6 +345,7 @@
                 nombre : '',
                 stock : 0,
                 tiempo : 0,
+                exp : '',
                 descripcion : '',
                 marca : '',
                 imagenmin:'',
@@ -360,7 +370,7 @@
                 arrayTiempo :[],
                 arrayEstado :[],
                 offset : 3,
-                criterio : 'codigo',
+                criterio : 'nombre',
                 buscar : '',
                 criterioA: 'idcategoria',
                 buscarA:'',
@@ -410,6 +420,7 @@
       generateAndDownloadBarcodeInPDF(codigo,nombre_categoria);
     },
      ocultarDetalle(){
+         
          
                 this.listado=1;
             },
@@ -464,7 +475,6 @@
             },
             listarArticulo (page,buscar,criterio){
                 let me=this;
-                this.buscaA = '';
                 var url= '/articulo?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
@@ -668,11 +678,13 @@
                 this.errorArticulo=0;
                 this.errorMostrarMsjArticulo =[];
 
-                if (this.idcategoria==0) this.errorMostrarMsjArticulo.push("Seleccione una categoría.");
+                if (this.idcategoria==0) this.errorMostrarMsjArticulo.push("Seleccione una Area.");
                 if (this.idunidad==0) this.errorMostrarMsjArticulo.push("Seleccione una unidad.");
-                if (this.idtiempo==0) this.errorMostrarMsjArticulo.push("Seleccione un tiempo .");
+                if (this.descripcion==0) this.errorMostrarMsjArticulo.push("Añada una descripcion .");
                 if (this.idestado==0) this.errorMostrarMsjArticulo.push("Seleccione un estado.");
-                if (!this.nombre) this.errorMostrarMsjArticulo.push("El nombre del artículo no puede estar vacío.");
+                if (!this.nombre){ alert('No has escrito nada en el usuario');
+                    return; 
+                };
                 if (!this.stock) this.errorMostrarMsjArticulo.push("El stock del artículo debe ser un número y no puede estar vacío.");
 
                 if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;

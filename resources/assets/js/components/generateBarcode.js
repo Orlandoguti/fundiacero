@@ -13,7 +13,7 @@ const generateAndDownloadBarcodeInPDF = (codigo,nombre_categoria) => {
 		// Following we add 5 barcode images
 		doc.addImage(realImage, 'PNG', 10, 10);
 
-		doc.save('barcode.pdf');
+		doc.save(nombre_categoria+" "+codigo+'.pdf');
 	});
 };
 

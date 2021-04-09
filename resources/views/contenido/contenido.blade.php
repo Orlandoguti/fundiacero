@@ -14,10 +14,6 @@
             <template v-if="menu==2">
                 <articulo></articulo>
             </template>
-            <template v-if="menu==13">
-                <artlamina></artlamina>
-            </template>
-
             <template v-if="menu==3">
                 <ingreso ></ingreso>
             </template>

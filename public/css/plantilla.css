@@ -251,6 +251,7 @@ th {
   text-align: left; }
 
 label {
+  font-size: 16px;
   display: inline-block;
   margin-bottom: .5rem; }
 
@@ -812,7 +813,7 @@ pre {
     max-width: 15%; }
   .col-md-4 {
     -ms-flex: 0 0 33.33333%;
-        flex: 0 0 33.33333%;
+        flex: 0 0 29%;
     max-width: 33.33333%; }
   .col-md-5 {
     -ms-flex: 0 0 41.66667%;
@@ -1295,7 +1296,7 @@ text-align: center; }
     opacity: 1; }
 
 select.form-control:not([size]):not([multiple]) {
-  height: calc(2.09375rem + 2px); }
+  height: calc(2.09375rem + 3.5px); }
 
 select.form-control:focus::-ms-value {
   color: #3e515b;
