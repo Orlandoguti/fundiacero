@@ -16,7 +16,7 @@
                         <a class="nav-link nav-dropdown-toggle"  href="#"><i class="icon-bag"></i> Almacén Principal</a>
                         <ul class="nav-dropdown-items">
                             <li @click="menu=2" class="nav-item">
-                                <a class="nav-link" href="#"><i class="icon-bag"></i> Articulos</a>
+                                <a class="nav-link" href="#"><i class="icon-bag"></i> Productos</a>
                             </li>
                         </ul>
                     </li>

@@ -9,10 +9,10 @@
                 <template v-if="listado==1">
                     <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Artículos
+                        <i class="fa fa-align-justify"></i> Productos
                         
                         <button type="button" @click="abrirModal('articulo','registrar')" class="btn btn-primary float-right">
-                            <i class="icon-plus"></i>&nbsp; Registrar Articulo
+                            <i class="icon-plus"></i>&nbsp; Registrar Producto
                         </button>
                          <button type="button" @click="cargarPdf()" class="btn btn-info float-right">
                             <i class="icon-doc"></i>&nbsp;Reporte
@@ -225,25 +225,25 @@
                                         </select>                                        
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Código</label>
-                                    <div class="col-md-9">
-                                        <input type="text" v-model="codigo" class="form-control" placeholder="Ingrese Codigo de Producto: AL-T0001 "> 
-                                        <barcode :value="codigo" :options="{ format: 'EAN-13' }">
-                                            Generando código de barras.    
-                                        </barcode>                                       
-                                    </div>
-                                </div>
+                      
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                                     <div class="col-md-5">
-                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de artículo">                                        
+                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Producto">                                        
                                     </div>
                                     <div class="col-md-4">
                                     <select class="form-control" v-model="idestado">
                                             <option value="0" disabled>Estado del Producto</option>
                                             <option v-for="estado in arrayEstado" :key="estado.id" :value="estado.id" v-text="estado.nombre"></option>
                                     </select>
+                                    </div>
+                                </div>
+                                          <div class="form-group row">
+                                    <label class="col-md-3 form-control-label" for="text-input">Código</label>
+                                    <div class="col-md-9">
+                                        <input type="text" v-model="codigo" class="form-control" placeholder="Ingrese Codigo de Producto - AL-T0001"> 
+                                        <barcode :value="codigo" :options="{ format: 'EAN-13' }">  
+                                        </barcode>                                       
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -708,7 +708,7 @@
                             case 'registrar':
                             {
                                 this.modal = 1;
-                                this.tituloModal = 'Registrar Artículo';
+                                this.tituloModal = 'Registrar Producto';
                                 this.idcategoria=0;
                                 this.nombre_categoria='';
                                 this.idunidad=0;
@@ -732,7 +732,7 @@
                             {
                                 //console.log(data);
                                 this.modal=1;
-                                this.tituloModal='Actualizar Artículo';
+                                this.tituloModal='Actualizar Producto';
                                 this.tipoAccion=2;
                                 this.articulo_id=data['id'];
                                 this.idcategoria=data['idcategoria'];

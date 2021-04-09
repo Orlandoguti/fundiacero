@@ -357,7 +357,7 @@
                             case 'registrar':
                             {
                                 this.modal = 1;
-                                this.tituloModal = 'Registrar Categoría';
+                                this.tituloModal = 'Registrar Area';
                                 this.nombre= '';
                                 this.descripcion = '';
                                 this.encargado = '';
@@ -368,7 +368,7 @@
                             {
                                 //console.log(data);
                                 this.modal=1;
-                                this.tituloModal='Actualizar categoría';
+                                this.tituloModal='Actualizar Area';
                                 this.tipoAccion=2;
                                 this.categoria_id=data['id'];
                                 this.nombre = data['nombre'];

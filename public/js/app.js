@@ -54649,7 +54649,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             case 'registrar':
                                 {
                                     this.modal = 1;
-                                    this.tituloModal = 'Registrar Categoría';
+                                    this.tituloModal = 'Registrar Area';
                                     this.nombre = '';
                                     this.descripcion = '';
                                     this.encargado = '';
@@ -54660,7 +54660,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 {
                                     //console.log(data);
                                     this.modal = 1;
-                                    this.tituloModal = 'Actualizar categoría';
+                                    this.tituloModal = 'Actualizar Area';
                                     this.tipoAccion = 2;
                                     this.categoria_id = data['id'];
                                     this.nombre = data['nombre'];
@@ -56063,7 +56063,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             case 'registrar':
                                 {
                                     this.modal = 1;
-                                    this.tituloModal = 'Registrar Artículo';
+                                    this.tituloModal = 'Registrar Producto';
                                     this.idcategoria = 0;
                                     this.nombre_categoria = '';
                                     this.idunidad = 0;
@@ -56087,7 +56087,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 {
                                     //console.log(data);
                                     this.modal = 1;
-                                    this.tituloModal = 'Actualizar Artículo';
+                                    this.tituloModal = 'Actualizar Producto';
                                     this.tipoAccion = 2;
                                     this.articulo_id = data['id'];
                                     this.idcategoria = data['idcategoria'];
@@ -58903,7 +58903,7 @@ var render = function() {
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header" }, [
                   _c("i", { staticClass: "fa fa-align-justify" }),
-                  _vm._v(" Artículos\n                \n                "),
+                  _vm._v(" Productos\n                \n                "),
                   _c(
                     "button",
                     {
@@ -58917,7 +58917,7 @@ var render = function() {
                     },
                     [
                       _c("i", { staticClass: "icon-plus" }),
-                      _vm._v("  Registrar Articulo\n                ")
+                      _vm._v("  Registrar Producto\n                ")
                     ]
                   ),
                   _vm._v(" "),
@@ -59628,65 +59628,6 @@ var render = function() {
                           staticClass: "col-md-3 form-control-label",
                           attrs: { for: "text-input" }
                         },
-                        [_vm._v("Código")]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "col-md-9" },
-                        [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.codigo,
-                                expression: "codigo"
-                              }
-                            ],
-                            staticClass: "form-control",
-                            attrs: {
-                              type: "text",
-                              placeholder:
-                                "Ingrese Codigo de Producto: AL-T0001 "
-                            },
-                            domProps: { value: _vm.codigo },
-                            on: {
-                              input: function($event) {
-                                if ($event.target.composing) {
-                                  return
-                                }
-                                _vm.codigo = $event.target.value
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "barcode",
-                            {
-                              attrs: {
-                                value: _vm.codigo,
-                                options: { format: "EAN-13" }
-                              }
-                            },
-                            [
-                              _vm._v(
-                                "\n                                    Generando código de barras.    \n                                "
-                              )
-                            ]
-                          )
-                        ],
-                        1
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "form-group row" }, [
-                      _c(
-                        "label",
-                        {
-                          staticClass: "col-md-3 form-control-label",
-                          attrs: { for: "text-input" }
-                        },
                         [_vm._v("Nombre")]
                       ),
                       _vm._v(" "),
@@ -59703,7 +59644,7 @@ var render = function() {
                           staticClass: "form-control",
                           attrs: {
                             type: "text",
-                            placeholder: "Nombre de artículo"
+                            placeholder: "Nombre de Producto"
                           },
                           domProps: { value: _vm.nombre },
                           on: {
@@ -59766,6 +59707,57 @@ var render = function() {
                           2
                         )
                       ])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "col-md-3 form-control-label",
+                          attrs: { for: "text-input" }
+                        },
+                        [_vm._v("Código")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "col-md-9" },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.codigo,
+                                expression: "codigo"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              type: "text",
+                              placeholder:
+                                "Ingrese Codigo de Producto - AL-T0001"
+                            },
+                            domProps: { value: _vm.codigo },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.codigo = $event.target.value
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("barcode", {
+                            attrs: {
+                              value: _vm.codigo,
+                              options: { format: "EAN-13" }
+                            }
+                          })
+                        ],
+                        1
+                      )
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group row" }, [
