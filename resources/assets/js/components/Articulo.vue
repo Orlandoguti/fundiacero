@@ -6,7 +6,7 @@
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
-                <template v-if="listado==1">
+                <template v-if="listado==1" :v-model="buscarA">
                     <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Productos
@@ -37,16 +37,17 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered table-striped table-sm">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>Area</th>
                                     <th>Nombre Producto</th>
                                     <th>Cantidad</th>
                                     <th>Medida</th>
-                                    <th>Descripción</th>
+                                    <th>Descripción</th>                                    
                                     <th>Garantia</th>
                                     <th>Tiempo</th>
+                                    <th>Marca</th>
                                     <th>Estado Producto</th>
                                     <th>Código de Producto</th>
                                     <th>Condicion</th>                                    
@@ -61,8 +62,9 @@
                                     <td v-text="articulo.stock"></td>
                                     <td v-text="articulo.nombre_unidad"></td>
                                     <td v-text="articulo.descripcion"></td>
-                                    <td v-text="articulo.tiempo"></td>                                   
-                                    <td v-text="articulo.nombre_tiempo"></td>
+                                    <td v-text="articulo.tiempo"></td>                                    
+                                    <td v-text="articulo.nombre_tiempo"></td>                                    
+                                    <td v-text="articulo.marca"></td>
                                     <td v-text="articulo.nombre_estado"></td>
                                    <td>
                                          <a href="#" class='black-color' @click.prevent="generateAndDownloadBarCode(articulo.codigo,articulo.nombre_categoria)">
@@ -121,7 +123,7 @@
                  <!-- Ejemplo de tabla Listado 2 detalles-->
                  <template v-else-if="listado==2">
                  <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Artículos
+                        <i class="fa fa-align-justify"></i> Productos
                     </div>
          <div class="card-body">
                 <div class="form-group row border">
@@ -198,7 +200,7 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-md-12">
-                                <button type="button" @click="ocultarDetalle()"  class="btn btn-secondary float-right">Cerrar</button>
+                                <button type="button" @click="ocultarDetalle()"  class="btn botonlogin">Cerrar</button>
                             </div>
                         </div>
                     </div>
@@ -212,7 +214,7 @@
                         <div class="modal-header">
                             <h4 class="modal-title" v-text="tituloModal"></h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
-                              <span aria-hidden="true">×</span>
+                              <span aria-hidden="true">x</span>
                             </button>
                         </div>
                         <div class="modal-body">
@@ -270,7 +272,7 @@
                                       <div class="col-md-4">
                                       <label class="radio-inline">
                                         <input type="radio" v-model="exp" value="1"> SI
-                                        <label >--</label>
+                                        <label><label></label></label>
                                         <input type="radio" v-model="exp" value="0"> NO
                                         </label>                                               
                                     </div>
@@ -737,6 +739,7 @@
                                 this.marca = '';
                                 this.imagen = '';
                                 this.imagenmin = '';
+                                this.exp ='0';
                                 this.tipoAccion = 1;
                                 break;
                             }
@@ -758,6 +761,7 @@
                                 this.descripcion= data['descripcion'];
                                 this.marca= data['marca'];
                                 this.imagen= data[''];
+                                this.exp= '1';
                                 this.imagenmin= data['imagenm'];
                                 break;
                             }
