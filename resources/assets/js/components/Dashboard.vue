@@ -1,5 +1,5 @@
 <template>
-<main class="main">
+<section class="full-width pageContent">
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
@@ -47,8 +47,7 @@
             </div>
         </div>
     </div>
-
-</main>
+</section>
 </template>
 <script>
     export default {

@@ -1,5 +1,5 @@
 <template>
-            <main class="main">
+          <section class="full-width pageContent">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <template v-if="listado==1" :v-model="buscarA">
-                    <div class="card">
+                     <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Productos
                         
@@ -18,8 +18,12 @@
                             <i class="icon-doc"></i>&nbsp;Reporte
                         </button>
                     </div>
-                    <div class="card-body">
-                        <div class="form-group row">
+                     </div>
+                    <div class="container-fluid">
+
+			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+				<div class="table-responsive">
+                       <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
                                         <select v-model="buscarA" @click="listarArticulo(1,buscarA,criterioA)" class="form-control col-md-4">
@@ -37,10 +41,10 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Area</th>
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
+						<thead>
+							<tr>
+								<th class="mdl-data-table__cell--non-numeric">Area</th>								    
                                     <th>Nombre Producto</th>
                                     <th>Cantidad</th>
                                     <th>Medida</th>
@@ -52,9 +56,9 @@
                                     <th>Código de Producto</th>
                                     <th>Condicion</th>                                    
                                     <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+							</tr>
+						</thead>
+						  <tbody>
                                 <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
                                     
                                     <td v-text="articulo.nombre_categoria"></td>
@@ -100,8 +104,12 @@
                                     </td>
                                 </tr>                                
                             </tbody>
-                        </table>
-                        <nav>
+					</table>
+
+                    
+				</div>
+			</div>
+                 <nav>
                             <ul class="pagination">
                                 <li class="page-item" v-if="pagination.current_page > 1">
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
@@ -114,8 +122,7 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
-                    </div>
+		        </div>
                 </template>
                 
                 <!-- Fin ejemplo de tabla Listado -->
@@ -323,7 +330,7 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
-        </main>
+          </section>
 </template>
 
 <script>
