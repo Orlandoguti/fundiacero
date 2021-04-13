@@ -63,7 +63,7 @@
 						</thead>
 						  <tbody>
                                 <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
-                                    <td <img class = "img-square" :src="'/imagenes/articulos/' + articulo.imagen" width="50" height="50"></td>
+                                    <td <img class = "img-square" :src="'/imagenes/articulos/' + articulo.imagen" width="70" height="70"></td>
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.nombre"></td>
                                     <td v-text="articulo.stock"></td>
