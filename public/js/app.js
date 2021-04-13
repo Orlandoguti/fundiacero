@@ -55991,7 +55991,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             offset: 3,
             criterio: 'idcategoria',
             buscar: '',
-            criterioA: 'idcategoria',
+            criterioA: 'nombre',
             buscarA: ''
 
         };
@@ -61430,8 +61430,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.buscarA,
-                                  expression: "buscarA"
+                                  value: _vm.buscar,
+                                  expression: "buscar"
                                 }
                               ],
                               staticClass: "form-control col-md-4",
@@ -61439,8 +61439,8 @@ var render = function() {
                                 click: function($event) {
                                   _vm.listarArticulo(
                                     1,
-                                    _vm.buscarA,
-                                    _vm.criterioA
+                                    _vm.buscar,
+                                    _vm.criterio
                                   )
                                 },
                                 change: function($event) {
@@ -61453,7 +61453,7 @@ var render = function() {
                                         "_value" in o ? o._value : o.value
                                       return val
                                     })
-                                  _vm.buscarA = $event.target.multiple
+                                  _vm.buscar = $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
                                 }
@@ -61490,8 +61490,8 @@ var render = function() {
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.criterio,
-                                  expression: "criterio"
+                                  value: _vm.criterioA,
+                                  expression: "criterioA"
                                 }
                               ],
                               staticClass: "form-control col-md-3",
@@ -61506,7 +61506,7 @@ var render = function() {
                                         "_value" in o ? o._value : o.value
                                       return val
                                     })
-                                  _vm.criterio = $event.target.multiple
+                                  _vm.criterioA = $event.target.multiple
                                     ? $$selectedVal
                                     : $$selectedVal[0]
                                 }
@@ -61534,8 +61534,8 @@ var render = function() {
                               {
                                 name: "model",
                                 rawName: "v-model",
-                                value: _vm.buscar,
-                                expression: "buscar"
+                                value: _vm.buscarA,
+                                expression: "buscarA"
                               }
                             ],
                             staticClass: "form-control",
@@ -61543,7 +61543,7 @@ var render = function() {
                               type: "text",
                               placeholder: "Texto a buscar"
                             },
-                            domProps: { value: _vm.buscar },
+                            domProps: { value: _vm.buscarA },
                             on: {
                               keyup: function($event) {
                                 if (
@@ -61557,13 +61557,17 @@ var render = function() {
                                 ) {
                                   return null
                                 }
-                                _vm.listarArticulo(1, _vm.buscar, _vm.criterio)
+                                _vm.listarArticulo(
+                                  1,
+                                  _vm.buscarA,
+                                  _vm.criterioA
+                                )
                               },
                               input: function($event) {
                                 if ($event.target.composing) {
                                   return
                                 }
-                                _vm.buscar = $event.target.value
+                                _vm.buscarA = $event.target.value
                               }
                             }
                           }),
@@ -61577,8 +61581,8 @@ var render = function() {
                                 click: function($event) {
                                   _vm.listarArticulo(
                                     1,
-                                    _vm.buscar,
-                                    _vm.criterio
+                                    _vm.buscarA,
+                                    _vm.criterioA
                                   )
                                 }
                               }

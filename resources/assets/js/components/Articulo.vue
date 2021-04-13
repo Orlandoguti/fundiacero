@@ -6,7 +6,7 @@
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
-                <template v-if="listado==1" :v-model="buscarA">
+                <template v-if="listado==1">
                      	<section class="full-width header-well">
                             <div class="full-width header-well-icon">
                                 <i class="zmdi zmdi-washing-machine"></i>
@@ -37,18 +37,18 @@
                  <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
-                                        <select v-model="buscarA" @click="listarArticulo(1,buscarA,criterioA)" class="form-control col-md-4">
+                                        <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control col-md-4">
                                             <option value="" disabled>Seleccione la Area</option>
                                             <option value="">Todos</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
-                                    <select class="form-control col-md-3" v-model="criterio">
+                                    <select class="form-control col-md-3" v-model="criterioA">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                       <option value="codigo">Codigo</option>
                                     </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarArticulo(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarArticulo(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(1,buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+                                    <button type="submit" @click="listarArticulo(1,buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
@@ -396,7 +396,7 @@
                 offset : 3,
                 criterio : 'idcategoria',
                 buscar : '',
-                criterioA: 'idcategoria',
+                criterioA: 'nombre',
                 buscarA:'',
                
             }
