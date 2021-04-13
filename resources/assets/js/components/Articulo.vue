@@ -394,7 +394,7 @@
                 arrayTiempo :[],
                 arrayEstado :[],
                 offset : 3,
-                criterio : 'nombre',
+                criterio : 'idcategoria',
                 buscar : '',
                 criterioA: 'idcategoria',
                 buscarA:'',
@@ -798,7 +798,7 @@
         },
         mounted() {
             this.selectCategoria();
-            this.listarArticulo(1,this.buscar,this.criterio,1,this.buscarA,this.criterioA);
+            this.listarArticulo(1,this.buscar,this.criterio,this.buscarA,this.criterioA);
         }
     }
 </script>

@@ -55989,7 +55989,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             arrayTiempo: [],
             arrayEstado: [],
             offset: 3,
-            criterio: 'nombre',
+            criterio: 'idcategoria',
             buscar: '',
             criterioA: 'idcategoria',
             buscarA: ''
@@ -56368,7 +56368,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.selectCategoria();
-        this.listarArticulo(1, this.buscar, this.criterio, 1, this.buscarA, this.criterioA);
+        this.listarArticulo(1, this.buscar, this.criterio, this.buscarA, this.criterioA);
     }
 });
 
