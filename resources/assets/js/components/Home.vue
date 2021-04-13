@@ -2,8 +2,18 @@
 
 	<!-- pageContent -->
 	<section class="">
+			<section class="full-width header-well">
+                            <div class="full-width header-well-icon">
+                                <i class="zmdi zmdi-washing-machine"></i>
+                            </div>
+							<div class="full-width header-well-text">
+							<p class="text-condensedLight ">Seccion Principal Fundiciones Fundiacero S.A.</p>
+							</div>
+                </section>
+	
 		<section class="full-width text-center" style="padding: 40px 0;">
-			<h3 class="text-center tittles">FUNDIACERO S.A.</h3>
+			
+			
 			<!-- Tiles -->
 			<article class="full-width tile">
 				<div class="tile-text">

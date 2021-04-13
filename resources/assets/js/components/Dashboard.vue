@@ -5,6 +5,16 @@
         <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
     </ol>
     <div class="container-fluid">
+        	<section class="full-width header-well">
+                            <div class="full-width header-well-icon">
+                                <i class="zmdi zmdi-washing-machine"></i>
+                            </div>
+                            <div class="full-width header-well-text">
+                                <p class="text-condensedLight">
+                                   Seccion de Graficas Ingresos y Pedidos Fundiciones Fundiacero S.A.
+                                </p>
+                            </div>
+                        </section>
         <div class="card">
             <div class="card-header">
                 

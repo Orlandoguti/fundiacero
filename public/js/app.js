@@ -54614,6 +54614,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -54859,10 +54873,12 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
+      _vm._m(1),
+      _vm._v(" "),
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-header" }, [
           _c("i", { staticClass: "fa fa-align-justify" }),
-          _vm._v(" Areas\n                "),
+          _vm._v(" Areas\n                        "),
           _c(
             "button",
             {
@@ -54876,7 +54892,7 @@ var render = function() {
             },
             [
               _c("i", { staticClass: "icon-plus" }),
-              _vm._v(" Nueva Area\n                ")
+              _vm._v(" Nueva Area\n                        ")
             ]
           )
         ]),
@@ -54972,181 +54988,192 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c(
-            "table",
-            { staticClass: "table table-bordered table-striped table-sm" },
-            [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.arrayCategoria, function(categoria) {
-                  return _c("tr", { key: categoria.id }, [
-                    _c("td", {
-                      domProps: { textContent: _vm._s(categoria.nombre) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(categoria.descripcion) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", {
-                      domProps: { textContent: _vm._s(categoria.encargado) }
-                    }),
-                    _vm._v(" "),
-                    _c("td", [
-                      categoria.condicion
-                        ? _c("div", [
-                            _c("span", { staticClass: "badge badge-success" }, [
-                              _vm._v("Activo")
-                            ])
-                          ])
-                        : _c("div", [
-                            _c("span", { staticClass: "badge badge-danger" }, [
-                              _vm._v("Desactivado")
-                            ])
-                          ])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "td",
-                      [
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-warning btn-sm",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                _vm.abrirModal(
-                                  "categoria",
-                                  "actualizar",
-                                  categoria
-                                )
-                              }
-                            }
-                          },
-                          [_c("i", { staticClass: "icon-pencil" })]
-                        ),
-                        _vm._v("  \n                                "),
-                        categoria.condicion
-                          ? [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-danger btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.desactivarCategoria(categoria.id)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "icon-trash" })]
-                              )
-                            ]
-                          : [
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-info btn-sm",
-                                  attrs: { type: "button" },
-                                  on: {
-                                    click: function($event) {
-                                      _vm.activarCategoria(categoria.id)
-                                    }
-                                  }
-                                },
-                                [_c("i", { staticClass: "icon-check" })]
-                              )
-                            ]
-                      ],
-                      2
-                    )
-                  ])
-                })
-              )
-            ]
-          ),
-          _vm._v(" "),
-          _c("nav", [
+          _c("div", { staticClass: "table-responsive" }, [
             _c(
-              "ul",
-              { staticClass: "pagination" },
+              "table",
+              {
+                staticClass:
+                  "mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive"
+              },
               [
-                _vm.pagination.current_page > 1
-                  ? _c("li", { staticClass: "page-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "page-link",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.cambiarPagina(
-                                _vm.pagination.current_page - 1,
-                                _vm.buscar,
-                                _vm.criterio
+                _vm._m(2),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.arrayCategoria, function(categoria) {
+                    return _c("tr", { key: categoria.id }, [
+                      _c("td", {
+                        domProps: { textContent: _vm._s(categoria.nombre) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(categoria.descripcion) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", {
+                        domProps: { textContent: _vm._s(categoria.encargado) }
+                      }),
+                      _vm._v(" "),
+                      _c("td", [
+                        categoria.condicion
+                          ? _c("div", [
+                              _c(
+                                "span",
+                                { staticClass: "badge badge-success" },
+                                [_vm._v("Activo")]
                               )
-                            }
-                          }
-                        },
-                        [_vm._v("Ant")]
+                            ])
+                          : _c("div", [
+                              _c(
+                                "span",
+                                { staticClass: "badge badge-danger" },
+                                [_vm._v("Desactivado")]
+                              )
+                            ])
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "td",
+                        [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-warning btn-sm",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.abrirModal(
+                                    "categoria",
+                                    "actualizar",
+                                    categoria
+                                  )
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "icon-pencil" })]
+                          ),
+                          _vm._v(
+                            "  \n                                        "
+                          ),
+                          categoria.condicion
+                            ? [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-danger btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.desactivarCategoria(categoria.id)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "icon-trash" })]
+                                )
+                              ]
+                            : [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-info btn-sm",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        _vm.activarCategoria(categoria.id)
+                                      }
+                                    }
+                                  },
+                                  [_c("i", { staticClass: "icon-check" })]
+                                )
+                              ]
+                        ],
+                        2
                       )
                     ])
-                  : _vm._e(),
-                _vm._v(" "),
-                _vm._l(_vm.pagesNumber, function(page) {
-                  return _c(
-                    "li",
-                    {
-                      key: page,
-                      staticClass: "page-item",
-                      class: [page == _vm.isActived ? "active" : ""]
-                    },
-                    [
-                      _c("a", {
+                  })
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("nav", [
+          _c(
+            "ul",
+            { staticClass: "pagination" },
+            [
+              _vm.pagination.current_page > 1
+                ? _c("li", { staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
                         staticClass: "page-link",
                         attrs: { href: "#" },
-                        domProps: { textContent: _vm._s(page) },
                         on: {
                           click: function($event) {
                             $event.preventDefault()
-                            _vm.cambiarPagina(page, _vm.buscar, _vm.criterio)
+                            _vm.cambiarPagina(
+                              _vm.pagination.current_page - 1,
+                              _vm.buscar,
+                              _vm.criterio
+                            )
                           }
                         }
-                      })
-                    ]
-                  )
-                }),
-                _vm._v(" "),
-                _vm.pagination.current_page < _vm.pagination.last_page
-                  ? _c("li", { staticClass: "page-item" }, [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "page-link",
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              $event.preventDefault()
-                              _vm.cambiarPagina(
-                                _vm.pagination.current_page + 1,
-                                _vm.buscar,
-                                _vm.criterio
-                              )
-                            }
+                      },
+                      [_vm._v("Ant")]
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _vm._l(_vm.pagesNumber, function(page) {
+                return _c(
+                  "li",
+                  {
+                    key: page,
+                    staticClass: "page-item",
+                    class: [page == _vm.isActived ? "active" : ""]
+                  },
+                  [
+                    _c("a", {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      domProps: { textContent: _vm._s(page) },
+                      on: {
+                        click: function($event) {
+                          $event.preventDefault()
+                          _vm.cambiarPagina(page, _vm.buscar, _vm.criterio)
+                        }
+                      }
+                    })
+                  ]
+                )
+              }),
+              _vm._v(" "),
+              _vm.pagination.current_page < _vm.pagination.last_page
+                ? _c("li", { staticClass: "page-item" }, [
+                    _c(
+                      "a",
+                      {
+                        staticClass: "page-link",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.cambiarPagina(
+                              _vm.pagination.current_page + 1,
+                              _vm.buscar,
+                              _vm.criterio
+                            )
                           }
-                        },
-                        [_vm._v("Sig")]
-                      )
-                    ])
-                  : _vm._e()
-              ],
-              2
-            )
-          ])
+                        }
+                      },
+                      [_vm._v("Sig")]
+                    )
+                  ])
+                : _vm._e()
+            ],
+            2
+          )
         ])
       ])
     ]),
@@ -55423,9 +55450,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "full-width header-well" }, [
+      _c("div", { staticClass: "full-width header-well-icon" }, [
+        _c("i", { staticClass: "zmdi zmdi-washing-machine" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "full-width header-well-text" }, [
+        _c("p", { staticClass: "text-condensedLight" }, [
+          _vm._v(
+            "\n                                   Seccion de Listado Areas Fundiciones Fundiacero S.A.\n                                "
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("thead", [
       _c("tr", [
-        _c("th", [_vm._v("Nombre Area")]),
+        _c("th", { staticClass: "mdl-data-table__cell--non-numeric" }, [
+          _vm._v("Nombre Area")
+        ]),
         _vm._v(" "),
         _c("th", [_vm._v("Descripción")]),
         _vm._v(" "),
@@ -55547,6 +55594,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__generateBarcode__ = __webpack_require__(67);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_barcode__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_barcode___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_barcode__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -61309,6 +61368,8 @@ var render = function() {
       [
         _vm.listado == 1
           ? [
+              _vm._m(1),
+              _vm._v(" "),
               _c("div", { staticClass: "card" }, [
                 _c("div", { staticClass: "card-header" }, [
                   _c("i", { staticClass: "fa fa-align-justify" }),
@@ -61539,233 +61600,214 @@ var render = function() {
                             "mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive"
                         },
                         [
-                          _vm._m(1),
+                          _vm._m(2),
                           _vm._v(" "),
                           _c(
                             "tbody",
                             _vm._l(_vm.arrayArticulo, function(articulo) {
-                              return _c(
-                                "tr",
-                                {
-                                  key: articulo.id,
+                              return _c("tr", { key: articulo.id }, [
+                                _c("img", {
+                                  staticClass: "img-square",
+                                  attrs: {
+                                    src:
+                                      "/imagenes/articulos/" + articulo.imagen,
+                                    width: "70",
+                                    height: "70"
+                                  },
                                   on: {
                                     click: function($event) {
                                       _vm.verArticulo(articulo.id)
                                     }
                                   }
-                                },
-                                [
-                                  _c("img", {
-                                    staticClass: "img-square",
-                                    attrs: {
-                                      src:
-                                        "/imagenes/articulos/" +
-                                        articulo.imagen,
-                                      width: "70",
-                                      height: "70"
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(
-                                        articulo.nombre_categoria
-                                      )
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(articulo.nombre)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(articulo.stock)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(
-                                        articulo.nombre_unidad
-                                      )
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(articulo.descripcion)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(articulo.tiempo)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(
-                                        articulo.nombre_tiempo
-                                      )
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(articulo.marca)
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", {
-                                    domProps: {
-                                      textContent: _vm._s(
-                                        articulo.nombre_estado
-                                      )
-                                    }
-                                  }),
-                                  _vm._v(" "),
-                                  _c("td", [
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(
+                                      articulo.nombre_categoria
+                                    )
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.nombre)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.stock)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.nombre_unidad)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.descripcion)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.tiempo)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.nombre_tiempo)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.marca)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", {
+                                  domProps: {
+                                    textContent: _vm._s(articulo.nombre_estado)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "a",
+                                    {
+                                      staticClass: "black-color",
+                                      attrs: { href: "#" },
+                                      on: {
+                                        click: function($event) {
+                                          $event.preventDefault()
+                                          _vm.generateAndDownloadBarCode(
+                                            articulo.codigo,
+                                            articulo.nombre_categoria
+                                          )
+                                        }
+                                      }
+                                    },
+                                    [
+                                      _c("i", {
+                                        staticClass: "fa fa-barcode fa-2xd",
+                                        attrs: { "aria-hidden": "true" }
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  articulo.condicion
+                                    ? _c("div", [
+                                        _c(
+                                          "span",
+                                          {
+                                            staticClass: "badge badge-success"
+                                          },
+                                          [_vm._v("Activo")]
+                                        )
+                                      ])
+                                    : _c("div", [
+                                        _c(
+                                          "span",
+                                          { staticClass: "badge badge-danger" },
+                                          [_vm._v("Desactivado")]
+                                        )
+                                      ])
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "td",
+                                  [
                                     _c(
-                                      "a",
+                                      "button",
                                       {
-                                        staticClass: "black-color",
-                                        attrs: { href: "#" },
+                                        staticClass: "btn btn-success btn-sm",
+                                        attrs: { type: "button" },
                                         on: {
                                           click: function($event) {
-                                            $event.preventDefault()
-                                            _vm.generateAndDownloadBarCode(
-                                              articulo.codigo,
-                                              articulo.nombre_categoria
+                                            _vm.verArticulo(articulo.id)
+                                          }
+                                        }
+                                      },
+                                      [_c("i", { staticClass: "icon-eye" })]
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "button",
+                                      {
+                                        staticClass: "btn btn-warning btn-sm",
+                                        attrs: { type: "button" },
+                                        on: {
+                                          click: function($event) {
+                                            _vm.abrirModal(
+                                              "articulo",
+                                              "actualizar",
+                                              articulo
                                             )
                                           }
                                         }
                                       },
-                                      [
-                                        _c("i", {
-                                          staticClass: "fa fa-barcode fa-2xd",
-                                          attrs: { "aria-hidden": "true" }
-                                        })
-                                      ]
-                                    )
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("td", [
+                                      [_c("i", { staticClass: "icon-pencil" })]
+                                    ),
+                                    _vm._v(
+                                      "  \n                                        "
+                                    ),
                                     articulo.condicion
-                                      ? _c("div", [
+                                      ? [
                                           _c(
-                                            "span",
+                                            "button",
                                             {
-                                              staticClass: "badge badge-success"
+                                              staticClass:
+                                                "btn btn-danger btn-sm",
+                                              attrs: { type: "button" },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.desactivarArticulo(
+                                                    articulo.id
+                                                  )
+                                                }
+                                              }
                                             },
-                                            [_vm._v("Activo")]
+                                            [
+                                              _c("i", {
+                                                staticClass: "icon-trash"
+                                              })
+                                            ]
                                           )
-                                        ])
-                                      : _c("div", [
-                                          _c(
-                                            "span",
-                                            {
-                                              staticClass: "badge badge-danger"
-                                            },
-                                            [_vm._v("Desactivado")]
-                                          )
-                                        ])
-                                  ]),
-                                  _vm._v(" "),
-                                  _c(
-                                    "td",
-                                    [
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "btn btn-success btn-sm",
-                                          attrs: { type: "button" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.verArticulo(articulo.id)
-                                            }
-                                          }
-                                        },
-                                        [_c("i", { staticClass: "icon-eye" })]
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "button",
-                                        {
-                                          staticClass: "btn btn-warning btn-sm",
-                                          attrs: { type: "button" },
-                                          on: {
-                                            click: function($event) {
-                                              _vm.abrirModal(
-                                                "articulo",
-                                                "actualizar",
-                                                articulo
-                                              )
-                                            }
-                                          }
-                                        },
-                                        [
-                                          _c("i", {
-                                            staticClass: "icon-pencil"
-                                          })
                                         ]
-                                      ),
-                                      _vm._v(
-                                        "  \n                                        "
-                                      ),
-                                      articulo.condicion
-                                        ? [
-                                            _c(
-                                              "button",
-                                              {
-                                                staticClass:
-                                                  "btn btn-danger btn-sm",
-                                                attrs: { type: "button" },
-                                                on: {
-                                                  click: function($event) {
-                                                    _vm.desactivarArticulo(
-                                                      articulo.id
-                                                    )
-                                                  }
+                                      : [
+                                          _c(
+                                            "button",
+                                            {
+                                              staticClass:
+                                                "btn btn-info btn-sm",
+                                              attrs: { type: "button" },
+                                              on: {
+                                                click: function($event) {
+                                                  _vm.activarArticulo(
+                                                    articulo.id
+                                                  )
                                                 }
-                                              },
-                                              [
-                                                _c("i", {
-                                                  staticClass: "icon-trash"
-                                                })
-                                              ]
-                                            )
-                                          ]
-                                        : [
-                                            _c(
-                                              "button",
-                                              {
-                                                staticClass:
-                                                  "btn btn-info btn-sm",
-                                                attrs: { type: "button" },
-                                                on: {
-                                                  click: function($event) {
-                                                    _vm.activarArticulo(
-                                                      articulo.id
-                                                    )
-                                                  }
-                                                }
-                                              },
-                                              [
-                                                _c("i", {
-                                                  staticClass: "icon-check"
-                                                })
-                                              ]
-                                            )
-                                          ]
-                                    ],
-                                    2
-                                  )
-                                ]
-                              )
+                                              }
+                                            },
+                                            [
+                                              _c("i", {
+                                                staticClass: "icon-check"
+                                              })
+                                            ]
+                                          )
+                                        ]
+                                  ],
+                                  2
+                                )
+                              ])
                             })
                           )
                         ]
@@ -61860,7 +61902,7 @@ var render = function() {
             ]
           : _vm.listado == 2
             ? [
-                _vm._m(2),
+                _vm._m(3),
                 _vm._v(" "),
                 _c(
                   "div",
@@ -61872,7 +61914,7 @@ var render = function() {
                     _c("div", { staticClass: "form-group row border" }, [
                       _c("div", { staticClass: "table-responsive col-md-12" }, [
                         _c("table", { staticClass: "table" }, [
-                          _vm._m(3),
+                          _vm._m(4),
                           _vm._v(" "),
                           _vm.arrayArticulo.length
                             ? _c(
@@ -61922,7 +61964,7 @@ var render = function() {
                   _c("div", { staticClass: "form-group row border" }, [
                     _c("div", { staticClass: "table-responsive col-md-12" }, [
                       _c("table", { staticClass: "table" }, [
-                        _vm._m(4),
+                        _vm._m(5),
                         _vm._v(" "),
                         _vm.arrayArticulo.length
                           ? _c(
@@ -61979,7 +62021,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "form-group row border" }, [
-                    _vm._m(5),
+                    _vm._m(6),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-md-5" }, [
                       _c(
@@ -62074,6 +62116,8 @@ var render = function() {
           [
             _c("div", { staticClass: "modal-content" }, [
               _c("div", { staticClass: "modal-header" }, [
+                _c("i", { staticClass: "zmdi zmdi-washing-machine" }),
+                _vm._v(" "),
                 _c("h4", {
                   staticClass: "modal-title",
                   domProps: { textContent: _vm._s(_vm.tituloModal) }
@@ -62465,7 +62509,7 @@ var render = function() {
                           _vm._v(
                             " SI\n                                        "
                           ),
-                          _vm._m(6),
+                          _vm._m(7),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -62727,6 +62771,24 @@ var staticRenderFns = [
     return _c("ol", { staticClass: "breadcrumb" }, [
       _c("li", { staticClass: "breadcrumb-item" }, [
         _c("a", { attrs: { href: "/" } }, [_vm._v("Dashboard")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "full-width header-well" }, [
+      _c("div", { staticClass: "full-width header-well-icon" }, [
+        _c("i", { staticClass: "zmdi zmdi-washing-machine" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "full-width header-well-text" }, [
+        _c("p", { staticClass: "text-condensedLight" }, [
+          _vm._v(
+            "\n                                   Almacen Principal de Fundiciones Fundiacero S.A.\n                                "
+          )
+        ])
       ])
     ])
   },
@@ -72465,6 +72527,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -72600,6 +72672,20 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "container-fluid" }, [
+        _c("section", { staticClass: "full-width header-well" }, [
+          _c("div", { staticClass: "full-width header-well-icon" }, [
+            _c("i", { staticClass: "zmdi zmdi-washing-machine" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "full-width header-well-text" }, [
+            _c("p", { staticClass: "text-condensedLight" }, [
+              _vm._v(
+                "\n                                   Seccion de Graficas Ingresos y Pedidos Fundiciones Fundiacero S.A.\n                                "
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
         _c("div", { staticClass: "card" }, [
           _c("div", { staticClass: "card-header" }),
           _vm._v(" "),
@@ -72709,6 +72795,16 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -72950,6 +73046,8 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", {}, [
+    _vm._m(0),
+    _vm._v(" "),
     _c(
       "section",
       {
@@ -72957,22 +73055,18 @@ var render = function() {
         staticStyle: { padding: "40px 0" }
       },
       [
-        _c("h3", { staticClass: "text-center tittles" }, [
-          _vm._v("FUNDIACERO S.A.")
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
         _vm._m(1),
         _vm._v(" "),
         _vm._m(2),
         _vm._v(" "),
         _vm._m(3),
         _vm._v(" "),
+        _vm._m(4),
+        _vm._v(" "),
         _c("article", { staticClass: "full-width tile" }, [
           _c("div", { staticClass: "tile-text" }, [
             _c("span", { staticClass: "text-condensedLight" }, [
-              _vm._v("\n\t\t\t\t\t" + _vm._s(_vm.$cont)),
+              _vm._v("\n\t\t\t\t\t\t" + _vm._s(_vm.$cont)),
               _c("br"),
               _vm._v(" "),
               _c("small", [_vm._v("Products")])
@@ -72982,11 +73076,11 @@ var render = function() {
           _c("i", { staticClass: "zmdi zmdi-washing-machine tile-icon" })
         ]),
         _vm._v(" "),
-        _vm._m(4)
+        _vm._m(5)
       ]
     ),
     _vm._v(" "),
-    _vm._m(5)
+    _vm._m(6)
   ])
 }
 var staticRenderFns = [
@@ -72994,10 +73088,26 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "full-width header-well" }, [
+      _c("div", { staticClass: "full-width header-well-icon" }, [
+        _c("i", { staticClass: "zmdi zmdi-washing-machine" })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "full-width header-well-text" }, [
+        _c("p", { staticClass: "text-condensedLight " }, [
+          _vm._v("Seccion Principal Fundiciones Fundiacero S.A.")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
     return _c("article", { staticClass: "full-width tile" }, [
       _c("div", { staticClass: "tile-text" }, [
         _c("span", { staticClass: "text-condensedLight" }, [
-          _vm._v("\n\t\t\t\t\t2"),
+          _vm._v("\n\t\t\t\t\t\t2"),
           _c("br"),
           _vm._v(" "),
           _c("small", [_vm._v("Administrators")])
@@ -73014,7 +73124,7 @@ var staticRenderFns = [
     return _c("article", { staticClass: "full-width tile" }, [
       _c("div", { staticClass: "tile-text" }, [
         _c("span", { staticClass: "text-condensedLight" }, [
-          _vm._v("\n\t\t\t\t\t71"),
+          _vm._v("\n\t\t\t\t\t\t71"),
           _c("br"),
           _vm._v(" "),
           _c("small", [_vm._v("Clients")])
@@ -73031,7 +73141,7 @@ var staticRenderFns = [
     return _c("article", { staticClass: "full-width tile" }, [
       _c("div", { staticClass: "tile-text" }, [
         _c("span", { staticClass: "text-condensedLight" }, [
-          _vm._v("\n\t\t\t\t\t7"),
+          _vm._v("\n\t\t\t\t\t\t7"),
           _c("br"),
           _vm._v(" "),
           _c("small", [_vm._v("Providers")])
@@ -73048,7 +73158,7 @@ var staticRenderFns = [
     return _c("article", { staticClass: "full-width tile" }, [
       _c("div", { staticClass: "tile-text" }, [
         _c("span", { staticClass: "text-condensedLight" }, [
-          _vm._v("\n\t\t\t\t\t9"),
+          _vm._v("\n\t\t\t\t\t\t9"),
           _c("br"),
           _vm._v(" "),
           _c("small", [_vm._v("Categories")])
@@ -73065,7 +73175,7 @@ var staticRenderFns = [
     return _c("article", { staticClass: "full-width tile" }, [
       _c("div", { staticClass: "tile-text" }, [
         _c("span", { staticClass: "text-condensedLight" }, [
-          _vm._v("\n\t\t\t\t\t47"),
+          _vm._v("\n\t\t\t\t\t\t47"),
           _c("br"),
           _vm._v(" "),
           _c("small", [_vm._v("Sales")])
@@ -73100,7 +73210,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "text-center" }, [
                 _vm._v(
-                  "\n                    \tLorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.\n                    "
+                  "\n\t                    \tLorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.\n\t                    "
                 )
               ]),
               _vm._v(" "),
@@ -73123,7 +73233,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "text-center" }, [
                 _vm._v(
-                  "\n                    \tLorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.\n                    "
+                  "\n\t                    \tLorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.\n\t                    "
                 )
               ]),
               _vm._v(" "),
@@ -73146,7 +73256,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "text-center" }, [
                 _vm._v(
-                  "\n                    \tLorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.\n                    "
+                  "\n\t                    \tLorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.\n\t                    "
                 )
               ]),
               _vm._v(" "),
@@ -73169,7 +73279,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("p", { staticClass: "text-center" }, [
                 _vm._v(
-                  "\n                    \tLorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.\n                    "
+                  "\n\t                    \tLorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.\n\t                    "
                 )
               ]),
               _vm._v(" "),

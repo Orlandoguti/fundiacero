@@ -7,6 +7,16 @@
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <template v-if="listado==1" :v-model="buscarA">
+                     	<section class="full-width header-well">
+                            <div class="full-width header-well-icon">
+                                <i class="zmdi zmdi-washing-machine"></i>
+                            </div>
+                            <div class="full-width header-well-text">
+                                <p class="text-condensedLight">
+                                   Almacen Principal de Fundiciones Fundiacero S.A.
+                                </p>
+                            </div>
+                        </section>
                      <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Productos
@@ -19,6 +29,7 @@
                         </button>
                     </div>
                      </div>
+                     
                     <div class="container-fluid">
 
 			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
@@ -62,8 +73,8 @@
 							</tr>
 						</thead>
 						  <tbody>
-                                <tr v-for="articulo in arrayArticulo"  :key="articulo.id" @click="verArticulo(articulo.id)">
-                                    <td <img class = "img-square" :src="'/imagenes/articulos/' + articulo.imagen" width="70" height="70"></td>
+                                <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
+                                    <td <img class = "img-square" :src="'/imagenes/articulos/' + articulo.imagen" width="70" height="70" @click="verArticulo(articulo.id)"></td>
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.nombre"></td>
                                     <td v-text="articulo.stock"></td>
@@ -222,6 +233,7 @@
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <i class="zmdi zmdi-washing-machine"></i>
                             <h4 class="modal-title" v-text="tituloModal"></h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">x</span>

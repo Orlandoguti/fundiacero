@@ -111,8 +111,9 @@ html, body{
 .header-well,
 .header-well-icon,
 .header-well-text{
-	min-height: 150px;
+	min-height: 80px;
 	height: auto;
+	margin-bottom: 15px;
 }
 .header-well{
 	position: relative;
@@ -379,6 +380,7 @@ html, body{
 }
 /*=============Estilos navegacion lateral*/
 .navLateral{
+	height: 100%;
 	left: 0;
 	width: 300px;
 	z-index: 100;
@@ -885,3 +887,4 @@ html, body{
     top: 4px;
     visibility: visible;
 }
+

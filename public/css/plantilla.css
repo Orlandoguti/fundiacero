@@ -534,7 +534,7 @@ pre {
       max-width: 1140px; } }
 
 .container-fluid {
-  height: 835px;
+  height: 100%;
   margin-right: auto;
   margin-left: auto;
   padding-right: 15px;

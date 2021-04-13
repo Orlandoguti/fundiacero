@@ -6,6 +6,16 @@
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
+                 	<section class="full-width header-well">
+                            <div class="full-width header-well-icon">
+                                <i class="zmdi zmdi-washing-machine"></i>
+                            </div>
+                            <div class="full-width header-well-text">
+                                <p class="text-condensedLight">
+                                   Seccion de Listado Areas Fundiciones Fundiacero S.A.
+                                </p>
+                            </div>
+                        </section>
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Areas
@@ -26,10 +36,11 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered table-striped table-sm">
+                <div class="table-responsive">
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                             <thead>
                                 <tr>
-                                    <th>Nombre Area</th>
+                                    <th class="mdl-data-table__cell--non-numeric">Nombre Area</th>
                                     <th>Descripción</th>
                                     <th>Encargado</th>
                                     <th>Estado</th>
@@ -68,6 +79,8 @@
                                 </tr>                                
                             </tbody>
                         </table>
+                        </div>
+                        </div>
                         <nav>
                             <ul class="pagination">
                                 <li class="page-item" v-if="pagination.current_page > 1">
@@ -81,7 +94,8 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
+                    
+                
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
