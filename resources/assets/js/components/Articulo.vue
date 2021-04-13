@@ -45,7 +45,7 @@
 				<div class="table-responsive">
 					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
 						<thead>
-							<tr>
+							<tr >
 								<th class="mdl-data-table__cell--non-numeric">Imagen</th>
                                     <th>Area</th>								    
                                     <th>Nombre Producto</th>
@@ -62,7 +62,7 @@
 							</tr>
 						</thead>
 						  <tbody>
-                                <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
+                                <tr v-for="articulo in arrayArticulo"  :key="articulo.id" @click="verArticulo(articulo.id)">
                                     <td <img class = "img-square" :src="'/imagenes/articulos/' + articulo.imagen" width="70" height="70"></td>
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.nombre"></td>
