@@ -879,3 +879,9 @@ html, body{
     text-align: left;
     color: inherit;
 }
+.mdl-textfield--floating-label.is-focused .mdl-textfield__label, .mdl-textfield--floating-label.is-dirty .mdl-textfield__label, .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
+    color: #ffffff;
+    font-size: 12px;
+    top: 4px;
+    visibility: visible;
+}
