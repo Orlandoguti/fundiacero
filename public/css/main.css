@@ -88,7 +88,7 @@ html, body{
 	text-align: center;
 	font-size: 30px;
 }
-.table-responsive{´
+.table-responsive{
 	text-align: center;
 	width: 100%;
 	overflow-x: scroll;
@@ -259,7 +259,7 @@ html, body{
 }
 /*====== Backgrouns color*/
 .bg-primary {
-    background-color: #2e6da4 !important;
+    background-color: #ffffff !important;
 }
 .bg-success {
     background-color: #3f903f !important;
@@ -850,4 +850,32 @@ html, body{
 		right: 122%;
 		text-align: right;
 	}
+}
+.mdl-textfield__label {
+    bottom: 0;
+    color: rgb(255 255 255 / 47%);
+    font-size: 16px;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    position: absolute;
+    display: block;
+    top: 24px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: left;
+}
+.mdl-textfield__input {
+    border: none;
+    border-bottom: 1px solid rgb(255 255 255 / 27%);
+    display: block;
+    font-size: 16px;
+    font-family: "Helvetica","Arial",sans-serif;
+    margin: 0;
+    padding: 4px 0;
+    width: 100%;
+    background: 0 0;
+    text-align: left;
+    color: inherit;
 }
