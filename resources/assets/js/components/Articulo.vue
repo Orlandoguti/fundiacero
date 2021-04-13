@@ -1,5 +1,5 @@
 <template>
-          <section class="full-width pageContent">
+          <section class="">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
@@ -22,8 +22,8 @@
                     <div class="container-fluid">
 
 			<div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-				<div class="table-responsive">
-                       <div class="form-group row">
+               
+                 <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
                                         <select v-model="buscarA" @click="listarArticulo(1,buscarA,criterioA)" class="form-control col-md-4">
@@ -41,10 +41,13 @@
                                 </div>
                             </div>
                         </div>
+                       
+				<div class="table-responsive">
 					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
 						<thead>
 							<tr>
-								<th class="mdl-data-table__cell--non-numeric">Area</th>								    
+								<th class="mdl-data-table__cell--non-numeric">Imagen</th>
+                                    <th>Area</th>								    
                                     <th>Nombre Producto</th>
                                     <th>Cantidad</th>
                                     <th>Medida</th>
@@ -60,7 +63,7 @@
 						</thead>
 						  <tbody>
                                 <tr v-for="articulo in arrayArticulo"  :key="articulo.id">
-                                    
+                                    <td <img class = "img-square" :src="'/imagenes/articulos/' + articulo.imagen" width="50" height="50"></td>
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.nombre"></td>
                                     <td v-text="articulo.stock"></td>
@@ -132,7 +135,7 @@
                  <div class="card-header">
                         <i class="fa fa-align-justify"></i> Productos
                     </div>
-         <div class="card-body">
+         <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
                 <div class="form-group row border">
                             <div class="table-responsive col-md-12">
                                 <table class="table">

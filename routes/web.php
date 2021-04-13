@@ -77,6 +77,7 @@ Route::group(['middleware'=>['auth']],function(){
 
     Route::group(['middleware' => ['Administrador']], function () {
         
+        Route::get('/home','Home1Controller');
         Route::get('/categoria', 'CategoriaController@index');
         Route::post('/categoria/registrar', 'CategoriaController@store');
         Route::put('/categoria/actualizar', 'CategoriaController@update');

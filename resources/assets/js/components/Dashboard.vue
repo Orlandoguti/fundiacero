@@ -1,5 +1,5 @@
 <template>
-<section class="full-width pageContent">
+<section class="">
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
