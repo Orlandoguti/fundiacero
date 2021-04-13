@@ -29,9 +29,9 @@
     <link href="css/plantilla.css" rel="stylesheet">
 </head>
 
-<body>
+<body >
 
-    <div id="app">
+    <div class="body" id="app">
  
         @if(Auth::check())
             @if (Auth::user()->idrol == 1)

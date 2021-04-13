@@ -56085,9 +56085,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             };
             reader.readAsDataURL(file);
         },
-        listarArticulo: function listarArticulo(page, buscar, criterio) {
+        listarArticulo: function listarArticulo(page, buscar, criterio, buscarA, criterioA) {
             var me = this;
-            var url = '/articulo?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio;
+            var url = '/articulo?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&buscarA=' + buscarA + '&criterioA=' + criterioA;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 me.arrayArticulo = respuesta.articulos.data;
@@ -56143,12 +56143,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
-        cambiarPagina: function cambiarPagina(page, buscar, criterio) {
+        cambiarPagina: function cambiarPagina(page, buscar, criterio, buscarA, criterioA) {
             var me = this;
             //Actualiza la página actual
             me.pagination.current_page = page;
             //Envia la petición para visualizar la data de esa página
-            me.listarArticulo(page, buscar, criterio);
+            me.listarArticulo(page, buscar, criterio, buscarA, criterioA);
         },
         registrarArticulo: function registrarArticulo() {
             if (this.validarArticulo()) {
@@ -56368,7 +56368,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     mounted: function mounted() {
         this.selectCategoria();
-        this.listarArticulo(1, this.buscar, this.criterio);
+        this.listarArticulo(1, this.buscar, this.criterio, 1, this.buscarA, this.criterioA);
     }
 });
 
@@ -61359,7 +61359,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", {}, [
+  return _c("section", { staticClass: "responsive" }, [
     _vm._m(0),
     _vm._v(" "),
     _c(
@@ -61834,7 +61834,9 @@ var render = function() {
                                     _vm.cambiarPagina(
                                       _vm.pagination.current_page - 1,
                                       _vm.buscar,
-                                      _vm.criterio
+                                      _vm.criterio,
+                                      _vm.buscarA,
+                                      _vm.criterioA
                                     )
                                   }
                                 }
@@ -61863,7 +61865,9 @@ var render = function() {
                                   _vm.cambiarPagina(
                                     page,
                                     _vm.buscar,
-                                    _vm.criterio
+                                    _vm.criterio,
+                                    _vm.buscarA,
+                                    _vm.criterioA
                                   )
                                 }
                               }
@@ -61885,7 +61889,9 @@ var render = function() {
                                     _vm.cambiarPagina(
                                       _vm.pagination.current_page + 1,
                                       _vm.buscar,
-                                      _vm.criterio
+                                      _vm.criterio,
+                                      _vm.buscarA,
+                                      _vm.criterioA
                                     )
                                   }
                                 }

@@ -1,5 +1,5 @@
 <template>
-          <section class="">
+          <section class="responsive">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
@@ -126,13 +126,13 @@
                  <nav>
                             <ul class="pagination">
                                 <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio,buscarA,criterioA)">Ant</a>
                                 </li>
                                 <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio,buscarA,criterioA)" v-text="page"></a>
                                 </li>
                                 <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio,buscarA,criterioA)">Sig</a>
                                 </li>
                             </ul>
                         </nav>
@@ -146,8 +146,8 @@
                  <div class="card-header">
                         <i class="fa fa-align-justify"></i> Productos
                     </div>
-         <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
-                <div class="form-group row border">
+                <div class="mdl-cell mdl-cell--4-col-phone mdl-cell--8-col-tablet mdl-cell--12-col-desktop">
+                    <div class="form-group row border">
                             <div class="table-responsive col-md-12">
                                 <table class="table">
                                     <thead>
@@ -497,9 +497,9 @@
                 }
                 reader.readAsDataURL(file);
             },
-            listarArticulo (page,buscar,criterio){
+            listarArticulo (page,buscar,criterio,buscarA,criterioA){
                 let me=this;
-                var url= '/articulo?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                var url= '/articulo?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio + '&buscarA='+ buscarA + '&criterioA='+ criterioA ;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayArticulo = respuesta.articulos.data;
@@ -560,12 +560,12 @@
                     console.log(error);
                 });
             },
-            cambiarPagina(page,buscar,criterio){
+            cambiarPagina(page,buscar,criterio,buscarA,criterioA){
                 let me = this;
                 //Actualiza la página actual
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
-                me.listarArticulo(page,buscar,criterio);
+                me.listarArticulo(page,buscar,criterio,buscarA,criterioA);
             },
             registrarArticulo(){
                 if (this.validarArticulo()){
@@ -798,7 +798,7 @@
         },
         mounted() {
             this.selectCategoria();
-            this.listarArticulo(1,this.buscar,this.criterio);
+            this.listarArticulo(1,this.buscar,this.criterio,1,this.buscarA,this.criterioA);
         }
     }
 </script>
