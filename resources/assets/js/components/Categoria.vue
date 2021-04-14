@@ -40,7 +40,7 @@
 					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                             <thead>
                                 <tr>
-                                    <th class="mdl-data-table__cell--non-numeric">Nombre Area</th>
+                                    <th>Nombre Area</th>
                                     <th>Descripción</th>
                                     <th>Encargado</th>
                                     <th>Estado</th>

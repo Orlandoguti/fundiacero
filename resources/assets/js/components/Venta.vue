@@ -4,13 +4,23 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
             </ol>
+            <section class="full-width header-well">
+                            <div class="full-width header-well-icon">
+                               <img src="/imagenes/icono.png" width="60" height="60" class="icono-fundi">
+                            </div>
+                            <div class="full-width header-well-text">
+                                <p class="text-condensedLight">
+                                   Seccion de Pedidos Fundiciones Fundiacero S.A.
+                                </p>
+                            </div>
+                        </section>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Ventas de 
-                        <button type="button" @click="mostrarDetalle()" class="btn btn-secondary float-right">
-                            <i class="icon-plus"></i>&nbsp;Nuevo venta
+                        <i class="fa fa-align-justify"></i> Pedidos
+                        <button type="button" @click="mostrarDetalle()" class="btn btn-primary float-right">
+                            <i class="icon-plus"></i>&nbsp;Generar Pedido
                         </button>
                     </div>
                     <!-- Listado-->
@@ -19,18 +29,17 @@
                         <div class="form-group row">
                             <div class="col-md-6">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
-                                      <option value="tipo_comprobante">Tipo Comprobante</option>
-                                      <option value="num_comprobante">Número Comprobante</option>
-                                      <option value="fecha_hora">Fecha-Hora</option>
+                                     <select class="form-control col-md-3" v-model="criterioV">
+                                      <option value="numero_comprobante">Nº Comprobante</option>
+                                      <option value="descripcion">Descripcion</option>
                                     </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                    <input type="text" v-model="buscarV" @keyup.enter="listarVenta(1,buscarV,criterioV)" class="form-control" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarVenta(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-sm">
+                      <div class="table-responsive">
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                 <thead>
                                     <tr>
                                         <th>Opciones</th>
@@ -103,7 +112,6 @@
                                         placeholder="Buscar Clientes..."
                                         :onChange="getDatosCliente"
                                     >
-                                        
                                     </v-select>
                                 </div>
                             </div>
@@ -352,15 +360,21 @@
                         </div>
                         <div class="modal-body">
                         <div class="form-group row">
-                            <div class="col-md-6">
+                                <div class="col-md-13">
                                 <div class="input-group">
+                                       <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control col-md-4">
+                                            <option value="" disabled>Seleccione la Area</option>
+                                            <option value="">Todos</option>
+                                             <option value="1">laminacion</option>
+                                            <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
+                                        </select>
                                     <select class="form-control col-md-3" v-model="criterioA">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
-                                      <option value="codigo">Código</option>
+                                      <option value="codigo">Codigo</option>
                                     </select>
-                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarArticulo(buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(1,buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+                                    <button type="submit" @click="listarArticulo(1,buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
@@ -401,8 +415,22 @@
                                 </tr>                                
                             </tbody>
                         </table>
-                            </div>
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item" v-if="pagination.current_page > 1">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
+                                </li>
+                                <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                                </li>
+                                <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
+                                </li>
+                            </ul>
+                        </nav>
                         </div>
+                           
+                    </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
                             <button type="button" v-if="tipoAccion==1" class="btn btn-primary" @click="registrarPersona()">Guardar</button>
@@ -424,7 +452,10 @@
             return {
                 venta_id: 0,
                 idcliente:0,
+                idcategoria : 0,
+                nombre_categoria : '',
                 cliente:'',
+                categoria:'',
                 tipo_comprobante : 'BOLETA',
                 serie_comprobante : '',
                 num_comprobante : '',
@@ -450,11 +481,14 @@
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'num_comprobante',
+                criterio : 'idcategoria',
                 buscar : '',
                 criterioA: 'nombre',
                 buscarA:'',
+                criterioV : 'num_comprobante',
+                buscarV : '',
                 arrayArticulo: [],
+                arrayCategoria :[],
                 idarticulo: 0,
                 codigo: '',
                 articulo: '',
@@ -571,6 +605,7 @@
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
                 me.listarVenta(page,buscar,criterio);
+                 me.listarArticulo(page,buscar,criterio);
             },
             encuentra(id){
                 var sw=0;
@@ -643,17 +678,19 @@
                     });
                     }
             },
-            listarArticulo (buscar,criterio){
+            listarArticulo (page,buscar,criterio,buscarA,criterioA){
                 let me=this;
-                var url= '/articulo/listarArticuloVenta?buscar='+ buscar + '&criterio='+ criterio;
+                var url= '/articulo?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio + '&buscarA='+ buscarA + '&criterioA='+ criterioA ;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayArticulo = respuesta.articulos.data;
+                    me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
             },
+       
             registrarVenta(){
                 if (this.validarVenta()){
                     return;
@@ -663,6 +700,7 @@
 
                 axios.post('/venta/registrar',{
                     'idcliente': this.idcliente,
+                    'idcategoria': this.idcategoria,
                     'tipo_comprobante': this.tipo_comprobante,
                     'serie_comprobante' : this.serie_comprobante,
                     'num_comprobante' : this.num_comprobante,
@@ -680,6 +718,7 @@
                     me.impuesto=0.18;
                     me.total=0.0;
                     me.idarticulo=0;
+                    me.idcategoria=0;
                     me.articulo='';
                     me.cantidad=0;
                     me.precio=0;

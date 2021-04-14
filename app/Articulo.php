@@ -21,4 +21,5 @@ class Articulo extends Model
     public function estado(){
         return $this->belongsTo('App\Estado');
     }
+    
 }

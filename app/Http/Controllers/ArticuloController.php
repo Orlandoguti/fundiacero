@@ -75,7 +75,17 @@ class ArticuloController extends Controller
         }
         
 
-        return ['articulos' => $articulos];
+        return [
+            'pagination' => [
+                'total'        => $articulos->total(),
+                'current_page' => $articulos->currentPage(),
+                'per_page'     => $articulos->perPage(),
+                'last_page'    => $articulos->lastPage(),
+                'from'         => $articulos->firstItem(),
+                'to'           => $articulos->lastItem(),
+            ],
+            'articulos' => $articulos
+        ];
     }
     public function obtenerCabecera(Request $request){
         if (!$request->ajax()) return redirect('/');
@@ -130,7 +140,7 @@ class ArticuloController extends Controller
             ->join('tiempos','articulos.idtiempo','=','tiempos.id')
             ->join('estados','articulos.idestado','=','estados.id')
             ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
-            ->orderBy('articulos.id', 'desc')->paginate(10);
+            ->orderBy('categorias.id', 'asc')->paginate(7);
         }
         else{
             $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
@@ -139,12 +149,21 @@ class ArticuloController extends Controller
             ->join('estados','articulos.idestado','=','estados.id')
             ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
             ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
-            ->where('articulos.stock','>','0')
-            ->orderBy('articulos.id', 'desc')->paginate(10);
+            ->orderBy('categorias.id', 'asc')->paginate(7);
         }
         
 
-        return ['articulos' => $articulos];
+        return [
+            'pagination' => [
+                'total'        => $articulos->total(),
+                'current_page' => $articulos->currentPage(),
+                'per_page'     => $articulos->perPage(),
+                'last_page'    => $articulos->lastPage(),
+                'from'         => $articulos->firstItem(),
+                'to'           => $articulos->lastItem(),
+            ],
+            'articulos' => $articulos
+        ];
     }
     public function listarPdf(){
         $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')

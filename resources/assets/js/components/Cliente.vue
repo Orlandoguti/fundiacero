@@ -3,7 +3,16 @@
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
-            </ol>
+            </ol><section class="full-width header-well">
+                            <div class="full-width header-well-icon">
+                               <img src="/imagenes/icono.png" width="60" height="60" class="icono-fundi">
+                            </div>
+                            <div class="full-width header-well-text">
+                                <p class="text-condensedLight">
+                                   Seccion de Clientes Fundiciones Fundiacero S.A.
+                                </p>
+                            </div>
+                        </section>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
