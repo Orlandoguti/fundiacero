@@ -9,7 +9,7 @@
                 <template v-if="listado==1">
                      	<section class="full-width header-well">
                             <div class="full-width header-well-icon">
-                                <i class="zmdi zmdi-washing-machine"></i>
+                               <img src="/imagenes/icono.png" width="60" height="60" class="icono-fundi">
                             </div>
                             <div class="full-width header-well-text">
                                 <p class="text-condensedLight">
@@ -345,8 +345,85 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
+
+             <template v-if="listado==3">
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <select class="form-control col-md-3" v-model="criterio">
+                                      <option value="tipo_comprobante">Tipo Comprobante</option>
+                                      <option value="num_comprobante">Número Comprobante</option>
+                                      <option value="fecha_hora">Fecha-Hora</option>
+                                    </select>
+                                    <input type="text" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                    <button type="submit" @click="listarVenta(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Opciones</th>
+                                        <th>Usuario</th>
+                                        <th>Cliente</th>
+                                        <th>Tipo Comprobante</th>
+                                        <th>Serie Comprobante</th>
+                                        <th>Número Comprobante</th>
+                                        <th>Fecha Hora</th>
+                                        <th>Total</th>
+                                        <th>Impuesto</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="venta in arrayVenta" :key="venta.id">
+                                        <td>
+                                            <button type="button" @click="verVenta(venta.id)" class="btn btn-success btn-sm">
+                                            <i class="icon-eye"></i>
+                                            </button> &nbsp;
+                                            <button type="button" @click="pdfVenta(venta.id)" class="btn btn-info btn-sm">
+                                            <i class="icon-doc"></i>
+                                            </button> &nbsp;
+                                            <template v-if="venta.estado=='Registrado'">
+                                                <button type="button" class="btn btn-danger btn-sm" @click="desactivarVenta(venta.id)">
+                                                    <i class="icon-trash"></i>
+                                                </button>
+                                            </template>
+                                        </td>
+                                        <td v-text="venta.usuario"></td>
+                                        <td v-text="venta.nombre"></td>
+                                        <td v-text="venta.tipo_comprobante"></td>
+                                        <td v-text="venta.serie_comprobante"></td>
+                                        <td v-text="venta.num_comprobante"></td>
+                                        <td v-text="venta.created_at"></td>
+                                        <td v-text="venta.total"></td>
+                                        <td v-text="venta.impuesto"></td>
+                                        <td v-text="venta.estado"></td>
+                                    </tr>                                
+                                </tbody>
+                            </table>
+                        </div>
+                        <nav>
+                            <ul class="pagination">
+                                <li class="page-item" v-if="pagination.current_page > 1">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
+                                </li>
+                                <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
+                                </li>
+                                <li class="page-item" v-if="pagination.current_page < pagination.last_page">
+                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    </template>
           </section>
+
 </template>
+
 
 <script>
 
@@ -381,6 +458,25 @@
                 tipoAccion : 0,
                 errorArticulo : 0,
                 errorMostrarMsjArticulo : [],
+                venta_id: 0,
+                idcliente:0,
+                cliente:'',
+                tipo_comprobante : 'BOLETA',
+                serie_comprobante : '',
+                num_comprobante : '',
+                impuesto: 0.18,
+                total:0.0,
+                totalImpuesto: 0.0,
+                totalParcial: 0.0,
+                arrayVenta : [],
+                arrayCliente : [],
+                arrayDetalle : [],
+                listado:1,
+                modal : 0,
+                tituloModal : '',
+                tipoAccion : 0,
+                errorVenta : 0,
+                errorMostrarMsjVenta : [],
                 pagination : {
                     'total' : 0,
                     'current_page' : 0,
@@ -403,7 +499,8 @@
            
         },
         components: {
-        'barcode': VueBarcode
+        'barcode': VueBarcode,
+        vSelect
     },
         computed:{
             imagenm(){
@@ -435,6 +532,13 @@
                 }
                 return pagesArray;             
 
+            },
+                calcularTotal: function(){
+                var resultado=0.0;
+                for(var i=0;i<this.arrayDetalle.length;i++){
+                    resultado=resultado+(this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad-this.arrayDetalle[i].descuento)
+                }
+                return resultado;
             }
         },
 
@@ -451,7 +555,7 @@
 
                verArticulo(id){
                 let me=this;
-                me.listado=2;
+                me.listado=3;
 
                var arrayArticulo=[];
                 var url= '/articulo/obtenerCabecera?id=' + id;
@@ -834,4 +938,5 @@
     .fa-2xd {
     font-size: 31px;
 }
+
 </style>

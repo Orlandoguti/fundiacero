@@ -86,7 +86,7 @@
 					<li class="full-width">
 						<a href="home.html" class="full-width">
 							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-view-dashboard"></i>
+							<i class="zmdi zmdi-store"></i>
 							</div>
 							<div class="navLateral-body-cr">
 								HOME
@@ -95,7 +95,7 @@
 					</li>
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
+						<a href="#" class="full-width btn-subMenu">
 							<div class="navLateral-body-cl">
 								<i class="zmdi zmdi-case"></i>
 							</div>
@@ -290,10 +290,9 @@
 		@yield('contenido')
 		</div>
 </section>
-<div id="mCSB_2_scrollbar_vertical" class="mCSB_scrollTools mCSB_2_scrollbar mCS-dark-thin mCSB_scrollTools_vertical" style="display: block;"><a href="#" class="mCSB_buttonUp" style="display: block;"></a><div class="mCSB_draggerContainer"><div id="mCSB_2_dragger_vertical" class="mCSB_dragger" style="position: absolute; min-height: 30px; display: block; height: 439px; max-height: 500px; top: 0px;"><div class="mCSB_dragger_bar" style="line-height: 30px;"></div></div><div class="mCSB_draggerRail"></div></div><a href="#" class="mCSB_buttonDown" style="display: block;"></a></div>
 <section class="full-width navLateral">
 		<div class="full-width navLateral-bg btn-menu"></div>
-		<div class="full-width navLateral-body mCustomScrollbar _mCS_3 mCS-autoHide mCS_no_scrollbar"><div  class="mCustomScrollBox mCS-light-thin mCSB_vertical mCSB_inside" tabindex="0" style="max-height: 541px;"><div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
+		<div class="full-width navLateral-body mCustomScrollbar _mCS_3 mCS-autoHide mCS_no_scrollbar"><div  class="mCustomScrollBox mCS-light-thin mCSB_vertical mCSB_inside" tabindex="0" style="max-height: 100%;"><div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
 			<div class="full-width navLateral-body-logo text-center tittles">
 				<i class="zmdi zmdi-close btn-menu"></i> FUNDIACERO S.A. 
 			</div>
@@ -310,16 +309,42 @@
 			</figure>
 			<nav class="full-width">
 				<ul class="full-width list-unstyle menu-principal">
-					<li @click="menu=13" class="full-width">
-						<a href="#" class="full-width">
+				<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a href="#" class="full-width btn-subMenu">
 							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-view-dashboard"></i>
+								<i class="zmdi zmdi-store"></i>
 							</div>
 							<div class="navLateral-body-cr">
-								HOME
+								PRINCIPAL
 							</div>
+							<span class="zmdi zmdi-chevron-left"></span>
 						</a>
+						<ul class="full-width menu-principal sub-menu-options">
+						<li @click="menu=13" class="full-width">
+								<a href="#" class="full-width">
+									<div class="navLateral-body-cl">
+										<i class="zmdi zmdi-view-dashboard"></i>
+									</div>
+									<div class="navLateral-body-cr">
+										HOME
+									</div>
+								</a>
+							</li>
+							<li @click="menu=0" class="full-width">
+								<a href="#" class="full-width">
+									<div class="navLateral-body-cl">
+									<i class="zmdi zmdi-balance"></i>
+									</div>
+									<div class="navLateral-body-cr">
+										DASHBOARD
+									</div>
+								</a>
+							</li>
+						</ul>
 					</li>
+				
+					
 					<li class="full-width divider-menu-h"></li>
 					<li @click="menu=1" class="full-width">
 								<a href="#" class="full-width">
@@ -333,7 +358,7 @@
 							</li>
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
+						<a href="#" class="full-width btn-subMenu">
 							<div class="navLateral-body-cl">
 							<i class="zmdi zmdi-store"></i>
 							</div>
@@ -357,105 +382,128 @@
 					</li>
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
+						<a href="#" class="full-width btn-subMenu">
 							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-face"></i>
+							<i class="zmdi zmdi-wrench"></i>
 							</div>
 							<div class="navLateral-body-cr">
-								USERS
+								ADMINISTRACION
 							</div>
 							<span class="zmdi zmdi-chevron-left"></span>
 						</a>
 						<ul class="full-width menu-principal sub-menu-options">
-							<li class="full-width">
-								<a href="admin.html" class="full-width">
+							<li @click="menu=7" class="full-width">
+								<a href="#" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-account"></i>
 									</div>
 									<div class="navLateral-body-cr">
-										ADMINISTRATORS
+										USUARIOS
 									</div>
 								</a>
 							</li>
-							<li class="full-width">
-								<a href="client.html" class="full-width">
+							<li @click="menu=6" class="full-width">
+								<a href="#" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-accounts"></i>
 									</div>
 									<div class="navLateral-body-cr">
-										CLIENT
+										CLIENTES
+									</div>
+								</a>
+							</li>
+							<li @click="menu=4" class="full-width">
+								<a href="#" class="full-width">
+									<div class="navLateral-body-cl">
+									<i class="zmdi zmdi-truck"></i>
+									</div>
+									<div class="navLateral-body-cr">
+										PROVEEDORES
 									</div>
 								</a>
 							</li>
 						</ul>
 					</li>
-					
-					<li @click="menu=0" class="full-width">
-						<a href="#" class="full-width">
-							<div class="navLateral-body-cl">
-							<i class="zmdi zmdi-balance"></i>
-							</div>
-							<div class="navLateral-body-cr">
-								DASHBOARD
-							</div>
-						</a>
-					</li>
 					<li class="full-width divider-menu-h"></li>
 					<li class="full-width">
-						<a href="sales.html" class="full-width">
+						<a href="#" class="full-width btn-subMenu">
 							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-shopping-cart"></i>
+							<i class="zmdi zmdi-widgets"></i>
 							</div>
 							<div class="navLateral-body-cr">
-								SALES
-							</div>
-						</a>
-					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="inventory.html" class="full-width">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-store"></i>
-							</div>
-							<div class="navLateral-body-cr">
-								INVENTORY
-							</div>
-						</a>
-					</li>
-					<li class="full-width divider-menu-h"></li>
-					<li class="full-width">
-						<a href="#!" class="full-width btn-subMenu">
-							<div class="navLateral-body-cl">
-								<i class="zmdi zmdi-wrench"></i>
-							</div>
-							<div class="navLateral-body-cr">
-								SETTINGS
+								ACCIONES
 							</div>
 							<span class="zmdi zmdi-chevron-left"></span>
 						</a>
 						<ul class="full-width menu-principal sub-menu-options">
-							<li class="full-width">
-								<a href="#!" class="full-width">
+							<li @click="menu=5" class="full-width">
+								<a href="#" class="full-width">
 									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
+									<i class="zmdi zmdi-card"></i>
 									</div>
 									<div class="navLateral-body-cr">
-										OPTION
+										PEDIDOS
 									</div>
 								</a>
 							</li>
-							<li class="full-width">
-								<a href="#!" class="full-width">
+							<li @click="menu=3" class="full-width">
+								<a href="#" class="full-width">
 									<div class="navLateral-body-cl">
-										<i class="zmdi zmdi-widgets"></i>
+									<i class="zmdi zmdi-wrench"></i>
 									</div>
 									<div class="navLateral-body-cr">
-										OPTION
+										INGRESO
+									</div>
+								</a>
+							</li>
+							<li @click="menu=5" class="full-width">
+								<a href="#" class="full-width">
+									<div class="navLateral-body-cl">										
+									<i class="zmdi zmdi-shopping-cart"></i>
+									</div>
+									<div class="navLateral-body-cr">
+										DESPACHO
 									</div>
 								</a>
 							</li>
 						</ul>
 					</li>
+					<li class="full-width divider-menu-h"></li>
+					<li class="full-width">
+						<a href="#" class="full-width btn-subMenu">
+							<div class="navLateral-body-cl">
+							<i class="zmdi zmdi-case"></i>
+							</div>
+							<div class="navLateral-body-cr">
+								REPORTES
+							</div>
+							<span class="zmdi zmdi-chevron-left"></span>
+						</a>
+						<ul class="full-width menu-principal sub-menu-options">
+							<li @click="menu=9" class="full-width">
+								<a href="#" class="full-width">
+									<div class="navLateral-body-cl">
+									<i class="zmdi zmdi-widgets"></i>
+									</div>
+									<div class="navLateral-body-cr">
+										INGRESOS
+									</div>
+								</a>
+							</li>
+							<li @click="menu=10" class="full-width">
+								<a href="#" class="full-width">
+									<div class="navLateral-body-cl">
+									<i class="zmdi zmdi-widgets"></i>
+									</div>
+									<div class="navLateral-body-cr">
+										DESPACHO
+									</div>
+								</a>
+							</li>
+						</ul>
+					</li>
+				
+				
 				</ul>
 			</nav>
 		

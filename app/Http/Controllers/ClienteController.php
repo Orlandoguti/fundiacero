@@ -15,10 +15,10 @@ class ClienteController extends Controller
         $criterio = $request->criterio;
         
         if ($buscar==''){
-            $personas = Persona::orderBy('id', 'desc')->paginate(3);
+            $personas = Persona::orderBy('id', 'desc')->paginate(7);
         }
         else{
-            $personas = Persona::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(3);
+            $personas = Persona::where($criterio, 'like', '%'. $buscar . '%')->orderBy('id', 'desc')->paginate(7);
         }
         
 

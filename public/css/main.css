@@ -123,15 +123,21 @@ html, body{
 .header-well{
 	position: relative;
 }
+
 .header-well-icon,
 .header-well-text{
 	position: absolute;
 	top: 0;
 	color: #333;
 }
-.header-well-icon{
-	left: 0;
-	width: 25%;
+.header-well-icon {
+    /* align-items: inherit; */
+    float: center;
+    left: 0;
+    width: 25%;
+    text-align: right;
+    /* margin-right: 15px; */
+    padding-right: 25px;
 }
 .header-well-icon i,
 .header-well-text p{

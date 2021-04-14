@@ -7,7 +7,7 @@
     <div class="container-fluid">
         	<section class="full-width header-well">
                             <div class="full-width header-well-icon">
-                                <i class="zmdi zmdi-washing-machine"></i>
+                               <img src="/imagenes/icono.png" width="60" height="60" class="icono-fundi">
                             </div>
                             <div class="full-width header-well-text">
                                 <p class="text-condensedLight">
@@ -15,6 +15,70 @@
                                 </p>
                             </div>
                         </section>
+                        <section class="full-width text-center" style="padding: 40px 0;">
+			
+			
+			<!-- Tiles -->
+			<article class="full-width tile">
+				<div class="tile-text">
+					<span class="text-condensedLight">
+						2<br>
+						<small>Administrators</small>
+					</span>
+				</div>
+				<i class="zmdi zmdi-account tile-icon"></i>
+			</article>
+			<article class="full-width tile">
+				<div class="tile-text">
+					<span class="text-condensedLight">
+						71<br>
+						<small>Clients</small>
+					</span>
+				</div>
+				<i class="zmdi zmdi-accounts tile-icon"></i>
+			</article>
+			<article class="full-width tile">
+				<div class="tile-text">
+					<span class="text-condensedLight">
+						7<br>
+						<small>Providers</small>
+					</span>
+				</div>
+				<i class="zmdi zmdi-truck tile-icon"></i>
+			</article>
+			<article class="full-width tile">
+				<div class="tile-text">
+					<span class="text-condensedLight">
+						<label class="text-condensedLight" v-text="varMesIngreso"></label><br>
+						<small>Categories</small>
+					</span>
+				</div>
+				<i class="zmdi zmdi-label tile-icon"></i>
+			</article>
+            
+			<article class="full-width tile">
+                
+				<div  class="tile-text">
+					<span class="text-condensedLight"> 
+                        <div class="col-md-3">
+                                <label for="">total</label>
+                                <p v-text="total"></p>
+                            </div>
+						<small>Products</small>
+					</span>
+				</div>
+				<i class="zmdi zmdi-washing-machine tile-icon"></i>
+			</article>
+			<article class="full-width tile">
+				<div class="tile-text">
+					<span class="text-condensedLight">
+						47<br>
+						<small>Sales</small>
+					</span>
+				</div>
+				<i class="zmdi zmdi-shopping-cart tile-icon"></i>
+			</article>
+		</section>
         <div class="card">
             <div class="card-header">
                 
@@ -24,7 +88,7 @@
                     <div class="col-md-6">
                         <div class="card card-chart">
                             <div class="card-header">
-                                <h4>Ingresos</h4>
+                                <h4>var</h4>
                             </div>
                             <div class="card-content">
                                 <div class="ct-chart">
@@ -57,6 +121,60 @@
             </div>
         </div>
     </div>
+    <section class="full-width" style="margin: 30px 0;">
+			<h3 class="text-center tittles">RESPONSIVE TIMELINE</h3>
+			<!-- TimeLine -->
+			<div id="timeline-c" class="timeline-c">
+				<div class="timeline-c-box">
+	                <div class="timeline-c-box-icon bg-info">
+	                    <i class="zmdi zmdi-twitter"></i>
+	                </div>
+	                <div class="timeline-c-box-content">
+	                    <h4 class="text-center text-condensedLight">Tittle timeline</h4>
+	                    <p class="text-center">
+	                    	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.
+	                    </p>
+	                    <span class="timeline-date"><i class="zmdi zmdi-calendar-note zmdi-hc-fw"></i>05-04-2016</span>
+	                </div>
+	            </div>
+				<div class="timeline-c-box">
+	                <div class="timeline-c-box-icon bg-success">
+	                    <i class="zmdi zmdi-whatsapp"></i>
+	                </div>
+	                <div class="timeline-c-box-content">
+	                    <h4 class="text-center text-condensedLight">Tittle timeline</h4>
+	                    <p class="text-center">
+	                    	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.
+	                    </p>
+	                    <span class="timeline-date"><i class="zmdi zmdi-calendar-note zmdi-hc-fw"></i>06-04-2016</span>
+	                </div>
+	            </div>
+	            <div class="timeline-c-box">
+	                <div class="timeline-c-box-icon bg-primary">
+	                    <i class="zmdi zmdi-facebook"></i>
+	                </div>
+	                <div class="timeline-c-box-content">
+	                    <h4 class="text-center text-condensedLight">Tittle timeline</h4>
+	                    <p class="text-center">
+	                    	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.
+	                    </p>
+	                    <span class="timeline-date"><i class="zmdi zmdi-calendar-note zmdi-hc-fw"></i>07-04-2016</span>
+	                </div>
+	            </div>
+	            <div class="timeline-c-box">
+	                <div class="timeline-c-box-icon bg-danger">
+	                    <i class="zmdi zmdi-youtube"></i>
+	                </div>
+	                <div class="timeline-c-box-content">
+	                    <h4 class="text-center text-condensedLight">Tittle timeline</h4>
+	                    <p class="text-center">
+	                    	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Soluta nobis rerum iure nostrum dolor. Quo totam possimus, ex, sapiente rerum vel maxime fugiat, ipsam blanditiis veniam, suscipit labore excepturi veritatis.
+	                    </p>
+	                    <span class="timeline-date"><i class="zmdi zmdi-calendar-note zmdi-hc-fw"></i>08-04-2016</span>
+	                </div>
+	            </div>
+			</div>
+		</section>
 </section>
 </template>
 <script>
@@ -68,7 +186,6 @@
                 ingresos:[],
                 varTotalIngreso:[],
                 varMesIngreso:[], 
-                
                 varVenta:null,
                 charVenta:null,
                 ventas:[],

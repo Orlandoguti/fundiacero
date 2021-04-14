@@ -10,12 +10,12 @@
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Usuarios
                         <button type="button" @click="abrirModal('persona','registrar')" class="btn btn-primary float-right">
-                            <i class="icon-plus"></i>&nbsp;Nuevo
+                            <i class="icon-plus"></i>&nbsp;Nuevo Usuario
                         </button>
                     </div>
                     <div class="card-body">
                         <div class="form-group row">
-                            <div class="col-md-6">
+                            <div class="col-md-13">
                                 <div class="input-group">
                                     <select class="form-control col-md-3" v-model="criterio">
                                       <option value="nombre">Nombre</option>
@@ -28,10 +28,10 @@
                                 </div>
                             </div>
                         </div>
-                        <table class="table table-bordered table-striped table-sm">
+                        <div class="table-responsive">
+                        <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                             <thead>
-                                <tr>
-                                    <th>Opciones</th>
+                                <tr>                                  
                                     <th>Nombre</th>
                                     <th>Tipo Documento</th>
                                     <th>Número</th>
@@ -40,10 +40,19 @@
                                     <th>Email</th>
                                     <th>Usuario</th>
                                     <th>Role</th>
+                                    <th class="mdl-data-table__cell--non-numeric">Opciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr v-for="persona in arrayPersona" :key="persona.id">
+                                    <td v-text="persona.nombre"></td>
+                                    <td v-text="persona.tipo_documento"></td>
+                                    <td v-text="persona.num_documento"></td>
+                                    <td v-text="persona.direccion"></td>
+                                    <td v-text="persona.telefono"></td>
+                                    <td v-text="persona.email"></td>
+                                    <td v-text="persona.usuario"></td>
+                                    <td v-text="persona.rol"></td>                                    
                                     <td>
                                         <button type="button" @click="abrirModal('persona','actualizar',persona)" class="btn btn-warning btn-sm">
                                           <i class="icon-pencil"></i>
@@ -59,18 +68,12 @@
                                             </button>
                                         </template>
                                     </td>
-                                    <td v-text="persona.nombre"></td>
-                                    <td v-text="persona.tipo_documento"></td>
-                                    <td v-text="persona.num_documento"></td>
-                                    <td v-text="persona.direccion"></td>
-                                    <td v-text="persona.telefono"></td>
-                                    <td v-text="persona.email"></td>
-                                    <td v-text="persona.usuario"></td>
-                                    <td v-text="persona.rol"></td>
                                 </tr>                                
                             </tbody>
                         </table>
-                        <nav>
+                        </div>                      
+                    </div>
+                      <nav>
                             <ul class="pagination">
                                 <li class="page-item" v-if="pagination.current_page > 1">
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
@@ -83,7 +86,6 @@
                                 </li>
                             </ul>
                         </nav>
-                    </div>
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
