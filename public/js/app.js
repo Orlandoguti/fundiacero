@@ -61614,10 +61614,9 @@ var render = function() {
                             "tbody",
                             _vm._l(_vm.arrayArticulo, function(articulo) {
                               return _c("tr", { key: articulo.id }, [
-                                _c("td", {
+                                _c("img", {
                                   staticClass: "img-square",
                                   attrs: {
-                                    img: "",
                                     src:
                                       "/imagenes/articulos/" + articulo.imagen,
                                     width: "70",
