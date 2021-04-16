@@ -136,6 +136,14 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/venta/obtenerDetalles', 'VentaController@obtenerDetalles');
         Route::get('/venta/pdf/{id}', 'VentaController@pdf')->name('venta_pdf');
 
+        Route::get('/pedido', 'PedidoController@index');
+        Route::get('/pedido/num', 'PedidoController@num');
+        Route::post('/pedido/registrar', 'PedidoController@store');
+        Route::put('/pedido/desactivar', 'PedidoController@desactivar');
+        Route::get('/pedido/obtenerCabecera', 'PedidoController@obtenerCabecera');
+        Route::get('/pedido/obtenerDetalles', 'PedidoController@obtenerDetalles');
+        Route::get('/pedido/pdf/{id}', 'PedidoController@pdf')->name('pedido_pdf');
+
         Route::get('/rol', 'RolController@index');
         Route::get('/rol/selectRol', 'RolController@selectRol');
         

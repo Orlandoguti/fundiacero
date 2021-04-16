@@ -165,6 +165,44 @@ class ArticuloController extends Controller
             'articulos' => $articulos
         ];
     }
+    public function listarArticuloPedido(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+        
+        if ($buscar==''){
+            $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
+            ->join('unidads','articulos.idunidad','=','unidads.id')
+            ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+            ->join('estados','articulos.idestado','=','estados.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
+            ->orderBy('categorias.id', 'asc')->paginate(7);
+        }
+        else{
+            $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
+            ->join('unidads','articulos.idunidad','=','unidads.id')
+            ->join('tiempos','articulos.idtiempo','=','tiempos.id')
+            ->join('estados','articulos.idestado','=','estados.id')
+            ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
+            ->where('articulos.'.$criterio, 'like', '%'. $buscar . '%')
+            ->orderBy('categorias.id', 'asc')->paginate(7);
+        }
+        
+
+        return [
+            'pagination' => [
+                'total'        => $articulos->total(),
+                'current_page' => $articulos->currentPage(),
+                'per_page'     => $articulos->perPage(),
+                'last_page'    => $articulos->lastPage(),
+                'from'         => $articulos->firstItem(),
+                'to'           => $articulos->lastItem(),
+            ],
+            'articulos' => $articulos
+        ];
+    }
     public function listarPdf(){
         $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
         ->join('unidads','articulos.idunidad','=','unidads.id')
@@ -188,6 +226,17 @@ class ArticuloController extends Controller
         return ['articulos' => $articulos];
     }
     public function buscarArticuloVenta(Request $request ){
+        if (!$request->ajax()) return redirect('/');
+
+        $filtro = $request->filtro;
+        $articulos = Articulo::where('codigo','=', $filtro)
+        ->select('id', 'nombre','stock')
+        ->where('stock','>','0')
+        ->orderBy('nombre', 'asc')->take(1)->get();
+
+        return ['articulos' => $articulos];
+    }
+    public function buscarArticuloPedido(Request $request ){
         if (!$request->ajax()) return redirect('/');
 
         $filtro = $request->filtro;

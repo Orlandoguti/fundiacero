@@ -56,6 +56,9 @@
             <template v-if="menu==13">
             <home></home>
             </template>
+            <template v-if="menu==14">
+            <pedido></pedido>
+            </template>
             @elseif (Auth::user()->idrol == 2)
             <template v-if="menu==0">
                 <dashboard></dashboard>

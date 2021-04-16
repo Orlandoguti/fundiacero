@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Pedidos
-                        <button type="button" @click="mostrarDetalle()" class="btn btn-primary float-right">
+                        <button type="button" @click="mostrarDetalle()" class="btn btn-secondary float-right">
                             <i class="icon-plus"></i>&nbsp;Generar Pedido
                         </button>
                     </div>
@@ -30,7 +30,7 @@
                             <div class="col-md-6">
                                 <div class="input-group">
                                      <select class="form-control col-md-3" v-model="criterioV">
-                                      <option value="numero_comprobante">Nº Comprobante</option>
+                                      <option value="numero_comprobante">Nº comprobante</option>
                                       <option value="descripcion">Descripcion</option>
                                     </select>
                                     <input type="text" v-model="buscarV" @keyup.enter="listarVenta(1,buscarV,criterioV)" class="form-control" placeholder="Texto a buscar">

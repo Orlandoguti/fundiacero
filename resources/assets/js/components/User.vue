@@ -1,5 +1,5 @@
 <template>
-            <main class="main">
+            <section class="responsive">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
@@ -97,8 +97,8 @@
                             </ul>
                         </nav>
                 </div>
-                <!-- Fin ejemplo de tabla Listado -->
-            </div>
+                          </div>
+                <!-- Fin ejemplo de tabla Listado -->  
             <!--Inicio del modal agregar/actualizar-->
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog modal-primary modal-lg" role="document">
@@ -110,6 +110,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre(*)</label>
@@ -170,7 +171,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">password</label>
                                     <div class="col-md-9">
-                                        <input type="password" v-model="password" class="form-control" placeholder="password del usuario">
+                                        <input type="password" v-model="password" class="form-control" placeholder="password del usuario" required>
                                     </div>
                                 </div>
                                 <div v-show="errorPersona" class="form-group row div-error">
@@ -194,7 +195,7 @@
                 <!-- /.modal-dialog -->
             </div>
             <!--Fin del modal-->
-        </main>
+            </section>
 </template>
 
 <script>

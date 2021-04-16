@@ -33,6 +33,9 @@
 /*=====================================================
 					Estilos generales
 ======================================================*/
+input:required {
+	border: 1px dashed red;
+  }
 :root{
 	--color-text: #ffffff;
 	--primary-color: #2B2B2C;

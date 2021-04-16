@@ -377,6 +377,16 @@
 								PRODUCTOS
 							</div>
 						</a>
+							</li>
+							<li @click="menu=14" class="full-width">
+								<a href="#" class="full-width">
+									<div class="navLateral-body-cl">
+									<i class="zmdi zmdi-card"></i>
+									</div>
+									<div class="navLateral-body-cr">
+										PEDIDOS
+									</div>
+								</a>
 							</li>						
 						</ul>
 					</li>
@@ -435,17 +445,7 @@
 							</div>
 							<span class="zmdi zmdi-chevron-left"></span>
 						</a>
-						<ul class="full-width menu-principal sub-menu-options">
-							<li @click="menu=5" class="full-width">
-								<a href="#" class="full-width">
-									<div class="navLateral-body-cl">
-									<i class="zmdi zmdi-card"></i>
-									</div>
-									<div class="navLateral-body-cr">
-										PEDIDOS
-									</div>
-								</a>
-							</li>
+						<ul class="full-width menu-principal sub-menu-options">					
 							<li @click="menu=3" class="full-width">
 								<a href="#" class="full-width">
 									<div class="navLateral-body-cl">
