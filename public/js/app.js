@@ -63791,7 +63791,7 @@ var render = function() {
         [
           _c("div", { staticClass: "card-header" }, [
             _c("i", { staticClass: "fa fa-align-justify" }),
-            _vm._v(" Ingresos\n                "),
+            _vm._v(" Ingresos\n                        "),
             _c(
               "button",
               {
@@ -63805,7 +63805,7 @@ var render = function() {
               },
               [
                 _c("i", { staticClass: "icon-plus" }),
-                _vm._v(" Nuevo\n                ")
+                _vm._v(" Nuevo\n                        ")
               ]
             )
           ]),
@@ -63922,7 +63922,7 @@ var render = function() {
                       "table",
                       {
                         staticClass:
-                          "table table-bordered table-striped table-sm"
+                          "mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive"
                       },
                       [
                         _vm._m(1),
@@ -64008,7 +64008,7 @@ var render = function() {
                                   [_c("i", { staticClass: "icon-eye" })]
                                 ),
                                 _vm._v(
-                                  "  \n                                        "
+                                  "  \n                                                "
                                 ),
                                 _c(
                                   "button",
@@ -64636,12 +64636,12 @@ var render = function() {
                                         _vm._v(" "),
                                         _c("td", [
                                           _vm._v(
-                                            "\n                                        " +
+                                            "\n                                                " +
                                               _vm._s(
                                                 detalle.precio *
                                                   detalle.cantidad
                                               ) +
-                                              "\n                                    "
+                                              "\n                                            "
                                           )
                                         ])
                                       ])
@@ -64867,12 +64867,12 @@ var render = function() {
                                             _vm._v(" "),
                                             _c("td", [
                                               _vm._v(
-                                                "\n                                        " +
+                                                "\n                                                " +
                                                   _vm._s(
                                                     detalle.precio *
                                                       detalle.cantidad
                                                   ) +
-                                                  "\n                                    "
+                                                  "\n                                            "
                                               )
                                             ])
                                           ])
@@ -65339,7 +65339,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { attrs: { colspan: "5" } }, [
         _vm._v(
-          "\n                                        No hay articulos agregados\n                                    "
+          "\n                                                No hay articulos agregados\n                                            "
         )
       ])
     ])
@@ -65391,7 +65391,7 @@ var staticRenderFns = [
     return _c("tr", [
       _c("td", { attrs: { colspan: "4" } }, [
         _vm._v(
-          "\n                                        No hay articulos agregados\n                                    "
+          "\n                                                No hay articulos agregados\n                                            "
         )
       ])
     ])
@@ -73014,10 +73014,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -73059,24 +73055,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log(error);
             });
         },
-        selectCategoria: function selectCategoria(search, loading) {
+        selectCategoria: function selectCategoria() {
             var me = this;
-            loading(true);
-            var url = '/categoria/selectCategoria?filtro=' + search;
+            var url = '/categoria/selectCategoria';
             axios.get(url).then(function (response) {
                 //console.log(response);
                 var respuesta = response.data;
-                q: search;
                 me.arrayCategoria = respuesta.categorias;
-                loading(false);
             }).catch(function (error) {
                 console.log(error);
             });
-        },
-        getDatosCategoria: function getDatosCategoria(val1) {
-            var me = this;
-            me.loading = true;
-            me.idcategoria = val1.id;
         },
         pdfPedido: function pdfPedido(id) {
             window.open('/pedido/pdf/' + id, '_blank');
@@ -73156,7 +73144,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 me.idcategoria = 0;
                 me.cantidad = 0;
                 me.producto = '';
-                me.medida = '';
+                me.medida = '0';
                 me.codigo = '';
                 me.detallep = '';
                 me.arrayDetalle = [];
@@ -73183,7 +73171,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             me.listado = 0;
             me.categoria = '';
             me.solicitante = '';
-            me.medida = '';
+            me.medida = '0';
             me.producto = '';
             me.cantidad = 0;
             me.arrayDetalle = [];
@@ -73225,6 +73213,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     mounted: function mounted() {
+        this.selectCategoria();
         this.listarPedido(1, this.buscar, this.criterio);
     }
 });
@@ -73278,25 +73267,54 @@ var render = function() {
                 _c("div", { staticClass: "card-body" }, [
                   _c("div", { staticClass: "form-group row border" }, [
                     _c("div", { staticClass: "col-md-4" }, [
+                      _c("label", [_vm._v("Nombre del Solicitante(*)")]),
+                      _vm._v(" "),
                       _c(
-                        "div",
-                        { staticClass: "form-group" },
-                        [
-                          _c("label", { attrs: { for: "" } }, [
-                            _vm._v("Seleccione la Area(*)")
-                          ]),
-                          _vm._v(" "),
-                          _c("v-select", {
-                            attrs: {
-                              "on-search": _vm.selectCategoria,
-                              label: "nombre",
-                              options: _vm.arrayCategoria,
-                              placeholder: "Buscar Areas...",
-                              onChange: _vm.getDatosCategoria
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.idcategoria,
+                              expression: "idcategoria"
                             }
+                          ],
+                          staticClass: "form-control col-md-9",
+                          on: {
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.idcategoria = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "option",
+                            { attrs: { value: "0", disabled: "" } },
+                            [_vm._v("Seleccione la Area")]
+                          ),
+                          _vm._v(" "),
+                          _vm._l(_vm.arrayCategoria, function(categoria) {
+                            return _c("option", {
+                              key: categoria.id,
+                              domProps: {
+                                value: categoria.id,
+                                textContent: _vm._s(categoria.nombre)
+                              }
+                            })
                           })
                         ],
-                        1
+                        2
                       )
                     ]),
                     _vm._v(" "),

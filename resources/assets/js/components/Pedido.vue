@@ -31,17 +31,13 @@
                     <div class="card-body">
                         <div class="form-group row border">
                             <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Seleccione la Area(*)</label>
-                                    <v-select
-                                        :on-search="selectCategoria"
-                                        label="nombre"
-                                        :options="arrayCategoria"
-                                        placeholder="Buscar Areas..."
-                                        :onChange="getDatosCategoria"
-                                    >
-                                    </v-select>
-                                </div>
+                               
+                                    <label>Nombre del Solicitante(*)</label>
+                                     <select class="form-control col-md-9" v-model="idcategoria">
+                                            <option value="0" disabled>Seleccione la Area</option>
+                                            <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
+                                    </select>
+                                
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -190,25 +186,17 @@
                     console.log(error);
                 });
             },
-            selectCategoria(search,loading){
+            selectCategoria(){
                 let me=this;
-                loading(true)
-                var url= '/categoria/selectCategoria?filtro='+search;
+                var url= '/categoria/selectCategoria';
                 axios.get(url).then(function (response) {
                     //console.log(response);
-                    let respuesta= response.data;
-                    q: search
+                    var respuesta= response.data;
                     me.arrayCategoria = respuesta.categorias;
-                    loading(false)
                 })
                 .catch(function (error) {
                     console.log(error);
                 });
-            },
-            getDatosCategoria(val1){
-                let me = this;
-                me.loading = true;
-                me.idcategoria = val1.id;
             },
             pdfPedido(id){
                 window.open('/pedido/pdf/'+ id ,'_blank');
@@ -287,7 +275,7 @@
                     me.idcategoria=0;
                     me.cantidad=0;
                     me.producto='';
-                    me.medida='';
+                    me.medida='0';
                     me.codigo='';
                     me.detallep='';
                     me.arrayDetalle=[];
@@ -317,7 +305,7 @@
                 me.listado=0;
                     me.categoria='';
                     me.solicitante='';
-                    me.medida='';
+                    me.medida='0';
                     me.producto='';
                     me.cantidad=0;
                     me.arrayDetalle=[];
@@ -367,6 +355,7 @@
 
         },
         mounted() {
+            this.selectCategoria();
             this.listarPedido(1,this.buscar,this.criterio);
         }
     }
