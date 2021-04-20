@@ -16,49 +16,54 @@
         font-size: 10px;
         /*font-family: SourceSansPro;*/
         }
- 
-        #logo{
-        width: 130px;
-        height:60px;
-        float: left;
+        #container {
+            width:100%;
+            text-align:center;
         }
+
+        #left {
+            text-align:center;
+            float:left;
+            width:30%;
+        }
+
+        #center {
+            padding-top:30px;
+            display: inline-block;
+            margin:0 auto;
+            width:30%;
+        }
+
+        #right {
+            float:right;
+            width:30%;
+        }
+        #imagen{
+            text-align:center;
+            width:60%;
+            height:50px;
+        }
+        #nuemrop{
+            margin-left:15px;
+            text-align:center;
+            width:100%;
+            font-size:15px;
+        }
+        #orden{
+        margin-top: 15px;
+        text-align:center;
+        font-size: 15px;
+        }
+
+        #encabezado{
+        text-align: center;
+        font-size: 12px;
+        }
+
         #separado{
             width: 100%;
             height:85px;
         }
- 
-        #imagen{
-        margin-left:5px;
-        width: 125px;
-        height:50px;
-        }
- 
-        #datos{
-        float: left;
-        margin-top: 0%;
-        margin-right: 50%;
-        /*text-align: justify;*/
-        }
- 
-        #encabezado{
-        text-align: center;
-        margin-right: 35%;
-        font-size: 12px;
-        }
-        #titulo{
-        text-align: center;
-        font-size: 15px;
-        margin-bottom:10px;
-        }
- 
-        #fact{
-        /*position: relative;*/
-        float: right;
-        margin-top: 10px;
-        margin-right: 4%;
-        font-size: 23px;
-        }
- 
         section{
         clear: left;
         }
@@ -112,24 +117,19 @@
     </style>
     <body>
         @foreach ($pedido as $p)
-        <header>
-            <div id="datos">
-                <p id="encabezado">
-                    <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
-                </p>
-            </div>
-            <div id="fact">
-            <div id="logo">
-                <img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen">
-            </div>
-                <p><br>
-                Nº Pedido-.{{$p->id}}</p>
-            </div>
+        <header> 
+        <div id="container">
+        <div id="left">
+        <p id="encabezado">
+        <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
+         </p>
+        </div>
+        <div id="center"><b id="orden">ORDEN DE PEDIDO</b></div>
+        <div id="right">
+        <div><img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen"></div>
+        <div><p id="nuemrop">Nº Pedido-.{{$p->id}}</p></div>
+        </div>           
         </header>
-        <br>
-        <section>
-        <div id="titulo"><b>ORDEN DE PEDIDO</b></div>
-        </section>
         <section>
             <div>
             <table id="facarticulo">
@@ -181,34 +181,29 @@
         <div id="gracias">
             <div id="gracias1">
                 <p><b>..............................</b><br>
-                <b>SOLICITADO POR</b></p>
+                <b>FIRMA Y SELLO</b></p>
             </div>
             <div id="gracias2">
                 <p><b>.................................</b><br>
-                <b>RECEPCIONADO POR</b></p>
+                <b>FIRMA Y SELLO</b></p>
             </div>
         </div>
         </footer>
         <div id="separado"></div>
         @foreach ($pedido as $p)
-        <header>
-            <div id="datos">
-                <p id="encabezado">
-                    <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
-                </p>
-            </div>
-            <div id="fact">
-            <div id="logo">
-                <img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen">
-            </div>
-                <p><br>
-                Nº Pedido-.{{$p->id}}</p>
-            </div>
+        <header> 
+        <div id="container">
+        <div id="left">
+        <p id="encabezado">
+        <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
+         </p>
+        </div>
+        <div id="center"><b id="orden">ORDEN DE PEDIDO</b></div>
+        <div id="right">
+        <div><img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen"></div>
+        <div><p id="nuemrop">Nº Pedido-.{{$p->id}}</p></div>
+        </div>           
         </header>
-        <br>
-        <section>
-        <div id="titulo"><b>ORDEN DE PEDIDO</b></div>
-        </section>
         <section>
             <div>
             <table id="facarticulo">
@@ -260,15 +255,13 @@
         <div id="gracias">
             <div id="gracias1">
                 <p><b>..............................</b><br>
-                <b>SOLICITADO POR</b></p>
+                <b>FIRMA Y SELLO</b></p>
             </div>
             <div id="gracias2">
                 <p><b>.................................</b><br>
-                <b>RECEPCIONADO POR</b></p>
+                <b>FIRMA Y SELLO</b></p>
             </div>
         </div>
         </footer>
     </body>
-
-    
 </html>
