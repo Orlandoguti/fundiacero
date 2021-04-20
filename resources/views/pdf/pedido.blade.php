@@ -18,10 +18,9 @@
         }
  
         #logo{
-        width: 110px;
+        width: 130px;
         height:60px;
         float: left;
-        margin-right: 2%;
         }
         #separado{
             width: 100%;
@@ -29,14 +28,15 @@
         }
  
         #imagen{
-        width: 100px;
+        margin-left:5px;
+        width: 125px;
         height:50px;
         }
  
         #datos{
         float: left;
         margin-top: 0%;
-        margin-right: 2%;
+        margin-right: 50%;
         /*text-align: justify;*/
         }
  
@@ -54,8 +54,7 @@
         #fact{
         /*position: relative;*/
         float: right;
-        margin-top: 2%;
-        margin-left: 2%;
+        margin-top: 10px;
         margin-right: 4%;
         font-size: 23px;
         }
@@ -93,6 +92,7 @@
         }
  
         #gracias{
+        margin-top:35px;
         width: 380px;
         display: flex;
         text-align: center; 
@@ -106,19 +106,22 @@
         float: right;
         text-align: center; 
         }
+        #sello{
+            margin-top:20px;
+        }
     </style>
     <body>
         @foreach ($pedido as $p)
         <header>
-            <div id="logo">
-                <img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen">
-            </div>
             <div id="datos">
                 <p id="encabezado">
-                    <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celualar:+(591)76621804<br>Email: central@fundiacero.com
+                    <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
                 </p>
             </div>
             <div id="fact">
+            <div id="logo">
+                <img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen">
+            </div>
                 <p><br>
                 Nº Pedido-.{{$p->id}}</p>
             </div>
@@ -174,7 +177,7 @@
         </section>
         <br>
         <br>
-        <footer>
+        <footer id="sello">
         <div id="gracias">
             <div id="gracias1">
                 <p><b>..............................</b><br>
@@ -189,15 +192,15 @@
         <div id="separado"></div>
         @foreach ($pedido as $p)
         <header>
-            <div id="logo">
-                <img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen">
-            </div>
             <div id="datos">
                 <p id="encabezado">
-                    <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celualar:+(591)76621804<br>Email: central@fundiacero.com
+                    <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
                 </p>
             </div>
             <div id="fact">
+            <div id="logo">
+                <img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen">
+            </div>
                 <p><br>
                 Nº Pedido-.{{$p->id}}</p>
             </div>
@@ -253,7 +256,7 @@
         </section>
         <br>
         <br>
-        <footer>
+        <footer id="sello">
         <div id="gracias">
             <div id="gracias1">
                 <p><b>..............................</b><br>
@@ -265,7 +268,6 @@
             </div>
         </div>
         </footer>
-        
     </body>
 
     
