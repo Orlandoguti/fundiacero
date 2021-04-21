@@ -63334,6 +63334,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -63363,10 +63365,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 'to': 0
             },
             offset: 3,
-            criterio: 'numero_comprobante',
+            criterio: 'idcategoria',
             buscar: '',
             criterioA: 'nombre',
             buscarA: '',
+            criterioV: 'numero_comprobante',
+            buscarV: '',
             arrayArticulo: [],
             idarticulo: 0,
             codigo: '',
@@ -63433,7 +63437,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         buscarArticulo: function buscarArticulo() {
             var me = this;
-            var url = '/articulo/buscarArticulo?filtro=' + me.codigo;
+            var url = '/articulo/buscarArticuloVenta?filtro=' + me.codigo;
 
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
@@ -63442,6 +63446,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 if (me.arrayArticulo.length > 0) {
                     me.articulo = me.arrayArticulo[0]['nombre'];
                     me.idarticulo = me.arrayArticulo[0]['id'];
+                    me.precio = me.arrayArticulo[0]['precio_venta'];
+                    me.stock = me.arrayArticulo[0]['stock'];
                 } else {
                     me.articulo = 'No existe este articulo';
                     me.idarticulo = 0;
@@ -63456,6 +63462,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             me.pagination.current_page = page;
             //Envia la petición para visualizar la data de esa página
             me.listarIngreso(page, buscar, criterio);
+            me.listarArticulo(page, buscar, criterio);
         },
         encuentra: function encuentra(id) {
             var sw = 0;
@@ -63513,9 +63520,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             }
         },
-        listarArticulo: function listarArticulo(buscar, criterio) {
+        listarArticulo: function listarArticulo(page, buscar, criterio, buscarA, criterioA) {
             var me = this;
-            var url = '/articulo/listarArticulo?buscar=' + buscar + '&criterio=' + criterio;
+            var url = '/articulo?page=' + page + '&buscar=' + buscar + '&criterio=' + criterio + '&buscarA=' + buscarA + '&criterioA=' + criterioA;
             axios.get(url).then(function (response) {
                 var respuesta = response.data;
                 me.arrayArticulo = respuesta.articulos.data;
@@ -63525,30 +63532,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         },
         registrarIngreso: function registrarIngreso() {
+            var _this = this;
+
             if (this.validarIngreso()) {
                 return;
             }
+            swal({
+                title: 'Esta seguro de realizar este ingreso?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+                    var me = _this;
 
-            var me = this;
+                    axios.post('/ingreso/registrar', {
+                        'idcategoria': _this.idcategoria,
+                        'numero_comprobante': _this.numero_comprobante,
+                        'detalle': _this.detalle,
+                        'data': _this.arrayDetalle
 
-            axios.post('/ingreso/registrar', {
-                'idcategoria': this.idcategoria,
-                'numero_comprobante': this.numero_comprobante,
-                'detalle': this.detalle,
-                'data': this.arrayDetalle
+                    }).then(function (response) {
+                        me.listado = 1;
+                        me.listarIngreso(1, '', 'numero_comprobante');
+                        me.idcategoria = 0;
+                        me.numero_comprobante = '';
+                        me.detalle = '';
+                        me.idarticulo = 0;
+                        me.articulo = '';
+                        me.cantidad = 0;
+                        me.arrayDetalle = [];
 
-            }).then(function (response) {
-                me.listado = 1;
-                me.listarIngreso(1, '', 'numero_comprobante');
-                me.idcategoria = 0;
-                me.numero_comprobante = '';
-                me.detalle = '';
-                me.idarticulo = 0;
-                me.articulo = '';
-                me.cantidad = 0;
-                me.arrayDetalle = [];
-            }).catch(function (error) {
-                console.log(error);
+                        swal('Registrado!', 'El ingreso ha sido registrado con éxito.', 'success');
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel) {}
             });
         },
         validarIngreso: function validarIngreso() {
@@ -63618,7 +63646,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.tituloModal = 'Seleccione los articulos que desee';
         },
         desactivarIngreso: function desactivarIngreso(id) {
-            var _this = this;
+            var _this2 = this;
 
             swal({
                 title: 'Esta seguro de desactivar este ingreso?',
@@ -63634,7 +63662,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 reverseButtons: true
             }).then(function (result) {
                 if (result.value) {
-                    var me = _this;
+                    var me = _this2;
 
                     axios.put('/ingreso/desactivar', {
                         'id': id
@@ -63672,26 +63700,7 @@ var render = function() {
         "div",
         { staticClass: "card" },
         [
-          _c("div", { staticClass: "card-header" }, [
-            _c("i", { staticClass: "fa fa-align-justify" }),
-            _vm._v(" Ingresos\n                        "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary float-right",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.mostrarDetalle()
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "icon-plus" }),
-                _vm._v(" Nuevo\n                        ")
-              ]
-            )
-          ]),
+          _vm._m(1),
           _vm._v(" "),
           _vm.listado == 4
             ? [
@@ -63802,7 +63811,7 @@ var render = function() {
                           "mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive"
                       },
                       [
-                        _vm._m(1),
+                        _vm._m(2),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -64164,7 +64173,7 @@ var render = function() {
                               "table table-bordered table-striped table-sm"
                           },
                           [
-                            _vm._m(2),
+                            _vm._m(3),
                             _vm._v(" "),
                             _vm.arrayDetalle.length
                               ? _c(
@@ -64231,32 +64240,18 @@ var render = function() {
                                     ])
                                   })
                                 )
-                              : _c("tbody", [_vm._m(3)])
+                              : _c("tbody", [_vm._m(4)])
                           ]
                         )
                       ])
                     ]),
                     _vm._v(" "),
                     _c("div", { staticClass: "form-group row" }, [
-                      _c("div", { staticClass: "col-md-12" }, [
+                      _c("div", { staticClass: "col-md-7" }, [
                         _c(
                           "button",
                           {
-                            staticClass: "btn btn-secondary",
-                            attrs: { type: "button" },
-                            on: {
-                              click: function($event) {
-                                _vm.ocultarDetalle()
-                              }
-                            }
-                          },
-                          [_vm._v("Cerrar")]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "btn btn-primary",
+                            staticClass: "btn btn-primary float-right",
                             attrs: { type: "button" },
                             on: {
                               click: function($event) {
@@ -64264,7 +64259,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("Registrar Compra")]
+                          [_vm._v("Registrar Ingreso")]
                         )
                       ])
                     ])
@@ -64321,7 +64316,7 @@ var render = function() {
                                   "table table-bordered table-striped table-sm"
                               },
                               [
-                                _vm._m(4),
+                                _vm._m(5),
                                 _vm._v(" "),
                                 _vm.arrayDetalle.length
                                   ? _c(
@@ -64348,7 +64343,7 @@ var render = function() {
                                         ])
                                       })
                                     )
-                                  : _c("tbody", [_vm._m(5)])
+                                  : _c("tbody", [_vm._m(6)])
                               ]
                             )
                           ]
@@ -64429,8 +64424,65 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group row" }, [
-                  _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "col-md-13" }, [
                     _c("div", { staticClass: "input-group" }, [
+                      _c(
+                        "select",
+                        {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.buscar,
+                              expression: "buscar"
+                            }
+                          ],
+                          staticClass: "form-control col-md-4",
+                          on: {
+                            click: function($event) {
+                              _vm.listarArticulo(1, _vm.buscar, _vm.criterio)
+                            },
+                            change: function($event) {
+                              var $$selectedVal = Array.prototype.filter
+                                .call($event.target.options, function(o) {
+                                  return o.selected
+                                })
+                                .map(function(o) {
+                                  var val = "_value" in o ? o._value : o.value
+                                  return val
+                                })
+                              _vm.buscar = $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            }
+                          }
+                        },
+                        [
+                          _c("option", { attrs: { value: "", disabled: "" } }, [
+                            _vm._v("Seleccione la Area")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "" } }, [
+                            _vm._v("Todos")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v("laminacion")
+                          ]),
+                          _vm._v(" "),
+                          _vm._l(_vm.arrayCategoria, function(categoria) {
+                            return _c("option", {
+                              key: categoria.id,
+                              domProps: {
+                                value: categoria.id,
+                                textContent: _vm._s(categoria.nombre)
+                              }
+                            })
+                          })
+                        ],
+                        2
+                      ),
+                      _vm._v(" "),
                       _c(
                         "select",
                         {
@@ -64469,7 +64521,7 @@ var render = function() {
                           ]),
                           _vm._v(" "),
                           _c("option", { attrs: { value: "codigo" } }, [
-                            _vm._v("Código")
+                            _vm._v("Codigo")
                           ])
                         ]
                       ),
@@ -64494,7 +64546,7 @@ var render = function() {
                             ) {
                               return null
                             }
-                            _vm.listarArticulo(_vm.buscarA, _vm.criterioA)
+                            _vm.listarArticulo(1, _vm.buscarA, _vm.criterioA)
                           },
                           input: function($event) {
                             if ($event.target.composing) {
@@ -64512,7 +64564,7 @@ var render = function() {
                           attrs: { type: "submit" },
                           on: {
                             click: function($event) {
-                              _vm.listarArticulo(_vm.buscarA, _vm.criterioA)
+                              _vm.listarArticulo(1, _vm.buscarA, _vm.criterioA)
                             }
                           }
                         },
@@ -64532,7 +64584,7 @@ var render = function() {
                       staticClass: "table table-bordered table-striped table-sm"
                     },
                     [
-                      _vm._m(6),
+                      _vm._m(7),
                       _vm._v(" "),
                       _c(
                         "tbody",
@@ -64743,6 +64795,15 @@ var staticRenderFns = [
       _c("li", { staticClass: "breadcrumb-item" }, [
         _c("a", { attrs: { href: "/" } }, [_vm._v("Escritorio")])
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fa fa-align-justify" }),
+      _vm._v(" Ingresos\n                    ")
     ])
   },
   function() {
@@ -72544,32 +72605,53 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }
         },
         registrarPedido: function registrarPedido() {
+            var _this = this;
+
             if (this.validarPedido()) {
                 return;
             }
+            swal({
+                title: 'Esta seguro de realizar este pedido?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+            }).then(function (result) {
+                if (result.value) {
+                    var me = _this;
 
-            var me = this;
+                    axios.post('/pedido/registrar', {
+                        'idcategoria': _this.idcategoria,
+                        'solicitante': _this.solicitante,
+                        'data': _this.arrayDetalle
 
-            axios.post('/pedido/registrar', {
-                'idcategoria': this.idcategoria,
-                'solicitante': this.solicitante,
-                'data': this.arrayDetalle
+                    }).then(function (response) {
+                        me.listado = 1;
+                        me.listarPedido(1, '', 'solicitante');
+                        me.idproveedor = 0;
+                        me.solicitante = '';
+                        me.idcategoria = 0;
+                        me.cantidad = 0;
+                        me.producto = '';
+                        me.medida = '0';
+                        me.codigo = '';
+                        me.detallep = '';
+                        me.arrayDetalle = [];
+                        window.open('/pedido/pdf/' + response.data.id);
 
-            }).then(function (response) {
-                me.listado = 1;
-                me.listarPedido(1, '', 'solicitante');
-                me.idproveedor = 0;
-                me.solicitante = '';
-                me.idcategoria = 0;
-                me.cantidad = 0;
-                me.producto = '';
-                me.medida = '0';
-                me.codigo = '';
-                me.detallep = '';
-                me.arrayDetalle = [];
-                window.open('/pedido/pdf/' + response.data.id);
-            }).catch(function (error) {
-                console.log(error);
+                        swal('Registrado!', 'El pedido ha sido registrado con éxito.', 'success');
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                } else if (
+                // Read more about handling dismissals
+                result.dismiss === swal.DismissReason.cancel) {}
             });
         },
         validarPedido: function validarPedido() {
@@ -72599,7 +72681,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.listado = 1;
         },
         desactivarPedido: function desactivarPedido(id) {
-            var _this = this;
+            var _this2 = this;
 
             swal({
                 title: 'Esta seguro de anular esta Pedido?',
@@ -72615,7 +72697,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 reverseButtons: true
             }).then(function (result) {
                 if (result.value) {
-                    var me = _this;
+                    var me = _this2;
 
                     axios.put('/pedido/desactivar', {
                         'id': id

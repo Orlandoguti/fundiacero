@@ -259,7 +259,20 @@
                 if (this.validarPedido()){
                     return;
                 }
-                
+            swal({
+                title: 'Esta seguro de realizar este pedido?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
                 let me = this;
 
                 axios.post('/pedido/registrar',{
@@ -281,10 +294,21 @@
                     me.arrayDetalle=[];
                     window.open('/pedido/pdf/'+ response.data.id);
 
-
+                    swal(
+                        'Registrado!',
+                        'El pedido ha sido registrado con éxito.',
+                        'success'
+                        )
                 }).catch(function (error) {
                     console.log(error);
                 });
+                 } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                })
             },
             validarPedido(){
                 let me=this;

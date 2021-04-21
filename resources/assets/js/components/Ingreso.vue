@@ -9,9 +9,6 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Ingresos
-                        <button type="button" @click="mostrarDetalle()" class="btn btn-primary float-right">
-                            <i class="icon-plus"></i>&nbsp;Nuevo
-                        </button>
                     </div>
                     <!-- Listado-->
                     <template v-if="listado==4">
@@ -161,9 +158,8 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <div class="col-md-12">
-                                <button type="button" @click="ocultarDetalle()" class="btn btn-secondary">Cerrar</button>
-                                <button type="button" class="btn btn-primary" @click="registrarIngreso()">Registrar Compra</button>
+                            <div class="col-md-7">
+                                <button type="button" class="btn btn-primary float-right" @click="registrarIngreso()">Registrar Ingreso</button>
                             </div>
                         </div>
                     </div>
@@ -241,16 +237,22 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                        <div class="form-group row">
-                            <div class="col-md-6">
+                          <div class="form-group row">
+                                <div class="col-md-13">
                                 <div class="input-group">
+                                       <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control col-md-4">
+                                            <option value="" disabled>Seleccione la Area</option>
+                                            <option value="">Todos</option>
+                                             <option value="1">laminacion</option>
+                                            <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
+                                        </select>
                                     <select class="form-control col-md-3" v-model="criterioA">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
-                                      <option value="codigo">Código</option>
+                                      <option value="codigo">Codigo</option>
                                     </select>
-                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarArticulo(buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
+                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(1,buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+                                    <button type="submit" @click="listarArticulo(1,buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
@@ -302,7 +304,7 @@
                                 </li>
                             </ul>
                         </nav>
-                            </div>
+                      </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
@@ -347,10 +349,12 @@
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'numero_comprobante',
+                criterio : 'idcategoria',
                 buscar : '',
                 criterioA: 'nombre',
                 buscarA:'',
+                criterioV : 'numero_comprobante',
+                buscarV : '',
                 arrayArticulo: [],
                 idarticulo: 0,
                 codigo: '',
@@ -420,7 +424,7 @@
 
             buscarArticulo(){
                 let me=this;
-                var url= '/articulo/buscarArticulo?filtro=' + me.codigo;
+                var url= '/articulo/buscarArticuloVenta?filtro=' + me.codigo;
 
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
@@ -429,6 +433,8 @@
                     if(me.arrayArticulo.length>0){
                         me.articulo=me.arrayArticulo[0]['nombre'];
                         me.idarticulo=me.arrayArticulo[0]['id'];
+                        me.precio=me.arrayArticulo[0]['precio_venta'];
+                        me.stock=me.arrayArticulo[0]['stock'];
                     }
                     else{
                         me.articulo='No existe este articulo';
@@ -446,6 +452,7 @@
                 me.pagination.current_page = page;
                 //Envia la petición para visualizar la data de esa página
                 me.listarIngreso(page,buscar,criterio);
+                me.listarArticulo(page,buscar,criterio);
             },
             encuentra(id){
                 var sw=0;
@@ -504,9 +511,9 @@
                     });
                     }
             },
-            listarArticulo (buscar,criterio){
+            listarArticulo (page,buscar,criterio,buscarA,criterioA){
                 let me=this;
-                var url= '/articulo/listarArticulo?buscar='+ buscar + '&criterio='+ criterio;
+                var url= '/articulo?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio + '&buscarA='+ buscarA + '&criterioA='+ criterioA ;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayArticulo = respuesta.articulos.data;
@@ -520,7 +527,20 @@
                 if (this.validarIngreso()){
                     return;
                 }
-                
+                swal({
+                title: 'Esta seguro de realizar este ingreso?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
                 let me = this;
 
                 axios.post('/ingreso/registrar',{
@@ -540,9 +560,22 @@
                     me.cantidad=0;
                     me.arrayDetalle=[];
 
+                    swal(
+                        'Registrado!',
+                        'El ingreso ha sido registrado con éxito.',
+                        'success'
+                        )
+
                 }).catch(function (error) {
                     console.log(error);
                 });
+                   } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                })
             },
             validarIngreso(){
                 this.errorIngreso=0;
