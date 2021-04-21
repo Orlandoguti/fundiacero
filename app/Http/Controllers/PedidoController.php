@@ -29,7 +29,7 @@ class PedidoController extends Controller
         else{
             $pedidos = Pedido::join('categorias','pedidos.idcategoria','=','categorias.id')
             ->join('users','pedidos.idusuario','=','users.id')
-            ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.fecha_hora',
+            ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.created_at',
             'pedidos.estado','categorias.nombre','users.usuario')
             ->where('pedidos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('pedidos.id', 'desc')->paginate(3);
@@ -88,7 +88,7 @@ class PedidoController extends Controller
         $id = $request->id;
         $pedido = Pedido::join('categorias','pedidos.idcategoria','=','categorias.id')
         ->join('users','pedidos.idusuario','=','users.id')
-        ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.fecha_hora',
+        ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.created_at',
         'pedidos.estado','categorias.nombre','users.usuario')
         ->where('pedidos.id','=',$id)
         ->orderBy('pedidos.id', 'desc')->take(1)->get();
@@ -100,7 +100,7 @@ class PedidoController extends Controller
  
         $id = $request->id;
         $detalles = DetallePedido::join('unidads','detalle_pedidos.idunidad','=','unidads.id')
-        ->select('detalle_pedidos.cantidad','detalle_pedidos.medida','detalle_pedidos.detallep',
+        ->select('detalle_pedidos.producto','detalle_pedidos.cantidad','detalle_pedidos.medida','detalle_pedidos.detallep',
         'unidads.nombre as nombre_unidad')
         ->where('detalle_pedidos.idpedido','=',$id)
         ->orderBy('detalle_pedidos.id', 'desc')->get();

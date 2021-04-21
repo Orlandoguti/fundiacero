@@ -500,6 +500,16 @@
 									</div>
 								</a>
 							</li>
+							<li @click="menu=15" class="full-width">
+								<a href="#" class="full-width">
+									<div class="navLateral-body-cl">
+									<i class="zmdi zmdi-widgets"></i>
+									</div>
+									<div class="navLateral-body-cr">
+										PEDIDOS
+									</div>
+								</a>
+							</li>
 						</ul>
 					</li>
 				

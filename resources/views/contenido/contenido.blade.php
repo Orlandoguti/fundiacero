@@ -59,9 +59,15 @@
             <template v-if="menu==14">
             <pedido></pedido>
             </template>
+            <template v-if="menu==14">
+            <pedido></pedido>
+            </template>
+            <template v-if="menu==15">
+                <consultapedido></consultapedido>
+            </template>
             @elseif (Auth::user()->idrol == 2)
-            <template v-if="menu==0">
-                <dashboard></dashboard>
+            <template v-if="menu==15">
+                <consultapedido></consultapedido>
             </template>
             <template v-if="menu==5">
             <venta></venta>

@@ -29,6 +29,7 @@ Vue.component('dashboard', require('./components/Dashboard.vue'));
 Vue.component('home', require('./components/Home.vue'));
 Vue.component('consultaingreso', require('./components/ConsultaIngreso.vue'));
 Vue.component('consultaventa', require('./components/ConsultaVenta.vue'));
+Vue.component('consultapedido', require('./components/ConsultaPedido.vue'));
 Vue.component('notification', require('./components/Notification.vue'));
 
 
