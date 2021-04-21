@@ -26,38 +26,38 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-sm">
+                             <div class="table-responsive">
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                 <thead>
                                     <tr>
-                                        <th>Opciones</th>
                                         <th>Usuario</th>
-                                        <th>Proveedor</th>
-                                        <th>Tipo Comprobante</th>
-                                        <th>Serie Comprobante</th>
-                                        <th>Número Comprobante</th>
+                                        <th>Area</th>
+                                        <th>Numero Comprobante</th>
                                         <th>Fecha Hora</th>
-                                        <th>Total</th>
-                                        <th>Impuesto</th>
                                         <th>Estado</th>
+                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="ingreso in arrayIngreso" :key="ingreso.id">
+                                        <td v-text="ingreso.usuario"></td>
+                                        <td v-text="ingreso.nombre"></td>
+                                        <td v-text="ingreso.numero_comprobante"></td>
+                                        <td v-text="ingreso.created_at"></td>
+                                        <div v-if="ingreso.estado">
+                                        <span class="badge badge-success">Activo</span>
+                                         </div>
+                                            <div v-else>
+                                            <span class="badge badge-danger">Desactivado</span>
+                                            </div>
                                         <td>
                                             <button type="button" @click="verIngreso(ingreso.id)" class="btn btn-success btn-sm">
                                             <i class="icon-eye"></i>
-                                            </button>
+                                            </button> &nbsp;
+                                                <button type="button" class="btn btn-danger btn-sm" @click="desactivarIngreso(ingreso.id)">
+                                                    <i class="icon-trash"></i>
+                                                </button>
                                         </td>
-                                        <td v-text="ingreso.usuario"></td>
-                                        <td v-text="ingreso.nombre"></td>
-                                        <td v-text="ingreso.tipo_comprobante"></td>
-                                        <td v-text="ingreso.serie_comprobante"></td>
-                                        <td v-text="ingreso.num_comprobante"></td>
-                                        <td v-text="ingreso.created_at"></td>
-                                        <td v-text="ingreso.total"></td>
-                                        <td v-text="ingreso.impuesto"></td>
-                                        <td v-text="ingreso.estado"></td>
                                     </tr>                                
                                 </tbody>
                             </table>
@@ -82,32 +82,22 @@
                     <template v-else-if="listado==2">
                     <div class="card-body">
                         <div class="form-group row border">
-                            <div class="col-md-9">
-                                <div class="form-group">
-                                    <label for="">Proveedor</label>
-                                    <p v-text="proveedor"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <label for="">Impuesto</label>
-                                <p v-text="impuesto"></p>
-                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Tipo Comprobante</label>
-                                    <p v-text="tipo_comprobante"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Serie Comprobante</label>
-                                    <p v-text="serie_comprobante"></p>
+                                    <label for="">Area</label>
+                                    <p v-text="categoria"></p>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Número Comprobante</label>
-                                    <p v-text="num_comprobante"></p>
+                                    <p v-text="numero_comprobante"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Detalle de Producto</label>
+                                    <p v-text="detalle"></p>
                                 </div>
                             </div>
                         </div>
@@ -117,33 +107,15 @@
                                     <thead>
                                         <tr>
                                             <th>Artículo</th>
-                                            <th>Precio</th>
                                             <th>Cantidad</th>
-                                            <th>Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayDetalle.length">
                                         <tr v-for="detalle in arrayDetalle" :key="detalle.id">
                                             <td v-text="detalle.articulo">
                                             </td>
-                                            <td v-text="detalle.precio">
-                                            </td>
                                             <td v-text="detalle.cantidad">
                                             </td>
-                                            <td>
-                                                {{detalle.precio*detalle.cantidad}}
-                                            </td>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Total Parcial:</strong></td>
-                                            <td>$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Total Impuesto:</strong></td>
-                                            <td>$ {{totalImpuesto=(total*impuesto).toFixed(2)}}</td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="3" align="right"><strong>Total Neto:</strong></td>
-                                            <td>$ {{total}}</td>
                                         </tr>
                                     </tbody>  
                                     <tbody v-else>
@@ -310,12 +282,9 @@
                     var respuesta= response.data;
                     arrayIngresoT = respuesta.ingreso;
                     
-                    me.proveedor = arrayIngresoT[0]['nombre'];
-                    me.tipo_comprobante=arrayIngresoT[0]['tipo_comprobante'];
-                    me.serie_comprobante=arrayIngresoT[0]['serie_comprobante'];
-                    me.num_comprobante=arrayIngresoT[0]['num_comprobante'];
-                    me.impuesto=arrayIngresoT[0]['impuesto'];
-                    me.total=arrayIngresoT[0]['total'];
+                    me.categoria = arrayIngresoT[0]['nombre'];
+                    me.numero_comprobante=arrayIngresoT[0]['numero_comprobante'];
+                    me.detalle=arrayIngresoT[0]['detalle'];
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -333,6 +302,45 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+              desactivarIngreso(id){
+               swal({
+                title: 'Esta seguro de desactivar este ingreso?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.put('/ingreso/desactivar',{
+                        'id': id
+                    }).then(function (response) {
+                        me.listarIngreso(1,'','numero_comprobante');
+                        swal(
+                        'Anulado!',
+                        'El ingreso ha sido anulado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
             },
 
         },

@@ -7,14 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Ingreso extends Model
 {
     protected $fillable = [
-        'idproveedor', 
+        'idcategoria', 
         'idusuario',
-        'tipo_comprobante',
-        'serie_comprobante',
-        'num_comprobante',
+        'numero_comprobante',
+        'detalle',
         'created_at',
-        'impuesto',
-        'total',
         'estado'
      ];
      public function usuario()
@@ -23,7 +20,7 @@ class Ingreso extends Model
      }
      public function proveedor()
      {
-         return $this->belongsTo('App\Proveedor');
+         return $this->belongsTo('App\Categoria');
      }
   
   

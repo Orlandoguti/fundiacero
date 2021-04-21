@@ -20,19 +20,17 @@ class IngresoController extends Controller
         $criterio = $request->criterio;
          
         if ($buscar==''){
-            $ingresos = Ingreso::join('personas','ingresos.idproveedor','=','personas.id')
+            $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
             ->join('users','ingresos.idusuario','=','users.id')
-            ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
-            'ingresos.num_comprobante','ingresos.created_at','ingresos.impuesto','ingresos.total',
-            'ingresos.estado','personas.nombre','users.usuario')
+            ->select('ingresos.id','ingresos.numero_comprobante','ingresos.detalle','ingresos.created_at',
+            'ingresos.estado','categorias.nombre','users.usuario')
             ->orderBy('ingresos.id', 'desc')->paginate(5);
         }
         else{
-            $ingresos = Ingreso::join('personas','ingresos.idproveedor','=','personas.id')
+            $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
             ->join('users','ingresos.idusuario','=','users.id')
-            ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
-            'ingresos.num_comprobante','ingresos.created_at','ingresos.impuesto','ingresos.total',
-            'ingresos.estado','personas.nombre','users.usuario')
+            ->select('ingresos.id','ingresos.numero_comprobante','ingresos.detalle','ingresos.created_at',
+            'ingresos.estado','categorias.nombre','users.usuario')
             ->where('ingresos.'.$criterio, 'like', '%'. $buscar . '%')->orderBy('ingresos.id', 'desc')->paginate(3);
         }
          
@@ -54,11 +52,10 @@ class IngresoController extends Controller
         $id = $request->id;
          
 
-        $ingreso = Ingreso::join('personas','ingresos.idproveedor','=','personas.id')
+        $ingreso = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
         ->join('users','ingresos.idusuario','=','users.id')
-        ->select('ingresos.id','ingresos.tipo_comprobante','ingresos.serie_comprobante',
-        'ingresos.num_comprobante','ingresos.fecha_hora','ingresos.impuesto','ingresos.total',
-        'ingresos.estado','personas.nombre','users.usuario')
+        ->select('ingresos.id','ingresos.numero_comprobante','ingresos.detalle','ingresos.fecha_hora',
+        'ingresos.estado','categorias.nombre','users.usuario')
         ->where('ingresos.id','=',$id)
         ->orderBy('ingresos.id', 'desc')->take(1)->get();
 
@@ -74,7 +71,7 @@ class IngresoController extends Controller
         $id = $request->id;
          
         $detalles = DetalleIngreso::join('articulos','detalle_ingresos.idarticulo','=','articulos.id')
-        ->select('detalle_ingresos.cantidad','detalle_ingresos.precio','articulos.nombre as articulo')
+        ->select('detalle_ingresos.cantidad','articulos.nombre as articulo')
         ->where('detalle_ingresos.idingreso','=',$id)
         ->orderBy('detalle_ingresos.id', 'desc')->get();
 
@@ -94,14 +91,11 @@ class IngresoController extends Controller
             $mytime= Carbon::now('America/Lima');
  
             $ingreso = new Ingreso();
-            $ingreso->idproveedor=$request->get('idproveedor');
+            $ingreso->idcategoria=$request->get('idcategoria');
             $ingreso->idusuario = \Auth::user()->id;
-            $ingreso->tipo_comprobante = $request->tipo_comprobante;
-            $ingreso->serie_comprobante = $request->serie_comprobante;
-            $ingreso->num_comprobante = $request->num_comprobante;
+            $ingreso->numero_comprobante = $request->numero_comprobante;
+            $ingreso->detalle = $request->detalle;
             $ingreso->fecha_hora = $mytime->toDateString();
-            $ingreso->impuesto = $request->impuesto;
-            $ingreso->total = $request->total;
             $ingreso->estado = 'Registrado';
             $ingreso->save();
  
@@ -113,8 +107,7 @@ class IngresoController extends Controller
                 $detalle = new DetalleIngreso();
                 $detalle->idingreso = $ingreso->id;
                 $detalle->idarticulo = $det['idarticulo'];
-                $detalle->cantidad = $det['cantidad'];
-                $detalle->precio = $det['precio'];          
+                $detalle->cantidad = $det['cantidad'];       
                 $detalle->save();
             }          
             $fechaActual= date('Y-m-d');
