@@ -28,13 +28,44 @@ Route::group(['middleware'=>['auth']],function(){
     })->name('main');
 
     Route::group(['middleware' => ['Almacenero']], function () {
+     
+        Route::get('/articulo', 'ArticuloController@index');
+        Route::get('/articulo/buscarArticulo', 'ArticuloController@buscarArticulo');
+        Route::get('/articulo/listarArticulo', 'ArticuloController@listarArticulo');
+
+        Route::get('/pedido', 'PedidoController@index');
+        Route::get('/pedido/num', 'PedidoController@num');
+        Route::post('/pedido/registrar', 'PedidoController@store');
+        Route::get('/pedido/pdf/{id}', 'PedidoController@pdf')->name('pedido_pdf');
+
+    });
+
+    Route::group(['middleware' => ['Vendedor']], function () {
+        
+        Route::get('/home','Home1Controller');
         Route::get('/categoria', 'CategoriaController@index');
-        Route::post('/categoria/registrar', 'CategoriaController@store');
-        Route::put('/categoria/actualizar', 'CategoriaController@update');
-        Route::put('/categoria/desactivar', 'CategoriaController@desactivar');
-        Route::put('/categoria/activar', 'CategoriaController@activar');
         Route::get('/categoria/selectCategoria', 'CategoriaController@selectCategoria');
 
+        Route::get('/unidad', 'UnidadController@index');
+        Route::post('/unidad/registrar', 'UnidadController@store');
+        Route::put('/unidad/actualizar', 'UnidadController@update');
+        Route::put('/unidad/desactivar', 'UnidadController@desactivar');
+        Route::put('/unidad/activar', 'UnidadController@activar');
+        Route::get('/unidad/selectUnidad', 'UnidadController@selectUnidad');
+
+        Route::get('/tiempo', 'TiempoController@index');
+        Route::post('/tiempo/registrar', 'TiempoController@store');
+        Route::put('/tiempo/actualizar', 'TiempoController@update');
+        Route::put('/tiempo/desactivar', 'TiempoController@desactivar');
+        Route::put('/tiempo/activar', 'TiempoController@activar');
+        Route::get('/tiempo/selectTiempo', 'TiempoController@selectTiempo');
+
+        Route::get('/estado', 'EstadoController@index');
+        Route::post('/estado/registrar', 'EstadoController@store');
+        Route::put('/estado/actualizar', 'EstadoController@update');
+        Route::put('/estado/desactivar', 'EstadoController@desactivar');
+        Route::put('/estado/activar', 'EstadoController@activar');
+        Route::get('/estado/selectEstado', 'EstadoController@selectEstado');
 
         Route::get('/articulo', 'ArticuloController@index');
         Route::post('/articulo/registrar', 'ArticuloController@store');
@@ -43,36 +74,36 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/articulo/activar', 'ArticuloController@activar');
         Route::get('/articulo/buscarArticulo', 'ArticuloController@buscarArticulo');
         Route::get('/articulo/listarArticulo', 'ArticuloController@listarArticulo');
+        Route::get('/articulo/obtenerCabecera', 'ArticuloController@obtenerCabecera');
+        Route::get('/articulo/obtenerDetalles', 'ArticuloController@obtenerDetalles');
+        Route::get('/articulo/listarArticuloVenta', 'ArticuloController@listarArticuloVenta');
+        Route::get('/articulo/buscarArticuloVenta', 'ArticuloController@buscarArticuloVenta');
         Route::get('/articulo/listarPdf', 'ArticuloController@listarPdf')->name('articulos_pdf');
 
-        Route::get('/proveedor', 'ProveedorController@index');
-        Route::post('/proveedor/registrar', 'ProveedorController@store');
-        Route::put('/proveedor/actualizar', 'ProveedorController@update');
-        Route::get('/proveedor/selectProveedor', 'ProveedorController@selectProveedor');
-
-        Route::get('/ingreso', 'IngresoController@index');
-        Route::post('/ingreso/registrar', 'IngresoController@store');
-        Route::put('/ingreso/desactivar', 'IngresoController@desactivar');
-        Route::get('/ingreso/obtenerCabecera', 'IngresoController@obtenerCabecera');
-        Route::get('/ingreso/obtenerDetalles', 'IngresoController@obtenerDetalles');
-
-    });
-
-    Route::group(['middleware' => ['Vendedor']], function () {
-        Route::get('/cliente', 'ClienteController@index');
-        Route::post('/cliente/registrar', 'ClienteController@store');
-        Route::put('/cliente/actualizar', 'ClienteController@update');
-        Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
-
-        Route::get('/articulo/buscarArticuloVenta', 'ArticuloController@buscarArticuloVenta');
-        Route::get('/articulo/listarArticuloVenta', 'ArticuloController@listarArticuloVenta');
-
+       
         Route::get('/venta', 'VentaController@index');
+        Route::get('/venta/num', 'VentaController@num');
         Route::post('/venta/registrar', 'VentaController@store');
         Route::put('/venta/desactivar', 'VentaController@desactivar');
         Route::get('/venta/obtenerCabecera', 'VentaController@obtenerCabecera');
         Route::get('/venta/obtenerDetalles', 'VentaController@obtenerDetalles');
         Route::get('/venta/pdf/{id}', 'VentaController@pdf')->name('venta_pdf');
+
+        Route::get('/pedido', 'PedidoController@index');
+        Route::get('/pedido/num', 'PedidoController@num');
+        Route::post('/pedido/registrar', 'PedidoController@store');
+        Route::put('/pedido/desactivar', 'PedidoController@desactivar');
+        Route::get('/pedido/obtenerCabecera', 'PedidoController@obtenerCabecera');
+        Route::get('/pedido/obtenerDetalles', 'PedidoController@obtenerDetalles');
+        Route::get('/pedido/pdf/{id}', 'PedidoController@pdf')->name('pedido_pdf');
+
+        Route::get('/ingreso', 'IngresoController@index');
+        Route::get('/ingreso/num', 'IngresoController@num');
+        Route::post('/ingreso/registrar', 'IngresoController@store');
+        Route::put('/ingreso/desactivar', 'IngresoController@desactivar');
+        Route::get('/ingreso/obtenerCabecera', 'IngresoController@obtenerCabecera');
+        Route::get('/ingreso/obtenerDetalles', 'IngresoController@obtenerDetalles');
+        Route::get('/ingreso/pdf/{id}', 'IngresoController@pdf')->name('ingreso_pdf');
     });
 
     Route::group(['middleware' => ['Administrador']], function () {
@@ -160,6 +191,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/ingreso/desactivar', 'IngresoController@desactivar');
         Route::get('/ingreso/obtenerCabecera', 'IngresoController@obtenerCabecera');
         Route::get('/ingreso/obtenerDetalles', 'IngresoController@obtenerDetalles');
+        Route::get('/ingreso/pdf/{id}', 'IngresoController@pdf')->name('ingreso_pdf');
     });
 
 });

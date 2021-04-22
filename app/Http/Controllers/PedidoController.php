@@ -118,7 +118,7 @@ class PedidoController extends Controller
             $pedido->solicitante = $request->solicitante;
             $pedido->serie_comprobante = $request->serie_comprobante;
             $pedido->fecha_hora = $mytime->toDateString();
-            $pedido->estado = 'Registrado';
+            $pedido->estado = '1';
             $pedido->save();
  
             $detalles = $request->data;//Array de detalles
@@ -166,7 +166,7 @@ class PedidoController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
         $pedido = Pedido::findOrFail($request->id);
-        $pedido->estado = 'Anulado';
+        $pedido->estado = '0';
         $pedido->save();
     }
 }

@@ -13,7 +13,7 @@ class DashboardController extends Controller
         $ingresos=DB::table('ingresos as i')
         ->select(DB::raw('MONTH(i.fecha_hora) as mes'),
         DB::raw('YEAR(i.fecha_hora) as anio'),
-        DB::raw('SUM(i.total) as total'))
+        DB::raw('SUM(i.estado) as total'))
         ->whereYear('i.fecha_hora',$anio)
         ->groupBy(DB::raw('MONTH(i.fecha_hora)'),DB::raw('YEAR(i.fecha_hora)'))
         ->get();
@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $ventas=DB::table('ventas as v')
         ->select(DB::raw('MONTH(v.fecha_hora) as mes'),
         DB::raw('YEAR(v.fecha_hora) as anio'),
-        DB::raw('SUM(v.total) as total'))
+        DB::raw('SUM(v.estado) as total'))
         ->whereYear('v.fecha_hora',$anio)
         ->groupBy(DB::raw('MONTH(v.fecha_hora)'),DB::raw('YEAR(v.fecha_hora)'))
         ->get();

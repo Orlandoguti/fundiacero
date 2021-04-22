@@ -19,6 +19,8 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
+        "@syncfusion/ej2-base": "^19.1.57",
+        "@syncfusion/ej2-vue-charts": "^19.1.57",
         "jspdf": "^2.3.1",
         "laravel-echo": "^1.4.0",
         "pusher-js": "^4.3.1",

@@ -27,8 +27,8 @@
                             <div class="col-md-13">
                                 <div class="input-group">
                                     <select class="form-control col-md-4" v-model="criterio">
-                                      <option value="id">Nº Ingreso</option>
-                                      <option value="serie_comprobante">Serie Comprobante</option>
+                                      <option value="id">Nº Despacho</option>
+                                      <option value="serie_comprobante">Nombre Solicitante</option>
                                       <option value="created_at">Fecha-Hora</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
@@ -43,8 +43,7 @@
                                         <th>Nº de Despacho</th>
                                         <th>Usuario</th>
                                         <th>Area</th>
-                                        <th>Tipo Comprobante</th>
-                                        <th>Serie Comprobante</th>
+                                        <th>Nombre Solicitante</th>
                                         <th>Fecha Hora</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>
@@ -55,7 +54,6 @@
                                          <td v-text="venta.id"></td>
                                         <td v-text="venta.usuario"></td>
                                         <td v-text="venta.nombre"></td>
-                                        <td v-text="venta.tipo_comprobante"></td>
                                         <td v-text="venta.serie_comprobante"></td>
                                         <td v-text="venta.created_at"></td>
                                       <td>
@@ -106,7 +104,7 @@
                         <div class="form-group row border">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Nº de Ingreso</label>
+                                    <label>Nº de Despacho</label>
                                     <p v-text="id"></p>
                                 </div>
                             </div>
@@ -118,13 +116,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Tipo Comprobante</label>
-                                    <p v-text="tipo_comprobante"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Serie Comprobante</label>
+                                    <label>Nombre Solicitante</label>
                                     <p v-text="serie_comprobante"></p>
                                 </div>
                             </div>
@@ -178,13 +170,7 @@
                 venta_id: 0,
                 idcliente:0,
                 cliente:'',
-                tipo_comprobante : 'BOLETA',
                 serie_comprobante : '',
-                num_comprobante : '',
-                impuesto: 0.18,
-                total:0.0,
-                totalImpuesto: 0.0,
-                totalParcial: 0.0,
                 arrayVenta : [],
                 arrayCliente : [],
                 arrayDetalle : [],
@@ -203,7 +189,7 @@
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'num_comprobante',
+                criterio : 'id',
                 buscar : '',
                 criterioA: 'nombre',
                 buscarA:'',
@@ -286,11 +272,7 @@
                 me.listado=0;
 
                 me.idproveedor=0;
-                    me.tipo_comprobante='BOLETA';
                     me.serie_comprobante='';
-                    me.num_comprobante='';
-                    me.impuesto=0.18;
-                    me.total=0.0;
                     me.idarticulo=0;
                     me.articulo='';
                     me.cantidad=0;
@@ -313,9 +295,7 @@
                     arrayVentaT = respuesta.venta;
                     me.id = arrayVentaT[0]['id'];
                     me.categoria = arrayVentaT[0]['nombre'];
-                    me.tipo_comprobante=arrayVentaT[0]['tipo_comprobante'];
                     me.serie_comprobante=arrayVentaT[0]['serie_comprobante'];
-                    me.num_comprobante=arrayVentaT[0]['num_comprobante'];
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -354,7 +334,7 @@
                     axios.put('/venta/desactivar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarVenta(1,'','num_comprobante');
+                        me.listarVenta(1,'','id');
                         swal(
                         'Anulado!',
                         'El Despacho ha sido anulado con éxito.',

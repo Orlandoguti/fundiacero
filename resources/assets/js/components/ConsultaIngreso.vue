@@ -71,9 +71,14 @@
                                             <button type="button" @click="verIngreso(ingreso.id)" class="btn btn-success btn-sm">
                                             <i class="icon-eye"></i>
                                             </button> &nbsp;
+                                            <button type="button" @click="pdfIngreso(ingreso.id)" class="btn btn-info btn-sm">
+                                            <i class="icon-doc"></i>
+                                            </button>
+                                              <template v-if="ingreso.estado=='1'">
                                                 <button type="button" class="btn btn-danger btn-sm" @click="desactivarIngreso(ingreso.id)">
                                                     <i class="icon-trash"></i>
                                                 </button>
+                                            </template>
                                         </td>
                                     </tr>                                
                                 </tbody>
@@ -262,6 +267,9 @@
             }
         },
         methods : {
+             pdfIngreso(id){
+                window.open('http://localhost:8000/ingreso/pdf/'+ id ,'_blank');
+            },
             listarIngreso (page,buscar,criterio){
                 let me=this;
                 var url= '/ingreso?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;

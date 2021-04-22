@@ -28,6 +28,7 @@
                                 <div class="input-group">
                                     <select class="form-control col-md-4" v-model="criterio">
                                       <option value="id">Nº Pedido</option>
+                                      <option value="solicitante">Nombre Solicitante</option>
                                       <option value="fecha_hora">Fecha-Hora</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarPedido(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
@@ -54,7 +55,15 @@
                                         <td v-text="pedido.nombre"></td>                                        
                                         <td v-text="pedido.solicitante"></td>
                                         <td v-text="pedido.created_at"></td>
-                                        <td v-text="pedido.estado"></td>
+                                        <td>
+                                        <div v-if="pedido.estado">
+                                            <span class="badge badge-success">Registrado</span>
+                                        </div>
+                                        <div v-else>
+                                            <span class="badge badge-danger">Anulado</span>
+                                        </div>
+                                        
+                                    </td>
                                         <td>
                                             <button type="button" @click="verPedido(pedido.id)" class="btn btn-success btn-sm">
                                             <i class="icon-eye"></i>
@@ -62,6 +71,11 @@
                                             <button type="button" @click="pdfPedido(pedido.id)" class="btn btn-info btn-sm">
                                             <i class="icon-doc"></i>
                                             </button>
+                                             <template v-if="pedido.estado=='1'">
+                                                <button type="button" class="btn btn-danger btn-sm" @click="desactivarPedido(pedido.id)">
+                                                    <i class="icon-trash"></i>
+                                                </button>
+                                            </template>
                                         </td>
                                     </tr>                                
                                 </tbody>
@@ -318,6 +332,45 @@
                 .catch(function (error) {
                     console.log(error);
                 });
+            },
+              desactivarPedido(id){
+               swal({
+                title: 'Esta seguro de anular este Pedido?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.put('/pedido/desactivar',{
+                        'id': id
+                    }).then(function (response) {
+                        me.listarPedido(1,'','solicitante');
+                        swal(
+                        'Anulado!',
+                        'El Pedido ha sido anulado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
             },
 
         },

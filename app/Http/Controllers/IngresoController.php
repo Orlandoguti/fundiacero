@@ -108,6 +108,27 @@ class IngresoController extends Controller
             'detalles' => $detalles
         ];
     }
+    public function pdf(Request $request,$id){
+        $ingreso = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
+        ->join('users','ingresos.idusuario','=','users.id')
+        ->select('ingresos.id','ingresos.detalle','ingresos.tipo_comprobante','ingresos.serie_comprobante',
+        'ingresos.created_at',
+        'ingresos.estado','categorias.nombre','users.usuario')
+        ->where('ingresos.id','=',$id)
+        ->orderBy('ingresos.id','desc')->take(1)->get();
+
+        $detalles = DetalleIngreso::join('articulos','detalle_ingresos.idarticulo','=','articulos.id')
+        ->select('detalle_ingresos.cantidad',
+        'articulos.nombre as articulo')
+        ->where('detalle_ingresos.idingreso','=',$id)
+        ->orderBy('detalle_ingresos.id','desc')->get();
+
+        $numingreso=Ingreso::select('created_at')->where('id',$id)->get();
+
+        $pdf = \PDF::loadView('pdf.ingreso',['ingreso'=>$ingreso,'detalles'=>$detalles]);
+        return $pdf->download('ingreso-'.$numingreso[0]->num_comprobante.'.pdf');
+
+    }
     public function store(Request $request)
     {
         if (!$request->ajax()) return redirect('/');

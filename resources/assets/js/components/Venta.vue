@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Despachos
-                         <div class="float-right" style="margin-right: 15px;" v-for="venta in arrayVenta" :key="venta.id">Nº Ingreso
+                         <div class="float-right" style="margin-right: 15px;" v-for="venta in arrayVenta" :key="venta.id">Nº Despacho - 
                                 <span v-text="venta.id+1"></span> 
                          </div> 
                     </div>
@@ -38,25 +38,8 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Tipo Comprobante(*)</label>
-                                    <select class="form-control" v-model="tipo_comprobante">
-                                        <option value="0">Seleccione</option>
-                                        <option value="BOLETA">Boleta</option>
-                                        <option value="FACTURA">Factura</option>
-                                        <option value="TICKET">Ticket</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Serie Comprobante</label>
-                                    <input type="text" class="form-control" v-model="serie_comprobante" placeholder="000x">
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Número Comprobante(*)</label>
-                                    <input type="text" class="form-control" v-model="num_comprobante" placeholder="000xx">
+                                    <label>Nombre Solicitante</label>
+                                    <input type="text" class="form-control" v-model="serie_comprobante" placeholder="Ingrese Nombre del Solicitante...">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -234,9 +217,7 @@
                 idcategoria : 0,
                 nombre_categoria : '',
                 categoria:'',
-                tipo_comprobante : 'BOLETA',
                 serie_comprobante : '',
-                num_comprobante : '',
                 totalParcial: 0.0,
                 arrayVenta : [],
                 arrayDetalle : [],
@@ -259,7 +240,7 @@
                 buscar : '',
                 criterioA: 'nombre',
                 buscarA:'',
-                criterioV : 'num_comprobante',
+                criterioV : 'id',
                 buscarV : '',
                 arrayArticulo: [],
                 arrayCategoria :[],
@@ -464,18 +445,14 @@
                 axios.post('/venta/registrar',{
                     'idcategoria': this.idcategoria,
                     'idcategoria': this.idcategoria,
-                    'tipo_comprobante': this.tipo_comprobante,
                     'serie_comprobante' : this.serie_comprobante,
-                    'num_comprobante' : this.num_comprobante,
                     'data' : this.arrayDetalle
 
                 }).then(function (response) {
                     me.listado=1;
-                    me.listarVenta(1,'','num_comprobante');
+                    me.listarVenta(1,'','id');
                     me.idcategoria=0;
-                    me.tipo_comprobante='BOLETA';
                     me.serie_comprobante='';
-                    me.num_comprobante='';
                     me.idarticulo=0;
                     me.idcategoria=0;
                     me.articulo='';
@@ -514,8 +491,7 @@
                 });
 
                 if (me.idcategoria==0) me.errorMostrarMsjVenta.push("Seleccione una Area");
-                if (me.tipo_comprobante==0) me.errorMostrarMsjVenta.push("Sleccione el Comprobante");
-                if (!me.num_comprobante) me.errorMostrarMsjVenta.push("Ingrese el numero de comprobante");
+                if (!me.serie_comprobante) me.errorMostrarMsjVenta.push("Ingrese el Nombre de la Persona");
                 if (me.arrayDetalle.length<=0) me.errorMostrarMsjVenta.push("Ingrese detalles");
 
                 if (me.errorMostrarMsjVenta.length) me.errorVenta = 1;
@@ -527,9 +503,7 @@
                 me.listado=0;
 
                 me.idcategoria=0;
-                    me.tipo_comprobante='BOLETA';
                     me.serie_comprobante='';
-                    me.num_comprobante='';
                     me.idarticulo=0;
                     me.articulo='';
                     me.cantidad=0;
@@ -569,7 +543,7 @@
                     axios.put('/venta/desactivar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarVenta(1,'','num_comprobante');
+                        me.listarVenta(1,'','id');
                         swal(
                         'Anulado!',
                         'La venta ha sido anulado con éxito.',

@@ -19,7 +19,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Ingresos
-                        <div class="float-right" style="margin-right: 15px;" v-for="ingresos in arrayIngreso" :key="ingresos.id">Nº Ingreso
+                        <div class="float-right" style="margin-right: 15px;" v-for="ingresos in arrayIngreso" :key="ingresos.id">Nº Ingreso - 
                                 <span v-text="ingresos.id+1"></span> 
                          </div> 
                     </div>
