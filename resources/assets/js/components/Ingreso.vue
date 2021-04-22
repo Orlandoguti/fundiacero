@@ -4,85 +4,30 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
             </ol>
+              <section class="full-width header-well">
+                            <div class="full-width header-well-icon">
+                               <img src="/imagenes/icono.png" width="60" height="60" class="icono-fundi">
+                            </div>
+                            <div class="full-width header-well-text">
+                                <p class="text-condensedLight">
+                                   Seccion de Registro de Ingresos Fundiciones Fundiacero S.A.
+                                </p>
+                            </div>
+                        </section>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Ingresos
+                        <div class="float-right" style="margin-right: 15px;" v-for="ingresos in arrayIngreso" :key="ingresos.id">Nº Ingreso
+                                <span v-text="ingresos.id+1"></span> 
+                         </div> 
                     </div>
                     <!-- Listado-->
-                    <template v-if="listado==4">
-                    <div class="card-body">
-                        <div class="form-group row">
-                            <div class="col-md-13">
-                                <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
-                                      <option value="numero_comprobante">Numero Comprobante</option>
-                                      <option value="fecha_hora">Fecha-Hora</option>
-                                    </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarIngreso(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
-                                    <button type="submit" @click="listarIngreso(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
-                                </div>
-                            </div>
-                        </div>
-                      <div class="table-responsive">
-					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
-                                <thead>
-                                    <tr>
-                                        <th>Usuario</th>
-                                        <th>Area</th>
-                                        <th>Numero Comprobante</th>
-                                        <th>Detalles</th>
-                                        <th>Fecha Hora</th>
-                                        <th>Estado</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="ingreso in arrayIngreso" :key="ingreso.id">
-                                        <td v-text="ingreso.usuario"></td>
-                                        <td v-text="ingreso.nombre"></td>
-                                        <td v-text="ingreso.numero_comprobante"></td>
-                                        <td v-text="ingreso.detalle"></td>
-                                        <td v-text="ingreso.created_at"></td>
-                                        <div v-if="ingreso.estado">
-                                        <span class="badge badge-success">Activo</span>
-                                         </div>
-                                            <div v-else>
-                                            <span class="badge badge-danger">Desactivado</span>
-                                            </div>
-                                        <td>
-                                            <button type="button" @click="verIngreso(ingreso.id)" class="btn btn-success btn-sm">
-                                            <i class="icon-eye"></i>
-                                            </button> &nbsp;
-                                                <button type="button" class="btn btn-danger btn-sm" @click="desactivarIngreso(ingreso.id)">
-                                                    <i class="icon-trash"></i>
-                                                </button>
-                                        </td>
-                                    </tr>                                
-                                </tbody>
-                            </table>
-                        </div>
-                        <nav>
-                            <ul class="pagination">
-                                <li class="page-item" v-if="pagination.current_page > 1">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
-                                </li>
-                                <li class="page-item" v-for="page in pagesNumber" :key="page" :class="[page == isActived ? 'active' : '']">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(page,buscar,criterio)" v-text="page"></a>
-                                </li>
-                                <li class="page-item" v-if="pagination.current_page < pagination.last_page">
-                                    <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page + 1,buscar,criterio)">Sig</a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                    </template>
-                    <!--Fin Listado-->
-                    <!-- Detalle-->
-                    <template v-else-if="listado==1">
+                    <template v-if="listado==1">
                     <div class="card-body">
                         <div class="form-group row border">
+                            
                             <div class="col-md-5">
                                 <div class="form-group">
                                     <label for="">Area(*)</label>
@@ -91,17 +36,28 @@
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>                                        
                                 </div>
-                            </div>
-                         <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Numero Comprobante</label>
-                                    <input type="text" class="form-control" v-model="numero_comprobante" placeholder="Ingrese Numero Comprobante...">
-                                </div>
-                            </div>
+                            </div>                            
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Detalles</label>
                                     <input type="text" class="form-control" v-model="detalle" placeholder="Ingrese Detalles...">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tipo Comprobante</label>
+                                    <select class="form-control" v-model="tipo_comprobante">
+                                        <option value="0" disabled>Seleccione Comprobante</option>
+                                        <option value="Boleta">Boleta</option>
+                                        <option value="Factura">Factura</option>
+                                        <option value="Proforma">Proforma</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Serie Comprobante</label>
+                                    <input type="text" class="form-control" v-model="serie_comprobante" placeholder="Ingrese Numero Comprobante...">
                                 </div>
                             </div>
                             <div class="col-md-12">
@@ -130,6 +86,7 @@
                                         <tr>
                                             <th>Opciones</th>
                                             <th>Artículo</th>
+                                             <th>Stock Producto</th>
                                             <th>Cantidad</th>
                                         </tr>
                                     </thead>
@@ -141,6 +98,8 @@
                                                 </button>
                                             </td>
                                             <td v-text="detalle.articulo">
+                                            </td>
+                                            <td v-text="detalle.stock">
                                             </td>
                                             <td>
                                                 <input v-model="detalle.cantidad" type="number" value="2" class="form-control">
@@ -165,64 +124,6 @@
                     </div>
                     </template>
                     <!-- Fin Detalle-->
-                    <!--Ver ingreso-->
-                    <template v-else-if="listado==2">
-                    <div class="card-body">
-                        <div class="form-group row border">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="">Area</label>
-                                    <p v-text="categoria"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Numero Comprobante</label>
-                                    <p v-text="numero_comprobante"></p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Detalles</label>
-                                    <p v-text="detalle"></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group row border">
-                            <div class="table-responsive col-md-12">
-                                <table class="table table-bordered table-striped table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th>Artículo</th>
-                                            <th>Cantidad</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody v-if="arrayDetalle.length">
-                                        <tr v-for="detalle in arrayDetalle" :key="detalle.id">
-                                            <td v-text="detalle.articulo">
-                                            </td>
-                                            <td v-text="detalle.cantidad">
-                                            </td>
-                                        </tr>
-                                    </tbody>  
-                                    <tbody v-else>
-                                        <tr>
-                                            <td colspan="4">
-                                                No hay articulos agregados
-                                            </td>
-                                        </tr>
-                                    </tbody>                                  
-                                </table>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <div class="col-md-12">
-                                <button type="button" @click="ocultarDetalle()" class="btn btn-secondary">Cerrar</button>
-                            </div>
-                        </div>
-                    </div>
-                    </template>
-                    <!--Fin ver ingreso-->
                 </div>
                 <!-- Fin ejemplo de tabla Listado -->
             </div>
@@ -329,7 +230,7 @@
                 idcategoria:0,
                 categoria:'',
                 nombre : '',
-                numero_comprobante : '',
+                serie_comprobante : '',
                 detalle : '',
                 arrayIngreso : [],
                 arrayCategoria : [],
@@ -353,11 +254,10 @@
                 buscar : '',
                 criterioA: 'nombre',
                 buscarA:'',
-                criterioV : 'numero_comprobante',
-                buscarV : '',
                 arrayArticulo: [],
                 idarticulo: 0,
                 codigo: '',
+                tipo_comprobante:'0',
                 articulo: '',
                 precio: 0,
                 cantidad: 0,
@@ -394,12 +294,20 @@
                 }
                 return pagesArray;             
 
+            },
+              calcularTotal: function(){
+                var resultado=0.0;
+                for(var i=0;i<this.arrayDetalle.length;i++){
+                    resultado=resultado+(this.arrayDetalle[i].precio*this.arrayDetalle[i].cantidad-this.arrayDetalle[i].descuento)
+                }
+                return resultado;
             }
         },
+
         methods : {
-            listarIngreso (page,buscar,criterio){
+            listarIngreso (page){
                 let me=this;
-                var url= '/ingreso?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                var url= '/ingreso/num?page=' + page;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayIngreso = respuesta.ingresos.data;
@@ -524,6 +432,7 @@
                 });
             },
             registrarIngreso(){
+                
                 if (this.validarIngreso()){
                     return;
                 }
@@ -533,8 +442,8 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
                 cancelButtonText: 'Cancelar',
+                confirmButtonText: 'Aceptar!',
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
                 buttonsStyling: false,
@@ -545,16 +454,18 @@
 
                 axios.post('/ingreso/registrar',{
                     'idcategoria': this.idcategoria,
-                    'numero_comprobante': this.numero_comprobante,
                     'detalle' : this.detalle,
+                    'tipo_comprobante' : this.tipo_comprobante,
+                    'serie_comprobante' : this.serie_comprobante,
                     'data' : this.arrayDetalle
 
                 }).then(function (response) {
                     me.listado=1;
-                    me.listarIngreso(1,'','numero_comprobante');
+                    me.listarIngreso(1,'','serie_comprobante');
                     me.idcategoria=0;
-                    me.numero_comprobante='';
                     me.detalle='';
+                    me.serie_comprobante='';
+                    me.tipo_comprobante='';
                     me.idarticulo=0;
                     me.articulo='';
                     me.cantidad=0;
@@ -582,60 +493,11 @@
                 this.errorMostrarMsjIngreso =[];
 
                 if (this.idcategoria==0) this.errorMostrarMsjIngreso.push("Seleccione un Categoria");
-                if (this.numero_comprobante==0) this.errorMostrarMsjIngreso.push("Ingrese Numero de Comprobante");
+                if (this.serie_comprobante==0) this.errorMostrarMsjIngreso.push("Ingrese Serie de Comprobante");
                 if (this.arrayDetalle.length<=0) this.errorMostrarMsjIngreso.push("Ingrese Productos");
-
                 if (this.errorMostrarMsjIngreso.length) this.errorIngreso = 1;
 
                 return this.errorIngreso;
-            },
-            mostrarDetalle(){
-                let me=this;
-                me.listado=0;
-
-                me.idcategoria=0;
-                    me.numero_comprobante='';
-                    me.detalle='';
-                    me.idarticulo=0;
-                    me.articulo='';
-                    me.cantidad=0;
-                    me.arrayDetalle=[];
-            },
-            ocultarDetalle(){
-                this.listado=1;
-            },
-            verIngreso(id){
-                let me=this;
-                me.listado=2;
-
-                //Obtener datos del ingreso
-                var arrayIngresoT=[];
-                var url= '/ingreso/obtenerCabecera?id=' + id;
-
-                axios.get(url).then(function (response) {
-                    var respuesta= response.data;
-                    arrayIngresoT = respuesta.ingreso;
-                    
-                    me.categoria = arrayIngresoT[0]['nombre'];
-                    me.numero_comprobante=arrayIngresoT[0]['numero_comprobante'];
-                    me.detalle=arrayIngresoT[0]['detalle'];
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-
-                //obtener datos de los detalles
-                 var url= '/ingreso/obtenerDetalles?id=' + id;
-
-                axios.get(url).then(function (response) {
-                    console.log(response);
-                    var respuesta= response.data;
-                    me.arrayDetalle = respuesta.detalles;
-
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
             },
             cerrarModal(){
                 this.modal=0;
@@ -668,7 +530,7 @@
                     axios.put('/ingreso/desactivar',{
                         'id': id
                     }).then(function (response) {
-                        me.listarIngreso(1,'','numero_comprobante');
+                        me.listarIngreso(1,'','serie_comprobante');
                         swal(
                         'Anulado!',
                         'El ingreso ha sido anulado con éxito.',
@@ -691,7 +553,7 @@
         },
         mounted() {
             this.selectCategoria();
-            this.listarIngreso(1,this.buscar,this.criterio);
+            this.listarIngreso();
         }
     }
 </script>

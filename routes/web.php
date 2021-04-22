@@ -154,6 +154,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::put('/user/activar', 'UserController@activar');
 
         Route::get('/ingreso', 'IngresoController@index');
+        Route::get('/ingreso/num', 'IngresoController@num');
         Route::post('/ingreso/registrar', 'IngresoController@store');
         Route::put('/ingreso/desactivar', 'IngresoController@desactivar');
         Route::get('/ingreso/obtenerCabecera', 'IngresoController@obtenerCabecera');

@@ -384,7 +384,7 @@
 									<i class="zmdi zmdi-card"></i>
 									</div>
 									<div class="navLateral-body-cr">
-										PEDIDOS
+										REGISTRAR PEDIDO
 									</div>
 								</a>
 							</li>						
@@ -452,7 +452,7 @@
 									<i class="zmdi zmdi-wrench"></i>
 									</div>
 									<div class="navLateral-body-cr">
-										INGRESO
+									REGISTRAR INGRESO
 									</div>
 								</a>
 							</li>
@@ -462,7 +462,7 @@
 									<i class="zmdi zmdi-shopping-cart"></i>
 									</div>
 									<div class="navLateral-body-cr">
-										DESPACHO
+									REGISTRAR DESPACHO
 									</div>
 								</a>
 							</li>

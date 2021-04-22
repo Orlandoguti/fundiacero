@@ -22,16 +22,43 @@ class IngresoController extends Controller
         if ($buscar==''){
             $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
             ->join('users','ingresos.idusuario','=','users.id')
-            ->select('ingresos.id','ingresos.numero_comprobante','ingresos.detalle','ingresos.created_at',
+            ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.created_at',
             'ingresos.estado','categorias.nombre','users.usuario')
             ->orderBy('ingresos.id', 'desc')->paginate(5);
         }
         else{
             $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
             ->join('users','ingresos.idusuario','=','users.id')
-            ->select('ingresos.id','ingresos.numero_comprobante','ingresos.detalle','ingresos.created_at',
+            ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.created_at',
             'ingresos.estado','categorias.nombre','users.usuario')
             ->where('ingresos.'.$criterio, 'like', '%'. $buscar . '%')->orderBy('ingresos.id', 'desc')->paginate(3);
+        }
+         
+        return [
+            'pagination' => [
+                'total'        => $ingresos->total(),
+                'current_page' => $ingresos->currentPage(),
+                'per_page'     => $ingresos->perPage(),
+                'last_page'    => $ingresos->lastPage(),
+                'from'         => $ingresos->firstItem(),
+                'to'           => $ingresos->lastItem(),
+            ],
+            'ingresos' => $ingresos
+        ];
+    }
+    public function num(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+ 
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+         
+        if ($buscar==''){
+            $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
+            ->join('users','ingresos.idusuario','=','users.id')
+            ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.created_at',
+            'ingresos.estado','categorias.nombre','users.usuario')
+            ->orderBy('ingresos.id', 'desc')->paginate(1);
         }
          
         return [
@@ -54,7 +81,7 @@ class IngresoController extends Controller
 
         $ingreso = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
         ->join('users','ingresos.idusuario','=','users.id')
-        ->select('ingresos.id','ingresos.numero_comprobante','ingresos.detalle','ingresos.fecha_hora',
+        ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.fecha_hora',
         'ingresos.estado','categorias.nombre','users.usuario')
         ->where('ingresos.id','=',$id)
         ->orderBy('ingresos.id', 'desc')->take(1)->get();
@@ -84,7 +111,7 @@ class IngresoController extends Controller
     public function store(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
- 
+        
         try{
             DB::beginTransaction();
  
@@ -93,7 +120,9 @@ class IngresoController extends Controller
             $ingreso = new Ingreso();
             $ingreso->idcategoria=$request->get('idcategoria');
             $ingreso->idusuario = \Auth::user()->id;
-            $ingreso->numero_comprobante = $request->numero_comprobante;
+            $ingreso->detalle = $request->detalle;
+            $ingreso->serie_comprobante = $request->serie_comprobante;
+            $ingreso->tipo_comprobante = $request->tipo_comprobante;
             $ingreso->detalle = $request->detalle;
             $ingreso->fecha_hora = $mytime->toDateString();
             $ingreso->estado = 'Registrado';

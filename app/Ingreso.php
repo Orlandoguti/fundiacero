@@ -9,8 +9,9 @@ class Ingreso extends Model
     protected $fillable = [
         'idcategoria', 
         'idusuario',
-        'numero_comprobante',
         'detalle',
+        'tipo_comprobante',
+        'serie_comprobante',
         'created_at',
         'estado'
      ];

@@ -4,6 +4,16 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
             </ol>
+            <section class="full-width header-well">
+                            <div class="full-width header-well-icon">
+                               <img src="/imagenes/icono.png" width="60" height="60" class="icono-fundi">
+                            </div>
+                            <div class="full-width header-well-text">
+                                <p class="text-condensedLight">
+                                   Seccion de Detalles de Ingresos Fundiciones Fundiacero S.A.
+                                </p>
+                            </div>
+            </section>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
@@ -14,12 +24,12 @@
                     <template v-if="listado==1">
                     <div class="card-body">
                         <div class="form-group row">
-                            <div class="col-md-6">
+                            <div class="col-md-13">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
-                                      <option value="tipo_comprobante">Tipo Comprobante</option>
-                                      <option value="num_comprobante">Número Comprobante</option>
-                                      <option value="fecha_hora">Fecha-Hora</option>
+                                    <select class="form-control col-md-4" v-model="criterio">
+                                      <option value="id">Nº Ingreso</option>
+                                      <option value="serie_comprobante">Serie Comprobante</option>
+                                      <option value="created_at">Fecha-Hora</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarIngreso(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarIngreso(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
@@ -30,9 +40,11 @@
 					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                 <thead>
                                     <tr>
+                                        <th>Nº Ingreso</th>
                                         <th>Usuario</th>
                                         <th>Area</th>
-                                        <th>Numero Comprobante</th>
+                                        <th>Tipo de Comprobante</th>
+                                        <th>Serie Comprobante</th>
                                         <th>Fecha Hora</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>
@@ -40,16 +52,15 @@
                                 </thead>
                                 <tbody>
                                     <tr v-for="ingreso in arrayIngreso" :key="ingreso.id">
+                                         <td v-text="ingreso.id"></td>
                                         <td v-text="ingreso.usuario"></td>
                                         <td v-text="ingreso.nombre"></td>
-                                        <td v-text="ingreso.numero_comprobante"></td>
+                                        <td v-text="ingreso.tipo_comprobante"></td>
+                                        <td v-text="ingreso.serie_comprobante"></td>
                                         <td v-text="ingreso.created_at"></td>
-                                        <div v-if="ingreso.estado">
-                                        <span class="badge badge-success">Activo</span>
-                                         </div>
-                                            <div v-else>
-                                            <span class="badge badge-danger">Desactivado</span>
-                                            </div>
+                                        <td v-text="ingreso.estado">
+                                        
+                                        </td>
                                         <td>
                                             <button type="button" @click="verIngreso(ingreso.id)" class="btn btn-success btn-sm">
                                             <i class="icon-eye"></i>
@@ -82,6 +93,12 @@
                     <template v-else-if="listado==2">
                     <div class="card-body">
                         <div class="form-group row border">
+                         <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Nº de Ingreso</label>
+                                    <p v-text="id"></p>
+                                </div>
+                            </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Area</label>
@@ -90,8 +107,14 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Número Comprobante</label>
-                                    <p v-text="numero_comprobante"></p>
+                                    <label>Tipo de Comprobante</label>
+                                    <p v-text="tipo_comprobante"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Serie de Comprobante</label>
+                                    <p v-text="serie_comprobante"></p>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -147,11 +170,14 @@
     export default {
         data (){
             return {
+                id:'',
+                categoria:'',
+                detalle:'',
                 ingreso_id: 0,
                 idproveedor:0,
                 proveedor:'',
                 nombre : '',
-                tipo_comprobante : 'BOLETA',
+                tipo_comprobante : '',
                 serie_comprobante : '',
                 num_comprobante : '',
                 impuesto: 0.18,
@@ -176,7 +202,7 @@
                     'to' : 0,
                 },
                 offset : 3,
-                criterio : 'num_comprobante',
+                criterio : 'id',
                 buscar : '',
                 criterioA: 'nombre',
                 buscarA:'',
@@ -256,7 +282,7 @@
                 me.listado=0;
 
                 me.idproveedor=0;
-                    me.tipo_comprobante='BOLETA';
+                    me.tipo_comprobante='';
                     me.serie_comprobante='';
                     me.num_comprobante='';
                     me.impuesto=0.18;
@@ -283,8 +309,10 @@
                     arrayIngresoT = respuesta.ingreso;
                     
                     me.categoria = arrayIngresoT[0]['nombre'];
-                    me.numero_comprobante=arrayIngresoT[0]['numero_comprobante'];
+                    me.id=arrayIngresoT[0]['id'];
                     me.detalle=arrayIngresoT[0]['detalle'];
+                     me.tipo_comprobante=arrayIngresoT[0]['tipo_comprobante'];
+                      me.serie_comprobante=arrayIngresoT[0]['serie_comprobante'];
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -305,7 +333,7 @@
             },
               desactivarIngreso(id){
                swal({
-                title: 'Esta seguro de desactivar este ingreso?',
+                title: 'Esta seguro de anular este ingreso?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

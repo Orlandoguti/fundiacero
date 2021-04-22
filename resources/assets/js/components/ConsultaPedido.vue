@@ -245,7 +245,7 @@
                 });
             },
             pdfPedido(id){
-                window.open('http://localhost:8000/pedido/pdf/'+ id ,'_blank');
+                window.open('/pedido/pdf/'+ id ,'_blank');
             },
             cambiarPagina(page,buscar,criterio){
                 let me = this;

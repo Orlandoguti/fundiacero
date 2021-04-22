@@ -59,9 +59,6 @@
             <template v-if="menu==14">
             <pedido></pedido>
             </template>
-            <template v-if="menu==14">
-            <pedido></pedido>
-            </template>
             <template v-if="menu==15">
                 <consultapedido></consultapedido>
             </template>

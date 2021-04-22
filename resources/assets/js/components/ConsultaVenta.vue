@@ -2,24 +2,34 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Farmacia</a></li>
+                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
             </ol>
+             <section class="full-width header-well">
+                            <div class="full-width header-well-icon">
+                               <img src="/imagenes/icono.png" width="60" height="60" class="icono-fundi">
+                            </div>
+                            <div class="full-width header-well-text">
+                                <p class="text-condensedLight">
+                                   Seccion de Detalles de Despachos Fundiciones Fundiacero S.A.
+                                </p>
+                            </div>
+            </section>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Ventas nueva
+                        <i class="fa fa-align-justify"></i> Despachos
                     </div>
                     <!-- Listado-->
                     <template v-if="listado==1">
                     <div class="card-body">
                         <div class="form-group row">
-                            <div class="col-md-6">
+                            <div class="col-md-13">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
-                                      <option value="tipo_comprobante">Tipo Comprobante</option>
-                                      <option value="num_comprobante">Número Comprobante</option>
-                                      <option value="fecha_hora">Fecha-Hora</option>
+                                    <select class="form-control col-md-4" v-model="criterio">
+                                      <option value="id">Nº Ingreso</option>
+                                      <option value="serie_comprobante">Serie Comprobante</option>
+                                      <option value="created_at">Fecha-Hora</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarVenta(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
@@ -27,34 +37,35 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered table-striped table-sm">
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                 <thead>
                                     <tr>
-                                        
+                                        <th>Nº de Despacho</th>
                                         <th>Usuario</th>
-                                        <th>Cliente</th>
+                                        <th>Area</th>
                                         <th>Tipo Comprobante</th>
                                         <th>Serie Comprobante</th>
-                                        <th>Número Comprobante</th>
                                         <th>Fecha Hora</th>
-                                        <th>Total</th>
-                                        <th>Impuesto</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr v-for="venta in arrayVenta" :key="venta.id">
-                                      
+                                         <td v-text="venta.id"></td>
                                         <td v-text="venta.usuario"></td>
                                         <td v-text="venta.nombre"></td>
                                         <td v-text="venta.tipo_comprobante"></td>
                                         <td v-text="venta.serie_comprobante"></td>
-                                        <td v-text="venta.num_comprobante"></td>
                                         <td v-text="venta.created_at"></td>
-                                        <td v-text="venta.total"></td>
-                                        <td v-text="venta.impuesto"></td>
-                                        <td v-text="venta.estado"></td>
+                                          <td>
+                                        <div v-if="venta.estado">
+                                        <span class="badge badge-success">Registrado</span>
+                                         </div>
+                                            <div v-else>
+                                            <span class="badge badge-danger">Anulado</span>
+                                            </div>
+                                        </td>
                                         <td>
                                             <button type="button" @click="verVenta(venta.id)" class="btn btn-success btn-sm">
                                             <i class="icon-eye"></i>
@@ -62,6 +73,11 @@
                                             <button type="button" @click="pdfVenta(venta.id)" class="btn btn-info btn-sm">
                                             <i class="icon-doc"></i>
                                             </button>
+                                            <template v-if="venta.estado=='Registrado'">
+                                                <button type="button" class="btn btn-danger btn-sm" @click="desactivarVenta(venta.id)">
+                                                    <i class="icon-trash"></i>
+                                                </button>
+                                            </template>
                                         </td>
                                     </tr>                                
                                 </tbody>
@@ -87,15 +103,17 @@
                     <template v-else-if="listado==2">
                     <div class="card-body">
                         <div class="form-group row border">
-                            <div class="col-md-9">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <label for="">Cliente</label>
-                                    <p v-text="cliente"></p>
+                                    <label>Nº de Ingreso</label>
+                                    <p v-text="id"></p>
                                 </div>
                             </div>
-                            <div class="col-md-3">
-                                <label for="">Impuesto</label>
-                                <p v-text="impuesto"></p>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Area</label>
+                                    <p v-text="categoria"></p>
+                                </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
@@ -109,12 +127,6 @@
                                     <p v-text="serie_comprobante"></p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label>Número Comprobante</label>
-                                    <p v-text="num_comprobante"></p>
-                                </div>
-                            </div>
                         </div>
                         <div class="form-group row border">
                             <div class="table-responsive col-md-12">
@@ -122,37 +134,16 @@
                                     <thead>
                                         <tr>
                                             <th>Artículo</th>
-                                            <th>Precio</th>
                                             <th>Cantidad</th>
-                                            <th>Descuento</th>
-                                            <th>Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayDetalle.length">
                                         <tr v-for="detalle in arrayDetalle" :key="detalle.id">
                                             <td v-text="detalle.articulo">
                                             </td>
-                                            <td v-text="detalle.precio">
-                                            </td>
                                             <td v-text="detalle.cantidad">
                                             </td>
-                                            <td v-text="detalle.descuento">
-                                            </td>
-                                            <td>
-                                                {{detalle.precio*detalle.cantidad-detalle.descuento}}
-                                            </td>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right"><strong>Total Parcial:</strong></td>
-                                            <td>$ {{totalParcial=(total-totalImpuesto).toFixed(2)}}</td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right"><strong>Total Impuesto:</strong></td>
-                                            <td>$ {{totalImpuesto=(total*impuesto).toFixed(2)}}</td>
-                                        </tr>
-                                        <tr style="background-color: #CEECF5;">
-                                            <td colspan="4" align="right"><strong>Total Neto:</strong></td>
-                                            <td>$ {{total}}</td>
-                                        </tr>
+                                       </tr>
                                     </tbody>  
                                     <tbody v-else>
                                         <tr>
@@ -319,13 +310,11 @@
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     arrayVentaT = respuesta.venta;
-                    
-                    me.cliente = arrayVentaT[0]['nombre'];
+                    me.id = arrayVentaT[0]['id'];
+                    me.categoria = arrayVentaT[0]['nombre'];
                     me.tipo_comprobante=arrayVentaT[0]['tipo_comprobante'];
                     me.serie_comprobante=arrayVentaT[0]['serie_comprobante'];
                     me.num_comprobante=arrayVentaT[0]['num_comprobante'];
-                    me.impuesto=arrayVentaT[0]['impuesto'];
-                    me.total=arrayVentaT[0]['total'];
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -344,8 +333,49 @@
                     console.log(error);
                 });
             },
+            desactivarVenta(id){
+               swal({
+                title: 'Esta seguro de anular este Despacho?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                    let me = this;
+
+                    axios.put('/venta/desactivar',{
+                        'id': id
+                    }).then(function (response) {
+                        me.listarVenta(1,'','num_comprobante');
+                        swal(
+                        'Anulado!',
+                        'El Despacho ha sido anulado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+            },
+            
 
         },
+        
         mounted() {
             this.listarVenta(1,this.buscar,this.criterio);
         }

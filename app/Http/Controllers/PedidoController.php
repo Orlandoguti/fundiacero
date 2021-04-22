@@ -50,37 +50,13 @@ class PedidoController extends Controller
     public function num(Request $request)
     {
         if (!$request->ajax()) return redirect('/');
- 
-        $buscar = $request->buscar;
-        $criterio = $request->criterio;
          
-        if ($buscar==''){
             $pedidos = Pedido::join('categorias','pedidos.idcategoria','=','categorias.id')
             ->join('users','pedidos.idusuario','=','users.id')
             ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.created_at',
             'pedidos.estado','categorias.nombre','users.usuario')
-            ->orderBy('pedidos.id', 'desc')->paginate(1);
-        }
-        else{
-            $pedidos = Pedido::join('categorias','pedidos.idcategoria','=','categorias.id')
-            ->join('users','pedidos.idusuario','=','users.id')
-            ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.fecha_hora',
-            'pedidos.estado','categorias.nombre','users.usuario')
-            ->where('pedidos.'.$criterio, 'like', '%'. $buscar . '%')
-            ->orderBy('pedidos.id', 'desc')->paginate(1);
-        }
-         
-        return [
-            'pagination' => [
-                'total'        => $pedidos->total(),
-                'current_page' => $pedidos->currentPage(),
-                'per_page'     => $pedidos->perPage(),
-                'last_page'    => $pedidos->lastPage(),
-                'from'         => $pedidos->firstItem(),
-                'to'           => $pedidos->lastItem(),
-            ],
-            'pedidos' => $pedidos
-        ];
+            ->orderBy('pedidos.id', 'desc')->paginate(1);     
+        return ['pedidos' => $pedidos];
     }
     public function obtenerCabecera(Request $request){
         if (!$request->ajax()) return redirect('/');

@@ -145,7 +145,6 @@
 </template>
 
 <script>
-    import vSelect from 'vue-select';
     export default {
         data (){
             return {
@@ -169,18 +168,14 @@
                 detallep: '',
             }
         },
-        components: {
-            vSelect
-        },
         methods : {
 
-            listarPedido (page,buscar,criterio){
+            listarPedido (){
                 let me=this;
-                var url= '/pedido/num?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                var url= '/pedido/num?page=';
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayPedido = respuesta.pedidos.data;
-                    me.pagination= respuesta.pagination;
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -201,15 +196,7 @@
             pdfPedido(id){
                 window.open('/pedido/pdf/'+ id ,'_blank');
             },
-            cambiarPagina(page,buscar,criterio){
-                let me = this;
-                //Actualiza la página actual
-                me.pagination.current_page = page;
-                //Envia la petición para visualizar la data de esa página
-                me.listarPedido(page,buscar,criterio);
-                 me.listarArticulo(page,buscar,criterio);
-            },
-            eliminarDetalle(index){
+           eliminarDetalle(index){
                 let me = this;
                 me.arrayDetalle.splice(index, 1);
             },
@@ -238,29 +225,13 @@
                             me.detallep='';
                         }
             },
-            agregarDetalleModal(data =[]){
-                let me=this;
-                if(me.encuentra(data['id'])){
-                        swal({
-                            type: 'error',
-                            title: 'Error...',
-                            text: 'Este Artículo ya se encuentra agregado!',
-                        })
-                    }else{
-                    me.arrayDetalle.push({
-                    medida: data['medida'],
-                    producto: data['producto'],
-                    cantidad: 1,
-                    detallep: data['detallep'],
-                    });
-                    }
-            },
+
             registrarPedido(){
                 if (this.validarPedido()){
                     return;
                 }
-            swal({
-                title: 'Esta seguro de realizar este pedido?',
+                swal({
+                title: 'Esta seguro de realizar este Pedido?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -293,16 +264,16 @@
                     me.detallep='';
                     me.arrayDetalle=[];
                     window.open('/pedido/pdf/'+ response.data.id);
-
-                    swal(
+                swal(
                         'Registrado!',
-                        'El pedido ha sido registrado con éxito.',
+                        'El Pedido ha sido registrado con éxito.',
                         'success'
                         )
-                }).catch(function (error) {
+
+                 }).catch(function (error) {
                     console.log(error);
                 });
-                 } else if (
+                   } else if (
                     // Read more about handling dismissals
                     result.dismiss === swal.DismissReason.cancel
                 ) {
@@ -334,53 +305,10 @@
                     me.cantidad=0;
                     me.arrayDetalle=[];
             },
-            ocultarDetalle(){
-                this.listado=1;
-            },
-            desactivarPedido(id){
-               swal({
-                title: 'Esta seguro de anular esta Pedido?',
-                type: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Aceptar!',
-                cancelButtonText: 'Cancelar',
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                buttonsStyling: false,
-                reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
-                    let me = this;
-
-                    axios.put('/pedido/desactivar',{
-                        'id': id
-                    }).then(function (response) {
-                        me.listarPedido(1,'','solicitante');
-                        swal(
-                        'Anulado!',
-                        'El pedido se ha sido anulado con éxito.',
-                        'success'
-                        )
-                    }).catch(function (error) {
-                        console.log(error);
-                    });
-                    
-                    
-                } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    
-                }
-                }) 
-            },
-
-        },
+           },
         mounted() {
             this.selectCategoria();
-            this.listarPedido(1,this.buscar,this.criterio);
+            this.listarPedido();
         }
     }
 </script>
