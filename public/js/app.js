@@ -74850,6 +74850,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -75029,12 +75039,14 @@ var render = function() {
   return _c("main", { staticClass: "main" }, [
     _vm._m(0),
     _vm._v(" "),
+    _vm._m(1),
+    _vm._v(" "),
     _c("div", { staticClass: "container-fluid" }, [
       _c(
         "div",
         { staticClass: "card" },
         [
-          _vm._m(1),
+          _vm._m(2),
           _vm._v(" "),
           _vm.listado == 1
             ? [
@@ -75143,7 +75155,7 @@ var render = function() {
                           "mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive"
                       },
                       [
-                        _vm._m(2),
+                        _vm._m(3),
                         _vm._v(" "),
                         _c(
                           "tbody",
@@ -75343,7 +75355,7 @@ var render = function() {
                               "table table-bordered table-striped table-sm"
                           },
                           [
-                            _vm._m(3),
+                            _vm._m(4),
                             _vm._v(" "),
                             _vm.arrayDetalle.length
                               ? _c(
@@ -75376,7 +75388,7 @@ var render = function() {
                                     ])
                                   })
                                 )
-                              : _c("tbody", [_vm._m(4)])
+                              : _c("tbody", [_vm._m(5)])
                           ]
                         )
                       ])
@@ -75416,6 +75428,27 @@ var staticRenderFns = [
     return _c("ol", { staticClass: "breadcrumb" }, [
       _c("li", { staticClass: "breadcrumb-item" }, [
         _c("a", { attrs: { href: "/" } }, [_vm._v("Dashboard")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", { staticClass: "full-width header-well" }, [
+      _c("div", { staticClass: "full-width header-well-icon" }, [
+        _c("img", {
+          staticClass: "icono-fundi",
+          attrs: { src: "/imagenes/icono.png", width: "60", height: "60" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "full-width header-well-text" }, [
+        _c("p", { staticClass: "text-condensedLight" }, [
+          _vm._v(
+            "\n                                   Seccion de Detalles de Pedidos Fundiciones Fundiacero S.A.\n                                "
+          )
+        ])
       ])
     ])
   },
