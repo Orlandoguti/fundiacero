@@ -58,14 +58,15 @@
                                         <td v-text="venta.tipo_comprobante"></td>
                                         <td v-text="venta.serie_comprobante"></td>
                                         <td v-text="venta.created_at"></td>
-                                          <td>
+                                      <td>
                                         <div v-if="venta.estado">
-                                        <span class="badge badge-success">Registrado</span>
-                                         </div>
-                                            <div v-else>
+                                            <span class="badge badge-success">Registrado</span>
+                                        </div>
+                                        <div v-else>
                                             <span class="badge badge-danger">Anulado</span>
-                                            </div>
-                                        </td>
+                                        </div>
+                                        
+                                    </td>
                                         <td>
                                             <button type="button" @click="verVenta(venta.id)" class="btn btn-success btn-sm">
                                             <i class="icon-eye"></i>
@@ -73,7 +74,7 @@
                                             <button type="button" @click="pdfVenta(venta.id)" class="btn btn-info btn-sm">
                                             <i class="icon-doc"></i>
                                             </button>
-                                            <template v-if="venta.estado=='Registrado'">
+                                            <template v-if="venta.estado=='1'">
                                                 <button type="button" class="btn btn-danger btn-sm" @click="desactivarVenta(venta.id)">
                                                     <i class="icon-trash"></i>
                                                 </button>

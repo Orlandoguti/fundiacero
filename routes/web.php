@@ -130,6 +130,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/cliente/selectCliente', 'ClienteController@selectCliente');
 
         Route::get('/venta', 'VentaController@index');
+        Route::get('/venta/num', 'VentaController@num');
         Route::post('/venta/registrar', 'VentaController@store');
         Route::put('/venta/desactivar', 'VentaController@desactivar');
         Route::get('/venta/obtenerCabecera', 'VentaController@obtenerCabecera');

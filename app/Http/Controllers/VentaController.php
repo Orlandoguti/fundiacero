@@ -49,6 +49,34 @@ class VentaController extends Controller
             'ventas' => $ventas
         ];
     }
+    public function num(Request $request)
+    {
+        if (!$request->ajax()) return redirect('/');
+ 
+        $buscar = $request->buscar;
+        $criterio = $request->criterio;
+         
+        if ($buscar==''){
+            $ventas = Venta::join('categorias','ventas.idcategoria','=','categorias.id')
+            ->join('users','ventas.idusuario','=','users.id')
+            ->select('ventas.id','ventas.tipo_comprobante','ventas.serie_comprobante',
+            'ventas.num_comprobante','ventas.created_at',
+            'ventas.estado','categorias.nombre','users.usuario')
+            ->orderBy('ventas.id', 'desc')->paginate(1);
+        }
+         
+        return [
+            'pagination' => [
+                'total'        => $ventas->total(),
+                'current_page' => $ventas->currentPage(),
+                'per_page'     => $ventas->perPage(),
+                'last_page'    => $ventas->lastPage(),
+                'from'         => $ventas->firstItem(),
+                'to'           => $ventas->lastItem(),
+            ],
+            'ventas' => $ventas
+        ];
+    }
     public function obtenerCabecera(Request $request){
         if (!$request->ajax()) return redirect('/');
  
@@ -114,7 +142,7 @@ class VentaController extends Controller
             $venta->serie_comprobante = $request->serie_comprobante;
             $venta->num_comprobante = $request->num_comprobante;
             $venta->fecha_hora = $mytime->toDateString();
-            $venta->estado = 'Registrado';
+            $venta->estado = '1';
             $venta->save();
  
             $detalles = $request->data;//Array de detalles
@@ -160,7 +188,7 @@ class VentaController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
         $venta = Venta::findOrFail($request->id);
-        $venta->estado = 'Anulado';
+        $venta->estado = '0';
         $venta->save();
     }
 }

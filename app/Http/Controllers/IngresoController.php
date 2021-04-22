@@ -125,7 +125,7 @@ class IngresoController extends Controller
             $ingreso->tipo_comprobante = $request->tipo_comprobante;
             $ingreso->detalle = $request->detalle;
             $ingreso->fecha_hora = $mytime->toDateString();
-            $ingreso->estado = 'Registrado';
+            $ingreso->estado = '1';
             $ingreso->save();
  
             $detalles = $request->data;//Array de detalles
@@ -169,7 +169,7 @@ class IngresoController extends Controller
     {
         if (!$request->ajax()) return redirect('/');
         $ingreso = Ingreso::findOrFail($request->id);
-        $ingreso->estado = 'Anulado';
+        $ingreso->estado = '0';
         $ingreso->save();
     }
 }

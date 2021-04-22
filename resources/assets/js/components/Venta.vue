@@ -19,6 +19,9 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Despachos
+                         <div class="float-right" style="margin-right: 15px;" v-for="venta in arrayVenta" :key="venta.id">Nº Ingreso
+                                <span v-text="venta.id+1"></span> 
+                         </div> 
                     </div>
                     <!-- Detalle-->
                     <template v-if="listado==1">
@@ -301,9 +304,9 @@
             }
         },
         methods : {
-            listarVenta (page,buscar,criterio){
+            listarVenta (page){
                 let me=this;
-                var url= '/venta?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
+                var url= '/venta/num?page=' + page;
                 axios.get(url).then(function (response) {
                     var respuesta= response.data;
                     me.arrayVenta = respuesta.ventas.data;

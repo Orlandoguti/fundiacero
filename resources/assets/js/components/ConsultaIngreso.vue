@@ -58,9 +58,15 @@
                                         <td v-text="ingreso.tipo_comprobante"></td>
                                         <td v-text="ingreso.serie_comprobante"></td>
                                         <td v-text="ingreso.created_at"></td>
-                                        <td v-text="ingreso.estado">
+                                         <td>
+                                        <div v-if="ingreso.estado">
+                                            <span class="badge badge-success">Registrado</span>
+                                        </div>
+                                        <div v-else>
+                                            <span class="badge badge-danger">Anulado</span>
+                                        </div>
                                         
-                                        </td>
+                                    </td>
                                         <td>
                                             <button type="button" @click="verIngreso(ingreso.id)" class="btn btn-success btn-sm">
                                             <i class="icon-eye"></i>
