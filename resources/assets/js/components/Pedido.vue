@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
+                <li class="breadcrumb-item"><a href="/">Principal</a></li>
             </ol>
             <section class="full-width header-well">
                             <div class="full-width header-well-icon">
@@ -32,7 +32,7 @@
                         <div class="form-group row border">
                             <div class="col-md-4">
                                
-                                    <label>Nombre del Solicitante(*)</label>
+                                    <label>Nombre del Area:</label>
                                      <select class="form-control col-md-9" v-model="idcategoria">
                                             <option value="0" disabled>Seleccione la Area</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
@@ -41,7 +41,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Nombre del Solicitante(*)</label>
+                                    <label>Nombre del Solicitante:</label>
                                     <input type="text" class="form-control" v-model="solicitante" placeholder="Ingrese Nombre...">
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                          <div class="form-group row border">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Producto <span style="color: red;" v-show="producto==0"></span></label>
+                                    <label>Producto: <span style="color: red;" v-show="producto==0"></span></label>
                                     <input type="text" value="0" class="form-control" v-model="producto" placeholder="Ingrese Producto....">
                                 </div>
                             </div>
@@ -122,7 +122,7 @@
                                     <tbody v-else>
                                         <tr>
                                             <td colspan="6">
-                                                No hay articulos agregados
+                                                No hay Productos agregados
                                             </td>
                                         </tr>
                                     </tbody>                                  
@@ -201,8 +201,29 @@
                 me.arrayDetalle.splice(index, 1);
             },
             agregarDetalle(){
+                 
                 let me=this;
-                if(me.detallep==''){
+                if(me.producto==0){
+                     swal({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Ingrese Nombre del Producto!',
+                        })
+                    }else{
+                         if(me.cantidad==0){
+                     swal({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Ingrese Cantidad del Producto!',
+                        })
+                    }else{
+                         if(me.medida==0){
+                     swal({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Seleccione Medida del Producto!',
+                        })
+                    }else{
                     me.arrayDetalle.push({
                             cantidad: me.cantidad,
                             detallep:'No Hay detalle',
@@ -213,7 +234,7 @@
                             me.cantidad=0;
                             me.detallep='';
                         
-                }else{
+                 }if(me.detallep){
                             me.arrayDetalle.push({
                             cantidad: me.cantidad,
                             detallep: me.detallep,
@@ -223,13 +244,18 @@
                             me.producto='';
                             me.cantidad=0;
                             me.detallep='';
-                        }
+                }
+                }
+                }
+                 
+                        
             },
 
             registrarPedido(){
                 if (this.validarPedido()){
                     return;
                 }
+                
                 swal({
                 title: 'Esta seguro de realizar este Pedido?',
                 type: 'warning',
@@ -287,9 +313,26 @@
                 me.errorMostrarMsjPedido =[];
                 var art;
 
-
-                if (me.idcategoria==0) me.errorMostrarMsjPedido.push("Seleccione una Area");
-                if (me.solicitante==0) me.errorMostrarMsjPedido.push("Ingrese el Nombre del solicitante");
+                if (me.idcategoria==0){swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Seleccione Una Area!',
+                        });
+                }else{
+                    if (me.solicitante==0){ swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Ingrese Nombre Del Solicitante!',
+                        });
+                    }else{
+                        if (me.arrayDetalle.length<=0) swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Ingrese Productos a Pedir!',
+                        });
+                    }
+                }
+                if (me.arrayDetalle.length<=0) me.errorMostrarMsjPedido.push("");
 
                 if (me.errorMostrarMsjPedido.length) me.errorPedido = 1;
 

@@ -2,7 +2,7 @@
             <section class="responsive">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
+                <li class="breadcrumb-item"><a href="/">Principal</a></li>
             </ol>
             <section class="full-width header-well">
                             <div class="full-width header-well-icon">

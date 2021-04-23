@@ -136,7 +136,7 @@ class IngresoController extends Controller
         try{
             DB::beginTransaction();
  
-            $mytime= Carbon::now('America/Lima');
+            $mytime= Carbon::now('America/La_Paz');
  
             $ingreso = new Ingreso();
             $ingreso->idcategoria=$request->get('idcategoria');
@@ -145,7 +145,7 @@ class IngresoController extends Controller
             $ingreso->serie_comprobante = $request->serie_comprobante;
             $ingreso->tipo_comprobante = $request->tipo_comprobante;
             $ingreso->detalle = $request->detalle;
-            $ingreso->fecha_hora = $mytime->toDateString();
+            $ingreso->fecha_hora = $mytime->toDateTimeString();
             $ingreso->estado = '1';
             $ingreso->save();
  
@@ -157,7 +157,8 @@ class IngresoController extends Controller
                 $detalle = new DetalleIngreso();
                 $detalle->idingreso = $ingreso->id;
                 $detalle->idarticulo = $det['idarticulo'];
-                $detalle->cantidad = $det['cantidad'];       
+                $detalle->cantidad = $det['cantidad']; 
+                $detalle->fecha_hora = $mytime->toDateTimeString();      
                 $detalle->save();
             }          
             $fechaActual= date('Y-m-d');

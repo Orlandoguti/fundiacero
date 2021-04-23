@@ -19,7 +19,7 @@
 				<div class="tile-text">
 					<span class="text-condensedLight">
 						2<br>
-						<small>Administrators</small>
+						<small>Administrador</small>
 					</span>
 				</div>
 				<i class="zmdi zmdi-account tile-icon"></i>
@@ -28,7 +28,7 @@
 				<div class="tile-text">
 					<span class="text-condensedLight">
 						71<br>
-						<small>Clients</small>
+						<small>Usuarios</small>
 					</span>
 				</div>
 				<i class="zmdi zmdi-accounts tile-icon"></i>
@@ -37,7 +37,7 @@
 				<div class="tile-text">
 					<span class="text-condensedLight">
 						7<br>
-						<small>Providers</small>
+						<small>Proveedores</small>
 					</span>
 				</div>
 				<i class="zmdi zmdi-truck tile-icon"></i>
@@ -46,7 +46,7 @@
 				<div class="tile-text">
 					<span class="text-condensedLight">
 						9<br>
-						<small>Categories</small>
+						<small>Areas</small>
 					</span>
 				</div>
 				<i class="zmdi zmdi-label tile-icon"></i>
@@ -56,8 +56,8 @@
                 
 				<div class="tile-text">
 					<span class="text-condensedLight">
-						{{$cont}}<br>
-						<small>Products</small>
+						5<br>
+						<small>Productos</small>
 					</span>
 				</div>
 				<i class="zmdi zmdi-washing-machine tile-icon"></i>
@@ -66,7 +66,7 @@
 				<div class="tile-text">
 					<span class="text-condensedLight">
 						47<br>
-						<small>Sales</small>
+						<small>Despacho</small>
 					</span>
 				</div>
 				<i class="zmdi zmdi-shopping-cart tile-icon"></i>

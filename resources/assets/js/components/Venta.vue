@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
+                <li class="breadcrumb-item"><a href="/">Principal</a></li>
             </ol>
             <section class="full-width header-well">
                             <div class="full-width header-well-icon">
@@ -29,7 +29,7 @@
                         <div class="form-group row border">
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="">Area(*)</label>
+                                    <label for="">Area:</label>
                                         <select class="form-control" v-model="idcategoria">
                                             <option value="0" disabled>Seleccione la Area</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Nombre Solicitante</label>
+                                    <label>Nombre Solicitante:</label>
                                     <input type="text" class="form-control" v-model="serie_comprobante" placeholder="Ingrese Nombre del Solicitante...">
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                     <thead>
                                         <tr>
                                             <th>Opciones</th>
-                                            <th>Artículo</th>
+                                            <th>Producto</th>
                                             <th>Cantidad</th>
                                             <th>Stock Producto</th>
                                             <th>Nuevo Stock</th>
@@ -84,6 +84,7 @@
                                             <td v-text="detalle.articulo">
                                             </td>
                                              <td>
+                                                 <span style="color:red;" v-show="detalle.cantidad>detalle.stock">Stock Insuficiente: {{detalle.stock}}</span>
                                                 <input v-model="detalle.cantidad" type="number" value="2" class="form-control">
                                             </td>
                                              <td v-text="detalle.stock">
@@ -95,7 +96,7 @@
                                     <tbody v-else>
                                         <tr>
                                             <td colspan="6">
-                                                No hay articulos agregados
+                                                No hay Productos agregados
                                             </td>
                                         </tr>
                                     </tbody>                                  
@@ -133,7 +134,7 @@
                                              <option value="1">laminacion</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
-                                    <select class="form-control col-md-3" v-model="criterioA">
+                                    <select class="form-control col-md-4" v-model="criterioA">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                       <option value="codigo">Codigo</option>
@@ -148,9 +149,8 @@
                                  <thead>
                                  <tr>
                                     <th>Opciones</th>
-                                    <th>Código</th>
                                     <th>Nombre</th>
-                                    <th>Categoría</th>
+                                    <th>Area</th>
                                     <th>Stock</th>
                                     <th>Estado</th>
                                     </tr>
@@ -162,7 +162,6 @@
                                           <i class="icon-check"></i>
                                         </button>
                                     </td>
-                                    <td v-text="articulo.codigo"></td>
                                     <td v-text="articulo.nombre"></td>
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.stock"></td>
@@ -485,14 +484,39 @@
 
                 me.arrayDetalle.map(function(x){
                     if(x.cantidad>x.stock){
-                        art=x.articulo +" Stock insuficiente";
+                        swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Stock Insuficiente!',
+                        });
                         me.errorMostrarMsjVenta.push(art);
                     }
                 });
 
-                if (me.idcategoria==0) me.errorMostrarMsjVenta.push("Seleccione una Area");
-                if (!me.serie_comprobante) me.errorMostrarMsjVenta.push("Ingrese el Nombre de la Persona");
-                if (me.arrayDetalle.length<=0) me.errorMostrarMsjVenta.push("Ingrese detalles");
+                if (me.idcategoria==0){
+                     swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Seleccione Una Area!',
+                        });
+                }else{
+                    if (!me.serie_comprobante){ 
+                    swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Seleccione Una Nombre Solicitante!',
+                        });
+                        }else{
+                             if (me.arrayDetalle.length<=0) 
+                    swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Ingrese los Productos a Despachar!',
+                        });
+                        }
+                   
+                } 
+                if (me.arrayDetalle.length<=0) me.errorMostrarMsjVenta.push("");
 
                 if (me.errorMostrarMsjVenta.length) me.errorVenta = 1;
 
@@ -519,7 +543,7 @@
             abrirModal(){
                 this.arrayArticulo=[];
                 this.modal = 1;
-                this.tituloModal = 'Seleccione los articulos que desee';
+                this.tituloModal = 'Seleccione los Productos';
  
             },
         

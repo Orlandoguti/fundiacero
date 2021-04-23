@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/">Principal</a></li>
             </ol>
             <section class="full-width header-well">
                             <div class="full-width header-well-icon">
@@ -127,7 +127,7 @@
                                         <tr>
                                             <th>Producto</th>
                                             <th>Cantidad</th>
-                                            <th>Medidad</th>
+                                            <th>Medida</th>
                                             <th>Detalles</th>
                                         </tr>
                                     </thead>

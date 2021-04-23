@@ -125,7 +125,7 @@
         <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
          </p>
         </div>
-        <div id="center"><b id="orden">DETTALE DE DESPACHO</b></div>
+        <div id="center"><b id="orden">DETALLE DE DESPACHO</b></div>
         <div id="right">
         <div><img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen"></div>
         <div><p id="nuemrop">Nº Despacho-.{{$v->id}}</p></div>
@@ -139,7 +139,7 @@
                             <th>Encargado</th>
                             <th>Area</th>
                             <th>Nombre Solicitante</th>
-                            <th>Fecha de Pedido</th>
+                            <th>Fecha de Despacho</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -160,7 +160,7 @@
                 <table id="facarticulo">
                     <thead>
                         <tr id="fa">
-                            <th>Poducto</th>
+                            <th>Producto</th>
                             <th>Cantidad</th>
                         </tr>
                     </thead>
@@ -190,6 +190,77 @@
         </div>
         </footer>
         <div id="separado"></div>
-
+        @foreach ($venta as $v)
+        <header> 
+        <div id="container">
+        <div id="left">
+        <p id="encabezado">
+        <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
+         </p>
+        </div>
+        <div id="center"><b id="orden">DETALLE DE DESPACHO</b></div>
+        <div id="right">
+        <div><img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen"></div>
+        <div><p id="nuemrop">Nº Despacho-.{{$v->id}}</p></div>
+        </div>           
+        </header>
+        <section>
+            <div>
+            <table id="facarticulo">
+                    <thead>                        
+                        <tr id="fa">
+                            <th>Encargado</th>
+                            <th>Area</th>
+                            <th>Nombre Solicitante</th>
+                            <th>Fecha de Despacho</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        
+                            <td>{{$v->usuario}}</td>
+                            <td>{{$v->nombre}}</td>
+                            <td> {{$v->serie_comprobante}}</td>
+                            <td>{{$v->created_at}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        @endforeach
+        <section>
+            <div>
+                <table id="facarticulo">
+                    <thead>
+                        <tr id="fa">
+                            <th>Producto</th>
+                            <th>Cantidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($detalles as $det)
+                        <tr>
+                            <td>{{$det->articulo}}</td>                            
+                            <td>{{$det->cantidad}}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <br>
+        <br>
+        <footer id="sello">
+        <div id="gracias">
+            <div id="gracias1">
+                <p><b>..............................</b><br>
+                <b>FIRMA Y SELLO</b></p>
+            </div>
+            <div id="gracias2">
+                <p><b>.................................</b><br>
+                <b>FIRMA Y SELLO</b></p>
+            </div>
+        </div>
+        </footer>
     </body>
 </html>

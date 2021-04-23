@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
+                <li class="breadcrumb-item"><a href="/">Principal</a></li>
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
@@ -27,9 +27,10 @@
                         <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
-                                    <select class="form-control col-md-3" v-model="criterio">
+                                    <select class="form-control col-md-4" v-model="criterio">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
+                                      <option value="encargado">Encargado</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarCategoria(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar </button>
@@ -114,7 +115,7 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de categoría">
+                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Area">
                                         
                                     </div>
                                 </div>
@@ -234,7 +235,20 @@
                 if (this.validarCategoria()){
                     return;
                 }
-                
+                swal({
+                title: 'Esta seguro de Registrar esta Area?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
                 let me = this;
 
                 axios.post('/categoria/registrar',{
@@ -244,15 +258,42 @@
                 }).then(function (response) {
                     me.cerrarModal();
                     me.listarCategoria(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                swal(
+                        'Registrado!',
+                        'La Area ha sido registro con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
             },
             actualizarCategoria(){
                if (this.validarCategoria()){
                     return;
                 }
-                
+                swal({
+                title: 'Esta seguro de Actualizar esta Area?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
                 let me = this;
 
                 axios.put('/categoria/actualizar',{
@@ -263,13 +304,27 @@
                 }).then(function (response) {
                     me.cerrarModal();
                     me.listarCategoria(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
+              swal(
+                        'Acutualizado!',
+                        'La Area ha sido actualizada con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
             },
             desactivarCategoria(id){
                swal({
-                title: 'Esta seguro de desactivar esta categoría?',
+                title: 'Esta seguro de desactivar esta Area?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -370,6 +425,7 @@
                         switch(accion){
                             case 'registrar':
                             {
+                                
                                 this.modal = 1;
                                 this.tituloModal = 'Registrar Area';
                                 this.nombre= '';

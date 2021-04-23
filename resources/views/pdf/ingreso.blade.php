@@ -125,10 +125,10 @@
         <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
          </p>
         </div>
-        <div id="center"><b id="orden">DETTALE DE INGRESO</b></div>
+        <div id="center"><b id="orden">DETALLE DE INGRESO</b></div>
         <div id="right">
         <div><img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen"></div>
-        <div><p id="nuemrop">Nº Despacho-.{{$i->id}}</p></div>
+        <div><p id="nuemrop">Nº Ingreso-.{{$i->id}}</p></div>
         </div>           
         </header>
         <section>
@@ -141,7 +141,7 @@
                             <th>Tipo de Comprobante</th>
                             <th>Serie de Comprobante</th>
                             <th>Detalles</th>
-                            <th>Fecha de Pedido</th>
+                            <th>Fecha de Ingreso</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -164,7 +164,7 @@
                 <table id="facarticulo">
                     <thead>
                         <tr id="fa">
-                            <th>Poducto</th>
+                            <th>Producto</th>
                             <th>Cantidad</th>
                         </tr>
                     </thead>

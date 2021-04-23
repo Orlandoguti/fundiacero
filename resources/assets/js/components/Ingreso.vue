@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
+                <li class="breadcrumb-item"><a href="/">Principal</a></li>
             </ol>
               <section class="full-width header-well">
                             <div class="full-width header-well-icon">
@@ -30,7 +30,7 @@
                             
                             <div class="col-md-5">
                                 <div class="form-group">
-                                    <label for="">Area(*)</label>
+                                    <label for="">Area:</label>
                                         <select class="form-control" v-model="idcategoria">
                                             <option value="0" disabled>Seleccione la Area</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
@@ -39,24 +39,25 @@
                             </div>                            
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Detalles</label>
+                                    <label>Detalles:</label>
                                     <input type="text" class="form-control" v-model="detalle" placeholder="Ingrese Detalles...">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Tipo Comprobante</label>
+                                    <label>Tipo Comprobante:</label>
                                     <select class="form-control" v-model="tipo_comprobante">
                                         <option value="0" disabled>Seleccione Comprobante</option>
-                                        <option value="Boleta">Boleta</option>
                                         <option value="Factura">Factura</option>
+                                        <option value="Recibo">Recibo</option>
                                         <option value="Proforma">Proforma</option>
+                                        <option value="Ninguno">Ninguno</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Serie Comprobante</label>
+                                    <label>Serie Comprobante:</label>
                                     <input type="text" class="form-control" v-model="serie_comprobante" placeholder="Ingrese Numero Comprobante...">
                                 </div>
                             </div>
@@ -85,7 +86,7 @@
                                     <thead>
                                         <tr>
                                             <th>Opciones</th>
-                                            <th>Artículo</th>
+                                            <th>Producto</th>
                                              <th>Stock Producto</th>
                                             <th>Cantidad</th>
                                         </tr>
@@ -109,7 +110,7 @@
                                     <tbody v-else>
                                         <tr>
                                             <td colspan="5">
-                                                No hay articulos agregados
+                                                No hay Productos agregados
                                             </td>
                                         </tr>
                                     </tbody>                                  
@@ -141,13 +142,13 @@
                           <div class="form-group row">
                                 <div class="col-md-13">
                                 <div class="input-group">
-                                       <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control col-md-4">
+                                       <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control col-md-5">
                                             <option value="" disabled>Seleccione la Area</option>
                                             <option value="">Todos</option>
                                              <option value="1">laminacion</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
-                                    <select class="form-control col-md-3" v-model="criterioA">
+                                    <select class="form-control col-md-4" v-model="criterioA">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                       <option value="codigo">Codigo</option>
@@ -162,9 +163,8 @@
                                  <thead>
                                  <tr>
                                     <th>Opciones</th>
-                                    <th>Código</th>
                                     <th>Nombre</th>
-                                    <th>Categoría</th>
+                                    <th>Area</th>
                                     <th>Stock</th>
                                     <th>Estado</th>
                                     </tr>
@@ -176,7 +176,6 @@
                                           <i class="icon-check"></i>
                                         </button>
                                     </td>
-                                    <td v-text="articulo.codigo"></td>
                                     <td v-text="articulo.nombre"></td>
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.stock"></td>
@@ -436,6 +435,8 @@
                 if (this.validarIngreso()){
                     return;
                 }
+                
+
                 swal({
                 title: 'Esta seguro de realizar este ingreso?',
                 type: 'warning',
@@ -448,13 +449,15 @@
                 cancelButtonClass: 'btn btn-danger',
                 buttonsStyling: false,
                 reverseButtons: true
-                }).then((result) => {
-                if (result.value) {
+                }).then((result) => 
+                {if (result.value) {
+                   
                 let me = this;
-
+                if(me.detalle!=0 || me.serie_comprobante!=0){
                 axios.post('/ingreso/registrar',{
+                   
                     'idcategoria': this.idcategoria,
-                    'detalle' : this.detalle,
+                    'detalle':this.detalle,
                     'tipo_comprobante' : this.tipo_comprobante,
                     'serie_comprobante' : this.serie_comprobante,
                     'data' : this.arrayDetalle
@@ -465,36 +468,87 @@
                     me.idcategoria=0;
                     me.detalle='';
                     me.serie_comprobante='';
-                    me.tipo_comprobante='';
+                    me.tipo_comprobante='0';
                     me.idarticulo=0;
                     me.articulo='';
                     me.cantidad=0;
                     me.arrayDetalle=[];
-
+               
                     swal(
                         'Registrado!',
                         'El ingreso ha sido registrado con éxito.',
                         'success'
                         )
-
+                
                 }).catch(function (error) {
                     console.log(error);
                 });
-                   } else if (
-                    // Read more about handling dismissals
-                    result.dismiss === swal.DismissReason.cancel
-                ) {
-                    
-                }
-                })
+                   
+             }else{
+                 if(me.detalle==0 || me.serie_comprobante==0){
+                     axios.post('/ingreso/registrar',{
+                   
+                    'idcategoria': this.idcategoria,
+                    'detalle':this.detalle='Sin detalles',
+                    'tipo_comprobante' : this.tipo_comprobante,
+                    'serie_comprobante' : this.serie_comprobante ='Sin Comprobante',
+                    'data' : this.arrayDetalle
+
+                }).then(function (response) {
+                    me.listado=1;
+                    me.listarIngreso(1,'','serie_comprobante');
+                    me.idcategoria=0;
+                    me.detalle='';
+                    me.serie_comprobante='';
+                    me.tipo_comprobante='0';
+                    me.idarticulo=0;
+                    me.articulo='';
+                    me.cantidad=0;
+                    me.arrayDetalle=[];
+               
+                    swal(
+                        'Registrado!',
+                        'El ingreso ha sido registrado con éxito.',
+                        'success'
+                        )
+                
+                }).catch(function (error) {
+                    console.log(error);
+                });
+                   
+                   }
+                    }
+                   } 
+                   else if (result.dismiss === swal.DismissReason.cancel){}   
+            })
             },
             validarIngreso(){
                 this.errorIngreso=0;
                 this.errorMostrarMsjIngreso =[];
 
-                if (this.idcategoria==0) this.errorMostrarMsjIngreso.push("Seleccione un Categoria");
-                if (this.serie_comprobante==0) this.errorMostrarMsjIngreso.push("Ingrese Serie de Comprobante");
-                if (this.arrayDetalle.length<=0) this.errorMostrarMsjIngreso.push("Ingrese Productos");
+                if (this.idcategoria==0){
+                    swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Seleccione Una Area!',
+                        });
+                }else{
+                    if (this.tipo_comprobante==0){
+                       swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Seleccione Una Tipo de Comprobante!',
+                        });
+                    }else{
+                        if (this.arrayDetalle.length<=0) 
+                        swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Ingrese Productos!',
+                        });
+                    }
+                }
+                if (this.arrayDetalle.length<=0) this.errorMostrarMsjIngreso.push("");
                 if (this.errorMostrarMsjIngreso.length) this.errorIngreso = 1;
 
                 return this.errorIngreso;
@@ -506,7 +560,7 @@
             abrirModal(){
                 this.arrayArticulo=[];
                 this.modal = 1;
-                this.tituloModal = 'Seleccione los articulos que desee';
+                this.tituloModal = 'Seleccione los Productos';
  
             },
         

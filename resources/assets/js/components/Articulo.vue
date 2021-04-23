@@ -2,7 +2,7 @@
           <section class="responsive">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/">Principal</a></li>
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
@@ -573,7 +573,20 @@
                 if (this.validarArticulo()){
                     return;
                 }
-                
+                swal({
+                title: 'Esta seguro de Registrar este Producto?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
                 let me = this;
                 let formData = new FormData();
                 formData.append('idcategoria', this.idcategoria);
@@ -591,15 +604,42 @@
                 axios.post('/articulo/registrar',formData).then(function (response) {
                     me.cerrarModal();
                     me.listarArticulo(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                 swal(
+                        'Registrado!',
+                        'El Producto se ha sido registrado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
             },
-
             actualizarArticulo(){
                if (this.validarArticulo()){
                     return;
                 }
+                swal({
+                title: 'Esta seguro de Actualizar este Producto?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
                 let me = this;
                 let formData = new FormData();
                 formData.append('id', this.articulo_id);
@@ -618,9 +658,23 @@
                 axios.post('/articulo/actualizar',formData).then(function (response) {
                     me.cerrarModal();
                     me.listarArticulo(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
+             swal(
+                        'Actualizado!',
+                        'El Producto se ha sido actualizado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
             },
             desactivarArticulo(id){
                swal({
@@ -705,12 +759,11 @@
                 this.errorMostrarMsjArticulo =[];
 
                 if (this.idcategoria==0) this.errorMostrarMsjArticulo.push("Seleccione una Area.");
-                if (this.idunidad==0) this.errorMostrarMsjArticulo.push("Seleccione una unidad.");
-                if (this.descripcion==0) this.errorMostrarMsjArticulo.push("Añada una descripcion .");
-                if (this.idestado==0) this.errorMostrarMsjArticulo.push("Seleccione un estado.");
-                if (!this.nombre){ alert('No has escrito nada en el usuario');
-                    return; 
-                };
+                if (this.idunidad==0) this.errorMostrarMsjArticulo.push("Seleccione una Unidad.");
+                if (this.codigo==0) this.errorMostrarMsjArticulo.push("Añada un Codigo de Producto .");
+                if (this.descripcion==0) this.errorMostrarMsjArticulo.push("Añada una Descripcion .");
+                if (this.idestado==0) this.errorMostrarMsjArticulo.push("Seleccione un Estado.");
+                if (this.nombre==0)this.errorMostrarMsjArticulo.push('No has escrito nada en el Nombre de Producto');
                 if (!this.stock) this.errorMostrarMsjArticulo.push("El stock del artículo debe ser un número y no puede estar vacío.");
 
                 if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
