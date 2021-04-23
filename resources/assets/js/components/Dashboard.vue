@@ -30,7 +30,7 @@
                     <div class="col-md-6">
                         <div class="card card-chart">
                             <div class="card-header">
-                                <h4>Venta medicamento</h4>
+                                <h4>Despachos</h4>
                             </div>
                             <div class="card-content">
                                 <div class="ct-chart">
@@ -39,7 +39,7 @@
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <p>Ventas de los últimos meses.</p>
+                                <p>Despachos de los últimos meses.</p>
                             </div>
                         </div>
                     </div>
