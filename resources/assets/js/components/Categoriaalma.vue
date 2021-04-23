@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
+                <li class="breadcrumb-item"><a href="/">Principal</a></li>
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->
@@ -250,7 +250,7 @@
             },
             desactivarCategoria(id){
                swal({
-                title: 'Esta seguro de desactivar esta categoría?',
+                title: 'Esta seguro de desactivar esta Area?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -289,7 +289,7 @@
             },
             activarCategoria(id){
                swal({
-                title: 'Esta seguro de activar esta categoría?',
+                title: 'Esta seguro de activar esta Area?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -330,7 +330,7 @@
                 this.errorCategoria=0;
                 this.errorMostrarMsjCategoria =[];
 
-                if (!this.nombre) this.errorMostrarMsjCategoria.push("El nombre de la categoría no puede estar vacío.");
+                if (!this.nombre) this.errorMostrarMsjCategoria.push("El nombre de la area no puede estar vacío.");
                 if (!this.descripcion) this.errorMostrarMsjCategoria.push("La descripcion no puede estar vacío.");
                  if (!this.encargado) this.errorMostrarMsjCategoria.push("El encargado no puede estar vacío.");
                 if (this.errorMostrarMsjCategoria.length) this.errorCategoria = 1;
