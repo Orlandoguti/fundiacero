@@ -12,12 +12,11 @@ class DashboardController extends Controller
         $anio=date('Y');
 
         $detalle_ingresos=DB::table('detalle_ingresos as di')
-        ->select(DB::raw('(di.idingreso) as idingreso'),
+        ->select(DB::raw('SUM(di.idingreso) as idingreso'),
         DB::raw('SUM(di.cantidad) as totalc'),
-        DB::raw('(i.created_at) as dia'),
-        DB::raw('SUM(i.estado) as total'))
-        ->whereYear('i.fecha_hora',$anio)
-        ->groupBy(DB::raw('MONTH(i.fecha_hora)'),DB::raw('YEAR(i.fecha_hora)'),DB::raw('(i.created_at)'),DB::raw('(i.id)'))
+        DB::raw('(di.fecha_hora) as fecha'))
+        ->whereYear('di.fecha_hora',$anio)
+        ->groupBy(DB::raw('(di.fecha_hora)'),DB::raw('(di.cantidad)'),DB::raw('(di.idingreso)'),DB::raw('(di.id)'))
         ->get();
 
        
@@ -39,7 +38,7 @@ class DashboardController extends Controller
         ->groupBy(DB::raw('MONTH(v.fecha_hora)'),DB::raw('YEAR(v.fecha_hora)'))
         ->get();
  
-        return ['ingresos'=>$ingresos,'ventas'=>$ventas,'anio'=>$anio];      
+        return ['detalle_ingresos'=>$detalle_ingresos,'ingresos'=>$ingresos,'ventas'=>$ventas,'anio'=>$anio];      
  
     }
 }

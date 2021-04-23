@@ -89,6 +89,7 @@
                                             <th>Producto</th>
                                              <th>Stock Producto</th>
                                             <th>Cantidad</th>
+                                            <th>Unidad de Medida</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayDetalle.length">
@@ -104,6 +105,8 @@
                                             </td>
                                             <td>
                                                 <input v-model="detalle.cantidad" type="number" value="2" class="form-control">
+                                            </td>
+                                            <td v-text="detalle.nombre_unidad">
                                             </td>
                                         </tr>
                                     </tbody>  
@@ -414,7 +417,8 @@
                     idarticulo: data['id'],
                     articulo: data['nombre'],
                     cantidad: 1,
-                    stock: data['stock']
+                    stock: data['stock'],
+                    nombre_unidad: data['nombre_unidad']
                     });
                     }
             },
@@ -537,7 +541,7 @@
                        swal({
                        type: 'error',
                        title: 'Error...',
-                       text: 'Seleccione Una Tipo de Comprobante!',
+                       text: 'Seleccione Un Tipo de Comprobante!',
                         });
                     }else{
                         if (this.arrayDetalle.length<=0) 
@@ -548,6 +552,8 @@
                         });
                     }
                 }
+                if (this.tipo_comprobante==0) this.errorMostrarMsjIngreso.push("");
+                if (this.idcategoria==0) this.errorMostrarMsjIngreso.push("");
                 if (this.arrayDetalle.length<=0) this.errorMostrarMsjIngreso.push("");
                 if (this.errorMostrarMsjIngreso.length) this.errorIngreso = 1;
 

@@ -266,7 +266,7 @@
 						</li>
 					
 						<li class="btn-exit" id="btn-exit" tabindex="0">
-							<i onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="zmdi zmdi-power" ></i>
+							<i class="zmdi zmdi-power" ></i>
 							<div class="mdl-tooltip" for="btn-exit" data-upgraded=",MaterialTooltip">LogOut</div>
 							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         {{ csrf_field() }}

@@ -140,7 +140,7 @@
                                 <table class="table table-bordered table-striped table-sm">
                                     <thead>
                                         <tr>
-                                            <th>Artículo</th>
+                                            <th>Producto</th>
                                             <th>Cantidad</th>
                                         </tr>
                                     </thead>
@@ -268,7 +268,7 @@
         },
         methods : {
              pdfIngreso(id){
-                window.open('http://localhost:8000/ingreso/pdf/'+ id ,'_blank');
+                window.open('ingreso/pdf/'+ id ,'_blank');
             },
             listarIngreso (page,buscar,criterio){
                 let me=this;

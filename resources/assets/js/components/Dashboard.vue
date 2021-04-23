@@ -51,8 +51,7 @@
         <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainer' :title='title' :primaryXAxis='primaryXAxis' :primaryYAxis='primaryYAxis'
             :tooltip='tooltip' :chartArea='chartArea' :width='width'>
             <e-series-collection>
-                <e-series :dataSource='seriesData' type='Line' xName='month' yName='sales' name='Data' width=2 :marker='marker'> </e-series>
-                <e-series :dataSource='seriesData1' type='Line' xName='x' yName='y' name='England' width=2 :marker='marker'> </e-series>
+                <e-series :dataSource='detalle_ingresos' type='Line' xName='fecha' yName='totalc' name='Otro' width=2 :marker='marker'> </e-series>
                 <e-series :dataSource='ingresos' type='Line' xName='dia' yName='total' name='Ingresos' width=2 :marker='marker'> </e-series>
             </e-series-collection>
         </ejs-chart>
@@ -81,17 +80,9 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
         data (){
             return {
                 theme: theme,
-                varIngreso:null,
-                charIngreso:null,
+                detalle_ingresos:[],
                 ingresos:[],
-                varTotalIngreso:[],
-                varMesIngreso:[], 
-                
-                varVenta:null,
-                charVenta:null,
                 ventas:[],
-                varTotalVenta:[],
-                varMesVenta:[],
 
         seriesData: [
         { month: 'Jan', sales: 35 }, { month: 'Feb', sales: 28 },
@@ -112,7 +103,7 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       ],
       //Initializing Primary X Axis
       primaryXAxis: {
-        valueType: 'Category',
+        valueType: 'DateTime',
         edgeLabelPlacement: "Shift",
         majorGridLines: { width: 0 }
       },
@@ -149,6 +140,19 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
   },
 
         methods : {
+            getDetalleIngresos(){
+                let me=this;
+                var url= '/dashboard';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.detalle_ingresos = respuesta.detalle_ingresos;
+                    //cargamos los datos del chart
+                    me.loadDIngresos();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
             getIngresos(){
                 let me=this;
                 var url= '/dashboard';
@@ -175,72 +179,11 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
                     console.log(error);
                 });
             },
-            loadIngresos(){
-                let me=this;
-                me.ingresos.map(function(x){
-                    me.varMesIngreso.push(x.dia);
-                    me.varTotalIngreso.push(x.total);
-                });
-                me.varIngreso=document.getElementById('ingresos').getContext('2d');
-
-                me.charIngreso = new Chart(me.varIngreso, {
-                    type: 'line',
-                    data: {
-                        labels: me.varMesIngreso,
-                        datasets: [{
-                            label: 'Ingresos',
-                            data: me.varTotalIngreso,
-                            backgroundColor: '#ffc107',
-                            borderColor: 'rgba(255, 99, 132, 0.2)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true
-                                }
-                            }]
-                        }
-                    }
-                });
-            },
-            loadVentas(){
-                let me=this;
-                me.ventas.map(function(x){
-                    me.varMesVenta.push(x.mes);
-                    me.varTotalVenta.push(x.total);
-                });
-                me.varVenta=document.getElementById('ventas').getContext('2d');
-
-                me.charVenta = new Chart(me.varVenta, {
-                    type: 'bar',
-                    data: {
-                        labels: me.varMesVenta,
-                        datasets: [{
-                            label: 'Ventas',
-                            data: me.varTotalVenta,
-                            backgroundColor: '#007bff',
-                            borderColor: 'rgba(54, 162, 235, 0.2)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero:true
-                                }
-                            }]
-                        }
-                    }
-                });
-            }
         },
         mounted() {
             this.getIngresos();
             this.getVentas();
+            this.getDetalleIngresos();
         }
     }
 </script>

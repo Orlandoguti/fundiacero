@@ -332,6 +332,8 @@
                         });
                     }
                 }
+                if (me.solicitante==0) me.errorMostrarMsjPedido.push("");
+                if (me.idcategoria==0) me.errorMostrarMsjPedido.push("");
                 if (me.arrayDetalle.length<=0) me.errorMostrarMsjPedido.push("");
 
                 if (me.errorMostrarMsjPedido.length) me.errorPedido = 1;

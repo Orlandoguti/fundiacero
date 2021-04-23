@@ -28,7 +28,6 @@ $(document).ready(function(){
     });
     /*Salir del sistema*/
     $('.btn-exit').on('click', function(){
-		
     	swal({
 		  	title: 'Seguro que quiere Salir ?',
 		  	type: 'warning',
@@ -38,7 +37,7 @@ $(document).ready(function(){
 		},
 		function(isConfirm) {
 		  	if (isConfirm) {
-		    	window.location='logout-form'; 
+				window.location.href = 'logout'
 		  	}
 		});
     });

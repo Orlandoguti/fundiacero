@@ -72,6 +72,7 @@
                                             <th>Cantidad</th>
                                             <th>Stock Producto</th>
                                             <th>Nuevo Stock</th>
+                                            <th>Unidad de Medida</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayDetalle.length">
@@ -90,6 +91,8 @@
                                              <td v-text="detalle.stock">
                                             </td>
                                              <td v-text="detalle.stock-detalle.cantidad">
+                                            </td>
+                                            <td v-text="detalle.nombre_unidad">
                                             </td>
                                         </tr>
                                     </tbody>  
@@ -151,7 +154,7 @@
                                     <th>Opciones</th>
                                     <th>Nombre</th>
                                     <th>Area</th>
-                                    <th>Stock</th>
+                                    <th>Stock</th>                                
                                     <th>Estado</th>
                                     </tr>
                                    </thead>
@@ -378,13 +381,15 @@
                             idarticulo: me.idarticulo,
                             articulo: me.articulo,
                             cantidad: me.cantidad,
-                            stock: me.stock
+                            stock: me.stock,
+                            nombre_unidad: me.nombre_unidad
                             });
                             me.codigo='';
                             me.idarticulo=0;
                             me.articulo='';
                             me.cantidad=0;
-                            me.stock=0
+                            me.stock=0,
+                            nombre_unidad=''
                         }
                     }
                    
@@ -404,7 +409,8 @@
                     idarticulo: data['id'],
                     articulo: data['nombre'],
                     cantidad: 1,
-                    stock:data['stock']
+                    stock:data['stock'],
+                    nombre_unidad:data['nombre_unidad']
                     });
                     }
             },
@@ -504,7 +510,7 @@
                     swal({
                        type: 'error',
                        title: 'Error...',
-                       text: 'Seleccione Una Nombre Solicitante!',
+                       text: 'Seleccione Un Nombre Solicitante!',
                         });
                         }else{
                              if (me.arrayDetalle.length<=0) 
@@ -516,6 +522,8 @@
                         }
                    
                 } 
+                 if (me.idcategoria==0) me.errorMostrarMsjVenta.push("");
+                if (me.serie_comprobante==0) me.errorMostrarMsjVenta.push("");
                 if (me.arrayDetalle.length<=0) me.errorMostrarMsjVenta.push("");
 
                 if (me.errorMostrarMsjVenta.length) me.errorVenta = 1;

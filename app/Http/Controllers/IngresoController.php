@@ -98,7 +98,7 @@ class IngresoController extends Controller
         $id = $request->id;
          
         $detalles = DetalleIngreso::join('articulos','detalle_ingresos.idarticulo','=','articulos.id')
-        ->select('detalle_ingresos.cantidad','articulos.nombre as articulo')
+        ->select('detalle_ingresos.cantidad','articulos.nombre as articulo','articulos.idunidad as nombre_unidad')
         ->where('detalle_ingresos.idingreso','=',$id)
         ->orderBy('detalle_ingresos.id', 'desc')->get();
 

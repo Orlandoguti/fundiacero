@@ -11,7 +11,7 @@ class DetalleIngreso extends Model
         'idingreso', 
         'idarticulo',
         'cantidad',
-        'created_at'
+        'fecha_hora'
     ];
     public $timestamps = false;
  

@@ -126,7 +126,7 @@
                                 <table class="table table-bordered table-striped table-sm">
                                     <thead>
                                         <tr>
-                                            <th>Artículo</th>
+                                            <th>Producto</th>
                                             <th>Cantidad</th>
                                         </tr>
                                     </thead>
@@ -258,7 +258,7 @@
                 });
             },
             pdfVenta(id){
-                window.open('http://localhost:8000/venta/pdf/'+ id ,'_blank');
+                window.open('venta/pdf/'+ id ,'_blank');
             },
             cambiarPagina(page,buscar,criterio){
                 let me = this;
