@@ -450,9 +450,10 @@ html, body{
 	height: 45px;
 	line-height: 45px;
 	color: #fff;
+	background-image: url("public/imagenes/FFSAVERTICAL.png");
 	width: 100%;
 	font-size: 25px;
-	background-color: var(--acent-color);
+	background-color: black;
 }
 .navLateral-body-logo .zmdi-close{
 	width: 0;

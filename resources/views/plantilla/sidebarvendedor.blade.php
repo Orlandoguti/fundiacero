@@ -269,7 +269,7 @@
 							<i class="zmdi zmdi-power" ></i>
 							<div class="mdl-tooltip" for="btn-exit" data-upgraded=",MaterialTooltip">LogOut</div>
 						</li>
-						<li class="text-condensedLight noLink"><small>{{Auth::user()->usuario}}</small></li>
+						<li class="text-condensedLight noLink"><small>{{Auth::user()->nombreuser}}</small></li>
 						<li class="noLink">
 							<figure>
 							<img src="{{asset('imagenes/usuarios/'.Auth::user()->imagen)}}" alt="Avatar" class="img-responsive mCS_img_loaded">
@@ -299,8 +299,8 @@
 				</div>
 				<figcaption>
 					<span>
-					Personal<br>
-						<small>{{Auth::user()->usuario}}</small>
+					{{Auth::user()->rolnombre}}<br>
+						<small>{{Auth::user()->nombreuser}}</small>
 					</span>
 				</figcaption>
 			</figure>
