@@ -11,7 +11,7 @@
             <li  class="libar"><a @click="mostrarProductos()">PRODUCTOS</a></li>
         </ul>   
           
-    <template v-if="listado==7">
+    <template v-if="listado==1">
           <div class="card">
                 <div class="card-header">
                             <div class="col-md-4">
@@ -31,11 +31,11 @@
       <ejs-chart
         style="display:block"
         :theme="theme"
-        :primaryXAxis='primaryXAxisbar' :primaryYAxis='primaryYAxisbar'
+        :primaryXAxis='primaryXAxisbard' :primaryYAxis='primaryYAxisbard'
         ref="chart"
         align="center"
         id="chartcontainerR"
-        :title="titlebarrai"
+        :title="titlebarrade"
         :chartArea="chartArea"
         :width="width"
         :tooltip="tooltip"
@@ -45,10 +45,10 @@
       >
         <e-series-collection>
           <e-series
-            :dataSource="detalle_ingresos"
+            :dataSource="mas_ingresados"
             type="Column"
-            xName="fecha"
-            yName="totalc"
+            xName="nombre"
+            yName="TotalIngresos"
             name="Ingresos"
             width="2"
             :marker="marker"
@@ -69,7 +69,7 @@
         ref="chart"
         align="center"
         id="chartcontainerRdespacho"
-        :title="titlebarrav"
+        :title="titlebarradep"
         :chartArea="chartArea"
         :width="width"
         :tooltip="tooltip"
@@ -104,7 +104,7 @@
      </div>
      </div>
      </template>
-     <template v-if="listado==1">
+     <template v-if="listado==7">
               <div class="card">
                 <div class="card-header">
                             <div class="col-md-4">
@@ -158,7 +158,7 @@
       <ejs-chart
         style="display:block"
         :theme="theme"
-        :primaryXAxis='primaryXAxisbard' :primaryYAxis='primaryYAxisbard'
+        :primaryXAxis='primaryXAxisbarde' :primaryYAxis='primaryYAxisbarde'
         ref="chart"
         align="center"
         id="chartcontainerRdespacho"
@@ -182,10 +182,10 @@
             :cornerRadius="cornerRadius"
           ></e-series>
            <e-series
-            :dataSource="mas_vendidos"
+            :dataSource="detalle_ventas"
             type="Column"
-            xName="nombre"
-            yName="Productos Mas Despachados"
+            xName="fecha"
+            yName="totalv"
             name="Despachos"
             width="2"
             :marker="marker"
@@ -416,13 +416,15 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
         minorTickLines: { width: 0 }
       },
 
-         primaryXAxisbard: {
-         valueType : "Category" ,
+         primaryXAxisbarde: {
+         valueType : "DateTime" ,
+         labelFormat : "d/MM/y" ,
+         intervalType : "Days" ,
          edgeLabelPlacement : "Shift" ,
          majorGridLines : { width : 0 }},
        // Inicializando el eje Y primario 
       //Initializing Primary Y Axis
-      primaryYAxisbard: {
+      primaryYAxisbarde: {
         labelFormat: "{value}",
         rangePadding: "None",
         minimum: 0,
@@ -433,7 +435,24 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
         minorTickLines: { width: 0 }
       },
 
-           primaryXAxisbarp: {
+         primaryXAxisbard: {
+         valueType : "Category" ,
+         edgeLabelPlacement : "Shift" ,
+         majorGridLines : { width : 0 }},
+       // Inicializando el eje Y primario 
+      //Initializing Primary Y Axis
+      primaryYAxisbard: {
+        labelFormat: "{value}",
+        rangePadding: "None",
+        minimum: 0,
+        maximum: 20,
+        interval: 2,
+        lineStyle: { width: 0 },
+        majorTickLines: { width: 0 },
+        minorTickLines: { width: 0 }
+      },
+
+        primaryXAxisbarp: {
          valueType : "DateTime" ,
          labelFormat : "d/MM/y" ,
          intervalType : "Days" ,
@@ -452,14 +471,6 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
         minorTickLines: { width: 0 }
       },
 
-      //Initializing Primary X Axis
-      primaryXAxis: {
-         valueType : "DateTime" ,
-         labelFormat : "d/MM/y" ,
-         intervalType : "Days" ,
-         edgeLabelPlacement : "Shift" ,
-         majorGridLines : { width : 0 }},
-       // Inicializando el eje Y primario 
       //Initializing Primary Y Axis
       primaryYAxispe: {
         labelFormat: "{value}",
@@ -479,17 +490,7 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
          majorGridLines : { width : 0 }},
        // Inicializando el eje Y primario 
       //Initializing Primary Y Axis
-      primaryYAxis: {
-        labelFormat: "{value}",
-        rangePadding: "None",
-        minimum: 0,
-        maximum: 10,
-        interval: 2,
-        lineStyle: { width: 0 },
-        majorTickLines: { width: 0 },
-        minorTickLines: { width: 0 }
-      },
-
+     
         primaryXAxispro: {
             valueType: 'Category',
             majorGridLines: { width: 0 },
@@ -537,7 +538,9 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
        titlebarrai: "Grafico de Barras Ingresos por dia",
         titlebarrav: "Grafico de Barras Despachos por dia",
         titlebarrap: "Grafico de Barras Pedidos por dia",
-        titlebarrap: "Grafico de Barras Pedidos por dia"
+        titlebarrap: "Grafico de Barras Pedidos por dia",
+         titlebarrade: "Grafico de Productos mas Ingresados",
+        titlebarradep: "Grafico de Productos mas Despachados"
     };
   },
   

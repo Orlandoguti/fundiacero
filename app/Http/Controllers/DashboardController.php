@@ -19,9 +19,23 @@ class DashboardController extends Controller
         ->groupBy(DB::raw('(di.fecha_hora)'),DB::raw('(di.cantidad)'),DB::raw('(di.idingreso)'),DB::raw('(di.id)'))
         ->get();
 
+        $detalle_ventas=DB::table('detalle_ventas as dv')
+        ->select(DB::raw('(dv.idventa) as idventa'),
+        DB::raw('SUM(dv.cantidad) as totalv'),
+        DB::raw('(dv.fecha_hora) as fecha'))
+        ->whereYear('dv.fecha_hora',$anio)
+        ->groupBy(DB::raw('(dv.fecha_hora)'),DB::raw('(dv.cantidad)'),DB::raw('(dv.idventa)'),DB::raw('(dv.id)'))
+        ->get();
+
        
 
-      
+        $detalle_pedidos=DB::table('detalle_pedidos as dp')
+        ->select(DB::raw('(dp.idpedido) as idpedido'),
+        DB::raw('(dp.producto) as pro'),
+        DB::raw('(dp.fecha_hora) as fecha'),
+        DB::raw('(dp.cantidad) as totalp'))
+        ->groupBy(DB::raw('(dp.fecha_hora)'),DB::raw('(dp.cantidad)'),DB::raw('(dp.idpedido)'),DB::raw('(dp.id)'),DB::raw('(dp.producto)'))
+        ->get();
 
         $articulos=DB::table('articulos as a')
     		->join('categorias as c','a.idcategoria','=','c.id')
@@ -29,7 +43,7 @@ class DashboardController extends Controller
             ->groupBy('a.idcategoria','a.nombre','a.stock','c.nombre')
             ->get();
 
-            $mas_ingresados = DB::select('SELECT i.idarticulo, a.nombre, SUM(di.cantidad) AS TotalIngresos 
+            $mas_ingresados = DB::select('SELECT di.idarticulo, a.nombre, SUM(di.cantidad) AS TotalIngresos 
                     FROM detalle_ingresos as di 
                     JOIN articulos as a 
                     WHERE a.id = di.idarticulo 
@@ -48,7 +62,7 @@ class DashboardController extends Controller
 
      
  
-        return ['mas_ingresados' => $mas_ingresados,'mas_vendidos' => $mas_vendidos,'detalle_ingresos'=>$detalle_ingresos,'detalle_pedidos'=>$detalle_pedidos,'articulos'=>$articulos,'anio'=>$anio];      
+        return ['mas_ingresados' => $mas_ingresados,'mas_vendidos' => $mas_vendidos,'detalle_ingresos'=>$detalle_ingresos,'detalle_ventas'=>$detalle_ventas,'detalle_pedidos'=>$detalle_pedidos,'articulos'=>$articulos,'anio'=>$anio];      
  
     }
 }
