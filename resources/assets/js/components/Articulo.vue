@@ -757,14 +757,76 @@
             validarArticulo(){
                 this.errorArticulo=0;
                 this.errorMostrarMsjArticulo =[];
-
-                if (this.idcategoria==0) this.errorMostrarMsjArticulo.push("Seleccione una Area.");
-                if (this.idunidad==0) this.errorMostrarMsjArticulo.push("Seleccione una Unidad.");
-                if (this.codigo==0) this.errorMostrarMsjArticulo.push("Añada un Codigo de Producto .");
-                if (this.descripcion==0) this.errorMostrarMsjArticulo.push("Añada una Descripcion .");
-                if (this.idestado==0) this.errorMostrarMsjArticulo.push("Seleccione un Estado.");
-                if (this.nombre==0)this.errorMostrarMsjArticulo.push('No has escrito nada en el Nombre de Producto');
-                if (!this.stock) this.errorMostrarMsjArticulo.push("El stock del artículo debe ser un número y no puede estar vacío.");
+                 swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Seleccione Una Area!',
+                        })
+                if (this.idcategoria==0) {
+                     swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Seleccione Una Area!',
+                        })
+                }else{
+                   if (this.idunidad==0){
+                        swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: 'Seleccione Una Unidad de Medida!',
+                        })
+                   }else{
+                       if (this.codigo==0){
+                              swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: '!Añada Un Codigo de Producto!',
+                        })
+                       }else{
+                           if (this.descripcion==0) {
+                                 swal({
+                       type: 'error',
+                       title: 'Error...',
+                       text: '!Añada Una descripcion de Producto!',
+                        })
+                           }else{
+                                if (this.idestado==0) {
+                                           swal({
+                                    type: 'error',
+                                    title: 'Error...',
+                                    text: '!Seleccione Un Estado de Producto!',
+                                        })  
+                                }else{
+                                    if (this.nombre==0) {
+                                                swal({
+                                    type: 'error',
+                                    title: 'Error...',
+                                    text: '!No has escrito nada en el Nombre de Producto!',
+                                        }) 
+                                    }else{
+                                          if (!this.stock){
+                                                  swal({
+                                    type: 'error',
+                                    title: 'Error...',
+                                    text: '!La Cantidad del producto debe ser un número y no puede estar vacío.!',
+                                        })    
+                                          } 
+                                    }
+                               
+                           }
+                           
+                       } 
+                       
+                   }
+                }
+  }
+                if (this.idcategoria==0) this.errorMostrarMsjArticulo.push("");
+                if (this.idunidad==0) this.errorMostrarMsjArticulo.push("");
+                if (this.codigo==0) this.errorMostrarMsjArticulo.push("");
+                if (this.descripcion==0) this.errorMostrarMsjArticulo.push("");
+                if (this.idestado==0) this.errorMostrarMsjArticulo.push("");
+                if (this.nombre==0)this.errorMostrarMsjArticulo.push('');
+                if (!this.stock) this.errorMostrarMsjArticulo.push("");
 
                 if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
 

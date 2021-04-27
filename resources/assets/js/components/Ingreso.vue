@@ -495,7 +495,7 @@
                     'idcategoria': this.idcategoria,
                     'detalle':this.detalle='Sin detalles',
                     'tipo_comprobante' : this.tipo_comprobante,
-                    'serie_comprobante' : this.serie_comprobante ='Sin Comprobante',
+                    'serie_comprobante' : this.serie_comprobante ='S/N',
                     'data' : this.arrayDetalle
 
                 }).then(function (response) {
