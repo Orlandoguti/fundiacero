@@ -453,7 +453,7 @@ html, body{
 	background-image: url("public/imagenes/FFSAVERTICAL.png");
 	width: 100%;
 	font-size: 25px;
-	background-color: black;
+	background-color: rgb(43 43 44 / 33%);
 }
 .navLateral-body-logo .zmdi-close{
 	width: 0;
