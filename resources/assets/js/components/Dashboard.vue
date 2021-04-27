@@ -227,7 +227,7 @@
      <div class="border">
          <div class="control-section">
     <div align='center'>
-        <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainerdespacho' :title='titlelineav' :primaryXAxis='primaryXAxis' :primaryYAxis='primaryYAxis'
+        <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainer' :title='titlelineav' :primaryXAxis='primaryXAxis' :primaryYAxis='primaryYAxis'
             :tooltip='tooltip' :chartArea='chartArea' :width='width'>
             <e-series-collection>
                  <e-series :dataSource='detalle_ventas' type='Line' xName='' yName='' name='' width=2 :marker='marker'> </e-series>  
@@ -308,14 +308,14 @@
         <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainer' :title='titlelineap' :primaryXAxis='primaryXAxispe' :primaryYAxis='primaryYAxispe'
             :tooltip='tooltip' :chartArea='chartArea' :width='width'>
             <e-series-collection>
-                <e-series :dataSource='productos' type='Line' xName='fecha' yName='totalp' name='Pedidos' width=2 :marker='marker'> </e-series>
+                <e-series :dataSource='detalle_pedidos' type='Line' xName='fecha' yName='totalp' name='Pedidos' width=2 :marker='marker'> </e-series>
             </e-series-collection>
         </ejs-chart>
     </div>
      </div>
      </div>
         </template>
-            <template v-if="listado==6">
+            <template v-if="listado==5">
                 <div class="card">
                     <div class="card-header">
                                 <div class="col-md-4">
@@ -340,7 +340,7 @@
 
                 </div>
         </template>
-        <template v-if="listado==5">
+        <template v-if="listado==6">
                      <div class="card">
                         <div class="card-header">
                                 <div class="col-md-4">
@@ -358,8 +358,8 @@
                             <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainer' :title='title' :primaryXAxis='primaryXAxispro' :primaryYAxis='primaryYAxispro'
                                 :chartArea='chartArea' :width='width'  :tooltip='tooltip' :legendSettings='legendSettings'>
                                 <e-series-collection>
-                                    <e-series :dataSource='productos' type='Column' xName='stock' yName='nombre' name='Germany'> </e-series>
-                                    <e-series :dataSource='productos' type='Line' xName='stock' yName='nombre' name='Japan' width=2 :marker='marker'> </e-series>
+                                    <e-series :dataSource='productos_area' type='Column' xName='nombre' yName='totalproductos' name='Area'> </e-series>
+                                    <e-series :dataSource='productos_area' type='Line' xName='nombre' yName='totalproductos' name='Area' width=2 :marker='marker'> </e-series>
                                 </e-series-collection>
                             </ejs-chart>
                         </div>
@@ -390,6 +390,7 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
                 theme: theme,
                 detalle_ingresos:[],
                 articulos:[],
+                productos_area:[],
                 detalle_pedidos:[],
                 detalle_ventas:[],
             replace:'',
@@ -408,9 +409,6 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       primaryYAxisbar: {
         labelFormat: "{value}",
         rangePadding: "None",
-        minimum: 0,
-        maximum: 10,
-        interval: 2,
         lineStyle: { width: 0 },
         majorTickLines: { width: 0 },
         minorTickLines: { width: 0 }
@@ -427,9 +425,6 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       primaryYAxisbarde: {
         labelFormat: "{value}",
         rangePadding: "None",
-        minimum: 0,
-        maximum: 10,
-        interval: 2,
         lineStyle: { width: 0 },
         majorTickLines: { width: 0 },
         minorTickLines: { width: 0 }
@@ -444,9 +439,6 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       primaryYAxisbard: {
         labelFormat: "{value}",
         rangePadding: "None",
-        minimum: 0,
-        maximum: 20,
-        interval: 2,
         lineStyle: { width: 0 },
         majorTickLines: { width: 0 },
         minorTickLines: { width: 0 }
@@ -463,9 +455,6 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       primaryYAxisbarp: {
         labelFormat: "{value}",
         rangePadding: "None",
-        minimum: 0,
-        maximum: 50,
-        interval: 2,
         lineStyle: { width: 0 },
         majorTickLines: { width: 0 },
         minorTickLines: { width: 0 }
@@ -475,9 +464,6 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       primaryYAxispe: {
         labelFormat: "{value}",
         rangePadding: "None",
-        minimum: 0,
-        maximum: 50,
-        interval: 2,
         lineStyle: { width: 0 },
         majorTickLines: { width: 0 },
         minorTickLines: { width: 0 }
@@ -500,7 +486,6 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       //Initializing Primary Y Axis
         primaryYAxispro:
         {
-            minimum: 0, maximum: 100, interval: 20,
             lineStyle: { width: 0 },
             labelFormat: '{value}'
         },
@@ -600,6 +585,18 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
                     console.log(error);
                 });
             },
+        getProductosArea(){
+                let me=this;
+                var url= '/dashboard';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.productos_area = respuesta.productos_area;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+            },
+            
       
               getDetalleIngresos(){
                 let me=this;
@@ -641,6 +638,7 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
         },
         mounted() {
             this.getMasIngresados();
+            this.getProductosArea();
             this.getMasVendidos();
             this.getDetalleVentas();
             this.getDetalleIngresos();

@@ -43,6 +43,14 @@ class DashboardController extends Controller
             ->groupBy('a.idcategoria','a.nombre','a.stock','c.nombre')
             ->get();
 
+        $productos_area = DB::select('SELECT a.idcategoria, ca.nombre, SUM(a.condicion) AS totalproductos 
+                FROM articulos as a 
+                JOIN categorias as ca 
+                WHERE ca.id = a.idcategoria 
+                GROUP BY a.idcategoria
+                ORDER BY SUM(a.condicion) DESC 
+                LIMIT 0 , 10');
+
             $mas_ingresados = DB::select('SELECT di.idarticulo, a.nombre, SUM(di.cantidad) AS TotalIngresos 
                     FROM detalle_ingresos as di 
                     JOIN articulos as a 
@@ -62,7 +70,7 @@ class DashboardController extends Controller
 
      
  
-        return ['mas_ingresados' => $mas_ingresados,'mas_vendidos' => $mas_vendidos,'detalle_ingresos'=>$detalle_ingresos,'detalle_ventas'=>$detalle_ventas,'detalle_pedidos'=>$detalle_pedidos,'articulos'=>$articulos,'anio'=>$anio];      
+        return ['productos_area' => $productos_area,'mas_ingresados' => $mas_ingresados,'mas_vendidos' => $mas_vendidos,'detalle_ingresos'=>$detalle_ingresos,'detalle_ventas'=>$detalle_ventas,'detalle_pedidos'=>$detalle_pedidos,'articulos'=>$articulos,'anio'=>$anio];      
  
     }
 }

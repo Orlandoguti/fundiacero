@@ -57,7 +57,7 @@
                                         <td v-text="ingreso.nombre"></td>
                                         <td v-text="ingreso.tipo_comprobante"></td>
                                         <td v-text="ingreso.serie_comprobante"></td>
-                                        <td v-text="ingreso.created_at"></td>
+                                        <td v-text="ingreso.fecha_hora"></td>
                                          <td>
                                         <div v-if="ingreso.estado">
                                             <span class="badge badge-success">Registrado</span>

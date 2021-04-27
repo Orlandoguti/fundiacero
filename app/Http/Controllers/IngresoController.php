@@ -22,14 +22,14 @@ class IngresoController extends Controller
         if ($buscar==''){
             $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
             ->join('users','ingresos.idusuario','=','users.id')
-            ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.created_at',
+            ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.fecha_hora',
             'ingresos.estado','categorias.nombre','users.usuario')
             ->orderBy('ingresos.id', 'desc')->paginate(5);
         }
         else{
             $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
             ->join('users','ingresos.idusuario','=','users.id')
-            ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.created_at',
+            ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.fecha_hora',
             'ingresos.estado','categorias.nombre','users.usuario')
             ->where('ingresos.'.$criterio, 'like', '%'. $buscar . '%')->orderBy('ingresos.id', 'desc')->paginate(3);
         }
@@ -56,7 +56,7 @@ class IngresoController extends Controller
         if ($buscar==''){
             $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
             ->join('users','ingresos.idusuario','=','users.id')
-            ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.created_at',
+            ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.fecha_hora',
             'ingresos.estado','categorias.nombre','users.usuario')
             ->orderBy('ingresos.id', 'desc')->paginate(1);
         }
@@ -112,7 +112,7 @@ class IngresoController extends Controller
         $ingreso = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
         ->join('users','ingresos.idusuario','=','users.id')
         ->select('ingresos.id','ingresos.detalle','ingresos.tipo_comprobante','ingresos.serie_comprobante',
-        'ingresos.created_at',
+        'ingresos.fecha_hora',
         'ingresos.estado','categorias.nombre','users.usuario')
         ->where('ingresos.id','=',$id)
         ->orderBy('ingresos.id','desc')->take(1)->get();
@@ -123,7 +123,7 @@ class IngresoController extends Controller
         ->where('detalle_ingresos.idingreso','=',$id)
         ->orderBy('detalle_ingresos.id','desc')->get();
 
-        $numingreso=Ingreso::select('created_at')->where('id',$id)->get();
+        $numingreso=Ingreso::select('fecha_hora')->where('id',$id)->get();
 
         $pdf = \PDF::loadView('pdf.ingreso',['ingreso'=>$ingreso,'detalles'=>$detalles]);
         return $pdf->download('ingreso-'.$numingreso[0]->num_comprobante.'.pdf');
