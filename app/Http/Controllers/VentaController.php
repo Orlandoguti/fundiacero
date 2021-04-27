@@ -131,13 +131,13 @@ class VentaController extends Controller
         try{
             DB::beginTransaction();
  
-            $mytime= Carbon::now('America/Lima');
+            $mytime= Carbon::now('America/La_Paz');
  
             $venta = new Venta();
             $venta->idcategoria = $request->idcategoria;
             $venta->idusuario = \Auth::user()->id;
             $venta->serie_comprobante = $request->serie_comprobante;
-            $venta->fecha_hora = $mytime->toDateString();
+            $venta->fecha_hora = $mytime->toDateTimeString();
             $venta->estado = '1';
             $venta->save();
  
@@ -149,7 +149,8 @@ class VentaController extends Controller
                 $detalle = new DetalleVenta();
                 $detalle->idventa = $venta->id;
                 $detalle->idarticulo = $det['idarticulo'];
-                $detalle->cantidad = $det['cantidad'];       
+                $detalle->cantidad = $det['cantidad'];   
+                $detalle->fecha_hora = $mytime->toDateTimeString();     
                 $detalle->save();
             }          
             $fechaActual= date('Y-m-d H:i:s');

@@ -10,7 +10,8 @@ class DetalleVenta extends Model
     protected $fillable = [
         'idventa', 
         'idarticulo',
-        'cantidad'
+        'cantidad',
+        'fecha_hora'
     ];
     public $timestamps = false;
 }

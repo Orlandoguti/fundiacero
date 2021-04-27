@@ -29,18 +29,26 @@ $(document).ready(function(){
     /*Salir del sistema*/
     $('.btn-exit').on('click', function(){
     	swal({
-		  	title: 'Seguro que quiere Salir ?',
+		  	title: 'Seguro que quiere Salir del Sistema ?',
 		  	type: 'warning',
 		  	showCancelButton: true,
 		  	confirmButtonText: 'Salir',
 		  	closeOnConfirm: false
-		},
-		function(isConfirm) {
-		  	if (isConfirm) {
-				window.location.href = 'logout'
-		  	}
-		});
-    });
+		}).then((result) => {
+			if (result.value) {
+				
+		    window.location.href="/logout";
+			
+			swal(
+				'Sesion Cerrada!',
+				'Gracias Por Ingresar a Fundiacero'
+				)
+			}
+			
+		})
+	}
+	);
+
     /*Mostrar y ocultar submenus*/
     $('.btn-subMenu').on('click', function(){
     	var subMenu=$(this).next('ul');
@@ -70,3 +78,4 @@ $(document).ready(function(){
             });
         });
 })(jQuery);
+

@@ -110,14 +110,14 @@ class PedidoController extends Controller
         try{
             DB::beginTransaction();
  
-            $mytime= Carbon::now('America/Lima');
+            $mytime= Carbon::now('America/La_Paz');
  
             $pedido = new Pedido();
             $pedido->idcategoria = $request->idcategoria;
             $pedido->idusuario = \Auth::user()->id;
             $pedido->solicitante = $request->solicitante;
             $pedido->serie_comprobante = $request->serie_comprobante;
-            $pedido->fecha_hora = $mytime->toDateString();
+            $pedido->fecha_hora = $mytime->toDateTimeString();
             $pedido->estado = '1';
             $pedido->save();
  
@@ -131,7 +131,8 @@ class PedidoController extends Controller
                 $detalle->medida = $det['medida'];
                 $detalle->cantidad = $det['cantidad'];
                 $detalle->detallep = $det['detallep'];
-                $detalle->producto = $det['producto'];          
+                $detalle->producto = $det['producto'];
+                $detalle->fecha_hora = $mytime->toDateTimeString();           
                 $detalle->save();
             }          
             $fechaActual= date('Y-m-d H:i:s');

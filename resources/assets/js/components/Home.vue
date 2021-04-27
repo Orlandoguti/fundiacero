@@ -1,5 +1,7 @@
 <template>
 
+
+
 	<!-- pageContent -->
 	<section class="">
 			<section class="full-width header-well">
@@ -11,18 +13,23 @@
 							</div>
                 </section>
 	
-		<section class="full-width text-center" style="padding: 40px 0;">
-			
+		<section id="app" class="full-width text-center" style="padding: 40px 0;">
+	
+		
+       
 			
 			<!-- Tiles -->
+				<li @click="menu=2">
+								<a href="#">MENU 2
+								</a>
+							</li>
 			<article class="full-width tile">
 				<div class="tile-text">
-					<span class="text-condensedLight">
-						2<br>
-						<small>Administrador</small>
-					</span>
+					<router-link to="/">Dashboard</router-link>
+					
 				</div>
-				<i class="zmdi zmdi-account tile-icon"></i>
+				
+				<i  class="zmdi zmdi-account tile-icon"></i>
 			</article>
 			<article class="full-width tile">
 				<div class="tile-text">

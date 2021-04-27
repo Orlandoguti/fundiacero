@@ -837,9 +837,9 @@
                                 this.tiempo=data['tiempo'];
                                 this.descripcion= data['descripcion'];
                                 this.marca= data['marca'];
-                                this.imagen= data[''];
+                                this.imagen= data['imagen'];
                                 this.exp= '1';
-                                this.imagenmin= data['imagenm'];
+                                this.imagenm= data['imagenm'];
                                 break;
                             }
                         }

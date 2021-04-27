@@ -12,7 +12,8 @@ class DetallePedido extends Model
         'cantidad',
         'medida',
         'detallep',
-        'producto'
+        'producto',
+        'fecha_hora'
     ];
     public $timestamps = false;
 }

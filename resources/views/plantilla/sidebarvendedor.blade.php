@@ -266,16 +266,13 @@
 						</li>
 					
 						<li class="btn-exit" id="btn-exit" tabindex="0">
-							<i onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="zmdi zmdi-power" ></i>
+							<i class="zmdi zmdi-power" ></i>
 							<div class="mdl-tooltip" for="btn-exit" data-upgraded=",MaterialTooltip">LogOut</div>
-							<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                    	</form>
 						</li>
 						<li class="text-condensedLight noLink"><small>{{Auth::user()->usuario}}</small></li>
 						<li class="noLink">
 							<figure>
-								<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive mCS_img_loaded">
+							<img src="{{asset('imagenes/usuarios/'.Auth::user()->imagen)}}" alt="Avatar" class="img-responsive mCS_img_loaded">
 							</figure>
 						</li>
 			
@@ -298,7 +295,7 @@
 			</div>
 			<figure class="full-width navLateral-body-tittle-menu">
 				<div>
-					<img src="assets/img/avatar-male.png" alt="Avatar" class="img-responsive mCS_img_loaded">
+				<img src="{{asset('imagenes/usuarios/'.Auth::user()->imagen)}}" alt="Avatar" class="img-responsive mCS_img_loaded">
 				</div>
 				<figcaption>
 					<span>

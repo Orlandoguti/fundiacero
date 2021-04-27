@@ -18,7 +18,7 @@ Route::group(['middleware'=>['guest']],function(){
 
 Route::group(['middleware'=>['auth']],function(){
     
-    Route::post('/logout', 'Auth\LoginController@logout')->name('logout');
+    Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
     Route::get('/dashboard','DashboardController');
     //Notificaciones
     Route::post('/notification/get','NotificationController@get');
@@ -181,7 +181,7 @@ Route::group(['middleware'=>['auth']],function(){
         
         Route::get('/user', 'UserController@index');
         Route::post('/user/registrar', 'UserController@store');
-        Route::put('/user/actualizar', 'UserController@update');
+        Route::post('/user/actualizar', 'UserController@update');
         Route::put('/user/desactivar', 'UserController@desactivar');
         Route::put('/user/activar', 'UserController@activar');
 

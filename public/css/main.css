@@ -30,17 +30,47 @@
     url("../fonts/oswald-light.woff2"), 
     url("../fonts/oswald-light.svg");
 }
+
+
 /*=====================================================
 					Estilos generales
 ======================================================*/
-input:required {
-	border: 1px dashed red;
-  }
+
 :root{
 	--color-text: #ffffff;
 	--primary-color: #2B2B2C;
 	--acent-color: #306e95;
 }
+.ulbar {	
+	list-style-type: none;
+	width: 35.5%;
+	margin-left: 30%;
+	padding: 0;
+	overflow: hidden;
+	border: 1px solid #e7e7e7;
+	background-color: #2a8ac2;
+  }  
+  .libar {
+	float: left;
+  }
+  
+  .libar a {
+	display: block;
+	color: rgb(255, 255, 255);
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+  }
+  
+  .libar a:hover:not(.activebar) {
+	  color: rgb(255, 255, 255);
+
+	background-color: rgb(0, 0, 0);
+  }
+  .activebar {
+	color: white;
+	background-color: #000000;
+  }
 html, body{
 	width: 100%;
 	height: 100%;
@@ -73,7 +103,7 @@ html, body{
 	box-sizing: border-box;
 }
 .img-responsive{
-	width: 100%;
+	width: 150%;
 	height: auto;
 }
 .table-responsive{
@@ -362,6 +392,7 @@ html, body{
 	-webkit-user-select: none;
 	-ms-user-select: none;
 }
+
 .navBar-options-list ul li{ outline: none; }
 .navBar-options-list ul li figure,
 .navBar-options-list ul li figure img{
@@ -465,7 +496,8 @@ html, body{
 	padding: 30px 0;
 }
 .navLateral-body-tittle-menu img{
-	max-width: 70px;
+    max-width: 110px;
+    max-height: 100px;
 }
 .menu-principal li,
 .menu-principal li a{

@@ -147,10 +147,11 @@
                                         <input type="email" v-model="telefono" class="form-control" placeholder="Teléfono">
                                     </div>
                                 </div>
+                                
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Email</label>
                                     <div class="col-md-9">
-                                        <input type="email" v-model="email" class="form-control" placeholder="Email">
+                                        <input type="email" id="email" v-model="email" class="form-control" placeholder="Email" required/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -174,6 +175,15 @@
                                         <input type="password" v-model="password" class="form-control" placeholder="password del usuario" required>
                                     </div>
                                 </div>
+                                   <div class="form-group row">
+                                    <label class="col-md-3 form-control-label">Seleccione la Imagen</label>
+                                    <div class="col-md-4">
+                                    <input type="file" class="form-control" @change="obtimage">
+                                </div>
+                                <figure>
+                                    <img width="200" height="200" :src="imagenm" alt="Foto del Producto">
+                                </figure>
+                                </div>
                                 <div v-show="errorPersona" class="form-group row div-error">
                                     <div class="text-center text-error">
                                         <div v-for="error in errorMostrarMsjPersona" :key="error" v-text="error">
@@ -181,12 +191,11 @@
                                         </div>
                                     </div>
                                 </div>
-
-                            </form>
+                            </form>                            
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>
-                            <button type="button" v-if="tipoAccion==1" class="btn btn-primary" @click="registrarPersona()">Guardar</button>
+                            <button type="button" v-if="tipoAccion==1" class="btn btn-primary" @click="registrarPersona()" @onclick="funciones()">Guardar</button>
                             <button type="button" v-if="tipoAccion==2" class="btn btn-primary" @click="actualizarPersona()">Actualizar</button>
                         </div>
                     </div>
@@ -199,9 +208,12 @@
 </template>
 
 <script>
+
     export default {
+        
         data (){
             return {
+                ing:'',
                 persona_id: 0,
                 nombre : '',
                 tipo_documento : '',
@@ -212,6 +224,8 @@
                 usuario: '',
                 password:'',
                 idrol: '',
+                imagen: '',
+                imagenmin:'',
                 arrayPersona : [],
                 arrayRol : [],
                 modal : 0,
@@ -231,8 +245,13 @@
                 criterio : 'nombre',
                 buscar : ''
             }
+            
         },
+        
         computed:{
+               imagenm(){
+                return this.imagenmin;
+            },
             isActived: function(){
                 return this.pagination.current_page;
             },
@@ -262,6 +281,20 @@
             }
         },
         methods : {
+
+             obtimage(e){
+                let file = e.target.files[0];
+                this.imagen = file;
+                this.cargarImagen(file);
+            },
+
+            cargarImagen(file){
+                let reader = new FileReader();
+                reader.onload = (e) =>{
+                    this.imagenmin = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            },
             listarPersona (page,buscar,criterio){
                 let me=this;
                 var url= '/user?page=' + page + '&buscar='+ buscar + '&criterio='+ criterio;
@@ -301,57 +334,376 @@
                 
                 let me = this;
 
-                axios.post('/user/registrar',{
-                    'nombre': this.nombre,
-                    'tipo_documento': this.tipo_documento,
-                    'num_documento' : this.num_documento,
-                    'direccion' : this.direccion,
-                    'telefono' : this.telefono,
-                    'email' : this.email,
-                    'idrol' : this.idrol,
-                    'usuario': this.usuario,
-                    'password': this.password
+                let formData = new FormData();
 
-                }).then(function (response) {
+               
+                if(me.idrol==1){
+                formData.append('nombre', this.nombre);
+                formData.append('tipo_documento', this.tipo_documento);
+                formData.append('num_documento', this.num_documento);
+                formData.append('direccion', this.direccion);
+                formData.append('telefono', this.telefono);
+                formData.append('email', this.email);
+                formData.append('idrol', this.idrol);
+                formData.append('usuario', this.usuario);
+                formData.append('password', this.password);
+                formData.append('imagen', this.imagen);
+                formData.append('rolnombre', this.rolnombre='Administrador');
+                formData.append('nombreuser', this.nombreuser = this.nombre);
+
+                swal({
+                title: 'Esta seguro de Registrar a este Usuario?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+
+                axios.post('/user/registrar',formData).then(function (response) {
                     me.cerrarModal();
                     me.listarPersona(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                });
+               swal(
+                        'Registrado!',
+                        'El Usuario ha sido Registrado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+             }else{
+                 if(me.idrol==2){
+                      formData.append('nombre', this.nombre);
+                formData.append('tipo_documento', this.tipo_documento);
+                formData.append('num_documento', this.num_documento);
+                formData.append('direccion', this.direccion);
+                formData.append('telefono', this.telefono);
+                formData.append('email', this.email);
+                formData.append('idrol', this.idrol);
+                formData.append('usuario', this.usuario);
+                formData.append('password', this.password);
+                formData.append('imagen', this.imagen);
+                formData.append('rolnombre', this.rolnombre='Almacenero');
+                formData.append('nombreuser', this.nombreuser = this.nombre);
+
+                 swal({
+                title: 'Esta seguro de Registrar a este Usuario?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+
+                axios.post('/user/registrar',formData).then(function (response) {
+                    me.cerrarModal();
+                    me.listarPersona(1,'','nombre');
+              swal(
+                        'Registrado!',
+                        'El Usuario ha sido Registrado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+
+           }else{
+               if(me.idrol==3){
+                          formData.append('nombre', this.nombre);
+                formData.append('tipo_documento', this.tipo_documento);
+                formData.append('num_documento', this.num_documento);
+                formData.append('direccion', this.direccion);
+                formData.append('telefono', this.telefono);
+                formData.append('email', this.email);
+                formData.append('idrol', this.idrol);
+                formData.append('usuario', this.usuario);
+                formData.append('password', this.password);
+                formData.append('imagen', this.imagen);
+                formData.append('rolnombre', this.rolnombre='Administrador de Area');
+                 formData.append('nombreuser', this.nombreuser = this.nombre);
+
+                 swal({
+                title: 'Esta seguro de Registrar a este Usuario?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+
+
+                axios.post('/user/registrar',formData).then(function (response) {
+                    me.cerrarModal();
+                    me.listarPersona(1,'','nombre');
+               swal(
+                        'Registrado!',
+                        'El Usuario ha sido Registrado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+
+
+               }
+           }
+             }
             },
+
             actualizarPersona(){
                if (this.validarPersona()){
                     return;
                 }
                 
-                let me = this;
-
-                axios.put('/user/actualizar',{
-                    'nombre': this.nombre,
-                    'tipo_documento': this.tipo_documento,
-                    'num_documento' : this.num_documento,
-                    'direccion' : this.direccion,
-                    'telefono' : this.telefono,
-                    'email' : this.email,
-                    'idrol' : this.idrol,
-                    'usuario': this.usuario,
-                    'password': this.password,
-                    'id': this.persona_id
-                }).then(function (response) {
+            let me = this;
+            let formData = new FormData();
+            if(me.idrol==1){
+              
+                formData.append('nombre', this.nombre);
+                formData.append('tipo_documento', this.tipo_documento);
+                formData.append('num_documento', this.num_documento);
+                formData.append('direccion', this.direccion);
+                formData.append('telefono', this.telefono);
+                formData.append('email', this.email);
+                formData.append('idrol', this.idrol);
+                formData.append('usuario', this.usuario);
+                formData.append('password', this.password);
+                formData.append('id', this.persona_id);
+                formData.append('imagen', this.imagen);
+                formData.append('rolnombre', this.rolnombre='Administrador');
+                formData.append('nombreuser', this.nombreuser = this.nombre);
+                
+                 swal({
+                title: 'Esta seguro de Actualizar a este Usuario?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                axios.post('/user/actualizar',formData).then(function (response) {
                     me.cerrarModal();
                     me.listarPersona(1,'','nombre');
-                }).catch(function (error) {
-                    console.log(error);
-                }); 
+                  swal(
+                        'Actualizado!',
+                        'El Usuario ha sido Actualizado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+                }else{
+                    if(me.idrol==2){
+                formData.append('nombre', this.nombre);
+                formData.append('tipo_documento', this.tipo_documento);
+                formData.append('num_documento', this.num_documento);
+                formData.append('direccion', this.direccion);
+                formData.append('telefono', this.telefono);
+                formData.append('email', this.email);
+                formData.append('idrol', this.idrol);
+                formData.append('usuario', this.usuario);
+                formData.append('password', this.password);
+                formData.append('id', this.persona_id);
+                formData.append('imagen', this.imagen);
+                formData.append('rolnombre', this.rolnombre='Almacenero');
+                formData.append('nombreuser', this.nombreuser = this.nombre);
+                swal({
+                title: 'Esta seguro de Actualizar a este Usuario?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+
+                axios.post('/user/actualizar',formData).then(function (response) {
+                    me.cerrarModal();
+                    me.listarPersona(1,'','nombre');
+                  swal(
+                        'Actualizado!',
+                        'El Usuario ha sido Actualizado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+                }else{
+                    if(me.idrol==3){
+                formData.append('nombre', this.nombre);
+                formData.append('tipo_documento', this.tipo_documento);
+                formData.append('num_documento', this.num_documento);
+                formData.append('direccion', this.direccion);
+                formData.append('telefono', this.telefono);
+                formData.append('email', this.email);
+                formData.append('idrol', this.idrol);
+                formData.append('usuario', this.usuario);
+                formData.append('password', this.password);
+                formData.append('id', this.persona_id);
+                formData.append('imagen', this.imagen);
+                formData.append('rolnombre', this.rolnombre='Administrador de Area');
+                formData.append('nombreuser', this.nombreuser = this.nombre);
+                swal({
+                title: 'Esta seguro de Actualizar a este Usuario?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Aceptar!',
+                cancelButtonText: 'Cancelar',
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                buttonsStyling: false,
+                reverseButtons: true
+                }).then((result) => {
+                if (result.value) {
+                  axios.post('/user/actualizar',formData).then(function (response) {
+                    me.cerrarModal();
+                    me.listarPersona(1,'','nombre');
+                swal(
+                        'Actualizado!',
+                        'El Usuario ha sido Actualizado con éxito.',
+                        'success'
+                        )
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                    
+                    
+                } else if (
+                    // Read more about handling dismissals
+                    result.dismiss === swal.DismissReason.cancel
+                ) {
+                    
+                }
+                }) 
+                    }
+                }
+                }
             },
             validarPersona(){
                 this.errorPersona=0;
                 this.errorMostrarMsjPersona =[];
-
-                if (!this.nombre) this.errorMostrarMsjPersona.push("El nombre de la pesona no puede estar vacío.");
-                if (!this.usuario) this.errorMostrarMsjPersona.push("El nombre de usuario no puede estar vacío.");
-                if (!this.password) this.errorMostrarMsjPersona.push("La password del usuario no puede estar vacía.");
-                if (this.idrol==0) this.errorMostrarMsjPersona.push("Seleccione una Role.");
+                if (!this.nombre) {
+                    swal ( " ¡El Nombre no puede estar Vacio! " );
+                }else{
+                    if (!this.usuario){
+                        swal ( " ¡El Nombre de Usuario no puede estar Vacio! " );
+                    }else{
+                          if (!this.password) {
+                              swal ( " ¡El Password del Usuario no puede estar Vacio! " );
+                          }else{
+                               if (this.idrol==0) {
+                                   swal ( " ¡Seleccione un Rol! " );
+                               }else{
+                                   if(this.tipo_documento==0){
+                                       swal ( " ¡Seleccione un El tipo de Documento! " );
+                                   }else{
+                                       if(this.num_documento==0){
+                                            swal ( " ¡Ingrese el numero de Documento! " );
+                                       }else{
+                                           if(this.direccion==0){
+                                            swal ( " ¡Ingrese Una Direccion! " );
+                                           }else{
+                                               if(this.telefono==0){
+                                                swal ( " ¡Ingrese Un Numero de Telefono! " );
+                                               }else{
+                                                   if(this.email==0){
+                                                       swal ( " ¡Ingrese el Email del Usuario! " );
+                                                   }
+                                               }
+                                           }
+                                       }
+                                   }
+                               }
+                          }
+                    }
+                } 
+                
+                if (!this.nombre) this.errorMostrarMsjPersona.push("");
+                if (!this.usuario) this.errorMostrarMsjPersona.push("");
+                if (!this.password) this.errorMostrarMsjPersona.push("");
+                if (this.idrol==0) this.errorMostrarMsjPersona.push("");
+                if (this.tipo_documento==0) this.errorMostrarMsjPersona.push("");
+                if (this.num_documento==0) this.errorMostrarMsjPersona.push("");
+                if (this.direccion==0) this.errorMostrarMsjPersona.push("");
+                if (this.telefono==0) this.errorMostrarMsjPersona.push("");
+                if (this.email==0) this.errorMostrarMsjPersona.push("");
+                
                 if (this.errorMostrarMsjPersona.length) this.errorPersona = 1;
 
                 return this.errorPersona;
@@ -368,6 +720,8 @@
                 this.usuario='';
                 this.password='';
                 this.idrol=0;
+                this.imagen = '';
+                this.imagenmin = '';
                 this.errorPersona=0;
             },
             abrirModal(modelo, accion, data = []){
@@ -389,6 +743,8 @@
                                 this.usuario='';
                                 this.password='';
                                 this.idrol=0;
+                                this.imagen = '';
+                                this.imagenmin = '';
                                 this.tipoAccion = 1;
                                 break;
                             }
@@ -408,6 +764,7 @@
                                 this.usuario = data['usuario'];
                                 this.password=data['password'];
                                 this.idrol=data['idrol'];
+                                this.imagen=data['imagen'];
                                 break;
                             }
                         }
