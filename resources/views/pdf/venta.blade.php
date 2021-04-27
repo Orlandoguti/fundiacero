@@ -148,7 +148,7 @@
                             <td>{{$v->usuario}}</td>
                             <td>{{$v->nombre}}</td>
                             <td> {{$v->serie_comprobante}}</td>
-                            <td>{{$v->created_at}}</td>
+                            <td>{{$v->fecha_hora}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -221,7 +221,7 @@
                             <td>{{$v->usuario}}</td>
                             <td>{{$v->nombre}}</td>
                             <td> {{$v->serie_comprobante}}</td>
-                            <td>{{$v->created_at}}</td>
+                            <td>{{$v->fecha_hora}}</td>
                         </tr>
                     </tbody>
                 </table>

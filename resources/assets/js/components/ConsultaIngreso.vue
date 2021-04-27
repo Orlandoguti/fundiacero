@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Principal</a></li>
+               
             </ol>
             <section class="full-width header-well">
                             <div class="full-width header-well-icon">
@@ -29,7 +29,7 @@
                                     <select class="form-control col-md-4" v-model="criterio">
                                       <option value="id">Nº Ingreso</option>
                                       <option value="serie_comprobante">Serie Comprobante</option>
-                                      <option value="created_at">Fecha-Hora</option>
+                                      <option value="fecha_hora">Fecha-Hora</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarIngreso(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarIngreso(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>

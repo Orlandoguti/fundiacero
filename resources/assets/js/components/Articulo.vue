@@ -2,7 +2,7 @@
           <section class="responsive">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Principal</a></li>
+               
             </ol>
             <div class="container-fluid">
                 <!-- Ejemplo de tabla Listado -->

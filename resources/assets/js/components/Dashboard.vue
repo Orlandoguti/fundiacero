@@ -2,10 +2,10 @@
 <main class="main">
     <!-- Breadcrumb -->
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
+        
     </ol>
     <div class="container-fluid">
-        <ul class="ulbar">
+        <ul class="ulbar float-center">
             <li  class="libar"><a class="activebar" @click="mostrarIngresosdespacho()">INGRESOS Y DESPACHOS</a></li>
             <li  class="libar"><a @click="mostrarPedido()">PEDIDOS</a></li>
             <li  class="libar"><a @click="mostrarProductos()">PRODUCTOS</a></li>
@@ -158,7 +158,7 @@
       <ejs-chart
         style="display:block"
         :theme="theme"
-        :primaryXAxis='primaryXAxisbarde' :primaryYAxis='primaryYAxisbarde'
+        :primaryXAxis='primaryXAxisbardes' :primaryYAxis='primaryYAxisbardes'
         ref="chart"
         align="center"
         id="chartcontainerRdespacho"
@@ -172,7 +172,7 @@
       >
         <e-series-collection>
           <e-series
-           
+          :dataSource="detalle_ventas"
             type="Column"
             xName=""
             yName=""
@@ -227,7 +227,7 @@
      <div class="border">
          <div class="control-section">
     <div align='center'>
-        <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainer' :title='titlelineav' :primaryXAxis='primaryXAxis' :primaryYAxis='primaryYAxis'
+        <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainerdes' :title='titlelineav' :primaryXAxis='primaryXAxis' :primaryYAxis='primaryYAxis'
             :tooltip='tooltip' :chartArea='chartArea' :width='width'>
             <e-series-collection>
                  <e-series :dataSource='detalle_ventas' type='Line' xName='' yName='' name='' width=2 :marker='marker'> </e-series>  
@@ -240,15 +240,15 @@
     
 
         </template>
-        <template v-if="listado==3">
+        <template v-if="listado==4">
           <div class="card">
                 <div class="card-header">
                             <div class="col-md-4">
                                 
                                 <select class="form-control col-md-13" v-model="listado">
                                             <option value="0" disabled>Seleccione Tipo de Grafico</option>
-                                            <option value="3"> Grafico de Barras</option>
-                                            <option value="4">Grafico de Lineas</option>                                            
+                                            <option value="4"> Grafico de Pedidos</option>
+                                            <option value="3">Pedidos por Area</option>                                             
                                 </select>
                             </div>
                 </div>
@@ -287,25 +287,10 @@
     </div>
      </div>
        </div>
-     </template>
-
-     <template v-if="listado==4">
-          <div class="card">
-                <div class="card-header">
-                            <div class="col-md-4">
-                                
-                                <select class="form-control col-md-13" v-model="listado">
-                                            <option value="0" disabled>Seleccione Tipo de Grafico</option>
-                                            <option value="3"> Grafico de Barras</option>
-                                            <option value="4">Grafico de Lineas</option>                                            
-                                </select>
-                            </div>
-                </div>
-                 </div>
          <div class="border">
             <div class="control-section">
     <div align='center'>
-        <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainer' :title='titlelineap' :primaryXAxis='primaryXAxispe' :primaryYAxis='primaryYAxispe'
+        <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainerpedidos' :title='titlelineap' :primaryXAxis='primaryXAxispe' :primaryYAxis='primaryYAxispe'
             :tooltip='tooltip' :chartArea='chartArea' :width='width'>
             <e-series-collection>
                 <e-series :dataSource='detalle_pedidos' type='Line' xName='fecha' yName='totalp' name='Pedidos' width=2 :marker='marker'> </e-series>
@@ -314,7 +299,67 @@
     </div>
      </div>
      </div>
-        </template>
+     </template>
+        <template v-if="listado==3">
+          <div class="card">
+                <div class="card-header">
+                            <div class="col-md-4">
+                                
+                              
+                                <select class="form-control col-md-13" v-model="listado">
+                                            <option value="0" disabled>Seleccione Tipo de Grafico</option>
+                                            <option value="4"> Grafico de Pedidos</option>
+                                            <option value="3">Pedidos por Area</option>                                                 
+                                </select>
+                            </div>
+                </div>
+                 </div>
+
+     <div class="border">
+         <div class="control-section">
+            <div align="center">
+      <ejs-chart
+        style="display:block"
+        :theme="theme"
+        :primaryXAxis='primaryXAxisbard' :primaryYAxis='primaryYAxisbard'
+        ref="chart"
+        align="center"
+        id="chartcontainerRdespacho"
+        :title="titlebarrapedi"
+        :chartArea="chartArea"
+        :width="width"
+        :tooltip="tooltip"
+        :legendSettings="legendSettings"
+        :pointRender="pointRender"       
+        :loaded="loaded"
+      >
+        <e-series-collection>
+          <e-series
+           
+            type="Column"
+            xName=""
+            yName=""
+            name=""
+            width="2"
+            :marker="marker"
+            :cornerRadius="cornerRadius"
+          ></e-series>
+           <e-series
+            :dataSource="pedidos_area"
+            type="Column"
+            xName="nombre"
+            yName="totalproductos"
+            name="Pedidos"
+            width="2"
+            :marker="marker"
+            :cornerRadius="cornerRadius"
+          ></e-series>
+        </e-series-collection>
+      </ejs-chart>
+    </div>
+     </div>
+     </div>
+     </template>
             <template v-if="listado==5">
                 <div class="card">
                     <div class="card-header">
@@ -330,7 +375,7 @@
                     </div>
                 <div class="control-section">
                     <div class="control-section">
-                        <ejs-accumulationchart id="containerprod" ref="pie" style='display:block;' :theme='theme' :legendSettings="legendSettings" :tooltip="tooltip" :enableAnimation='enableAnimation' :enableSmartLabels='enableSmartLabels' >
+                        <ejs-accumulationchart id="containerprod" ref="pie" style='display:block;' :theme='theme' :legendSettings="legendSettings" :tooltip="tooltip" :enableAnimation='enableAnimation' :enableSmartLabels='enableSmartLabels' :title='titlebarrapro'>
                             <e-accumulation-series-collection>
                                 <e-accumulation-series  :dataSource='articulos' xName='nombre' yName='stock' :radius=radius innerRadius="20%" :dataLabel="dataLabel"> </e-accumulation-series>
                             </e-accumulation-series-collection>
@@ -355,7 +400,7 @@
                     </div>
                     <div class="control-section">
                         <div align='center'>
-                            <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainer' :title='title' :primaryXAxis='primaryXAxispro' :primaryYAxis='primaryYAxispro'
+                            <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainer' :title='titlebarraproa' :primaryXAxis='primaryXAxispro' :primaryYAxis='primaryYAxispro'
                                 :chartArea='chartArea' :width='width'  :tooltip='tooltip' :legendSettings='legendSettings'>
                                 <e-series-collection>
                                     <e-series :dataSource='productos_area' type='Column' xName='nombre' yName='totalproductos' name='Area'> </e-series>
@@ -393,6 +438,7 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
                 productos_area:[],
                 detalle_pedidos:[],
                 detalle_ventas:[],
+                pedidos_area:[],
             replace:'',
         
             mas_vendidos: [],
@@ -404,17 +450,20 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
          intervalType : "Days" ,
          edgeLabelPlacement : "Shift" ,
          majorGridLines : { width : 0 }},
-       // Inicializando el eje Y primario 
-      //Initializing Primary Y Axis
       primaryYAxisbar: {
         labelFormat: "{value}",
-        rangePadding: "None",
         lineStyle: { width: 0 },
-        majorTickLines: { width: 0 },
-        minorTickLines: { width: 0 }
+      },
+      primaryXAxisbardes: {
+         valueType : "DateTime" ,
+         edgeLabelPlacement : "Shift" ,
+         majorGridLines : { width : 0 }},
+      primaryYAxisbardes: {
+        labelFormat: "{value}",
+        lineStyle: { width: 0 },
       },
 
-         primaryXAxisbarde: {
+         primaryXAxis: {
          valueType : "DateTime" ,
          labelFormat : "d/MM/y" ,
          intervalType : "Days" ,
@@ -422,9 +471,8 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
          majorGridLines : { width : 0 }},
        // Inicializando el eje Y primario 
       //Initializing Primary Y Axis
-      primaryYAxisbarde: {
+      primaryYAxis: {
         labelFormat: "{value}",
-        rangePadding: "None",
         lineStyle: { width: 0 },
         majorTickLines: { width: 0 },
         minorTickLines: { width: 0 }
@@ -438,7 +486,6 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       //Initializing Primary Y Axis
       primaryYAxisbard: {
         labelFormat: "{value}",
-        rangePadding: "None",
         lineStyle: { width: 0 },
         majorTickLines: { width: 0 },
         minorTickLines: { width: 0 }
@@ -454,7 +501,6 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       //Initializing Primary Y Axis
       primaryYAxisbarp: {
         labelFormat: "{value}",
-        rangePadding: "None",
         lineStyle: { width: 0 },
         majorTickLines: { width: 0 },
         minorTickLines: { width: 0 }
@@ -463,10 +509,7 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
       //Initializing Primary Y Axis
       primaryYAxispe: {
         labelFormat: "{value}",
-        rangePadding: "None",
         lineStyle: { width: 0 },
-        majorTickLines: { width: 0 },
-        minorTickLines: { width: 0 }
       },
        primaryXAxispe: {
          valueType : "DateTime" ,
@@ -523,9 +566,12 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
        titlebarrai: "Grafico de Barras Ingresos por dia",
         titlebarrav: "Grafico de Barras Despachos por dia",
         titlebarrap: "Grafico de Barras Pedidos por dia",
-        titlebarrap: "Grafico de Barras Pedidos por dia",
+        titlelineap: "Grafico de Lineas Pedidos por dia",
          titlebarrade: "Grafico de Productos mas Ingresados",
-        titlebarradep: "Grafico de Productos mas Despachados"
+         titlebarrapro: "Cantidad de Productos",
+         titlebarraproa: "Cantidad de Productos por Area",
+        titlebarradep: "Grafico de Productos mas Despachados",
+        titlebarrapedi: "Pedidos por Area"
     };
   },
   
@@ -573,6 +619,17 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
             },
              mostrarProductos2(){
                 this.listado=6;
+            },
+         getPedidosArea(){
+                let me=this;
+                var url= '/dashboard';
+                axios.get(url).then(function (response) {
+                    var respuesta= response.data;
+                    me.pedidos_area = respuesta.pedidos_area;
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             },
       getProductos(){
                 let me=this;
@@ -644,6 +701,7 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
             this.getDetalleIngresos();
             this.getDetallepedidos();
             this.getProductos();
+            this.getPedidosArea();
         }
     }
 </script>

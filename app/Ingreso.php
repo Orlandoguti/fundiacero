@@ -12,7 +12,7 @@ class Ingreso extends Model
         'detalle',
         'tipo_comprobante',
         'serie_comprobante',
-        'created_at',
+        'fecha_hora',
         'estado'
      ];
      public function usuario()

@@ -144,7 +144,7 @@
                         <tr>
                             <td>{{$p->nombre}}</td>
                             <td> {{$p->solicitante}}</td>
-                            <td>{{$p->created_at}}</td>
+                            <td>{{$p->fecha_hora}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -218,7 +218,7 @@
                         <tr>
                             <td>{{$p->nombre}}</td>
                             <td> {{$p->solicitante}}</td>
-                            <td>{{$p->created_at}}</td>
+                            <td>{{$p->fecha_hora}}</td>
                         </tr>
                     </tbody>
                 </table>

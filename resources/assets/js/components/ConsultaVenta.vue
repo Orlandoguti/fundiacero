@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Principal</a></li>
+               
             </ol>
              <section class="full-width header-well">
                             <div class="full-width header-well-icon">
@@ -29,7 +29,7 @@
                                     <select class="form-control col-md-4" v-model="criterio">
                                       <option value="id">Nº Despacho</option>
                                       <option value="serie_comprobante">Nombre Solicitante</option>
-                                      <option value="created_at">Fecha-Hora</option>
+                                      <option value="fecha_hora">Fecha-Hora</option>
                                     </select>
                                     <input type="text" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarVenta(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
@@ -55,7 +55,7 @@
                                         <td v-text="venta.usuario"></td>
                                         <td v-text="venta.nombre"></td>
                                         <td v-text="venta.serie_comprobante"></td>
-                                        <td v-text="venta.created_at"></td>
+                                        <td v-text="venta.fecha_hora"></td>
                                       <td>
                                         <div v-if="venta.estado">
                                             <span class="badge badge-success">Registrado</span>
@@ -177,6 +177,7 @@
                 listado:1,
                 modal : 0,
                 tituloModal : '',
+                fecha_hora : '',
                 tipoAccion : 0,
                 errorVenta : 0,
                 errorMostrarMsjVenta : [],

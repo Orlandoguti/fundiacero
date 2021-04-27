@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Escritorio</a></li>
+               
             </ol><section class="full-width header-well">
                             <div class="full-width header-well-icon">
                                <img src="/imagenes/icono.png" width="60" height="60" class="icono-fundi">

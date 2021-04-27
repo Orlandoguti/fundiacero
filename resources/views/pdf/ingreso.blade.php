@@ -152,7 +152,7 @@
                             <td> {{$i->tipo_comprobante}}</td>
                             <td> {{$i->serie_comprobante}}</td>
                             <td>{{$i->detalle}}</td>
-                            <td>{{$i->created_at}}</td>
+                            <td>{{$i->fecha_hora}}</td>
                         </tr>
                     </tbody>
                 </table>

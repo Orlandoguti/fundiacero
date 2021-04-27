@@ -23,7 +23,7 @@ class VentaController extends Controller
             $ventas = Venta::join('categorias','ventas.idcategoria','=','categorias.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.serie_comprobante',
-            'ventas.created_at',
+            'ventas.fecha_hora',
             'ventas.estado','categorias.nombre','users.usuario')
             ->orderBy('ventas.id', 'desc')->paginate(3);
         }
@@ -31,7 +31,7 @@ class VentaController extends Controller
             $ventas = Venta::join('categorias','ventas.idcategoria','=','categorias.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.serie_comprobante',
-            'ventas.created_at',
+            'ventas.fecha_hora',
             'ventas.estado','categorias.nombre','users.usuario')
             ->where('ventas.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('ventas.id', 'desc')->paginate(3);
@@ -60,7 +60,7 @@ class VentaController extends Controller
             $ventas = Venta::join('categorias','ventas.idcategoria','=','categorias.id')
             ->join('users','ventas.idusuario','=','users.id')
             ->select('ventas.id','ventas.serie_comprobante',
-            'ventas.created_at',
+            'ventas.fecha_hora',
             'ventas.estado','categorias.nombre','users.usuario')
             ->orderBy('ventas.id', 'desc')->paginate(1);
         }
@@ -97,7 +97,7 @@ class VentaController extends Controller
         $id = $request->id;
         $detalles = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
         ->select('detalle_ventas.cantidad',
-        'articulos.nombre as articulo')
+        'articulos.nombre as articulo','detalle_ventas.fecha_hora')
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id', 'desc')->get();
          
@@ -107,18 +107,18 @@ class VentaController extends Controller
         $venta = Venta::join('categorias','ventas.idcategoria','=','categorias.id')
         ->join('users','ventas.idusuario','=','users.id')
         ->select('ventas.id','ventas.serie_comprobante',
-        'ventas.created_at',
+        'ventas.fecha_hora',
         'ventas.estado','categorias.nombre','users.usuario')
         ->where('ventas.id','=',$id)
         ->orderBy('ventas.id','desc')->take(1)->get();
 
         $detalles = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
         ->select('detalle_ventas.cantidad',
-        'articulos.nombre as articulo')
+        'articulos.nombre as articulo','detalle_ventas.fecha_hora')
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id','desc')->get();
 
-        $numventa=Venta::select('created_at')->where('id',$id)->get();
+        $numventa=Venta::select('fecha_hora')->where('id',$id)->get();
 
         $pdf = \PDF::loadView('pdf.venta',['venta'=>$venta,'detalles'=>$detalles]);
         return $pdf->download('Despacho-'.$numventa[0]->num_comprobante.'.pdf');

@@ -271,7 +271,7 @@
 							<div class="mdl-tooltip" for="btn-exit" data-upgraded=",MaterialTooltip">LogOut</div>
 						
 						</li>
-						<li class="text-condensedLight noLink"><small>{{Auth::user()->usuario}}</small></li>
+						<li class="text-condensedLight noLink"><small>{{Auth::user()->nombreuser}}</small></li>
 						<li class="noLink">
 							<figure>
 								<img src="{{asset('imagenes/usuarios/'.Auth::user()->imagen)}}" alt="Avatar" class="img-responsive mCS_img_loaded">

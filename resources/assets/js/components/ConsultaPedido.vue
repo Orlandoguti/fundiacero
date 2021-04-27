@@ -2,7 +2,7 @@
             <main class="main">
             <!-- Breadcrumb -->
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Principal</a></li>
+               
             </ol>
             <section class="full-width header-well">
                             <div class="full-width header-well-icon">
@@ -54,7 +54,7 @@
                                         <td v-text="pedido.id"></td>
                                         <td v-text="pedido.nombre"></td>                                        
                                         <td v-text="pedido.solicitante"></td>
-                                        <td v-text="pedido.created_at"></td>
+                                        <td v-text="pedido.fecha_hora"></td>
                                         <td>
                                         <div v-if="pedido.estado">
                                             <span class="badge badge-success">Registrado</span>
@@ -116,7 +116,7 @@
                                  <div class="col-md-4">
                                  <div class="form-group">
                                     <label for="">Fecha de Pedido</label>
-                                    <p v-text="created_at"></p>
+                                    <p v-text="fecha_hora"></p>
                                 </div>
                             </div>                     
                         </div>
@@ -311,7 +311,7 @@
                     
                     me.cliente = arrayPedidoT[0]['nombre'];
                     me.solicitante=arrayPedidoT[0]['solicitante'];
-                    me.created_at=arrayPedidoT[0]['created_at'];
+                    me.fecha_hora=arrayPedidoT[0]['fecha_hora'];
                     me.num_comprobante=arrayPedidoT[0]['num_comprobante'];
                     me.impuesto=arrayPedidoT[0]['impuesto'];
                     me.total=arrayPedidoT[0]['total'];

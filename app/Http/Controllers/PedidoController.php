@@ -22,14 +22,14 @@ class PedidoController extends Controller
         if ($buscar==''){
             $pedidos = Pedido::join('categorias','pedidos.idcategoria','=','categorias.id')
             ->join('users','pedidos.idusuario','=','users.id')
-            ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.created_at',
+            ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.fecha_hora',
             'pedidos.estado','categorias.nombre','users.usuario')
             ->orderBy('pedidos.id', 'desc')->paginate(3);
         }
         else{
             $pedidos = Pedido::join('categorias','pedidos.idcategoria','=','categorias.id')
             ->join('users','pedidos.idusuario','=','users.id')
-            ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.created_at',
+            ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.fecha_hora',
             'pedidos.estado','categorias.nombre','users.usuario')
             ->where('pedidos.'.$criterio, 'like', '%'. $buscar . '%')
             ->orderBy('pedidos.id', 'desc')->paginate(3);
@@ -53,7 +53,7 @@ class PedidoController extends Controller
          
             $pedidos = Pedido::join('categorias','pedidos.idcategoria','=','categorias.id')
             ->join('users','pedidos.idusuario','=','users.id')
-            ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.created_at',
+            ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.fecha_hora',
             'pedidos.estado','categorias.nombre','users.usuario')
             ->orderBy('pedidos.id', 'desc')->paginate(1);     
         return ['pedidos' => $pedidos];
@@ -64,7 +64,7 @@ class PedidoController extends Controller
         $id = $request->id;
         $pedido = Pedido::join('categorias','pedidos.idcategoria','=','categorias.id')
         ->join('users','pedidos.idusuario','=','users.id')
-        ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.created_at',
+        ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.fecha_hora',
         'pedidos.estado','categorias.nombre','users.usuario')
         ->where('pedidos.id','=',$id)
         ->orderBy('pedidos.id', 'desc')->take(1)->get();
@@ -86,7 +86,7 @@ class PedidoController extends Controller
     public function pdf(Request $request,$id){
         $pedido = Pedido::join('categorias','pedidos.idcategoria','=','categorias.id')
         ->join('users','pedidos.idusuario','=','users.id')
-        ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.created_at',
+        ->select('pedidos.id','pedidos.solicitante','pedidos.serie_comprobante','pedidos.fecha_hora',
         'pedidos.estado','categorias.nombre')
         ->where('pedidos.id','=',$id)
         ->orderBy('pedidos.id','desc')->take(1)->get();
