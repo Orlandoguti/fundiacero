@@ -13,7 +13,7 @@ class NotificationController extends Controller
         $unreadNotifications = Auth::user()->unreadNotifications;
         $fechaActual= date('Y-m-d');
         foreach ($unreadNotifications as $notification){
-            if($fechaActual !=$notification->created_at->toDateString()){
+            if($fechaActual !=$notification->created_at->toDateTimeString()){
                 $notification->markAsRead();
             }
         }

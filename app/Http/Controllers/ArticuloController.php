@@ -35,7 +35,7 @@ class ArticuloController extends Controller
             ->orderBy('categorias.id', 'asc')->paginate(7);
         }
         
-
+        $cont=Articulo::count();
         return [
             'pagination' => [
                 'total'        => $articulos->total(),
@@ -45,9 +45,11 @@ class ArticuloController extends Controller
                 'from'         => $articulos->firstItem(),
                 'to'           => $articulos->lastItem(),
             ],
-            'articulos' => $articulos
+            'articulos' => $articulos,'cont'=>$cont
         ];
     }
+
+    
 
     public function listarArticulo(Request $request)
     {
@@ -210,11 +212,11 @@ class ArticuloController extends Controller
         ->join('estados','articulos.idestado','=','estados.id')
         ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
         ->orderBy('articulos.nombre', 'desc')->get();
-
+        $fechaActual= date('Y-m-d');
         $cont=Articulo::count();
 
-        $pdf = \PDF::loadView('pdf.articulospdf',['articulos'=>$articulos,'cont'=>$cont]);
-        return $pdf->download('articulos.pdf');
+        $pdf = \PDF::loadView('pdf.productospdf',['articulos'=>$articulos,'cont'=>$cont]);
+        return $pdf->download($fechaActual.'.pdf');
     }
     public function buscarArticulo(Request $request ){
         if (!$request->ajax()) return redirect('/');

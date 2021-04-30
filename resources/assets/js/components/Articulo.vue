@@ -77,7 +77,10 @@
                                     <td  <img class = "img-square" :src="'/imagenes/articulos/' + articulo.imagen" width="70" height="70" @click="verArticulo(articulo.id)"></td>
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.nombre"></td>
-                                    <td v-text="articulo.stock"></td>
+                                    <td >
+                                        <span>{{articulo.stock}}</span><br>
+                                        <span style="color:red;" v-show="articulo.stock<3">Stock Bajo Aumente Productos</span>
+                                    </td>
                                     <td v-text="articulo.nombre_unidad"></td>
                                     <td v-text="articulo.descripcion"></td>
                                     <td v-text="articulo.tiempo"></td>                                    

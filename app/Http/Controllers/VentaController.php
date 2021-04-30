@@ -153,9 +153,11 @@ class VentaController extends Controller
                 $detalle->fecha_hora = $mytime->toDateTimeString();     
                 $detalle->save();
             }          
-            $fechaActual= date('Y-m-d H:i:s');
-            $numVentas = DB::table('ventas')->whereDate('created_at',$fechaActual)->count();
-            $numIngresos = DB::table('ingresos')->whereDate('created_at',$fechaActual)->count();
+            $fechaActual= date('Y-m-d H:m:s');
+            $numVentas = DB::table('ventas')->whereDate('created_at', $fechaActual)->count();
+            $numIngresos = DB::table('ingresos')->whereDate('created_at', $fechaActual)->count();
+            $numPedidos = DB::table('pedidos')->whereDate('created_at', $fechaActual)->count();
+
 
             $arreglosDatos = [
                 'ventas' => [
@@ -165,7 +167,11 @@ class VentaController extends Controller
                 'ingresos' => [
                             'numero' => $numIngresos,
                             'msj' => 'Ingresos'
-                ]
+                ],
+                'pedidos' => [
+                    'numero' => $numPedidos,
+                    'msj' => 'Pedidos'
+                     ]
             ];
             $allUsers = User::all();
 

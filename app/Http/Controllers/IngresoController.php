@@ -164,8 +164,9 @@ class IngresoController extends Controller
             $fechaActual= date('Y-m-d');
             $numVentas = DB::table('ventas')->whereDate('created_at', $fechaActual)->count();
             $numIngresos = DB::table('ingresos')->whereDate('created_at', $fechaActual)->count();
+            $numPedidos = DB::table('pedidos')->whereDate('created_at', $fechaActual)->count();
 
-            $arregloDatos = [
+            $arreglosDatos = [
                 'ventas' => [
                             'numero' => $numVentas,
                             'msj' => 'Ventas'
@@ -173,12 +174,16 @@ class IngresoController extends Controller
                 'ingresos' => [
                             'numero' => $numIngresos,
                             'msj' => 'Ingresos'
-                ]
+                ],
+                'pedidos' => [
+                    'numero' => $numPedidos,
+                    'msj' => 'Pedidos'
+                     ]
             ];
             $allUsers = User::all();
 
             foreach ($allUsers as $notificar){
-                User::findOrFail($notificar->id)->notify(new NotifyAdmin($arregloDatos));
+                User::findOrFail($notificar->id)->notify(new NotifyAdmin($arreglosDatos));
             }
 
             DB::commit();

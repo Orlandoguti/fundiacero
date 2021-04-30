@@ -136,18 +136,24 @@ class PedidoController extends Controller
                 $detalle->save();
             }          
             $fechaActual= date('Y-m-d H:i:s');
-            $numPedidos = DB::table('pedidos')->whereDate('created_at',$fechaActual)->count();
-            $numIngresos = DB::table('ingresos')->whereDate('created_at',$fechaActual)->count();
+            $numVentas = DB::table('ventas')->whereDate('created_at', $fechaActual)->count();
+            $numIngresos = DB::table('ingresos')->whereDate('created_at', $fechaActual)->count();
+            $numPedidos = DB::table('pedidos')->whereDate('created_at', $fechaActual)->count();
+
 
             $arreglosDatos = [
-                'pedidos' => [
-                            'numero' => $numPedidos,
-                            'msj' => 'Pedidos'
+                'ventas' => [
+                            'numero' => $numVentas,
+                            'msj' => 'Ventas'
                         ],
                 'ingresos' => [
                             'numero' => $numIngresos,
                             'msj' => 'Ingresos'
-                ]
+                ],
+                'pedidos' => [
+                    'numero' => $numPedidos,
+                    'msj' => 'Pedidos'
+                     ]
             ];
             $allUsers = User::all();
 

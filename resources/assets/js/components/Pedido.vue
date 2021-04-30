@@ -203,7 +203,8 @@
             agregarDetalle(){
                  
                 let me=this;
-                if(me.producto==0){
+                if(me.detallep==0){
+                      if(me.producto==0){
                      swal({
                             type: 'error',
                             title: 'Error...',
@@ -233,8 +234,33 @@
                             me.producto='';
                             me.cantidad=0;
                             me.detallep='';
-                        
-                 }if(me.detallep){
+                    }
+                }
+               }
+                }else{
+                    if(me.detallep != 0){
+
+                         if(me.producto==0){
+                     swal({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Ingrese Nombre del Producto!',
+                        })
+                    }else{
+                         if(me.cantidad==0){
+                     swal({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Ingrese Cantidad del Producto!',
+                        })
+                    }else{
+                         if(me.medida==0){
+                     swal({
+                            type: 'error',
+                            title: 'Error...',
+                            text: 'Seleccione Medida del Producto!',
+                        })
+                    }else{
                             me.arrayDetalle.push({
                             cantidad: me.cantidad,
                             detallep: me.detallep,
@@ -244,8 +270,10 @@
                             me.producto='';
                             me.cantidad=0;
                             me.detallep='';
-                }
-                }
+                    }
+                 }
+                 }
+                 }
                 }
                  
                         

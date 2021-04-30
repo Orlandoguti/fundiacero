@@ -9,33 +9,26 @@ class DashboardController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $anio=date('Y');
 
-        $detalle_ingresos=DB::table('detalle_ingresos as di')
-        ->select(DB::raw('(di.idingreso) as idingreso'),
-        DB::raw('SUM(di.cantidad) as totalc'),
-        DB::raw('(di.fecha_hora) as fecha'))
-        ->whereYear('di.fecha_hora',$anio)
-        ->groupBy(DB::raw('(di.fecha_hora)'),DB::raw('(di.cantidad)'),DB::raw('(di.idingreso)'),DB::raw('(di.id)'))
-        ->get();
+        $detalle_ingresos=DB::select('SELECT  di.fecha_hora as fechai, di.idingreso, COUNT(di.idarticulo) AS totalc 
+        FROM detalle_ingresos as di
+        GROUP BY di.fecha_hora,di.idingreso
+        ORDER BY COUNT(di.idarticulo) DESC 
+        LIMIT 0 , 10');
 
-        $detalle_ventas=DB::table('detalle_ventas as dv')
-        ->select(DB::raw('(dv.idventa) as idventa'),
-        DB::raw('SUM(dv.cantidad) as totalv'),
-        DB::raw('(dv.fecha_hora) as fecha'))
-        ->whereYear('dv.fecha_hora',$anio)
-        ->groupBy(DB::raw('(dv.fecha_hora)'),DB::raw('(dv.cantidad)'),DB::raw('(dv.idventa)'),DB::raw('(dv.id)'))
-        ->get();
+        $detalle_ventas=DB::select('SELECT  dv.fecha_hora as fechav, dv.idventa, COUNT(dv.idarticulo) AS totalv
+                FROM detalle_ventas as dv
+                GROUP BY dv.fecha_hora,dv.idventa
+                ORDER BY COUNT(dv.idarticulo) DESC 
+                LIMIT 0 , 10');
 
        
 
-        $detalle_pedidos=DB::table('detalle_pedidos as dp')
-        ->select(DB::raw('(dp.idpedido) as idpedido'),
-        DB::raw('(dp.producto) as pro'),
-        DB::raw('(dp.fecha_hora) as fecha'),
-        DB::raw('(dp.cantidad) as totalp'))
-        ->groupBy(DB::raw('(dp.fecha_hora)'),DB::raw('(dp.cantidad)'),DB::raw('(dp.idpedido)'),DB::raw('(dp.id)'),DB::raw('(dp.producto)'))
-        ->get();
+        $detalle_pedidos=DB::select('SELECT  dv.fecha_hora as fechap, dv.idpedido, COUNT(dv.producto) AS totalp 
+        FROM detalle_pedidos as dv
+        GROUP BY dv.fecha_hora,dv.idpedido
+        ORDER BY COUNT(dv.producto) DESC 
+        LIMIT 0 , 10');
 
         $articulos=DB::table('articulos as a')
     		->join('categorias as c','a.idcategoria','=','c.id')
@@ -76,10 +69,12 @@ class DashboardController extends Controller
                     ORDER BY SUM(v.cantidad) DESC 
                     LIMIT 0 , 10');
 
+          
+           
 
-     
+   
  
-        return ['pedidos_area' => $pedidos_area,'productos_area' => $productos_area,'mas_ingresados' => $mas_ingresados,'mas_vendidos' => $mas_vendidos,'detalle_ingresos'=>$detalle_ingresos,'detalle_ventas'=>$detalle_ventas,'detalle_pedidos'=>$detalle_pedidos,'articulos'=>$articulos,'anio'=>$anio];      
+        return ['pedidos_area' => $pedidos_area,'productos_area' => $productos_area,'mas_ingresados' => $mas_ingresados,'mas_vendidos' => $mas_vendidos,'detalle_ingresos'=>$detalle_ingresos,'detalle_ventas'=>$detalle_ventas,'detalle_pedidos'=>$detalle_pedidos,'articulos'=>$articulos];      
  
     }
 }
