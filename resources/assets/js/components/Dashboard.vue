@@ -9,14 +9,18 @@
 	<section class="">
 			<section class="full-width header-well">
                            <div class="full-width header-well-icon">
+                            
                                <img src="/imagenes/icono.png" width="60" height="60" class="icono-fundi">
+                             
                             </div>
 							<div class="full-width header-well-text">
 							<p class="text-condensedLight ">Seccion Principal Fundiciones Fundiacero S.A.</p>
 							</div>
                 </section>
 		<section class="full-width" style="margin: 30px 0;">
+       <div width=100% style="text-align: center;"> 
 			<img src="/imagenes/Captura.png" width="300" class="logofundi">
+      </div>
 			<!-- TimeLine -->
 			<div id="timeline-c" class="timeline-c">
 				<div class="timeline-c-box">
@@ -140,10 +144,7 @@
 .datos{
     text-align: center;
 }
-.logofundi{
-    align-content: center;
-    margin-left: 35%;
-}
+
 </style>
 
 
