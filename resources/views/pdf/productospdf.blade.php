@@ -14,107 +14,157 @@
             line-height: 1.5;
             color: #151b1e;           
         }
-        .table {
-            display: table;
+        #container {
+            width:100%;
+            text-align:center;
+        }
+
+        #left {
+            text-align:center;
+            float:left;
+            width:30%;
+        }
+
+        #center {
+            padding-top:30px;
+            display: inline-block;
+            margin:0 auto;
+            width:30%;
+        }
+
+        #right {
+            float:right;
+            width:30%;
+        }
+        #imagen{
+            text-align:center;
+            width:60%;
+            height:50px;
+        }
+        #nuemrop{
+            margin-left:15px;
+            text-align:center;
+            width:100%;
+            font-size:15px;
+        }
+        #orden{
+        margin-top: 15px;
+        text-align:center;
+        font-size: 15px;
+        }
+
+        #encabezado{
+        text-align: center;
+        font-size: 12px;
+        }
+
+        #separado{
             width: 100%;
-            max-width: 100%;
-            margin-bottom: 1rem;
-            background-color: transparent;
-            border-collapse: collapse;
+            height:85px;
         }
-        .table-bordered {
-            border: 1px solid #c2cfd6;
+        section{
+        clear: left;
         }
-        thead {
-            display: table-header-group;
-            vertical-align: middle;
-            border-color: inherit;
+
+        #fac, #fv, #fa{
+        text-align: center;
+        color: 000000;
+        font-size: 12px;
         }
-        tr {
-            display: table-row;
-            vertical-align: inherit;
-            border-color: inherit;
-        }
-        .table th, .table td {
-            padding: 0.75rem;
-            vertical-align: top;
-            border-top: 1px solid #c2cfd6;
-        }
-        .table thead th {
-            vertical-align: bottom;
-            border-bottom: 2px solid #c2cfd6;
-        }
-        .table-bordered thead th, .table-bordered thead td {
-            border-bottom-width: 2px;
-        }
-        .table-bordered th, .table-bordered td {
-            border: 1px solid #c2cfd6;
+
+        table {
+         width: 100%;
+         border: 1px solid #000;
         }
         th, td {
-            display: table-cell;
-            vertical-align: inherit;
+            font-size:10px;
+        width: 25%;
+        text-align: center;
+        vertical-align: top;
+        border: 1px solid #000;
+        border-collapse: collapse;
+        padding: 0.3em;
+        caption-side: bottom;
+        }
+        caption {
+        padding: 0.3em;
+        color: #fff;
+            background: #000;
         }
         th {
-            font-weight: bold;
-            text-align: -internal-center;
-            text-align: left;
+        background: #eee;
         }
-        tbody {
-            display: table-row-group;
-            vertical-align: middle;
-            border-color: inherit;
+ 
+        #gracias{
+        margin-top:35px;
+        width: 380px;
+        display: flex;
+        text-align: center; 
+        margin-left:35px;
         }
-        tr {
-            display: table-row;
-            vertical-align: inherit;
-            border-color: inherit;
+        #gracias1{
+        float: left;
+        text-align: center; 
         }
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: rgba(0, 0, 0, 0.05);
+        #gracias2{
+        float: right;
+        text-align: center; 
         }
-        .izquierda{
-            float:left;
-        }
-        .derecha{
-            float:right;
+        #sello{
+            margin-top:20px;
         }
     </style>
 </head>
 <body>
+<header> 
+<div id="container">
+        <div id="left">
+        <p id="encabezado">
+        <b>Fundiciones Fundiacero S.A.</b><br>Warnes, Bolivia<br>Telefono - Celular:+(591)76621804<br>Email: central@fundiacero.com
+         </p>
+        </div>
+        <div id="center"><b id="orden">REPORTE DE PRODUCTOS</b></div>
+        <div id="right">
+        <div><img src="imagenes/Captura.png" alt="FUNDIACERO S.A." id="imagen"></div>
+        <div><p id="nuemrop">Fecha de Reporte <br> {{now()}}</p></div>
+        </div>           
     <div>
-        <h3>Lista de Productos <span class="derecha">{{now()}}</span></h3>
-    </div>
-    <div>
-        <table class="table table-bordered table-striped table-sm">
+    </header>
+    <div id="separado"></div>
+    <section >
+            <div>
+        <table id="facarticulo">
             <thead>
-                <tr>
-                    <th>Código</th>
+                <tr id="fa">
+                    <th>Area</th>
                     <th>Nombre</th>
-                    <th>Categoría</th>
-                    <th>Precio Venta</th>
+                    <th>Codigo</th>
                     <th>Stock</th>
-                    <th>Descripción</th>
-                    <th>Estado</th>
+                    <th>Marca</th>
+                    <th>Detalle</th>
+                    <th>Fecha de Registro</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach ($articulos as $a)
                 <tr>
-                    <td>{{$a->codigo}}</td>
+                    <td>{{$a->nombre_categoria}}</td>
                     <td>{{$a->nombre}}</td>
-                    <td>{{$a->categoria}}</td>
-                    <td>{{$a->unidad}}</td>
-                    <td>{{$a->precio_venta}}</td>
+                    <td>{{$a->codigo}}</td>
                     <td>{{$a->stock}}</td>
+                    <td>{{$a->marca}}</td>
                     <td>{{$a->descripcion}}</td>
-                    <td>{{$a->condicion?'Activo':'Desactivado'}}</td>
+                    <td>{{$a->created_at}}</td>
                 </tr>
                 @endforeach                               
             </tbody>
         </table>
+        </div>
+        </section>
     </div>
-    <div class="izquierda">
-        <p><strong>Total de registros: </strong>{{$cont}}</p>
-    </div>    
+    <table class="izquierda">
+    <tr><th>Total Productos Registrados</th>
+		<td>{{$cont}}</td></tr>
+    </table>    
 </body>
 </html>

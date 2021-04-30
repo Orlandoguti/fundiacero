@@ -210,7 +210,7 @@ class ArticuloController extends Controller
         ->join('unidads','articulos.idunidad','=','unidads.id')
         ->join('tiempos','articulos.idtiempo','=','tiempos.id')
         ->join('estados','articulos.idestado','=','estados.id')
-        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion')
+        ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion','articulos.created_at')
         ->orderBy('articulos.nombre', 'desc')->get();
         $fechaActual= date('Y-m-d');
         $cont=Articulo::count();

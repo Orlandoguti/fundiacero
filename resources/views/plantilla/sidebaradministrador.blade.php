@@ -1,4 +1,4 @@
-<notification :notifications="notifications"></notification>
+
 	<section class="full-width pageContent">
 		<!-- navBar -->
 		<div class="full-width navBar">
@@ -6,11 +6,7 @@
 				<i class="zmdi zmdi-swap btn-menu" id="btn-menu" tabindex="0"></i>	
 				<div class="mdl-tooltip" for="btn-menu" data-upgraded=",MaterialTooltip" style="left: 329px; margin-left: -50px; top: 55px;">Hide / Show MENU</div>
 				<nav class="navBar-options-list">
-					<ul class="list-unstyle">
-						<li class="btn-Notification" id="notifications" tabindex="0">
-							<i class="zmdi zmdi-notifications"></i>
-							<div class="mdl-tooltip" for="notifications" data-upgraded=",MaterialTooltip">Notifications</div>
-						</li>
+					<ul class="list-unstyle">					
 					
 						<li class="btn-exit" id="btn-exit" tabindex="0">
 							<i class="zmdi zmdi-power" ></i>
