@@ -1256,21 +1256,23 @@ text-align: center; }
       border: 0; } }
 
 .form-control {
+  border: none;
+  border-bottom: 1px solid rgb(255 255 255 / 27%);
   display: block;
+  font-size: 16px;
+  font-family: "Helvetica","Arial",sans-serif;
+  margin: 0;
+  padding: 4px 0;
   width: 100%;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.75rem;
-  line-height: 1.25;
-  color: #000000;
-  background-color: rgb(255, 255, 255);
-  background-image: none;
-  background-clip: padding-box;
-  border: 1px solid #c2cfd6;
-  border-radius: 0;
+  background: 0 0;
+  text-align: left;
+  color: inherit;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; }
   .form-control::-ms-expand {
-    background-color: transparent;
-    border: 0; }
+    color: #ffffff;
+    font-size: 12px;
+    top: 4px;
+    visibility: visible; }
   .form-control:focus {
     color: #000000;
     background-color: #fff;
@@ -1414,7 +1416,7 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   display: none;
   margin-top: .25rem;
   font-size: .875rem;
-  color: #f86c6b; }
+  color: #f1f1f1; }
 
 .invalid-tooltip {
   position: absolute;
@@ -1427,13 +1429,13 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   font-size: .875rem;
   line-height: 1;
   color: #fff;
-  background-color: rgba(248, 108, 107, 0.8);
+  background-color: rgba(170, 27, 206, 0.8);
   border-radius: .2rem; }
 
-.was-validated .form-control:valid, .form-control.is-valid, .was-validated
+.was-validated .mdl-textfield__input:valid, .mdl-textfield__input.is-valid, .was-validated
 .custom-select:valid,
 .custom-select.is-valid {
-  border-color: wheat;
+  border-color: rgb(255, 253, 250);
   background-color: transparent;
   font-size: 17px;
   padding: 10px 10px 10px 5px;
@@ -1442,13 +1444,13 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
   border: none;
   border-bottom: 1px solid #fff;
   outline: none; }
-  .was-validated .form-control:valid:focus, .form-control.is-valid:focus, .was-validated
+  .was-validated .mdl-textfield__input:valid:focus, .mdl-textfield__input.is-valid:focus, .was-validated
   .custom-select:valid:focus,
   .custom-select.is-valid:focus {
-    box-shadow: 0 0 0 0.2rem wheat; }
-  .was-validated .form-control:valid ~ .invalid-feedback,
-  .was-validated .form-control:valid ~ .invalid-tooltip, .form-control.is-valid ~ .invalid-feedback,
-  .form-control.is-valid ~ .invalid-tooltip, .was-validated
+    box-shadow: 0 0 0 0.2rem rgba(179, 245, 185, 0); }
+  .was-validated .mdl-textfield__input:valid ~ .invalid-feedback,
+  .was-validated .mdl-textfield__input:valid ~ .invalid-tooltip, .mdl-textfield__input.is-valid ~ .invalid-feedback,
+  .mdl-textfield__input.is-valid ~ .invalid-tooltip, .was-validated
   .custom-select:valid ~ .invalid-feedback,
   .was-validated
   .custom-select:valid ~ .invalid-tooltip,
@@ -1473,17 +1475,17 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 .was-validated .custom-file-input:valid:focus, .custom-file-input.is-valid:focus {
   box-shadow: 0 0 0 0.2rem rgba(77, 189, 116, 0.25); }
 
-.was-validated .form-control:invalid, .form-control.is-invalid, .was-validated
+.was-validated .mdl-textfield__input:invalid, .mdl-textfield__input.is-invalid, .was-validated
 .custom-select:invalid,
 .custom-select.is-invalid {
   border-color: #f86c6b; }
-  .was-validated .form-control:invalid:focus, .form-control.is-invalid:focus, .was-validated
+  .was-validated .mdl-textfield__input:invalid:focus, .mdl-textfield__input.is-invalid:focus, .was-validated
   .custom-select:invalid:focus,
   .custom-select.is-invalid:focus {
     box-shadow: 0 0 0 0.2rem rgba(248, 108, 107, 0.25); }
-  .was-validated .form-control:invalid ~ .invalid-feedback,
-  .was-validated .form-control:invalid ~ .invalid-tooltip, .form-control.is-invalid ~ .invalid-feedback,
-  .form-control.is-invalid ~ .invalid-tooltip, .was-validated
+  .was-validated .mdl-textfield__input:invalid ~ .invalid-feedback,
+  .was-validated .mdl-textfield__input:invalid ~ .invalid-tooltip, .mdl-textfield__input.is-invalid ~ .invalid-feedback,
+  .mdl-textfield__input.is-invalid ~ .invalid-tooltip, .was-validated
   .custom-select:invalid ~ .invalid-feedback,
   .was-validated
   .custom-select:invalid ~ .invalid-tooltip,
@@ -1492,16 +1494,16 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
     display: block; }
 
 .was-validated .form-check-input:invalid + .form-check-label, .form-check-input.is-invalid + .form-check-label {
-  color: #f86c6b; }
+  color: #17c434; }
 
 .was-validated .custom-control-input:invalid ~ .custom-control-indicator, .custom-control-input.is-invalid ~ .custom-control-indicator {
   background-color: rgba(248, 108, 107, 0.25); }
 
 .was-validated .custom-control-input:invalid ~ .custom-control-description, .custom-control-input.is-invalid ~ .custom-control-description {
-  color: #f86c6b; }
+  color: #856bf8; }
 
 .was-validated .custom-file-input:invalid ~ .custom-file-control, .custom-file-input.is-invalid ~ .custom-file-control {
-  border-color: #f86c6b; }
+  border-color: #80a586; }
   .was-validated .custom-file-input:invalid ~ .custom-file-control::before, .custom-file-input.is-invalid ~ .custom-file-control::before {
     border-color: inherit; }
 
@@ -1536,15 +1538,15 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
       -ms-flex-align: center;
           align-items: center;
       margin-bottom: 0; }
-    .form-inline .form-control {
+    .form-inline .mdl-textfield__input {
       display: inline-block;
       width: auto;
       vertical-align: middle; }
-    .form-inline .form-control-plaintext {
+    .form-inline .mdl-textfield__input-plaintext {
       display: inline-block; }
     .form-inline .input-group {
       width: auto; }
-    .form-inline .form-control-label {
+    .form-inline .mdl-textfield__input-label {
       margin-bottom: 0;
       align-content: center; }
     .form-inline .form-check {

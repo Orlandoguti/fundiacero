@@ -3,8 +3,9 @@
 
     @if(Auth::check())
             @if (Auth::user()->idrol == 1)
+            
             <template v-if="menu==0">
-                <dashboard></dashboard>
+            <home></home>
             </template>
 
             <template v-if="menu==1">
@@ -46,31 +47,24 @@
             <consultaventa></consultaventa>
             </template>
 
-            <template v-if="menu==11">
-                <h1>Ayuda</h1>
+            <template v-if="menu==13">
+                <dashboard></dashboard>
             </template>
 
-            <template v-if="menu==12">
-                <h1>Acerca de</h1>
-            </template>
-            <template v-if="menu==13">
-            <home></home>
-            </template>
             <template v-if="menu==14">
             <pedido></pedido>
             </template>
             <template v-if="menu==15">
                 <consultapedido></consultapedido>
             </template>
+
             @elseif (Auth::user()->idrol == 2)
+
+            
             <template v-if="menu==0">
-                <dashboard></dashboard>
+            <home></home>
             </template>
-
-            <template v-if="menu==17">
-                <categoriaalma></categoriaalma>
-            </template>
-
+            
             <template v-if="menu==2">
                 <articulo></articulo>
             </template>
@@ -91,24 +85,33 @@
             </template>
 
             <template v-if="menu==13">
-            <home></home>
+                <dashboard></dashboard>
             </template>
+
             <template v-if="menu==14">
             <pedido></pedido>
             </template>
             <template v-if="menu==15">
                 <consultapedido></consultapedido>
             </template>
+
+            <template v-if="menu==17">
+                <categoriaalma></categoriaalma>
+            </template>
+
             @elseif (Auth::user()->idrol == 3)
             <template v-if="menu==0">
-                <dashboard></dashboard>
-            </template>
-            <template v-if="menu==13">
             <home></home>
             </template>
+            
+            <template v-if="menu==13">
+                <dashboard></dashboard>
+            </template>
+
             <template v-if="menu==14">
             <pedido></pedido>
             </template>
+
             <template v-if="menu==16">
             <articuloarea></articuloarea>
             </template>

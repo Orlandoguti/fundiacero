@@ -4,7 +4,7 @@
 		<div class="full-width navBar">
 			<div class="full-width navBar-options">
 				<i class="zmdi zmdi-swap btn-menu" id="btn-menu" tabindex="0"></i>	
-				<div class="mdl-tooltip" for="btn-menu" data-upgraded=",MaterialTooltip" style="left: 329px; margin-left: -50px; top: 55px;">Hide / Show MENU</div>
+				<div class="mdl-tooltip" for="btn-menu" data-upgraded=",MaterialTooltip" style="left: 329px; margin-left: -50px; top: 55px;">Hide / Ver Menu</div>
 				<nav class="navBar-options-list">
 					<ul class="list-unstyle">					
 					

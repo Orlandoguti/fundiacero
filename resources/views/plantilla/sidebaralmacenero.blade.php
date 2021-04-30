@@ -34,7 +34,8 @@
 		<div class="full-width navLateral-bg btn-menu"></div>
 		<div class="full-width navLateral-body mCustomScrollbar _mCS_3 mCS-autoHide mCS_no_scrollbar"><div  class="mCustomScrollBox mCS-light-thin mCSB_vertical mCSB_inside" tabindex="0" style="max-height: 100%;"><div id="mCSB_3_container" class="mCSB_container mCS_y_hidden mCS_no_scrollbar_y" style="position:relative; top:0; left:0;" dir="ltr">
 			<div class="full-width navLateral-body-logo text-center tittles">
-				<i class="zmdi zmdi-close btn-menu"></i> FUNDIACERO S.A. 
+			<a href="/"><img src="imagenes/logo.png" width="150px" height="70px" href="/"></a>
+				<i class="zmdi zmdi-close btn-menu"></i> 
 			</div>
 			<figure class="full-width navLateral-body-tittle-menu">
 				<div>
@@ -61,7 +62,7 @@
 							<span class="zmdi zmdi-chevron-left"></span>
 						</a>
 						<ul class="full-width menu-principal sub-menu-options">
-						<li @click="menu=13" class="full-width">
+						<li @click="menu=0" class="full-width">
 								<a href="#" class="full-width">
 									<div class="navLateral-body-cl">
 										<i class="zmdi zmdi-view-dashboard"></i>

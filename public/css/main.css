@@ -932,6 +932,7 @@ html, body{
     background: 0 0;
     text-align: left;
     color: inherit;
+	transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s; 
 }
 .mdl-textfield--floating-label.is-focused .mdl-textfield__label, .mdl-textfield--floating-label.is-dirty .mdl-textfield__label, .mdl-textfield--floating-label.has-placeholder .mdl-textfield__label {
     color: #ffffff;
@@ -939,4 +940,3 @@ html, body{
     top: 4px;
     visibility: visible;
 }
-
