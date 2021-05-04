@@ -81,6 +81,15 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/articulo/listarArticuloVenta', 'ArticuloController@listarArticuloVenta');
         Route::get('/articulo/buscarArticuloVenta', 'ArticuloController@buscarArticuloVenta');
         Route::get('/articulo/listarPdf', 'ArticuloController@listarPdf')->name('articulos_pdf');
+        Route::get('/articulo/listarPdfarea1', 'ArticuloController@listarPdfarea1')->name('articulosarea1_pdf');
+        Route::get('/articulo/listarPdfarea2', 'ArticuloController@listarPdfarea2')->name('articulosarea2_pdf');
+        Route::get('/articulo/listarPdfarea3', 'ArticuloController@listarPdfarea3')->name('articulosarea3_pdf');
+        Route::get('/articulo/listarPdfarea4', 'ArticuloController@listarPdfarea4')->name('articulosarea4_pdf');
+        Route::get('/articulo/listarPdfarea5', 'ArticuloController@listarPdfarea5')->name('articulosarea5_pdf');
+        Route::get('/articulo/listarPdfarea6', 'ArticuloController@listarPdfarea6')->name('articulosarea6_pdf');
+        Route::get('/articulo/listarPdfarea7', 'ArticuloController@listarPdfarea7')->name('articulosarea7_pdf');
+        Route::get('/articulo/listarPdfarea8', 'ArticuloController@listarPdfarea8')->name('articulosarea8_pdf');
+        Route::get('/articulo/listarPdfarea9', 'ArticuloController@listarPdfarea9')->name('articulosarea9_pdf');
 
        
         Route::get('/venta', 'VentaController@index');
@@ -153,6 +162,15 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/articulo/listarArticuloVenta', 'ArticuloController@listarArticuloVenta');
         Route::get('/articulo/buscarArticuloVenta', 'ArticuloController@buscarArticuloVenta');
         Route::get('/articulo/listarPdf', 'ArticuloController@listarPdf')->name('articulos_pdf');
+        Route::get('/articulo/listarPdfarea1', 'ArticuloController@listarPdfarea1')->name('articulosarea1_pdf');
+        Route::get('/articulo/listarPdfarea2', 'ArticuloController@listarPdfarea2')->name('articulosarea2_pdf');
+        Route::get('/articulo/listarPdfarea3', 'ArticuloController@listarPdfarea3')->name('articulosarea3_pdf');
+        Route::get('/articulo/listarPdfarea4', 'ArticuloController@listarPdfarea4')->name('articulosarea4_pdf');
+        Route::get('/articulo/listarPdfarea5', 'ArticuloController@listarPdfarea5')->name('articulosarea5_pdf');
+        Route::get('/articulo/listarPdfarea6', 'ArticuloController@listarPdfarea6')->name('articulosarea6_pdf');
+        Route::get('/articulo/listarPdfarea7', 'ArticuloController@listarPdfarea7')->name('articulosarea7_pdf');
+        Route::get('/articulo/listarPdfarea8', 'ArticuloController@listarPdfarea8')->name('articulosarea8_pdf');
+        Route::get('/articulo/listarPdfarea9', 'ArticuloController@listarPdfarea9')->name('articulosarea9_pdf');
 
         Route::get('/proveedor', 'ProveedorController@index');
         Route::post('/proveedor/registrar', 'ProveedorController@store');

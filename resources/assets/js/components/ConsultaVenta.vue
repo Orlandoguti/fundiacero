@@ -1,3 +1,7 @@
+ <!-- Proyecto Fundiacero Realiado por Ingeniero: Orlando Marvin Gutierrez Hidalgo -->
+ <!-- Sistema Realizado el 2021 -->
+ <!-- Universidad Privada Franz Tamayo -->
+
 <template>
             <main class="main">
             <!-- Breadcrumb -->
@@ -26,12 +30,12 @@
                         <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
-                                    <select class="form-control col-md-4" v-model="criterio">
+                                    <select class="form-control2 col-md-4" v-model="criterio">
                                       <option value="id">Nº Despacho</option>
                                       <option value="serie_comprobante">Nombre Solicitante</option>
                                       <option value="fecha_hora">Fecha-Hora</option>
                                     </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                    <input type="text" v-model="buscar" @keyup.enter="listarVenta(1,buscar,criterio)" class="form-control2" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarVenta(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
@@ -122,12 +126,13 @@
                             </div>
                         </div>
                         <div class="form-group row border">
-                            <div class="table-responsive col-md-12">
-                                <table class="table table-bordered table-striped table-sm">
+                           <div class="table-responsive">
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                     <thead>
                                         <tr>
                                             <th>Producto</th>
                                             <th>Cantidad</th>
+                                            <th>Medida</th>
                                         </tr>
                                     </thead>
                                     <tbody v-if="arrayDetalle.length">
@@ -135,6 +140,8 @@
                                             <td v-text="detalle.articulo">
                                             </td>
                                             <td v-text="detalle.cantidad">
+                                            </td>
+                                            <td v-text="detalle.unidad">
                                             </td>
                                        </tr>
                                     </tbody>  

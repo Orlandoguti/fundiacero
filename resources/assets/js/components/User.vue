@@ -104,6 +104,7 @@
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <i class="zmdi zmdi-washing-machine"></i>
                             <h4 class="modal-title" v-text="tituloModal"></h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
@@ -762,9 +763,9 @@
                                 this.telefono = data['telefono'];
                                 this.email = data['email'];
                                 this.usuario = data['usuario'];
-                                this.password=data['password'];
-                                this.idrol=data['idrol'];
-                                this.imagen=data['imagen'];
+                                this.password = data['password'];
+                                this.idrol = data['idrol'];
+                                this.imagen = data['imagen'];
                                 break;
                             }
                         }

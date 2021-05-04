@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Crypt;
 use App\Articulo;
@@ -205,13 +206,195 @@ class ArticuloController extends Controller
             'articulos' => $articulos
         ];
     }
+
+    public function listarPdfarea1(){
+        $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=1
+        GROUP BY a.idcategoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        ORDER BY (a.idcategoria) ASC');
+
+
+        $count=DB::select('SELECT COUNT(a.condicion) AS totalproductos 
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=1
+        GROUP BY a.idcategoria');
+     
+        $fechaActual= date('Y-m-d');
+
+        $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
+        return $pdf->download($fechaActual.'.pdf');
+    }
+    public function listarPdfarea2(){
+        $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=2
+        GROUP BY a.idcategoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        ORDER BY (a.idcategoria) ASC');
+
+
+        $count=DB::select('SELECT COUNT(a.condicion) AS totalproductos 
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=2
+        GROUP BY a.idcategoria');
+     
+        $fechaActual= date('Y-m-d');
+
+        $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
+        return $pdf->download($fechaActual.'.pdf');
+    }
+    public function listarPdfarea3(){
+        $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=3
+        GROUP BY a.idcategoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        ORDER BY (a.idcategoria) ASC');
+
+
+        $count=DB::select('SELECT COUNT(a.condicion) AS totalproductos 
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=3
+        GROUP BY a.idcategoria');
+     
+        $fechaActual= date('Y-m-d');
+
+        $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
+        return $pdf->download($fechaActual.'.pdf');
+    }
+    public function listarPdfarea4(){
+        $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=4
+        GROUP BY a.idcategoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        ORDER BY (a.idcategoria) ASC');
+
+
+        $count=DB::select('SELECT COUNT(a.condicion) AS totalproductos 
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=4
+        GROUP BY a.idcategoria');
+     
+        $fechaActual= date('Y-m-d');
+
+        $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
+        return $pdf->download($fechaActual.'.pdf');
+    }
+    public function listarPdfarea5(){
+        $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=5
+        GROUP BY a.idcategoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        ORDER BY (a.idcategoria) ASC');
+
+
+        $count=DB::select('SELECT COUNT(a.condicion) AS totalproductos 
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=5
+        GROUP BY a.idcategoria');
+     
+        $fechaActual= date('Y-m-d');
+
+        $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
+        return $pdf->download($fechaActual.'.pdf');
+    }
+    public function listarPdfarea6(){
+        $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=6
+        GROUP BY a.idcategoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        ORDER BY (a.idcategoria) ASC');
+
+
+        $count=DB::select('SELECT COUNT(a.condicion) AS totalproductos 
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=6
+        GROUP BY a.idcategoria');
+     
+        $fechaActual= date('Y-m-d');
+
+        $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
+        return $pdf->download($fechaActual.'.pdf');
+    }
+    public function listarPdfarea7(){
+        $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=7
+        GROUP BY a.idcategoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        ORDER BY (a.idcategoria) ASC');
+
+
+        $count=DB::select('SELECT COUNT(a.condicion) AS totalproductos 
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=7
+        GROUP BY a.idcategoria');
+     
+        $fechaActual= date('Y-m-d');
+
+        $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
+        return $pdf->download($fechaActual.'.pdf');
+    }
+    public function listarPdfarea8(){
+        $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=8
+        GROUP BY a.idcategoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        ORDER BY (a.idcategoria) ASC');
+
+
+        $count=DB::select('SELECT COUNT(a.condicion) AS totalproductos 
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=8
+        GROUP BY a.idcategoria');
+     
+        $fechaActual= date('Y-m-d');
+
+        $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
+        return $pdf->download($fechaActual.'.pdf');
+    }
+    public function listarPdfarea9(){
+        $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=9
+        GROUP BY a.idcategoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
+        ORDER BY (a.idcategoria) ASC');
+
+
+        $count=DB::select('SELECT COUNT(a.condicion) AS totalproductos 
+        FROM articulos as a 
+        JOIN categorias as ca 
+        WHERE ca.id = a.idcategoria AND a.idcategoria=9
+        GROUP BY a.idcategoria');
+     
+        $fechaActual= date('Y-m-d');
+
+        $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
+        return $pdf->download($fechaActual.'.pdf');
+    }
+
     public function listarPdf(){
         $articulos = Articulo::join('categorias','articulos.idcategoria','=','categorias.id')
         ->join('unidads','articulos.idunidad','=','unidads.id')
         ->join('tiempos','articulos.idtiempo','=','tiempos.id')
         ->join('estados','articulos.idestado','=','estados.id')
         ->select('articulos.id','articulos.idcategoria','articulos.idunidad','articulos.idtiempo','articulos.idestado','articulos.codigo','articulos.nombre','categorias.nombre as nombre_categoria','unidads.nombre as nombre_unidad','tiempos.nombre as nombre_tiempo','estados.nombre as nombre_estado','articulos.stock','articulos.tiempo','articulos.descripcion','articulos.marca','articulos.imagen','articulos.condicion','articulos.created_at')
-        ->orderBy('articulos.nombre', 'desc')->get();
+        ->orderBy('categorias.id','articulos.created_at', 'desc')->get();
         $fechaActual= date('Y-m-d');
         $cont=Articulo::count();
 
@@ -313,3 +496,4 @@ class ArticuloController extends Controller
     }
 
 }
+

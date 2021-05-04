@@ -1,3 +1,7 @@
+ <!-- Proyecto Fundiacero Realiado por Ingeniero: Orlando Marvin Gutierrez Hidalgo -->
+ <!-- Sistema Realizado el 2021 -->
+ <!-- Universidad Privada Franz Tamayo -->
+
 <template>
 <main class="main">
   <ol class="breadcrumb">
@@ -53,7 +57,7 @@
 	                    <i class="zmdi zmdi-library"></i>
 	                </div>
 	                <div class="timeline-c-box-content">
-	                    <h4 class="text-center text-condensedLight"> </h4>
+	                    <h4 class="text-center text-condensedLight">Almacen</h4>
 	                    <p class="text-center">
 	                    	La seccion de Almacen Contiene todos los productos de la Empresa Fundiacero S.A. con sus respectivos datos y detalles que tenga dicho producto como tambien se hace una generacion de reporte de todos los productos Tambien Contiene la Seccion de Pedidos de Productos.
 	                    </p>

@@ -1,3 +1,7 @@
+ <!-- Proyecto Fundiacero Realiado por Ingeniero: Orlando Marvin Gutierrez Hidalgo -->
+ <!-- Sistema Realizado el 2021 -->
+ <!-- Universidad Privada Franz Tamayo -->
+
 <template>
             <main class="main">
             <!-- Breadcrumb -->
@@ -80,7 +84,8 @@
                                             <option value="Toneladas" >Toneladas</option>
                                             <option value="Litros" >Litros</option>
                                             <option value="Metros" >Metros</option>
-
+                                             <option value="m3" >m3</option>
+                                            <option value="Par" >Par</option>
                                 </select>
                                 </div>
                             </div>

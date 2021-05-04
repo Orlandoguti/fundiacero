@@ -1,3 +1,7 @@
+ <!-- Proyecto Fundiacero Realiado por Ingeniero: Orlando Marvin Gutierrez Hidalgo -->
+ <!-- Sistema Realizado el 2021 -->
+ <!-- Universidad Privada Franz Tamayo -->
+
 <template>
             <main class="main">
             <!-- Breadcrumb -->
@@ -81,8 +85,8 @@
                             </div>
                         </div>
                         <div class="form-group row border">
-                            <div class="table-responsive col-md-12">
-                                <table class="table table-bordered table-striped table-sm">
+                          <div class="table-responsive">
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                     <thead>
                                         <tr>
                                             <th>Opciones</th>
@@ -136,6 +140,7 @@
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <i class="zmdi zmdi-washing-machine"></i>
                             <h4 class="modal-title" v-text="tituloModal"></h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>
@@ -143,32 +148,33 @@
                         </div>
                         <div class="modal-body">
                           <div class="form-group row">
-                                <div class="col-md-13">
+                                <div class="col-md-12">
                                 <div class="input-group">
-                                       <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control col-md-5">
+                                       <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control2 col-md-5">
                                             <option value="" disabled>Seleccione la Area</option>
                                             <option value="">Todos</option>
                                              <option value="1">laminacion</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
-                                    <select class="form-control col-md-4" v-model="criterioA">
+                                    <select class="form-control2 col-md-4" v-model="criterioA">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                       <option value="codigo">Codigo</option>
                                     </select>
-                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(1,buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(1,buscarA,criterioA)" class="form-control2" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarArticulo(1,buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
                         </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-sm">
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                  <thead>
                                  <tr>
                                     <th>Opciones</th>
                                     <th>Nombre</th>
                                     <th>Area</th>
                                     <th>Stock</th>
+                                    <th>Medida</th>
                                     <th>Estado</th>
                                     </tr>
                                    </thead>
@@ -182,6 +188,7 @@
                                     <td v-text="articulo.nombre"></td>
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.stock"></td>
+                                    <td v-text="articulo.nombre_unidad"></td>
                                     <td>
                                         <div v-if="articulo.condicion">
                                             <span class="badge badge-success">Activo</span>
@@ -194,7 +201,8 @@
                                 </tr>                                
                             </tbody>
                         </table>
-                           <nav>
+                      </div>
+                         <nav>
                             <ul class="pagination">
                                 <li class="page-item" v-if="pagination.current_page > 1">
                                     <a class="page-link" href="#" @click.prevent="cambiarPagina(pagination.current_page - 1,buscar,criterio)">Ant</a>
@@ -207,7 +215,6 @@
                                 </li>
                             </ul>
                         </nav>
-                      </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" @click="cerrarModal()">Cerrar</button>

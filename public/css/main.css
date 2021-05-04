@@ -86,7 +86,11 @@ html, body{
 	height: 100%;
 
 }
-.text-condensedLight{ font-family: "RobotoCondensedLight"; }
+.text-condensedLight2{ 
+	color: #11385c;
+	font-family: "RobotoCondensedLight"; }
+.text-condensedLight{ 
+	font-family: "RobotoCondensedLight"; }
 .text-center{ text-align: center; }
 .tittles{ font-family: "OswaldLight"; }
 .mdl-textfield{ width: 100%; }
@@ -337,7 +341,7 @@ html, body{
 /*=============Estilos barra superior*/
 .navBar{
 	background-color: var(--primary-color);
-	height: 45px;
+	height: 48px;
 	color: #fff;
 }
 .navBar-options{

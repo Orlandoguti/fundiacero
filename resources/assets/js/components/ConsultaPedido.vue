@@ -1,3 +1,7 @@
+ <!-- Proyecto Fundiacero Realiado por Ingeniero: Orlando Marvin Gutierrez Hidalgo -->
+ <!-- Sistema Realizado el 2021 -->
+ <!-- Universidad Privada Franz Tamayo -->
+
 <template>
             <main class="main">
             <!-- Breadcrumb -->
@@ -121,8 +125,8 @@
                             </div>                     
                         </div>
                         <div class="form-group row border">
-                            <div class="table-responsive col-md-12">
-                                <table class="table table-bordered table-striped table-sm">
+                            <div class="table-responsive">
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp full-width table-responsive">
                                     <thead>
                                         <tr>
                                             <th>Producto</th>

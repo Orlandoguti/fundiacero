@@ -24,7 +24,7 @@
               </div>
               <div class="row" style="place-content: center;">
                 <div class="col-6">
-                  <button type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #3F51B5; margin: 0 auto; display: block;">Acceder</button>
+                  <button type="submit" class="mdl-button mdl-js-button mdl-js-ripple-effect" style="color: #bac1eb; margin: 0 auto; display: block;">Acceder</button>
                 </div>
               </div>
             </div>

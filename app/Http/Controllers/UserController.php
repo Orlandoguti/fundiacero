@@ -117,6 +117,7 @@ class UserController extends Controller
             $user->condicion = '1';
             $user->idrol = $request->idrol;
             $user->rolnombre = $request->rolnombre;
+            $user->nombreuser = $request->nombreuser;
             $user->save();
 
             DB::commit();

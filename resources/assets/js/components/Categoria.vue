@@ -1,3 +1,7 @@
+ <!-- Proyecto Fundiacero Realiado por Ingeniero: Orlando Marvin Gutierrez Hidalgo -->
+ <!-- Sistema Realizado el 2021 -->
+ <!-- Universidad Privada Franz Tamayo -->
+
 <template>
             <main class="main">
             <!-- Breadcrumb -->
@@ -27,12 +31,12 @@
                         <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
-                                    <select class="form-control col-md-4" v-model="criterio">
+                                    <select class="form-control2 col-md-4" v-model="criterio">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                       <option value="encargado">Encargado</option>
                                     </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                    <input type="text" v-model="buscar" @keyup.enter="listarCategoria(1,buscar,criterio)" class="form-control2" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarCategoria(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar </button>
                                 </div>
                             </div>
@@ -105,6 +109,7 @@
                 <div class="modal-dialog modal-primary modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
+                            <i class="zmdi zmdi-washing-machine"></i>
                             <h4 class="modal-title" v-text="tituloModal"></h4>
                             <button type="button" class="close" @click="cerrarModal()" aria-label="Close">
                               <span aria-hidden="true">×</span>

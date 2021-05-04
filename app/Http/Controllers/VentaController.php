@@ -96,8 +96,8 @@ class VentaController extends Controller
  
         $id = $request->id;
         $detalles = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
-        ->select('detalle_ventas.cantidad',
-        'articulos.nombre as articulo','detalle_ventas.fecha_hora')
+        ->join('unidads','articulos.idunidad','=','unidads.id')
+        ->select('detalle_ventas.cantidad','articulos.nombre as articulo','unidads.nombre as unidad','detalle_ventas.fecha_hora')
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id', 'desc')->get();
          

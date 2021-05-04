@@ -24,7 +24,7 @@
                         <button type="button" @click="abrirModal('articulo','registrar')" class="btn btn-primary float-right">
                             <i class="icon-plus"></i>&nbsp; Registrar Producto
                         </button>
-                         <button type="button" @click="cargarPdf()" class="btn btn-info float-right">
+                         <button type="button" @click="modalReporte('reporte','generar')" class="btn btn-info float-right">
                             <i class="icon-doc"></i>&nbsp;Reporte
                         </button>
                     </div>
@@ -37,17 +37,17 @@
                  <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
-                                        <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control col-md-4">
+                                        <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control2 col-md-4">
                                             <option value="" disabled>Seleccione la Area</option>
                                             <option value="">Todos</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
-                                    <select class="form-control col-md-3" v-model="criterioA">
+                                    <select class="form-control2 col-md-3" v-model="criterioA">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                       <option value="codigo">Codigo</option>
                                     </select>
-                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(1,buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(1,buscarA,criterioA)" class="form-control2" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarArticulo(1,buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
@@ -230,6 +230,61 @@
                     </div>
                 </template>
             </div>
+            <div class="modal fade" tabindex="-1" :class="{'mostrar' : modalrep}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog modal-primary modal-lg" role="document">
+                    <div class="modal-content">
+                        <div>
+                            
+                        </div>
+                        <div class="modal-header">
+                            <i class="zmdi zmdi-washing-machine"></i>
+                            <h4 class="modal-title" v-text="tituloModal"></h4>
+                            <button type="button" class="close" @click="cerrarModalrep()" aria-label="Close">
+                              <span aria-hidden="true">x</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <div style=" text-align: center;">
+                            <button type="button" @click="cargarPdf()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Todos
+                             </button>                          
+                           <button type="button" @click="cargarPdf1()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Almacen General
+                        </button>
+                           <button type="button" @click="cargarPdf2()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Electricidad
+                        </button>
+                           <button type="button" @click="cargarPdf3()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Chatarra
+                        </button>
+                           <button type="button" @click="cargarPdf4()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Fundicion y Colada Continua
+                        </button>
+                           <button type="button" @click="cargarPdf5()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Laminacion en Caliente
+                        </button>
+                         <button type="button" @click="cargarPdf6()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Laminacion en Frio
+                        </button>
+                         <button type="button" @click="cargarPdf7()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Mantenimiento
+                        </button>
+                         <button type="button" @click="cargarPdf8()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Oficina
+                        </button>
+                         <button type="button" @click="cargarPdf9()" class="btn btn-rep">
+                            <i class="icon-doc"></i>&nbsp;Torneria
+                        </button>
+                        </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" @click="cerrarModalrep()">Cerrar</button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
             
             <!--Inicio del modal agregar/actualizar-->
             <div class="modal fade" tabindex="-1" :class="{'mostrar' : modal}" role="dialog" aria-labelledby="myModalLabel" style="display: none;" aria-hidden="true">
@@ -243,58 +298,59 @@
                             </button>
                         </div>
                         <div class="modal-body">
+                            
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Area</label>
-                                    <div class="col-md-9">
+                                    <div class="col-md-12" style="display: flex;">
+                                    <div class="col-md-6">
+                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Nombre de Producto:</legend>
+                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Producto" >                                        
+                                    </div>
+                                      <div class="col-md-6">
+                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Area:</legend>
                                         <select class="form-control" v-model="idcategoria">
                                             <option value="0" disabled>Seleccione la Area</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>                                        
                                     </div>
                                 </div>
-                      
-                                <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
-                                    <div class="col-md-5">
-                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Producto" >                                        
-                                    </div>
-                                    <div class="col-md-4">
-                                    <select class="form-control" v-model="idestado">
-                                            <option value="0" disabled>Estado del Producto</option>
-                                            <option v-for="estado in arrayEstado" :key="estado.id" :value="estado.id" v-text="estado.nombre"></option>
-                                    </select>
-                                    </div>
                                 </div>
-                                          <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Código</label>
-                                    <div class="col-md-9">
+                                <div class="form-group row">
+                                 <div class="col-md-12" style="display: flex;">
+                                    <div class="col-md-6">
+                                    <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Codigo:</legend>
                                         <input type="text" v-model="codigo" class="form-control" placeholder="Ingrese Codigo de Producto - AL-T0001"> 
                                         <barcode :value="codigo" :options="{ format: 'EAN-13' }">  
                                         </barcode>                                       
                                     </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="email-input">Marca</label>
-                                    <div class="col-md-9">
+                                     <div class="col-md-6">
+                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Marca:</legend>
                                         <input type="email" v-model="marca" class="form-control" placeholder="Ingrese Marca del Producto">
                                     </div>
                                 </div>
+                                </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Cantidad</label>
-                                    <div class="col-md-4">
+                                    <div class="col-md-12" style="display: flex;">
+                                    <div class="col-md-6">
+                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Cantidad:</legend>
                                         <input type="number" v-model="stock" class="form-control" placeholder="">                                                     
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
+                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Medida:</legend>
                                      <select class="form-control" v-model="idunidad">
                                             <option value="0" disabled>Seleccione Unidad</option>
                                             <option v-for="unidad in arrayUnidad" :key="unidad.id" :value="unidad.id" v-text="unidad.nombre"></option>
                                         </select>
                                     </div>
                                 </div>
+                                </div>
                                  <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="text-input">Garantia</label>
-                                      <div class="col-md-4">
+                                     <div class="col-md-12" style="display: flex;">
+                                         <div class="col-md-4">
+                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Garantia:</legend>
+                                      </div>
+                                      <div class="col-md-2">
+                                          
                                       <label class="radio-inline">
                                         <input type="radio" v-model="exp" value="1"> SI
                                         <label><label></label></label>
@@ -311,20 +367,34 @@
                                         </select>
                                     </div>
                                 </div>
+                                </div>
                                   <div class="form-group row">
-                                    <label class="col-md-3 form-control-label" for="email-input">Descripción</label>
-                                    <div class="col-md-9">
+                                      <div class="col-md-12" style="display: flex;">
+                                    <div class="col-md-6">
+                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Descripcion:</legend>
                                         <input type="email" v-model="descripcion" class="form-control" placeholder="Ingrese descripción">
                                     </div>
+                                    <div class="col-md-6">
+                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Estado:</legend>
+                                     <select class="form-control" v-model="idestado">
+                                            <option value="0" disabled>Seleccione Estado</option>
+                                            <option v-for="estado in arrayEstado" :key="estado.id" :value="estado.id" v-text="estado.nombre"></option>
+                                        </select>
+                                    </div>
+                                </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3 form-control-label">Seleccione la Imagen</label>
+                                    <div class="col-md-12" style="display: flex;">
+                                    <div class="col-md-4">
+                                     <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Seleccione la Imagen:</legend>
+                                    </div>
                                     <div class="col-md-4">
                                     <input type="file" class="form-control" @change="obtimage">
                                 </div>
                                 <figure>
                                     <img width="200" height="200" :src="imagenm" alt="Foto del Producto">
                                 </figure>
+                                </div>
                                 </div>
                               
                                 <div v-show="errorArticulo" class="form-group row div-error">
@@ -382,6 +452,7 @@
                 arrayArticulo : [],
                 listado: 1,
                 modal : 0,
+                modalrep:0,
                 tituloModal : '',
                 tipoAccion : 0,
                 errorArticulo : 0,
@@ -517,6 +588,34 @@
             cargarPdf(){
                 window.open('/articulo/listarPdf','_blank');
             },
+            cargarPdf1(){
+                window.open('/articulo/listarPdfarea1','_blank');
+            },
+             cargarPdf2(){
+                window.open('/articulo/listarPdfarea2','_blank');
+            },
+            cargarPdf3(){
+                window.open('/articulo/listarPdfarea3','_blank');
+            },
+             cargarPdf4(){
+                window.open('/articulo/listarPdfarea4','_blank');
+            },
+            cargarPdf5(){
+                window.open('/articulo/listarPdfarea5','_blank');
+            },
+             cargarPdf6(){
+                window.open('/articulo/listarPdfarea6','_blank');
+            },
+              cargarPdf7(){
+                window.open('/articulo/listarPdfarea7','_blank');
+            },
+            cargarPdf8(){
+                window.open('/articulo/listarPdfarea8','_blank');
+            },
+             cargarPdf9(){
+                window.open('/articulo/listarPdfarea9','_blank');
+            },
+
             selectCategoria(){
                 let me=this;
                 var url= '/categoria/selectCategoria';
@@ -811,8 +910,16 @@
                                                   swal({
                                     type: 'error',
                                     title: 'Error...',
-                                    text: '!La Cantidad del producto debe ser un número y no puede estar vacío.!',
+                                    text: '!La Cantidad del producto estar vacío.!',
                                         })    
+                                          }else{
+                                              if(this.stock<1){
+                                                  swal({
+                                    type: 'error',
+                                    title: 'Error...',
+                                    text: '!La Cantidad del producto no debe ser menor a uno.!',
+                                        })    
+                                              }
                                           } 
                                     }
                                
@@ -830,6 +937,7 @@
                 if (this.idestado==0) this.errorMostrarMsjArticulo.push("");
                 if (this.nombre==0)this.errorMostrarMsjArticulo.push('');
                 if (!this.stock) this.errorMostrarMsjArticulo.push("");
+                if (this.stock<1) this.errorMostrarMsjArticulo.push("");
 
                 if (this.errorMostrarMsjArticulo.length) this.errorArticulo = 1;
 
@@ -855,6 +963,26 @@
                 this.marca = '';
                 this.imagen = '';
 		        this.errorArticulo=0;
+            },
+             cerrarModalrep(){
+                this.modalrep=0;
+                this.tituloModal='';
+            },
+              modalReporte(modelo, accion){
+                switch(modelo){
+                    case "reporte":
+                    {
+                        switch(accion){
+                            case 'generar':
+                            {
+                                this.modalrep = 1;
+                                this.tituloModal = 'Generar Reporte';
+                                this.tipoAccion = 3;
+                                break;
+                            }
+                        }
+                    }
+                }
             },
             abrirModal(modelo, accion, data = []){
                 switch(modelo){
