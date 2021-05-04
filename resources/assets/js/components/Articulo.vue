@@ -303,44 +303,44 @@
                                 <div class="form-group row">
                                     <div class="col-md-12" style="display: flex;">
                                     <div class="col-md-6">
-                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Nombre de Producto:</legend>
-                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Producto" >                                        
+                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Nombre de Producto:  <input type="text" v-model="nombre" class="form-control2" placeholder="Ingrese Nombre de Producto" ></legend>
+                                                                               
                                     </div>
                                       <div class="col-md-6">
-                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Area:</legend>
-                                        <select class="form-control" v-model="idcategoria">
+                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Area:  <select class="form-control2" v-model="idcategoria">
                                             <option value="0" disabled>Seleccione la Area</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
-                                        </select>                                        
+                                        </select>             </legend>
+                                                                  
                                     </div>
                                 </div>
                                 </div>
                                 <div class="form-group row">
                                  <div class="col-md-12" style="display: flex;">
                                     <div class="col-md-6">
-                                    <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Codigo:</legend>
-                                        <input type="text" v-model="codigo" class="form-control" placeholder="Ingrese Codigo de Producto - AL-T0001"> 
+                                    <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Codigo: <input type="text" v-model="codigo" class="form-control2" placeholder="Ingrese Codigo de Producto - AL-T0001"></legend>
+                                         
                                         <barcode :value="codigo" :options="{ format: 'EAN-13' }">  
                                         </barcode>                                       
                                     </div>
                                      <div class="col-md-6">
-                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Marca:</legend>
-                                        <input type="email" v-model="marca" class="form-control" placeholder="Ingrese Marca del Producto">
+                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Marca:  <input type="email" v-model="marca" class="form-control2" placeholder="Ingrese Marca del Producto"></legend>
+                                       
                                     </div>
                                 </div>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-md-12" style="display: flex;">
                                     <div class="col-md-6">
-                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Cantidad:</legend>
-                                        <input type="number" v-model="stock" class="form-control" placeholder="">                                                     
+                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Cantidad: <input type="number" v-model="stock" class="form-control2" placeholder=""></legend>
+                                                                                             
                                     </div>
                                     <div class="col-md-6">
-                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Medida:</legend>
-                                     <select class="form-control" v-model="idunidad">
+                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Medida: <select class="form-control2" v-model="idunidad">
                                             <option value="0" disabled>Seleccione Unidad</option>
                                             <option v-for="unidad in arrayUnidad" :key="unidad.id" :value="unidad.id" v-text="unidad.nombre"></option>
-                                        </select>
+                                        </select></legend>
+                                     
                                     </div>
                                 </div>
                                 </div>
@@ -348,7 +348,7 @@
                                      <div class="col-md-12" style="display: flex;">
                                          <div class="col-md-4">
                                          <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Garantia:</legend>
-                                      </div>
+                                        </div>
                                       <div class="col-md-2">
                                           
                                       <label class="radio-inline">
@@ -358,10 +358,10 @@
                                         </label>                                               
                                     </div>
                                     <div v-if="exp == 1" class="col-md-2">
-                                        <input type="number" v-model="tiempo" class="form-control" placeholder="">                                                     
+                                        <input type="number" v-model="tiempo" class="form-control2" placeholder="">                                                     
                                     </div>
                                     <div class="col-md-4" v-if="exp == 1">
-                                     <select class="form-control" v-model="idtiempo">
+                                     <select class="form-control2" v-model="idtiempo">
                                             <option value="0" disabled>Seleccione Tiempo</option>
                                             <option v-for="tiempo in arrayTiempo" :key="tiempo.id" :value="tiempo.id" v-text="tiempo.nombre"></option>
                                         </select>
@@ -371,15 +371,14 @@
                                   <div class="form-group row">
                                       <div class="col-md-12" style="display: flex;">
                                     <div class="col-md-6">
-                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Descripcion:</legend>
-                                        <input type="email" v-model="descripcion" class="form-control" placeholder="Ingrese descripción">
-                                    </div>
+                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Descripcion:  <input type="email" v-model="descripcion" class="form-control2" placeholder="Ingrese descripción"></legend>
+                                       </div>
                                     <div class="col-md-6">
-                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Estado:</legend>
-                                     <select class="form-control" v-model="idestado">
+                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Estado:  <select class="form-control2" v-model="idestado">
                                             <option value="0" disabled>Seleccione Estado</option>
                                             <option v-for="estado in arrayEstado" :key="estado.id" :value="estado.id" v-text="estado.nombre"></option>
-                                        </select>
+                                        </select></legend>
+                                    
                                     </div>
                                 </div>
                                 </div>
