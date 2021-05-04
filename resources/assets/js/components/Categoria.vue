@@ -120,20 +120,20 @@
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="text-input">Nombre</label>
                                     <div class="col-md-9">
-                                        <input type="text" v-model="nombre" class="form-control" placeholder="Nombre de Area">
+                                        <input type="text" v-model="nombre" class="form-control2" placeholder="Nombre de Area">
                                         
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Descripción</label>
                                     <div class="col-md-9">
-                                        <input type="email" v-model="descripcion" class="form-control" placeholder="Ingrese descripción">
+                                        <input type="email" v-model="descripcion" class="form-control2" placeholder="Ingrese descripción">
                                     </div>
                                 </div>
                                   <div class="form-group row">
                                     <label class="col-md-3 form-control-label" for="email-input">Encargado</label>
                                     <div class="col-md-9">
-                                        <input type="email" v-model="encargado" class="form-control" placeholder="Ingrese Nombre Encargado">
+                                        <input type="email" v-model="encargado" class="form-control2" placeholder="Ingrese Nombre Encargado">
                                     </div>
                                 </div>
                                 <div v-show="errorCategoria" class="form-group row div-error">

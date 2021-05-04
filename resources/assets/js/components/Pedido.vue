@@ -64,20 +64,20 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Producto: <span style="color: red;" v-show="producto==0"></span></label>
-                                    <input type="text" value="0" class="form-control" v-model="producto" placeholder="Ingrese Producto....">
+                                    <input type="text" value="0" class="form-control2" v-model="producto" placeholder="Ingrese Producto....">
                                 </div>
                             </div>
                             
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Cantidad: <span style="color: red;" v-show="cantidad==0"></span></label>
-                                    <input type="number" value="0" step="any" class="form-control" v-model="cantidad" placeholder="Ingrese Cantidad....">
+                                    <input type="number" value="0" step="any" class="form-control2" v-model="cantidad" placeholder="Ingrese Cantidad....">
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="form-group">
                                  <label>Undidad de Medida: <span style="color: red;"></span></label>
-                                <select class="form-control" v-model="medida" placeholder="Seleccione Unidad">
+                                <select class="form-control2" v-model="medida" placeholder="Seleccione Unidad">
                                             <option value="0" disabled>Seleccione Unidad</option>
                                             <option value="Kg" >Kg</option>
                                             <option value="Pza" >Pza</option>
@@ -92,7 +92,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label>Detalles:</label>
-                                    <input type="text" value="0" class="form-control" v-model="detallep" placeholder="Ingrese Detalle...">
+                                    <input type="text" value="0" class="form-control2" v-model="detallep" placeholder="Ingrese Detalle...">
                                 </div>
                             </div>
                             <div class="col-md-2">

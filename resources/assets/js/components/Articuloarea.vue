@@ -34,17 +34,17 @@
                  <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
-                                        <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control col-md-4">
+                                        <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control2 col-md-4">
                                             <option value="" disabled>Seleccione la Area</option>
                                             <option value="">Todos</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
-                                    <select class="form-control col-md-3" v-model="criterioA">
+                                    <select class="form-control2 col-md-3" v-model="criterioA">
                                       <option value="nombre">Nombre</option>
                                       <option value="descripcion">Descripción</option>
                                       <option value="codigo">Codigo</option>
                                     </select>
-                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(1,buscarA,criterioA)" class="form-control" placeholder="Texto a buscar">
+                                    <input type="text" v-model="buscarA" @keyup.enter="listarArticulo(1,buscarA,criterioA)" class="form-control2" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarArticulo(1,buscarA,criterioA)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
@@ -73,7 +73,10 @@
                                     <td  <img class = "img-square" :src="'/imagenes/articulos/' + articulo.imagen" width="70" height="70" @click="verArticulo(articulo.id)"></td>
                                     <td v-text="articulo.nombre_categoria"></td>
                                     <td v-text="articulo.nombre"></td>
-                                    <td v-text="articulo.stock"></td>
+                                      <td >
+                                        <span>{{articulo.stock}}</span><br>
+                                        <span style="color:red;" v-show="articulo.stock<5">Stock Bajo Aumente Productos</span>
+                                    </td>
                                     <td v-text="articulo.nombre_unidad"></td>
                                     <td v-text="articulo.descripcion"></td>
                                     <td v-text="articulo.tiempo"></td>                                    

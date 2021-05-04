@@ -79,7 +79,7 @@
                                     <td v-text="articulo.nombre"></td>
                                     <td >
                                         <span>{{articulo.stock}}</span><br>
-                                        <span style="color:red;" v-show="articulo.stock<3">Stock Bajo Aumente Productos</span>
+                                        <span style="color:red;" v-show="articulo.stock<5">Stock Bajo Aumente Productos</span>
                                     </td>
                                     <td v-text="articulo.nombre_unidad"></td>
                                     <td v-text="articulo.descripcion"></td>

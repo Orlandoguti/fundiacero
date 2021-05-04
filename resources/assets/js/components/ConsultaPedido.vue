@@ -30,12 +30,12 @@
                         <div class="form-group row">
                             <div class="col-md-13">
                                 <div class="input-group">
-                                    <select class="form-control col-md-4" v-model="criterio">
+                                    <select class="form-control2 col-md-4" v-model="criterio">
                                       <option value="id">Nº Pedido</option>
                                       <option value="solicitante">Nombre Solicitante</option>
                                       <option value="fecha_hora">Fecha-Hora</option>
                                     </select>
-                                    <input type="text" v-model="buscar" @keyup.enter="listarPedido(1,buscar,criterio)" class="form-control" placeholder="Texto a buscar">
+                                    <input type="text" v-model="buscar" @keyup.enter="listarPedido(1,buscar,criterio)" class="form-control2" placeholder="Texto a buscar">
                                     <button type="submit" @click="listarPedido(1,buscar,criterio)" class="btn btn-primary"><i class="fa fa-search"></i> Buscar</button>
                                 </div>
                             </div>
