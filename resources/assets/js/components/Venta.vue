@@ -139,7 +139,6 @@
                                        <select v-model="buscar" @click="listarArticulo(1,buscar,criterio)" class="form-control2 col-md-5">
                                             <option value="" disabled>Seleccione la Area</option>
                                             <option value="">Todos</option>
-                                             <option value="1">laminacion</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
                                         </select>
                                     <select class="form-control2 col-md-4" v-model="criterioA">
