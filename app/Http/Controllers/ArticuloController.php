@@ -225,7 +225,7 @@ class ArticuloController extends Controller
         $fechaActual= date('Y-m-d');
 
         $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
     public function listarPdfarea2(){
         $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
@@ -245,7 +245,7 @@ class ArticuloController extends Controller
         $fechaActual= date('Y-m-d');
 
         $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
     public function listarPdfarea3(){
         $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
@@ -265,7 +265,7 @@ class ArticuloController extends Controller
         $fechaActual= date('Y-m-d');
 
         $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
     public function listarPdfarea4(){
         $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
@@ -285,7 +285,7 @@ class ArticuloController extends Controller
         $fechaActual= date('Y-m-d');
 
         $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
     public function listarPdfarea5(){
         $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
@@ -305,7 +305,7 @@ class ArticuloController extends Controller
         $fechaActual= date('Y-m-d');
 
         $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
     public function listarPdfarea6(){
         $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
@@ -325,7 +325,7 @@ class ArticuloController extends Controller
         $fechaActual= date('Y-m-d');
 
         $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
     public function listarPdfarea7(){
         $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
@@ -345,7 +345,7 @@ class ArticuloController extends Controller
         $fechaActual= date('Y-m-d');
 
         $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
     public function listarPdfarea8(){
         $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
@@ -365,7 +365,7 @@ class ArticuloController extends Controller
         $fechaActual= date('Y-m-d');
 
         $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
     public function listarPdfarea9(){
         $articulos = DB::select('SELECT a.idcategoria, ca.nombre as nombre_categoria,a.nombre,a.codigo,a.stock,a.marca,a.descripcion,a.created_at
@@ -385,7 +385,7 @@ class ArticuloController extends Controller
         $fechaActual= date('Y-m-d');
 
         $pdf = \PDF::loadView('pdf.productosareapdf',['articulos'=>$articulos,'count'=>$count]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
 
     public function listarPdf(){
@@ -399,7 +399,7 @@ class ArticuloController extends Controller
         $cont=Articulo::count();
 
         $pdf = \PDF::loadView('pdf.productospdf',['articulos'=>$articulos,'cont'=>$cont]);
-        return $pdf->download($fechaActual.'.pdf');
+        return $pdf->stream($fechaActual.'.pdf');
     }
     public function buscarArticulo(Request $request ){
         if (!$request->ajax()) return redirect('/');

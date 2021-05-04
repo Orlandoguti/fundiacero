@@ -162,13 +162,15 @@
                         <tr id="fa">
                             <th>Producto</th>
                             <th>Cantidad</th>
+                            <th>Medida</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($detalles as $det)
                         <tr>
-                            <td>{{$det->articulo}}</td>                            
-                            <td>{{$det->cantidad}}</td>
+                            <td>{{$det->articulo}}</td>
+                            <td>{{$det->cantidad}}</td>                            
+                            <td>{{$det->nombre_unidad}}</td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -235,6 +237,7 @@
                         <tr id="fa">
                             <th>Producto</th>
                             <th>Cantidad</th>
+                            <th>Medida</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -242,6 +245,7 @@
                         <tr>
                             <td>{{$det->articulo}}</td>                            
                             <td>{{$det->cantidad}}</td>
+                            <td>{{$det->nombre_unidad}}</td>
                         </tr>
                         @endforeach
                     </tbody>

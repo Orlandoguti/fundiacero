@@ -113,15 +113,16 @@ class VentaController extends Controller
         ->orderBy('ventas.id','desc')->take(1)->get();
 
         $detalles = DetalleVenta::join('articulos','detalle_ventas.idarticulo','=','articulos.id')
-        ->select('detalle_ventas.cantidad',
+        ->join('unidads','articulos.idunidad','=','unidads.id')
+        ->select('detalle_ventas.cantidad','unidads.nombre as nombre_unidad',
         'articulos.nombre as articulo','detalle_ventas.fecha_hora')
         ->where('detalle_ventas.idventa','=',$id)
         ->orderBy('detalle_ventas.id','desc')->get();
 
-        $numventa=Venta::select('fecha_hora')->where('id',$id)->get();
+        $numventa=Venta::select('id')->where('id',$id)->get();
 
         $pdf = \PDF::loadView('pdf.venta',['venta'=>$venta,'detalles'=>$detalles]);
-        return $pdf->download('Despacho-'.$numventa[0]->num_comprobante.'.pdf');
+        return $pdf->stream('Despacho Nº'.$numventa[0]->id.':'.$venta[0]->fecha_hora.'.pdf');
 
     }
     public function store(Request $request)

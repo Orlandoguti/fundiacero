@@ -300,13 +300,10 @@
                         <div class="modal-body">
                             
                             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                                <div class="form-group row">
+                            <div class="form-group row">
                                     <div class="col-md-12" style="display: flex;">
-                                    <div class="col-md-6">
-                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Nombre de Producto:  <input type="text" v-model="nombre" class="form-control2" placeholder="Ingrese Nombre de Producto" ></legend>
-                                                                               
-                                    </div>
-                                      <div class="col-md-6">
+                                    
+                                      <div class="col-md-12">
                                         <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Area:  <select class="form-control2" v-model="idcategoria">
                                             <option value="0" disabled>Seleccione la Area</option>
                                             <option v-for="categoria in arrayCategoria" :key="categoria.id" :value="categoria.id" v-text="categoria.nombre"></option>
@@ -314,21 +311,37 @@
                                                                   
                                     </div>
                                 </div>
-                                </div>
+                            </div>
                                 <div class="form-group row">
-                                 <div class="col-md-12" style="display: flex;">
+                                    <div class="col-md-12" style="display: flex;">
                                     <div class="col-md-6">
-                                    <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Codigo: <input type="text" v-model="codigo" class="form-control2" placeholder="Ingrese Codigo de Producto - AL-T0001"></legend>
-                                         
-                                        <barcode :value="codigo" :options="{ format: 'EAN-13' }">  
-                                        </barcode>                                       
+                                        <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Nombre de Producto:  <input type="text" v-model="nombre" class="form-control2" placeholder="Ingrese Nombre de Producto" ></legend>
+                                                                               
                                     </div>
                                      <div class="col-md-6">
                                          <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Marca:  <input type="email" v-model="marca" class="form-control2" placeholder="Ingrese Marca del Producto"></legend>
-                                       
+                                        </div>
+                                </div>
+                                </div>
+                                <div class="form-group row">
+                                 <div class="col-md-12" style="display: flex;">
+                                   
+                                    <div class="col-md-12">
+                                    <legend class="text-condensedLight2"><i class="zmdi zmdi-border-color"></i> &nbsp; Codigo: <input type="text" v-model="codigo" class="form-control2" placeholder="Ingrese Codigo de Producto - AL-T0001"></legend>
+                                         </div>                                      
                                     </div>
-                                </div>
-                                </div>
+                                 </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12" style="display: flex;">
+                                        <div class="col-md-4">
+                                            </div>
+                                        <div class="col-md-6">
+                                            <barcode :value="codigo" :options="{ format: 'EAN-13' }">  
+                                            </barcode>  
+                                        </div>
+                                    </div>
+                                    </div>
+                               
                                 <div class="form-group row">
                                     <div class="col-md-12" style="display: flex;">
                                     <div class="col-md-6">

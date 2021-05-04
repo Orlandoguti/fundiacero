@@ -97,10 +97,10 @@ class PedidoController extends Controller
         ->where('detalle_pedidos.idpedido','=',$id)
         ->orderBy('detalle_pedidos.id','desc')->get();
 
-        $numpedido=Pedido::select('solicitante')->where('id',$id)->get();
+        $numpedido=Pedido::select('id')->where('id',$id)->get();
 
         $pdf = \PDF::loadView('pdf.pedido',['pedido'=>$pedido,'detalles'=>$detalles]);
-        return $pdf->download('pedido -'.$numpedido[0]->nombre.'.pdf');
+        return $pdf->stream('Pedido Nº'.$numpedido[0]->id.':'.$pedido[0]->nombre.'.pdf');
 
     }
     public function store(Request $request)

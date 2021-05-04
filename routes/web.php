@@ -80,7 +80,7 @@ Route::group(['middleware'=>['auth']],function(){
         Route::get('/articulo/obtenerDetalles', 'ArticuloController@obtenerDetalles');
         Route::get('/articulo/listarArticuloVenta', 'ArticuloController@listarArticuloVenta');
         Route::get('/articulo/buscarArticuloVenta', 'ArticuloController@buscarArticuloVenta');
-        Route::get('/articulo/listarPdf', 'ArticuloController@listarPdf')->name('articulos_pdf');
+        Route::get('/articulo/listarPdf', 'ArticuloController@listarPdf')->name('productos_pdf');
         Route::get('/articulo/listarPdfarea1', 'ArticuloController@listarPdfarea1')->name('articulosarea1_pdf');
         Route::get('/articulo/listarPdfarea2', 'ArticuloController@listarPdfarea2')->name('articulosarea2_pdf');
         Route::get('/articulo/listarPdfarea3', 'ArticuloController@listarPdfarea3')->name('articulosarea3_pdf');

@@ -22,7 +22,7 @@
                 <!-- Ejemplo de tabla Listado -->
                 <div class="card">
                     <div class="card-header">
-                        <i class="fa fa-align-justify"></i> PEDIDOS
+                        <i class="fa fa-align-justify"></i> Pedidos
                     </div>
                     <!-- Listado-->
                     <template v-if="listado==1">

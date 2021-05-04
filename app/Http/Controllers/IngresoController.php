@@ -119,15 +119,15 @@ class IngresoController extends Controller
         ->orderBy('ingresos.id','desc')->take(1)->get();
 
         $detalles = DetalleIngreso::join('articulos','detalle_ingresos.idarticulo','=','articulos.id')
-        ->select('detalle_ingresos.cantidad',
-        'articulos.nombre as articulo')
+        ->join('unidads','articulos.idunidad','=','unidads.id')
+        ->select('detalle_ingresos.cantidad','articulos.nombre as articulo','unidads.nombre as nombre_unidad')
         ->where('detalle_ingresos.idingreso','=',$id)
         ->orderBy('detalle_ingresos.id','desc')->get();
 
-        $numingreso=Ingreso::select('fecha_hora')->where('id',$id)->get();
+        $numingreso=Ingreso::select('id')->where('id',$id)->get();
 
         $pdf = \PDF::loadView('pdf.ingreso',['ingreso'=>$ingreso,'detalles'=>$detalles]);
-        return $pdf->download('ingreso-'.$numingreso[0]->num_comprobante.'.pdf');
+        return $pdf->stream('Ingreso Nº'.$numingreso[0]->id.':'.$ingreso[0]->fecha_hora.'.pdf');
 
     }
     public function store(Request $request)
