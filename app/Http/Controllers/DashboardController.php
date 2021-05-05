@@ -44,14 +44,12 @@ class DashboardController extends Controller
                 ORDER BY SUM(a.condicion) DESC 
                 LIMIT 0 , 10');
 
-        $pedidos_area = DB::select( 'SELECT pe.id,ca.nombre,SUM(dp.estado) as totalproductos 
-                FROM detalle_pedidos as dp
-                JOIN pedidos as pe
-                JOIN categorias as ca
-                WHERE (pe.idcategoria = ca.id) AND (pe.id = dp.idpedido)
-                GROUP BY pe.id,ca.nombre
-                ORDER BY SUM(dp.estado) DESC 
-                LIMIT 0 , 10');
+        $pedidos_area = DB::select( 'SELECT ca.nombre, SUM(pe.estado) as totalproductos 
+                        FROM pedidos as pe
+                        JOIN categorias as ca
+                        WHERE (pe.idcategoria = ca.id)
+                        GROUP BY ca.nombre
+                        LIMIT 0 , 10');
 
             $mas_ingresados = DB::select('SELECT di.idarticulo, a.nombre, SUM(di.cantidad) AS TotalIngresos 
                     FROM detalle_ingresos as di 

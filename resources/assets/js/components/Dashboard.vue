@@ -131,8 +131,8 @@
             :chartArea='chartArea' :width='width' :tooltip='tooltip' :enableSideBySidePlacement='false'>
             <e-series-collection>
                 <e-series :dataSource='seriesData' type='Column' xName='x' yName='y' name='' width=2 columnWidth=0.5 :marker='marker0' > </e-series>
-                <e-series :dataSource='detalle_ventas' type='Column' xName='fechav' yName='totalv' name='Despachos' width=2 columnWidth=0.5 :marker='marker1' > </e-series>
-                <e-series :dataSource='detalle_ingresos' type='Column' xName='fechai' yName='totalc' name='Ingresos' width=2 columnWidth=0.5 :marker='marker1' > </e-series>
+                <e-series :dataSource='detalle_ventas' type='Column' xName='fechav' yName='totalv' name='Productos Despachados' width=2 columnWidth=0.5 :marker='marker1' > </e-series>
+                <e-series :dataSource='detalle_ingresos' type='Column' xName='fechai' yName='totalc' name='Productos Ingresados' width=2 columnWidth=0.5 :marker='marker1' > </e-series>
                 <e-series :dataSource='s' type='Column' xName='fechav' yName='totalv' name='' width=2 columnWidth=0.2 :marker='marker1' > </e-series>
             </e-series-collection>
         </ejs-chart>
@@ -163,8 +163,8 @@
         <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainer' :title='titlelineai' :primaryXAxis='primaryXAxisli' :primaryYAxis='primaryYAxisli'
             :tooltip='tooltip' :chartArea='chartArea' :width='width'>
             <e-series-collection>
-                <e-series :dataSource='detalle_ingresos' type='Line' xName='fechai' yName='totalc' name='Ingresos' width=2 :marker='marker'> </e-series>
-                 <e-series :dataSource='detalle_ventas' type='Line' xName='fechav' yName='totalv' name='Despachos' width=2 :marker='marker'> </e-series>
+                <e-series :dataSource='detalle_ingresos' type='Line' xName='fechai' yName='totalc' name='Productos Ingresados' width=2 :marker='marker'> </e-series>
+                 <e-series :dataSource='detalle_ventas' type='Line' xName='fechav' yName='totalv' name='Productos Despachados' width=2 :marker='marker'> </e-series>
             </e-series-collection>
         </ejs-chart>
     </div>
@@ -208,7 +208,7 @@
             type="Column"
             xName="fechap"
             yName="totalp"
-            name="Pedidos"
+            name="Productos Pedidos"
             width="2"
             :marker="marker"
             :cornerRadius="cornerRadius"
@@ -224,7 +224,7 @@
         <ejs-chart style='display:block' :theme='theme' align='center' id='chartcontainerpedidos' :title='titlelineap' :primaryXAxis='primaryXAxispe' :primaryYAxis='primaryYAxispe'
             :tooltip='tooltip' :chartArea='chartArea' :width='width'>
             <e-series-collection>
-                <e-series :dataSource='detalle_pedidos' type='Line' xName='fechap' yName='totalp' name='Pedidos' width=2 :marker='marker'> </e-series>
+                <e-series :dataSource='detalle_pedidos' type='Line' xName='fechap' yName='totalp' name='Productos Pedidos' width=2 :marker='marker'> </e-series>
             </e-series-collection>
         </ejs-chart>
     </div>
@@ -280,7 +280,7 @@
             type="Column"
             xName="nombre"
             yName="totalproductos"
-            name="Pedidos"
+            name="Pedidos por Area"
             width="2"
             :marker="marker"
             :cornerRadius="cornerRadius"
@@ -541,9 +541,9 @@ let theme = (selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).rep
        titlelineav: "Grafico de Lineas Despachos por dia",
        titlebarrai: "Grafico de Barras Ingresos por dia",
         titlebarrav: "Grafico de Barras Despachos por dia",
-        titlebarrapedidos: "Grafico de Barras Pedidos por dia",
+        titlebarrapedidos: "Grafico de Barras Productos Pedidos por dia",
         titledi: "Grafico de Barras Ingresos y Despachos",
-        titlelineap: "Grafico de Lineas Pedidos por dia",
+        titlelineap: "Grafico de Lineas Productos Pedidos por dia",
          titlebarrade: "Grafico de Productos mas Ingresados",
          titlebarrapro: "Cantidad de Productos",
          titlebarraproa: "Cantidad de Productos por Area",
