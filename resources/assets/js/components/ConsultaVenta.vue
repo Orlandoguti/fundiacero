@@ -56,7 +56,7 @@
                                 <tbody>
                                     <tr v-for="venta in arrayVenta" :key="venta.id">
                                          <td v-text="venta.id"></td>
-                                        <td v-text="venta.usuario"></td>
+                                        <td v-text="venta.nombreuser"></td>
                                         <td v-text="venta.nombre"></td>
                                         <td v-text="venta.serie_comprobante"></td>
                                         <td v-text="venta.fecha_hora"></td>
@@ -122,6 +122,12 @@
                                 <div class="form-group">
                                     <label>Nombre Solicitante</label>
                                     <p v-text="serie_comprobante"></p>
+                                </div>
+                            </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Usuario</label>
+                                    <p v-text="nombreuser"></p>
                                 </div>
                             </div>
                         </div>
@@ -266,7 +272,7 @@
                 });
             },
             pdfVenta(id){
-                window.open('venta/pdf/'+ id ,'_blank');
+                window.open('despacho/pdf/'+ id ,'_blank');
             },
             cambiarPagina(page,buscar,criterio){
                 let me = this;
@@ -302,6 +308,7 @@
                     var respuesta= response.data;
                     arrayVentaT = respuesta.venta;
                     me.id = arrayVentaT[0]['id'];
+                    me.nombreuser = arrayVentaT[0]['nombreuser'];
                     me.categoria = arrayVentaT[0]['nombre'];
                     me.serie_comprobante=arrayVentaT[0]['serie_comprobante'];
                 })

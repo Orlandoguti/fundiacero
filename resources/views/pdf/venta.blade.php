@@ -145,7 +145,7 @@
                     <tbody>
                         <tr>
                         
-                            <td>{{$v->usuario}}</td>
+                            <td>{{$v->nombreuser}}</td>
                             <td>{{$v->nombre}}</td>
                             <td> {{$v->serie_comprobante}}</td>
                             <td>{{$v->fecha_hora}}</td>
@@ -220,7 +220,7 @@
                     <tbody>
                         <tr>
                         
-                            <td>{{$v->usuario}}</td>
+                            <td>{{$v->nombreuser}}</td>
                             <td>{{$v->nombre}}</td>
                             <td> {{$v->serie_comprobante}}</td>
                             <td>{{$v->fecha_hora}}</td>

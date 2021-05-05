@@ -57,7 +57,7 @@
                                 <tbody>
                                     <tr v-for="ingreso in arrayIngreso" :key="ingreso.id">
                                          <td v-text="ingreso.id"></td>
-                                        <td v-text="ingreso.usuario"></td>
+                                        <td v-text="ingreso.nombreuser"></td>
                                         <td v-text="ingreso.nombre"></td>
                                         <td v-text="ingreso.tipo_comprobante"></td>
                                         <td v-text="ingreso.serie_comprobante"></td>
@@ -136,6 +136,12 @@
                                 <div class="form-group">
                                     <label>Detalle de Producto</label>
                                     <p v-text="detalle"></p>
+                                </div>
+                            </div>
+                             <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Usuario</label>
+                                    <p v-text="nombreuser"></p>
                                 </div>
                             </div>
                         </div>
@@ -330,6 +336,8 @@
                     arrayIngresoT = respuesta.ingreso;
                     
                     me.categoria = arrayIngresoT[0]['nombre'];
+                    me.nombreuser = arrayIngresoT[0]['nombreuser'];
+                    
                     me.id=arrayIngresoT[0]['id'];
                     me.detalle=arrayIngresoT[0]['detalle'];
                      me.tipo_comprobante=arrayIngresoT[0]['tipo_comprobante'];

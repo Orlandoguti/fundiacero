@@ -147,7 +147,7 @@
                     <tbody>
                         <tr>
                         
-                            <td>{{$i->usuario}}</td>
+                            <td>{{$i->nombreuser}}</td>
                             <td>{{$i->nombre}}</td>
                             <td> {{$i->tipo_comprobante}}</td>
                             <td> {{$i->serie_comprobante}}</td>

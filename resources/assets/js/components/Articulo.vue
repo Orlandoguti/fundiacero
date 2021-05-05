@@ -598,34 +598,34 @@
                 });
             },
             cargarPdf(){
-                window.open('/articulo/listarPdf','_blank');
+                window.open('/producto/listarPdf','_blank');
             },
             cargarPdf1(){
-                window.open('/articulo/listarPdfarea1','_blank');
+                window.open('/producto/listarPdfarea1','_blank');
             },
              cargarPdf2(){
-                window.open('/articulo/listarPdfarea2','_blank');
+                window.open('/producto/listarPdfarea2','_blank');
             },
             cargarPdf3(){
-                window.open('/articulo/listarPdfarea3','_blank');
+                window.open('/producto/listarPdfarea3','_blank');
             },
              cargarPdf4(){
-                window.open('/articulo/listarPdfarea4','_blank');
+                window.open('/producto/listarPdfarea4','_blank');
             },
             cargarPdf5(){
-                window.open('/articulo/listarPdfarea5','_blank');
+                window.open('/producto/listarPdfarea5','_blank');
             },
              cargarPdf6(){
-                window.open('/articulo/listarPdfarea6','_blank');
+                window.open('/producto/listarPdfarea6','_blank');
             },
               cargarPdf7(){
-                window.open('/articulo/listarPdfarea7','_blank');
+                window.open('/producto/listarPdfarea7','_blank');
             },
             cargarPdf8(){
-                window.open('/articulo/listarPdfarea8','_blank');
+                window.open('/producto/listarPdfarea8','_blank');
             },
              cargarPdf9(){
-                window.open('/articulo/listarPdfarea9','_blank');
+                window.open('/producto/listarPdfarea9','_blank');
             },
 
             selectCategoria(){

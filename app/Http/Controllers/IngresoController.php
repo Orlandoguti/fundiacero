@@ -23,14 +23,14 @@ class IngresoController extends Controller
             $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
             ->join('users','ingresos.idusuario','=','users.id')
             ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.fecha_hora',
-            'ingresos.estado','categorias.nombre','users.usuario')
+            'ingresos.estado','categorias.nombre','users.nombreuser')
             ->orderBy('ingresos.id', 'desc')->paginate(5);
         }
         else{
             $ingresos = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
             ->join('users','ingresos.idusuario','=','users.id')
             ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.fecha_hora',
-            'ingresos.estado','categorias.nombre','users.usuario')
+            'ingresos.estado','categorias.nombre','users.nombreuser')
             ->where('ingresos.'.$criterio, 'like', '%'. $buscar . '%')->orderBy('ingresos.id', 'desc')->paginate(3);
         }
          
@@ -82,7 +82,7 @@ class IngresoController extends Controller
         $ingreso = Ingreso::join('categorias','ingresos.idcategoria','=','categorias.id')
         ->join('users','ingresos.idusuario','=','users.id')
         ->select('ingresos.id','ingresos.detalle','ingresos.serie_comprobante','ingresos.tipo_comprobante','ingresos.fecha_hora',
-        'ingresos.estado','categorias.nombre','users.usuario')
+        'ingresos.estado','categorias.nombre','users.nombreuser')
         ->where('ingresos.id','=',$id)
         ->orderBy('ingresos.id', 'desc')->take(1)->get();
 
@@ -114,7 +114,7 @@ class IngresoController extends Controller
         ->join('users','ingresos.idusuario','=','users.id')
         ->select('ingresos.id','ingresos.detalle','ingresos.tipo_comprobante','ingresos.serie_comprobante',
         'ingresos.fecha_hora',
-        'ingresos.estado','categorias.nombre','users.usuario')
+        'ingresos.estado','categorias.nombre','users.nombreuser')
         ->where('ingresos.id','=',$id)
         ->orderBy('ingresos.id','desc')->take(1)->get();
 
